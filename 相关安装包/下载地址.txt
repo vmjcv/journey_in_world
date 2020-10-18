@@ -1,0 +1,9 @@
+建议使用脚本下载，虽然慢得一逼
+
+编辑器下载地址：https://downloads.tuxfamily.org/godotengine/3.2.2/Godot_v3.2.2-stable_win64.exe.zip
+下载完毕后解压提取文件放到sunset/godot里面，重命名为Godot.exe
+
+导出包下载地址：https://downloads.tuxfamily.org/godotengine/3.2.2/Godot_v3.2.2-stable_export_templates.tpz
+下载完毕后解压提取文件放到sunset/godot里面，重命名为Godot.tpz
+
+python安装：建议直接安装一个anaconda，自带python和一些库，防止出现运行错误，下载地址：https://repo.anaconda.com/archive/Anaconda3-2020.02-Windows-x86_64.exe

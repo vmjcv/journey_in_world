@@ -1,0 +1,17 @@
+docs_dir: docs
+markdown_extensions:
+- admonition
+pages:
+- 活动规则: 活动规则.md
+- 项目详情: 项目详情.md
+- 玩法介绍: 玩法介绍.md
+- 前期准备: 前期准备.md
+- 工具使用: 工具使用.md
+- 资源规范: 资源规范.md
+- 代码规范: 代码规范.md
+- 教程地址: 教程地址.md
+- 扩展插件: 扩展插件.md
+- API: []
+repo_url: https://github.com/vmjcv/sunset/
+site_name: SunSet
+theme: material
