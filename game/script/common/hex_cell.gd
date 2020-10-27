@@ -15,6 +15,17 @@ var touched_color = Color.darkorchid
 var entered_color = Color.turquoise
 
 
+enum HexDirection {
+	NE,# 东北
+	E,# 东
+	SE,# 东南
+	SW,# 西南
+	W,# 西
+	NW,#　西北
+}
+
+var neighbors = [].resize(6)
+
 signal click_hex_cell
 signal entered_hex_cell
 signal exited_hex_cell
@@ -81,3 +92,9 @@ func change_color(cell_color):
 			material_override.albedo_color = Color.yellow
 		"blue":
 			material_override.albedo_color = Color.blue
+
+func get_neighbor(direction):
+	return neighbors[direction]
+
+func set_neighbor(direction,cell):
+	return neighbors[direction] = cell
