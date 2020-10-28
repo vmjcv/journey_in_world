@@ -97,4 +97,10 @@ func get_neighbor(direction):
 	return neighbors[direction]
 
 func set_neighbor(direction,cell):
-	return neighbors[direction] = cell
+	neighbors[direction] = cell
+
+func direction_opposite(direction):
+	if direction<3:
+		return direction+3
+	else:
+		return direction-3
