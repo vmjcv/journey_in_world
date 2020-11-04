@@ -33,11 +33,9 @@ signal entered_hex_cell
 signal exited_hex_cell
 
 func _ready():
-	multimesh.mesh = multimesh.mesh.duplicate()
+	multimesh = multimesh.duplicate()
 	update_mesh()
 	$Area/CollisionShape.shape = multimesh.mesh.create_convex_shape()
-	#material_override = material_override.duplicate(true)
-	#material_override.albedo_color = default_color
 
 func update_mesh():
 	arr = []
@@ -50,9 +48,14 @@ func update_mesh():
 	
 
 	var center = Vector3(0.0,0.0,0.0)
-	for i in range(6):
-		add_triangle(center,center+hex_metrics.corners[(i+1)%6],center+hex_metrics.corners[i])
-		add_color(cell_color,cell_color,cell_color)
+	for d in range(HexDirection.NE, HexDirection.NW+1):
+		add_triangle(center,center+hex_metrics.get_second_corner(d),center+hex_metrics.get_first_corner(d))
+		var neighbor = get_neighbor(d)
+		if not neighbor:
+			neighbor = self
+		add_color(cell_color,neighbor.cell_color,neighbor.cell_color)
+
+
 	arr[Mesh.ARRAY_VERTEX] = verts
 	#arr[Mesh.ARRAY_TEX_UV] = uvs
 	arr[Mesh.ARRAY_COLOR] = colors
@@ -88,12 +91,11 @@ func _on_area_mouse_exited():
 	emit_signal("exited_hex_cell")
 
 func change_color_entered():
-	#material_override.albedo_color = entered_color
 	cell_color = entered_color
 	update_mesh_color()
 
+
 func change_color_exited():
-	#material_override.albedo_color = default_color
 	cell_color = default_color
 	update_mesh_color()
 
@@ -101,29 +103,29 @@ func change_color_exited():
 func change_color(_cell_color):
 	match _cell_color:
 		"white":
-			#material_override.albedo_color = Color.white
 			cell_color = Color.white
 		"green":
-			#material_override.albedo_color = Color.green
 			cell_color = Color.green
 		"yellow":
-			#material_override.albedo_color = Color.yellow
 			cell_color = Color.yellow
 		"blue":
-			#material_override.albedo_color = Color.blue
 			cell_color = Color.blue
 	update_mesh_color()
 
 func update_mesh_color():
-	for i in range(colors.size()):
-		colors[i] = cell_color
+	colors = PoolColorArray()
+	for d in range(HexDirection.NE, HexDirection.NW+1):
+		var neighbor = get_neighbor(d)
+		if not neighbor:
+			neighbor = self
+		add_color(cell_color,neighbor.cell_color,neighbor.cell_color)
+	multimesh.mesh = null
 	multimesh.mesh = ArrayMesh.new()
-	#multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
-	print("update_mesh_color")
-	print(multimesh.mesh.get_surface_count())
+	arr[Mesh.ARRAY_COLOR] = colors
+	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
 
 func get_neighbor(direction):
-	return neighbors[direction]
+	return neighbors.get(direction,null)
 
 func set_neighbor(direction,cell):
 	neighbors[direction] = cell

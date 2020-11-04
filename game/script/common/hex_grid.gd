@@ -20,7 +20,6 @@ var cells:Array
 var multiple = 10
 var hex_metrics = HexStatic.HexMetrics.new()
 
-#func _process(delta):
 func _ready():
 	update_canvas()
 	cells = []
@@ -56,17 +55,18 @@ func create_cell(x:int,z:int,i:int):
 	cell.connect("entered_hex_cell",self,"entered_hex_cell",[x,z,cell])
 	cell.connect("exited_hex_cell",self,"exited_hex_cell",[x,z,cell])
 	
-#	if x>0:
-#		cell.set_neighbor(cell.HexDirection.W,cells[i-1])
-#	if z>0:
-#		if z&1 == 0:
-#			cell.set_neighbor(cell.HexDirection.NE,cells[i-width])
-#			if x > 0:
-#				cell.set_neighbor(cell.HexDirection.NW,cells[i-width-1])
-#		else:
-#			cell.set_neighbor(cell.HexDirection.NW,cells[i-width])
-#			if x > 0:
-#				cell.set_neighbor(cell.HexDirection.NE,cells[i-width+1])
+	if x>0:
+		cell.set_neighbor(cell.HexDirection.W,cells[i-1])
+	if z>0:
+		if z&1 == 0:
+			cell.set_neighbor(cell.HexDirection.NE,cells[i-width])
+			if x > 0:
+				cell.set_neighbor(cell.HexDirection.NW,cells[i-width-1])
+		else:
+			cell.set_neighbor(cell.HexDirection.NW,cells[i-width])
+			if x > 0:
+				cell.set_neighbor(cell.HexDirection.NE,cells[i-width+1])
+				
 func click_hex_cell(x,z,cell):
 	if cell_map.has(cell):
 		if cell_map[cell]["color"] == GUI.get_now_color():

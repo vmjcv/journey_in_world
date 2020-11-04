@@ -11,6 +11,12 @@ class HexMetrics:
 		Vector3(-inner_radius,0.0,-0.5*outer_radius),
 		Vector3(-inner_radius,0.0,0.5*outer_radius),
 	])
+	
+	func get_first_corner(direction):
+		return corners[direction]
+	
+	func get_second_corner(direction):
+		return corners[(direction+1)%len(corners)]
 
 class HexCoordinates:
 	export(int) var x
