@@ -58,14 +58,14 @@ func create_cell(x:int,z:int,i:int):
 	if x>0:
 		cell.set_neighbor(cell.HexDirection.W,cells[i-1])
 	if z>0:
-		if z&1 == 0:
+		if z%2 == 1:
+			cell.set_neighbor(cell.HexDirection.NW,cells[i-width])
+			if x < width - 1:
+				cell.set_neighbor(cell.HexDirection.NE,cells[i-width+1])
+		else:
 			cell.set_neighbor(cell.HexDirection.NE,cells[i-width])
 			if x > 0:
 				cell.set_neighbor(cell.HexDirection.NW,cells[i-width-1])
-		else:
-			cell.set_neighbor(cell.HexDirection.NW,cells[i-width])
-			if x > 0:
-				cell.set_neighbor(cell.HexDirection.NE,cells[i-width+1])
 				
 func click_hex_cell(x,z,cell):
 	if cell_map.has(cell):

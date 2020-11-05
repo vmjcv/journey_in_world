@@ -116,6 +116,7 @@ func update_mesh_color():
 	colors = PoolColorArray()
 	for d in range(HexDirection.NE, HexDirection.NW+1):
 		var neighbor = get_neighbor(d)
+		print(d,neighbor)
 		if not neighbor:
 			neighbor = self
 		add_color(cell_color,neighbor.cell_color,neighbor.cell_color)
