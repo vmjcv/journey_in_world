@@ -49,7 +49,7 @@ func update_mesh():
 
 	var center = Vector3(0.0,0.0,0.0)
 	for d in range(HexDirection.NE, HexDirection.NW+1):
-		add_triangle(center,center+hex_metrics.get_second_corner(d),center+hex_metrics.get_first_corner(d))
+		add_triangle(center,center+hex_metrics.get_first_corner(d),center+hex_metrics.get_second_corner(d))
 		var neighbor = get_neighbor(d)
 		if not neighbor:
 			neighbor = self
@@ -93,11 +93,13 @@ func _on_area_mouse_exited():
 func change_color_entered():
 	cell_color = entered_color
 	update_mesh_color()
+	update_neighbor_mesh_color()
 
 
 func change_color_exited():
 	cell_color = default_color
 	update_mesh_color()
+	update_neighbor_mesh_color()
 
 
 func change_color(_cell_color):
@@ -111,29 +113,37 @@ func change_color(_cell_color):
 		"blue":
 			cell_color = Color.blue
 	update_mesh_color()
+	update_neighbor_mesh_color()
 
 func update_mesh_color():
 	colors = PoolColorArray()
 	for d in range(HexDirection.NE, HexDirection.NW+1):
 		var neighbor = get_neighbor(d)
-		print(d,neighbor)
 		if not neighbor:
 			neighbor = self
-		add_color(cell_color,neighbor.cell_color,neighbor.cell_color)
+		var edge_color = (cell_color + neighbor.cell_color) * 0.5
+		add_color(cell_color,edge_color,edge_color)
 	multimesh.mesh = null
 	multimesh.mesh = ArrayMesh.new()
 	arr[Mesh.ARRAY_COLOR] = colors
 	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
+
+func update_neighbor_mesh_color():
+	for d in range(HexDirection.NE, HexDirection.NW+1):
+		var neighbor = get_neighbor(d)
+		if neighbor:
+			neighbor.update_mesh_color()
 
 func get_neighbor(direction):
 	return neighbors.get(direction,null)
 
 func set_neighbor(direction,cell):
 	neighbors[direction] = cell
-	cell.neighbors[direction_opposite(direction)] = cell
+	cell.neighbors[direction_opposite(direction)] = self
 
 func direction_opposite(direction):
 	if direction<3:
 		return direction+3
 	else:
 		return direction-3
+

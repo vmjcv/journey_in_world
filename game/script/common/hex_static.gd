@@ -4,12 +4,12 @@ class HexMetrics:
 	var outer_radius := 10.0 
 	var inner_radius := outer_radius * 0.866025404
 	var corners := PoolVector3Array([
-		Vector3(0.0,0.0,outer_radius),
-		Vector3(inner_radius,0.0,0.5*outer_radius),
-		Vector3(inner_radius,0.0,-0.5*outer_radius),
 		Vector3(0.0,0.0,-outer_radius),
-		Vector3(-inner_radius,0.0,-0.5*outer_radius),
+		Vector3(inner_radius,0.0,-0.5*outer_radius),
+		Vector3(inner_radius,0.0,0.5*outer_radius),
+		Vector3(0.0,0.0,outer_radius),
 		Vector3(-inner_radius,0.0,0.5*outer_radius),
+		Vector3(-inner_radius,0.0,-0.5*outer_radius),
 	])
 	
 	func get_first_corner(direction):
