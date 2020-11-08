@@ -3,6 +3,9 @@ class_name HexStatic
 class HexMetrics:
 	var outer_radius := 10.0 
 	var inner_radius := outer_radius * 0.866025404
+	var solid_factor = 0.75
+	var blend_factor = 1 - solid_factor
+	var elevation_step = 5 # 高度步进
 	var corners := PoolVector3Array([
 		Vector3(0.0,0.0,-outer_radius),
 		Vector3(inner_radius,0.0,-0.5*outer_radius),
@@ -17,6 +20,15 @@ class HexMetrics:
 	
 	func get_second_corner(direction):
 		return corners[(direction+1)%len(corners)]
+
+	func get_first_solid_corner(direction):
+		return corners[direction]*solid_factor
+	
+	func get_second_solid_corner(direction):
+		return corners[(direction+1)%len(corners)]*solid_factor
+		
+	func get_bridge(direction):
+		return (corners[direction]+corners[(direction+1)%len(corners)])*blend_factor
 
 class HexCoordinates:
 	export(int) var x

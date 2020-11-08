@@ -29,6 +29,8 @@ func _ready():
 		for x in range(width):
 			create_cell(x,z,i)
 			i = i + 1 
+	for cell in cells:
+		cell.init_mesh()
 
 func update_canvas():
 	hex_grid_canvas.size = Vector2((width+1/2)*hex_metrics.inner_radius * 2*multiple,(height * 1.5+0.5)*hex_metrics.outer_radius*multiple)
@@ -44,7 +46,7 @@ func create_cell(x:int,z:int,i:int):
 	var cell = cell_obj.instance()
 	cell.coordinates = HexStatic.HexCoordinates.from_offset_coordinates(x,z)
 	cells[i] = cell
-	add_child(cell)
+	
 	cell.translation = position
 	var cell_label = cell_label_obj.instance()
 	hex_grid_canvas.add_child(cell_label)
@@ -66,6 +68,7 @@ func create_cell(x:int,z:int,i:int):
 			cell.set_neighbor(cell.HexDirection.NE,cells[i-width])
 			if x > 0:
 				cell.set_neighbor(cell.HexDirection.NW,cells[i-width-1])
+	add_child(cell)
 				
 func click_hex_cell(x,z,cell):
 	if cell_map.has(cell):
@@ -76,9 +79,11 @@ func click_hex_cell(x,z,cell):
 		else:
 			cell_map[cell]["color"] = GUI.get_now_color()
 			cell.change_color(GUI.get_now_color())
+			cell.set_elevation(GUI.get_now_elevation())
 	else:
 		cell_map[cell] = {"color":GUI.get_now_color()}
 		cell.change_color(GUI.get_now_color())
+		cell.set_elevation(GUI.get_now_elevation())
 	
 func entered_hex_cell(x,z,cell):
 	if not cell_map.has(cell):
@@ -87,3 +92,4 @@ func entered_hex_cell(x,z,cell):
 func exited_hex_cell(x,z,cell):
 	if not cell_map.has(cell):
 		cell.change_color_exited()
+
