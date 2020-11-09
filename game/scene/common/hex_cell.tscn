@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://script/common/hex_cell.gd" type="Script" id=1]
+[ext_resource path="res://addons/SIsilicon.3d.text/label_3d.gd" type="Script" id=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type spatial;
@@ -30,9 +31,21 @@ input_capture_on_drag = true
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.69549 )
-visible = false
+[node name="Label3D" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0.467109, 0 )
+script = ExtResource( 2 )
+text = "Text"
+text_size = 1.0
+font = null
+align = 0
+color = Color( 0.6, 0.6, 0.6, 1 )
+metallic = 0.0
+roughness = 0.5
+emission_color = Color( 1, 1, 1, 1 )
+emission_strength = 0.0
+extrude = 0.0
+max_steps = 256
+step_size = 1.0
 [connection signal="input_event" from="Area" to="." method="_on_area_input_event"]
 [connection signal="mouse_entered" from="Area" to="." method="_on_area_mouse_entered"]
 [connection signal="mouse_exited" from="Area" to="." method="_on_area_mouse_exited"]

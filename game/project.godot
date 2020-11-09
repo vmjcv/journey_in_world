@@ -48,6 +48,10 @@ window/size/width=1920
 window/size/height=1080
 window/size/always_on_top=true
 
+[editor_plugins]
+
+enabled=PoolStringArray( "SIsilicon.3d.text" )
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
