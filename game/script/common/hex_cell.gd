@@ -37,6 +37,7 @@ signal exited_hex_cell
 
 
 func _ready():
+	$Label3D.text = coordinates.to_string_on_separate_lines()
 	pass
 
 func init_mesh():

@@ -13,5 +13,5 @@ mouse_filter = 2
 [node name="hex_grid" parent="." instance=ExtResource( 2 )]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 40, 70, 40 )
+transform = Transform( 1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 40, 70, 52.6185 )
 current = true
