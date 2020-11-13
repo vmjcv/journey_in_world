@@ -15,9 +15,8 @@ var default_color = Color.white
 var touched_color = Color.darkorchid
 var entered_color = Color.turquoise
 var cell_color = default_color
-var index
 
-var elevation setget set_elevation,get_elevation# 高度
+var elevation = 0 setget set_elevation,get_elevation# 高度
 
 
 enum HexDirection {
@@ -53,7 +52,6 @@ func update_mesh():
 	normals = PoolVector3Array()
 	indices = PoolIntArray()
 	colors = PoolColorArray()
-	
 
 	var center = Vector3(0.0,0.0,0.0)
 	for d in range(HexDirection.NE, HexDirection.NW+1):
@@ -63,28 +61,30 @@ func update_mesh():
 		var bridge = hex_metrics.get_bridge(d)
 		var v4 = v2+bridge
 		var v5 = v3+bridge
-		
+		var neighbor = get_neighbor(d)
+		if neighbor:
+			v4.y = (neighbor.elevation-elevation) * hex_metrics.elevation_step
+			v5.y = v4.y
 		var v6 = v1+hex_metrics.get_first_corner(d)
 		var v7 = v1+hex_metrics.get_second_corner(d)
 		add_triangle(v1,v2,v3)
 		change_inner_triangle_color(v1,v2,v3)
-		
+
 		if d <= HexDirection.SE:
-			var neighbor = get_neighbor(d)
 			if not neighbor:
 				pass
 			else:
 				add_quad(v2,v3,v4,v5)
 				change_triangulate_color(d,v2,v3,v4,v5)
 		if d <= HexDirection.E:
-			var neighbor = get_neighbor(d)
 			var next_neighbor = get_neighbor(get_next(d))
 			if not neighbor or not next_neighbor:
 				pass
 			else:
-				var third_point = v3 + hex_metrics.get_bridge(get_next(d))
-				add_triangle(v3,v5,third_point)
-				change_triangle_color(d,v3,v5,third_point)
+				var v8 = v3 + hex_metrics.get_bridge(get_next(d))
+				v8.y = (next_neighbor.elevation-elevation) * hex_metrics.elevation_step
+				add_triangle(v3,v5,v8)
+				change_triangle_color(d,v3,v5,v8)
 
 	arr[Mesh.ARRAY_VERTEX] = verts
 	#arr[Mesh.ARRAY_TEX_UV] = uvs
@@ -111,7 +111,7 @@ func change_triangle_color(d,v1,v2,v3):
 	var neighbor = get_neighbor(d)
 	var next_neighbor = get_neighbor(get_next(d))
 	if not neighbor or not next_neighbor:
-		return 
+		return
 	add_triangle_color(v1,v2,v3,cell_color,neighbor.cell_color,next_neighbor.cell_color)
 
 
@@ -119,7 +119,7 @@ func add_triangle(v1,v2,v3):
 	add_vert(v1)
 	add_vert(v2)
 	add_vert(v3)
-	
+
 func add_vert(v1):
 	if not v1 in verts:
 		verts.push_back(v1)
@@ -131,7 +131,7 @@ func add_triangle_color(v1,v2,v3,color1,color2,color3):
 	var index1 = verts_array.find(v1)
 	var index2 = verts_array.find(v2)
 	var index3 = verts_array.find(v3)
-	
+
 	add_vert_color(index1,color1)
 	add_vert_color(index2,color2)
 	add_vert_color(index3,color3)
@@ -149,7 +149,7 @@ func add_quad(v2,v3,v4,v5):
 	add_vert(v3)
 	add_vert(v2)
 	add_vert(v5)
-	
+
 func add_quad_color(v2,v3,v4,v5,color2,color3,color4,color5):
 	var verts_array = Array(verts)
 	var index2 = verts_array.find(v2)
@@ -166,7 +166,7 @@ func add_quad_color(v2,v3,v4,v5,color2,color3,color4,color5):
 func _on_area_input_event(camera, event, click_position, click_normal, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		emit_signal("click_hex_cell")
-		
+
 func _on_area_mouse_entered():
 	emit_signal("entered_hex_cell")
 
@@ -176,14 +176,14 @@ func _on_area_mouse_exited():
 
 func change_color_entered():
 	cell_color = entered_color
-	update_mesh_color()
-	update_neighbor_mesh_color()
+	update_mesh()
+	update_neighbor_mesh()
 
 
 func change_color_exited():
 	cell_color = default_color
-	update_mesh_color()
-	update_neighbor_mesh_color()
+	update_mesh()
+	update_neighbor_mesh()
 
 
 func change_color(_cell_color):
@@ -196,51 +196,14 @@ func change_color(_cell_color):
 			cell_color = Color.yellow
 		"blue":
 			cell_color = Color.blue
-	update_mesh_color()
-	update_neighbor_mesh_color()
+	update_mesh()
+	update_neighbor_mesh()
 
-func update_mesh_color():
-	colors = PoolColorArray()
-	var center = Vector3(0.0,0.0,0.0)
-	for d in range(HexDirection.NE, HexDirection.NW+1):
-		var v1 = center
-		var v2 = center+hex_metrics.get_first_solid_corner(d)
-		var v3 = center+hex_metrics.get_second_solid_corner(d)
-		var bridge = hex_metrics.get_bridge(d)
-#		var v4 = center+hex_metrics.get_first_corner(d)
-#		var v5 = center+hex_metrics.get_second_corner(d)
-		var v4 = v2+bridge
-		var v5 = v3+bridge
-		
-		var v6 = v1+hex_metrics.get_first_corner(d)
-		var v7 = v1+hex_metrics.get_second_corner(d)
-		change_inner_triangle_color(v1,v2,v3)
-		if d <= HexDirection.SE:
-			var neighbor = get_neighbor(d)
-			if not neighbor:
-				pass
-			else:
-				change_triangulate_color(d,v2,v3,v4,v5)
-
-		if d <= HexDirection.E:
-			var neighbor = get_neighbor(d)
-			var next_neighbor = get_neighbor(get_next(d))
-			if not neighbor or not next_neighbor:
-				pass
-			else:
-				var third_point = v3 + hex_metrics.get_bridge(get_next(d))
-				change_triangle_color(d,v3,v5,third_point)
-		
-	multimesh.mesh = null
-	multimesh.mesh = ArrayMesh.new()
-	arr[Mesh.ARRAY_COLOR] = colors
-	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
-
-func update_neighbor_mesh_color():
+func update_neighbor_mesh():
 	for d in range(HexDirection.NE, HexDirection.NW+1):
 		var neighbor = get_neighbor(d)
 		if neighbor:
-			neighbor.update_mesh_color()
+			neighbor.update_mesh()
 
 func get_neighbor(direction):
 	return neighbors.get(direction,null)
@@ -264,7 +227,14 @@ func direction_opposite(direction):
 func set_elevation(_elevation):
 	elevation = _elevation
 	translation.y = elevation*hex_metrics.elevation_step
-	pass
-	
+	update_mesh()
+	update_neighbor_mesh()
+
 func get_elevation():
 	return elevation
+
+func terrace_lerp(a,b,step):
+	var h = step*hex_metrics.horizontal_terrace_step_size
+	a.x = a.x+ (b.x-a.x)*h
+	a.z = a.z+ (b.z-a.z)*h
+	return a
