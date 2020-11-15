@@ -74,8 +74,12 @@ func update_mesh():
 			if not neighbor:
 				pass
 			else:
-				add_quad(v2,v3,v4,v5)
-				change_triangulate_color(d,v2,v3,v4,v5)
+				if get_edge_type(d) == hex_metrics.HexEdgeType.SLOPE:
+					triangulate_edge_terraces(v2,v3,self,v4,v5,neighbor)
+				else:
+					add_quad(v2,v3,v4,v5)
+					add_quad_color(v2,v3,v4,v5,cell_color,cell_color,neighbor.cell_color,neighbor.cell_color)
+
 		if d <= HexDirection.E:
 			var next_neighbor = get_neighbor(get_next(d))
 			if not neighbor or not next_neighbor:
@@ -83,8 +87,22 @@ func update_mesh():
 			else:
 				var v8 = v3 + hex_metrics.get_bridge(get_next(d))
 				v8.y = (next_neighbor.elevation-elevation) * hex_metrics.elevation_step
-				add_triangle(v3,v5,v8)
-				change_triangle_color(d,v3,v5,v8)
+				# add_triangle(v3,v5,v8)
+				# change_triangle_color(d,v3,v5,v8)
+				# add_triangle_color(v3,v5,v8,cell_color,neighbor.cell_color,next_neighbor.cell_color)
+
+				# triangulate_corner(v3,self,v5,neighbor,v8,next_neighbor)
+
+				if elevation <= neighbor.elevation:
+					if elevation<=next_neighbor.elevation:
+						triangulate_corner(v3,self,v5,neighbor,v8,next_neighbor)
+					else:
+						triangulate_corner(v8,next_neighbor,v3,self,v5,neighbor)
+				elif neighbor.elevation<=next_neighbor.elevation:
+					triangulate_corner(v5,neighbor,v8,next_neighbor,v3,self)
+				else:
+					triangulate_corner(v8,next_neighbor,v3,self,v5,neighbor)
+
 
 	arr[Mesh.ARRAY_VERTEX] = verts
 	#arr[Mesh.ARRAY_TEX_UV] = uvs
@@ -93,18 +111,12 @@ func update_mesh():
 	arr[Mesh.ARRAY_INDEX] = indices
 	multimesh.mesh = ArrayMesh.new()
 	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr) # No blendshapes or compression used.
+	# multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, arr) # No blendshapes or compression used.
 	#multimesh.mesh.generate_triangle_mesh()
 
 func change_inner_triangle_color(v1,v2,v3):
 	# 改变内部三角形的颜色
 	add_triangle_color(v1,v2,v3,cell_color,cell_color,cell_color)
-
-func change_triangulate_color(d,v2,v3,v4,v5):
-	# 改变连接四边形的颜色
-	var neighbor = get_neighbor(d)
-	if not neighbor:
-		return
-	add_quad_color(v2,v3,v4,v5,cell_color,cell_color,neighbor.cell_color,neighbor.cell_color)
 
 func change_triangle_color(d,v1,v2,v3):
 	# 改变连接三角形的颜色
@@ -142,6 +154,117 @@ func add_vert_color(index,color):
 	else:
 		colors[index] = color
 
+func triangulate_corner(bottom,bottom_cell,left,left_cell,right,right_cell):
+	var left_edge_type = bottom_cell.get_edge_type_by_cell(left_cell)
+	var right_edge_type = bottom_cell.get_edge_type_by_cell(right_cell)
+	if left_edge_type == hex_metrics.HexEdgeType.SLOPE:
+		if right_edge_type == hex_metrics.HexEdgeType.SLOPE:
+			triangulate_corner_terraces(bottom,bottom_cell,left,left_cell,right,right_cell)
+		elif right_edge_type == hex_metrics.HexEdgeType.FLAT:
+			triangulate_corner_terraces(left,left_cell,right,right_cell,bottom,bottom_cell)
+		else:
+			triangulate_corner_terraces_cliff(bottom,bottom_cell,left,left_cell,right,right_cell)
+	elif right_edge_type == hex_metrics.HexEdgeType.SLOPE:
+		if left_edge_type == hex_metrics.HexEdgeType.FLAT:
+			triangulate_corner_terraces(right,right_cell,bottom,bottom_cell,left,left_cell)
+		else:
+			triangulate_corner_cliff_terraces(bottom,bottom_cell,left,left_cell,right,right_cell)
+	elif left_cell.get_edge_type_by_cell(right_cell) == hex_metrics.HexEdgeType.SLOPE:
+		if left_cell.elevation<right_cell.elevation:
+			triangulate_corner_cliff_terraces(right,right_cell,bottom,bottom_cell,left,left_cell)
+		else:
+			triangulate_corner_terraces_cliff(left,left_cell,right,right_cell,bottom,bottom_cell)
+	else:
+		add_triangle(bottom,left,right)
+		add_triangle_color(bottom,left,right,bottom_cell.cell_color,left_cell.cell_color,right_cell.cell_color)
+
+func triangulate_corner_terraces(begin,begin_cell,left,left_cell,right,right_cell):
+	var v3  = hex_metrics.terrace_lerp(begin,left,1)
+	var v4  = hex_metrics.terrace_lerp(begin,right,1)
+	var c3 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,left_cell.cell_color,1)
+	var c4 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,right_cell.cell_color,1)
+	add_triangle(begin,v3,v4)
+	add_triangle_color(begin,v3,v4,begin_cell.cell_color,c3,c4)
+
+	for i in range(2,hex_metrics.terrace_steps):
+		var v1 = Vector3(v3)
+		var v2 = Vector3(v4)
+		var c1 = Color(c3)
+		var c2 = Color(c4)
+		v3 = hex_metrics.terrace_lerp(begin,left,i)
+		v4 = hex_metrics.terrace_lerp(begin,right,i)
+		c3 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,left_cell.cell_color,i)
+		c4 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,right_cell.cell_color,i)
+		add_quad(v1,v2,v3,v4)
+		add_quad_color(v1,v2,v3,v4,c1,c2,c3,c4)
+
+	add_quad(v3,v4,left,right)
+	add_quad_color(v3,v4,left,right,c3,c4,left_cell.cell_color,right_cell.cell_color)
+	pass
+
+func triangulate_corner_terraces_cliff(begin,begin_cell,left,left_cell,right,right_cell):
+	var b = 1.0/ (right_cell.elevation - begin_cell.elevation)
+	b = abs(b)
+	var boundary =lerp(begin,right,b)
+	var boundary_color = hex_metrics.color_slerp(begin_cell.cell_color,right_cell.cell_color,b)
+	# add_triangle(begin,left,boundary)
+	# add_triangle_color(begin,left,boundary,begin_cell.cell_color,left_cell.cell_color,boundary_color)
+	triangulate_boundary_triangle(begin,begin_cell,left,left_cell,boundary,boundary_color)
+	if left_cell.get_edge_type_by_cell(right_cell) == hex_metrics.HexEdgeType.SLOPE:
+		triangulate_boundary_triangle(left,left_cell,right,right_cell,boundary,boundary_color)
+	else:
+		add_triangle(left,right,boundary)
+		add_triangle_color(left,right,boundary,left_cell.cell_color,right_cell.cell_color,boundary_color)
+
+func triangulate_corner_cliff_terraces(begin,begin_cell,left,left_cell,right,right_cell):
+	var b = 1.0/ (left_cell.elevation - begin_cell.elevation)
+	b = abs(b)
+	var boundary =lerp(begin,left,b)
+	var boundary_color = hex_metrics.color_slerp(begin_cell.cell_color,left_cell.cell_color,b)
+	# add_triangle(begin,left,boundary)
+	# add_triangle_color(begin,left,boundary,begin_cell.cell_color,left_cell.cell_color,boundary_color)
+	triangulate_boundary_triangle(right,right_cell,begin,begin_cell,boundary,boundary_color)
+	if left_cell.get_edge_type_by_cell(right_cell) == hex_metrics.HexEdgeType.SLOPE:
+		triangulate_boundary_triangle(left,left_cell,right,right_cell,boundary,boundary_color)
+	else:
+		add_triangle(left,right,boundary)
+		add_triangle_color(left,right,boundary,left_cell.cell_color,right_cell.cell_color,boundary_color)
+
+func triangulate_boundary_triangle(begin,begin_cell,left,left_cell,boundary,boundary_color):
+	var v2  = hex_metrics.terrace_lerp(begin,left,1)
+	var c2 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,left_cell.cell_color,1)
+
+	add_triangle(begin,v2,boundary)
+	add_triangle_color(begin,v2,boundary,begin_cell.cell_color,c2,boundary_color)
+	for i in range(2,hex_metrics.terrace_steps):
+		var v1 = Vector3(v2)
+		var c1 = Color(c2)
+		v2 = hex_metrics.terrace_lerp(begin,left,i)
+		c2 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,left_cell.cell_color,i)
+		add_triangle(v1,v2,boundary)
+		add_triangle_color(v1,v2,boundary,c1,c2,boundary_color)
+	add_triangle(v2,left,boundary)
+	add_triangle_color(v2,left,boundary,c2,left_cell.cell_color,boundary_color)
+
+func triangulate_edge_terraces(begin_left,begin_right,begin_cell,end_left,end_right,end_cell):
+	var v3 = hex_metrics.terrace_lerp(begin_left,end_left,1)
+	var v4 = hex_metrics.terrace_lerp(begin_right,end_right,1)
+	var c2 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,end_cell.cell_color,1)
+	add_quad(begin_left,begin_right,v3,v4)
+	add_quad_color(begin_left,begin_right,v3,v4,begin_cell.cell_color,begin_cell.cell_color,c2,c2)
+	for i in range(2,hex_metrics.terrace_steps):
+		var v1 = Vector3(v3)
+		var v2 = Vector3(v4)
+		var c1 = Color(c2)
+		v3 = hex_metrics.terrace_lerp(begin_left,end_left,i)
+		v4 = hex_metrics.terrace_lerp(begin_right,end_right,i)
+		c2 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,end_cell.cell_color,i)
+		add_quad(v1,v2,v3,v4)
+		add_quad_color(v1,v2,v3,v4,c1,c1,c2,c2)
+
+	add_quad(v3,v4,end_left,end_right)
+	add_quad_color(v3,v4,end_left,end_right,c2,c2,end_cell.cell_color,end_cell.cell_color)
+
 func add_quad(v2,v3,v4,v5):
 	add_vert(v2)
 	add_vert(v4)
@@ -150,17 +273,17 @@ func add_quad(v2,v3,v4,v5):
 	add_vert(v2)
 	add_vert(v5)
 
-func add_quad_color(v2,v3,v4,v5,color2,color3,color4,color5):
+func add_quad_color(v2,v3,v4,v5,c2,c3,c4,c5):
 	var verts_array = Array(verts)
 	var index2 = verts_array.find(v2)
 	var index3 = verts_array.find(v3)
 	var index4 = verts_array.find(v4)
 	var index5 = verts_array.find(v5)
 
-	add_vert_color(index2,color2)
-	add_vert_color(index3,color3)
-	add_vert_color(index4,color4)
-	add_vert_color(index5,color5)
+	add_vert_color(index2,c2)
+	add_vert_color(index3,c3)
+	add_vert_color(index4,c4)
+	add_vert_color(index5,c5)
 
 
 func _on_area_input_event(camera, event, click_position, click_normal, shape_idx):
@@ -233,8 +356,9 @@ func set_elevation(_elevation):
 func get_elevation():
 	return elevation
 
-func terrace_lerp(a,b,step):
-	var h = step*hex_metrics.horizontal_terrace_step_size
-	a.x = a.x+ (b.x-a.x)*h
-	a.z = a.z+ (b.z-a.z)*h
-	return a
+func get_edge_type(direction):
+	var neighbor = get_neighbor(direction)
+	return hex_metrics.get_edge_type(elevation,neighbor.elevation)
+
+func get_edge_type_by_cell(cell):
+	return hex_metrics.get_edge_type(elevation,cell.elevation)

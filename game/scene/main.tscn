@@ -11,7 +11,12 @@ script = ExtResource( 3 )
 mouse_filter = 2
 
 [node name="hex_grid" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0672531, 0.230003, -0.269363 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 40, 70, 52.6185 )
+transform = Transform( 1, 0, 0, 0, 0.434649, 0.9006, 0, -0.9006, 0.434649, 40.0297, 70, 52.5937 )
 current = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.71407, 0.698371, -0.0488104, 0.0777938, -0.00986598, 0.996921, 0.695739, -0.715668, -0.061374, 6.93521, 18.3167, -0.314833 )
+light_color = Color( 0.945098, 0.160784, 0.160784, 1 )
