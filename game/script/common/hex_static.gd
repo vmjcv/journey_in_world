@@ -19,11 +19,28 @@ class HexMetrics:
 		Vector3(-inner_radius,0.0,-0.5*outer_radius),
 	])
 
+	var noise1 = create_noise(12345,4,20,0.8)
+	var noise2 =create_noise(22222,4,20,0.8)
+	var noise3 = create_noise(45678,4,20,0.8)
+
 	enum HexEdgeType {
 		FLAT,# 平坦
 		SLOPE,# 倾斜
 		CLIFF,# 悬崖
 	}
+	func create_noise(_seed,_octaves,_period,_persistence):
+		var noise  = OpenSimplexNoise.new()
+		noise.seed = _seed
+		noise.octaves = _octaves
+		noise.period =_period
+		noise.persistence = _persistence
+		return noise
+
+	func get_noise(position):
+		var delta1 = noise1.get_noise_3d(position.x,position.y,position.z)
+		var delta2 = noise2.get_noise_3d(position.x,position.y,position.z)
+		var delta3 = noise3.get_noise_3d(position.x,position.y,position.z)
+		return Vector3(delta1,delta2,delta3)
 
 	func get_edge_type(height1,height2):
 		if height1 == height2:

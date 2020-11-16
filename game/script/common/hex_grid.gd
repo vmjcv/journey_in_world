@@ -12,7 +12,6 @@ var GUI
 onready var hex_grid_canvas = $hex_grid_canvas
 
 onready var label_canvas = $label_canvas
-
 var cell_map = Dictionary()
 
 var cells:Array

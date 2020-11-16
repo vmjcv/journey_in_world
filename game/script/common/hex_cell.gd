@@ -18,7 +18,6 @@ var cell_color = default_color
 
 var elevation = 0 setget set_elevation,get_elevation# 高度
 
-
 enum HexDirection {
 	NE,# 东北
 	E,# 东
@@ -43,6 +42,7 @@ func init_mesh():
 	multimesh = multimesh.duplicate()
 	update_mesh()
 	$Area/CollisionShape.shape = multimesh.mesh.create_convex_shape()
+	self.test()
 
 func update_mesh():
 	arr = []
@@ -110,8 +110,8 @@ func update_mesh():
 	#arr[Mesh.ARRAY_NORMAL] = normals
 	arr[Mesh.ARRAY_INDEX] = indices
 	multimesh.mesh = ArrayMesh.new()
-	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr) # No blendshapes or compression used.
-	# multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, arr) # No blendshapes or compression used.
+	# multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr) # No blendshapes or compression used.
+	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, arr) # No blendshapes or compression used.
 	#multimesh.mesh.generate_triangle_mesh()
 
 func change_inner_triangle_color(v1,v2,v3):
@@ -128,9 +128,9 @@ func change_triangle_color(d,v1,v2,v3):
 
 
 func add_triangle(v1,v2,v3):
-	add_vert(v1)
-	add_vert(v2)
-	add_vert(v3)
+	add_vert(perturb(v1))
+	add_vert(perturb(v2))
+	add_vert(perturb(v3))
 
 func add_vert(v1):
 	if not v1 in verts:
@@ -140,9 +140,9 @@ func add_vert(v1):
 
 func add_triangle_color(v1,v2,v3,color1,color2,color3):
 	var verts_array = Array(verts)
-	var index1 = verts_array.find(v1)
-	var index2 = verts_array.find(v2)
-	var index3 = verts_array.find(v3)
+	var index1 = verts_array.find(perturb(v1))
+	var index2 = verts_array.find(perturb(v2))
+	var index3 = verts_array.find(perturb(v3))
 
 	add_vert_color(index1,color1)
 	add_vert_color(index2,color2)
@@ -266,19 +266,19 @@ func triangulate_edge_terraces(begin_left,begin_right,begin_cell,end_left,end_ri
 	add_quad_color(v3,v4,end_left,end_right,c2,c2,end_cell.cell_color,end_cell.cell_color)
 
 func add_quad(v2,v3,v4,v5):
-	add_vert(v2)
-	add_vert(v4)
-	add_vert(v5)
-	add_vert(v3)
-	add_vert(v2)
-	add_vert(v5)
+	add_vert(perturb(v2))
+	add_vert(perturb(v4))
+	add_vert(perturb(v5))
+	add_vert(perturb(v3))
+	add_vert(perturb(v2))
+	add_vert(perturb(v5))
 
 func add_quad_color(v2,v3,v4,v5,c2,c3,c4,c5):
 	var verts_array = Array(verts)
-	var index2 = verts_array.find(v2)
-	var index3 = verts_array.find(v3)
-	var index4 = verts_array.find(v4)
-	var index5 = verts_array.find(v5)
+	var index2 = verts_array.find(perturb(v2))
+	var index3 = verts_array.find(perturb(v3))
+	var index4 = verts_array.find(perturb(v4))
+	var index5 = verts_array.find(perturb(v5))
 
 	add_vert_color(index2,c2)
 	add_vert_color(index3,c3)
@@ -362,3 +362,17 @@ func get_edge_type(direction):
 
 func get_edge_type_by_cell(cell):
 	return hex_metrics.get_edge_type(elevation,cell.elevation)
+
+func perturb(position):
+	var sample = hex_metrics.get_noise(position)
+	var cur_position = Vector3(position)
+	cur_position.x =cur_position.x+ sample.x
+	cur_position.y =cur_position.y+ sample.y
+	cur_position.z =cur_position.z+ sample.z
+	return cur_position
+
+func test():
+	print("--------------")
+	print(perturb(Vector3(1.0,0.5,0.2)))
+	print(perturb(Vector3(1.0,0.5,0.2)))
+	print(perturb(Vector3(1.0,0.5,0.2)))
