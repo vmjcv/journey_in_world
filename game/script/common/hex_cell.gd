@@ -64,8 +64,14 @@ func update_mesh():
 		if neighbor:
 			v4.y = (neighbor.translation -  translation).y
 			v5.y = v4.y
-		add_triangle(v1,v2,v3)
-		change_inner_triangle_color(v1,v2,v3)
+		var e1 = lerp(v2,v3,1/3)
+		var e2 = lerp(v2,v3,2/3)
+		add_triangle(v1,v2,e1)
+		change_inner_triangle_color(v1,v2,e1)
+		add_triangle(v1,e1,e2)
+		change_inner_triangle_color(v1,e1,e2)
+		add_triangle(v1,e2,v3)
+		change_inner_triangle_color(v1,e2,v3)
 
 		if d <= HexDirection.SE:
 			if not neighbor:
@@ -101,8 +107,8 @@ func update_mesh():
 	#arr[Mesh.ARRAY_NORMAL] = normals
 	arr[Mesh.ARRAY_INDEX] = indices
 	multimesh.mesh = ArrayMesh.new()
-	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr) # No blendshapes or compression used.
-	# multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, arr) # No blendshapes or compression used.
+	# multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr) # No blendshapes or compression used.
+	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, arr) # No blendshapes or compression used.
 	#multimesh.mesh.generate_triangle_mesh()
 
 func change_inner_triangle_color(v1,v2,v3):
