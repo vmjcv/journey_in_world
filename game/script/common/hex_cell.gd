@@ -42,7 +42,6 @@ func init_mesh():
 	multimesh = multimesh.duplicate()
 	update_mesh()
 	$Area/CollisionShape.shape = multimesh.mesh.create_convex_shape()
-	self.test()
 
 func update_mesh():
 	arr = []
@@ -63,10 +62,8 @@ func update_mesh():
 		var v5 = v3+bridge
 		var neighbor = get_neighbor(d)
 		if neighbor:
-			v4.y = (neighbor.elevation-elevation) * hex_metrics.elevation_step
+			v4.y = (neighbor.translation -  translation).y
 			v5.y = v4.y
-		var v6 = v1+hex_metrics.get_first_corner(d)
-		var v7 = v1+hex_metrics.get_second_corner(d)
 		add_triangle(v1,v2,v3)
 		change_inner_triangle_color(v1,v2,v3)
 
@@ -86,13 +83,7 @@ func update_mesh():
 				pass
 			else:
 				var v8 = v3 + hex_metrics.get_bridge(get_next(d))
-				v8.y = (next_neighbor.elevation-elevation) * hex_metrics.elevation_step
-				# add_triangle(v3,v5,v8)
-				# change_triangle_color(d,v3,v5,v8)
-				# add_triangle_color(v3,v5,v8,cell_color,neighbor.cell_color,next_neighbor.cell_color)
-
-				# triangulate_corner(v3,self,v5,neighbor,v8,next_neighbor)
-
+				v8.y = (next_neighbor.translation -  translation).y
 				if elevation <= neighbor.elevation:
 					if elevation<=next_neighbor.elevation:
 						triangulate_corner(v3,self,v5,neighbor,v8,next_neighbor)
@@ -110,8 +101,8 @@ func update_mesh():
 	#arr[Mesh.ARRAY_NORMAL] = normals
 	arr[Mesh.ARRAY_INDEX] = indices
 	multimesh.mesh = ArrayMesh.new()
-	# multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr) # No blendshapes or compression used.
-	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, arr) # No blendshapes or compression used.
+	multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr) # No blendshapes or compression used.
+	# multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, arr) # No blendshapes or compression used.
 	#multimesh.mesh.generate_triangle_mesh()
 
 func change_inner_triangle_color(v1,v2,v3):
@@ -350,6 +341,7 @@ func direction_opposite(direction):
 func set_elevation(_elevation):
 	elevation = _elevation
 	translation.y = elevation*hex_metrics.elevation_step
+	translation.y = translation.y + hex_metrics.get_noise(translation).y*hex_metrics.elevation_perturb_strength
 	update_mesh()
 	update_neighbor_mesh()
 
@@ -364,15 +356,10 @@ func get_edge_type_by_cell(cell):
 	return hex_metrics.get_edge_type(elevation,cell.elevation)
 
 func perturb(position):
-	var sample = hex_metrics.get_noise(position)
+	var sample = hex_metrics.get_noise(translation+position)
+	sample = sample *hex_metrics.cell_perturb_strength
 	var cur_position = Vector3(position)
 	cur_position.x =cur_position.x+ sample.x
-	cur_position.y =cur_position.y+ sample.y
+	#cur_position.y =cur_position.y+ sample.y
 	cur_position.z =cur_position.z+ sample.z
 	return cur_position
-
-func test():
-	print("--------------")
-	print(perturb(Vector3(1.0,0.5,0.2)))
-	print(perturb(Vector3(1.0,0.5,0.2)))
-	print(perturb(Vector3(1.0,0.5,0.2)))

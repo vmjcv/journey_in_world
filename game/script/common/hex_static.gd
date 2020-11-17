@@ -23,6 +23,10 @@ class HexMetrics:
 	var noise2 =create_noise(22222,4,20,0.8)
 	var noise3 = create_noise(45678,4,20,0.8)
 
+	var cell_perturb_strength = 5
+	var noise_scale = 1
+	var elevation_perturb_strength = 1.5
+
 	enum HexEdgeType {
 		FLAT,# 平坦
 		SLOPE,# 倾斜
@@ -37,9 +41,10 @@ class HexMetrics:
 		return noise
 
 	func get_noise(position):
-		var delta1 = noise1.get_noise_3d(position.x,position.y,position.z)
-		var delta2 = noise2.get_noise_3d(position.x,position.y,position.z)
-		var delta3 = noise3.get_noise_3d(position.x,position.y,position.z)
+		var cur_position = position * noise_scale
+		var delta1 = noise1.get_noise_3d(cur_position.x,cur_position.y,cur_position.z)
+		var delta2 = noise2.get_noise_3d(cur_position.x,cur_position.y,cur_position.z)
+		var delta3 = noise3.get_noise_3d(cur_position.x,cur_position.y,cur_position.z)
 		return Vector3(delta1,delta2,delta3)
 
 	func get_edge_type(height1,height2):

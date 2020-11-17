@@ -30,6 +30,11 @@ func _ready():
 			i = i + 1
 	for cell in cells:
 		cell.init_mesh()
+		cell.elevation = randi()%7
+		var color_map =["white","green","yellow","blue"]
+		var index = randi()%4
+		cell.change_color(color_map[index])
+		cell_map[cell] = {"color":color_map[index]}
 
 func update_canvas():
 	hex_grid_canvas.size = Vector2((width+1/2)*hex_metrics.inner_radius * 2*multiple,(height * 1.5+0.5)*hex_metrics.outer_radius*multiple)
@@ -64,6 +69,7 @@ func create_cell(x:int,z:int,i:int):
 			if x > 0:
 				cell.set_neighbor(cell.HexDirection.NW,cells[i-width-1])
 	add_child(cell)
+
 
 func click_hex_cell(x,z,cell):
 	if cell_map.has(cell):
