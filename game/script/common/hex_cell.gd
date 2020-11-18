@@ -122,11 +122,26 @@ func add_triangle(v1,v2,v3):
 	add_vert(perturb(v2))
 	add_vert(perturb(v3))
 
+func add_triangle_unperturbed(v1,v2,v3):
+	add_vert(v1)
+	add_vert(v2)
+	add_vert(v3)
+
 func add_vert(v1):
 	if not v1 in verts:
 		verts.push_back(v1)
 	var verts_array = Array(verts)
 	indices.push_back(verts_array.find(v1))
+
+func add_triangle_color_unperturbed(v1,v2,v3,color1,color2,color3):
+	var verts_array = Array(verts)
+	var index1 = verts_array.find(v1)
+	var index2 = verts_array.find(v2)
+	var index3 = verts_array.find(v3)
+
+	add_vert_color(index1,color1)
+	add_vert_color(index2,color2)
+	add_vert_color(index3,color3)
 
 func add_triangle_color(v1,v2,v3,color1,color2,color3):
 	var verts_array = Array(verts)
@@ -217,20 +232,20 @@ func triangulate_corner_cliff_terraces(begin,begin_cell,left,left_cell,right,rig
 		add_triangle_color(left,right,boundary,left_cell.cell_color,right_cell.cell_color,boundary_color)
 
 func triangulate_boundary_triangle(begin,begin_cell,left,left_cell,boundary,boundary_color):
-	var v2  = hex_metrics.terrace_lerp(begin,left,1)
+	var v2  = perturb(hex_metrics.terrace_lerp(begin,left,1))
 	var c2 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,left_cell.cell_color,1)
 
-	add_triangle(begin,v2,boundary)
-	add_triangle_color(begin,v2,boundary,begin_cell.cell_color,c2,boundary_color)
+	add_triangle_unperturbed(perturb(begin),v2,boundary)
+	add_triangle_color_unperturbed(perturb(begin),v2,boundary,begin_cell.cell_color,c2,boundary_color)
 	for i in range(2,hex_metrics.terrace_steps):
 		var v1 = Vector3(v2)
 		var c1 = Color(c2)
-		v2 = hex_metrics.terrace_lerp(begin,left,i)
+		v2 = perturb(hex_metrics.terrace_lerp(begin,left,i))
 		c2 = hex_metrics.terrace_color_lerp(begin_cell.cell_color,left_cell.cell_color,i)
-		add_triangle(v1,v2,boundary)
-		add_triangle_color(v1,v2,boundary,c1,c2,boundary_color)
-	add_triangle(v2,left,boundary)
-	add_triangle_color(v2,left,boundary,c2,left_cell.cell_color,boundary_color)
+		add_triangle_unperturbed(v1,v2,boundary)
+		add_triangle_color_unperturbed(v1,v2,boundary,c1,c2,boundary_color)
+	add_triangle_unperturbed(v2,perturb(left),boundary)
+	add_triangle_color_unperturbed(v2,perturb(left),boundary,c2,left_cell.cell_color,boundary_color)
 
 func triangulate_edge_terraces(begin,begin_cell,end,end_cell):
 	var e2 = HexStatic.HexEdgeVertices.terrace_lerp(begin,end,1)
