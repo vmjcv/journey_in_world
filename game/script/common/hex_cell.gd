@@ -64,8 +64,8 @@ func update_mesh():
 		if neighbor:
 			v4.y = (neighbor.translation -  translation).y
 			v5.y = v4.y
-		var e1 = lerp(v2,v3,1/3)
-		var e2 = lerp(v2,v3,2/3)
+		var e1 = lerp(v2,v3,0.333)
+		var e2 = lerp(v2,v3,0.666)
 		add_triangle(v1,v2,e1)
 		change_inner_triangle_color(v1,v2,e1)
 		add_triangle(v1,e1,e2)
@@ -73,15 +73,15 @@ func update_mesh():
 		add_triangle(v1,e2,v3)
 		change_inner_triangle_color(v1,e2,v3)
 
-		if d <= HexDirection.SE:
-			if not neighbor:
-				pass
-			else:
-				if get_edge_type(d) == hex_metrics.HexEdgeType.SLOPE:
-					triangulate_edge_terraces(v2,v3,self,v4,v5,neighbor)
-				else:
-					add_quad(v2,v3,v4,v5)
-					add_quad_color(v2,v3,v4,v5,cell_color,cell_color,neighbor.cell_color,neighbor.cell_color)
+		# if d <= HexDirection.SE:
+		# 	if not neighbor:
+		# 		pass
+		# 	else:
+		# 		if get_edge_type(d) == hex_metrics.HexEdgeType.SLOPE:
+		# 			triangulate_edge_terraces(v2,v3,self,v4,v5,neighbor)
+		# 		else:
+		# 			add_quad(v2,v3,v4,v5)
+		# 			add_quad_color(v2,v3,v4,v5,cell_color,cell_color,neighbor.cell_color,neighbor.cell_color)
 
 		if d <= HexDirection.E:
 			var next_neighbor = get_neighbor(get_next(d))
@@ -93,12 +93,12 @@ func update_mesh():
 				if elevation <= neighbor.elevation:
 					if elevation<=next_neighbor.elevation:
 						triangulate_corner(v3,self,v5,neighbor,v8,next_neighbor)
-					else:
-						triangulate_corner(v8,next_neighbor,v3,self,v5,neighbor)
-				elif neighbor.elevation<=next_neighbor.elevation:
-					triangulate_corner(v5,neighbor,v8,next_neighbor,v3,self)
-				else:
-					triangulate_corner(v8,next_neighbor,v3,self,v5,neighbor)
+					# else:
+					# 	triangulate_corner(v8,next_neighbor,v3,self,v5,neighbor)
+				# elif neighbor.elevation<=next_neighbor.elevation:
+				# 	triangulate_corner(v5,neighbor,v8,next_neighbor,v3,self)
+				# else:
+				# 	triangulate_corner(v8,next_neighbor,v3,self,v5,neighbor)
 
 
 	arr[Mesh.ARRAY_VERTEX] = verts
@@ -172,6 +172,7 @@ func triangulate_corner(bottom,bottom_cell,left,left_cell,right,right_cell):
 		else:
 			triangulate_corner_terraces_cliff(left,left_cell,right,right_cell,bottom,bottom_cell)
 	else:
+		print(bottom,left,right)
 		add_triangle(bottom,left,right)
 		add_triangle_color(bottom,left,right,bottom_cell.cell_color,left_cell.cell_color,right_cell.cell_color)
 
@@ -278,10 +279,9 @@ func add_quad_color(v2,v3,v4,v5,c2,c3,c4,c5):
 	var index5 = verts_array.find(perturb(v5))
 
 	add_vert_color(index2,c2)
-	add_vert_color(index3,c3)
 	add_vert_color(index4,c4)
 	add_vert_color(index5,c5)
-
+	add_vert_color(index3,c3)
 
 func _on_area_input_event(camera, event, click_position, click_normal, shape_idx):
 	if event is InputEventMouseButton and event.pressed:

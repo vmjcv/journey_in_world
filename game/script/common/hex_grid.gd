@@ -30,7 +30,8 @@ func _ready():
 			i = i + 1
 	for cell in cells:
 		cell.init_mesh()
-		cell.elevation = randi()%7
+		# cell.elevation = randi()%7
+		cell.elevation = 0
 		var color_map =["white","green","yellow","blue"]
 		var index = randi()%4
 		cell.change_color(color_map[index])

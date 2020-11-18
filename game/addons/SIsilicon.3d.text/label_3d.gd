@@ -58,7 +58,7 @@ func _ready() -> void:
 	proxy.mesh = CubeMesh.new()
 	proxy.material_override = preload("label_3d.material").duplicate()
 	material = proxy.material_override
-	
+
 	var view_texture: ViewportTexture = viewport.get_texture()
 	view_texture.flags = Texture.FLAG_FILTER
 	material.set_shader_param("text", view_texture)
@@ -86,22 +86,22 @@ func set_text(value: String) -> void:
 		label.text = text
 		label.rect_size = Vector2()
 		label.force_update_transform()
-		
+
 		var size: Vector2 = label.rect_size
 		viewport.size = size
-		
+
 		viewport.render_target_update_mode = Viewport.UPDATE_ALWAYS
 		yield(get_tree(), "idle_frame")
-		
+
 		label.rect_size = Vector2()
 		label.force_update_transform()
-		
+
 		size = label.rect_size
 		viewport.size = size
-		
+
 		yield(get_tree(), "idle_frame")
 		viewport.render_target_update_mode = Viewport.UPDATE_DISABLED
-		
+
 		proxy.scale.x = size.x * text_size / 200.0
 		proxy.scale.y = size.y * text_size / 200.0
 
@@ -120,7 +120,7 @@ func set_extrude(value: float) -> void:
 	if proxy:
 		proxy.scale.z = extrude if extrude != 0 else 1
 		material.set_shader_param("extrude", extrude != 0)
-		
+
 		if extrude == 0 and proxy.mesh is CubeMesh:
 			proxy.mesh = QuadMesh.new()
 			proxy.mesh.size = Vector2(2, 2)
@@ -151,8 +151,8 @@ func set_align(value: int) -> void:
 			3:
 				label.align = Label.ALIGN_FILL
 			_:
-				printerr("Invalid align value set for %s!" % self)
-	
+				pass
+
 	set_text(text)
 
 
@@ -182,7 +182,6 @@ func set_emission_color(value: Color) -> void:
 
 func set_emission_strength(value: float) -> void:
 	emission_strength = value
-	print(emission_color * emission_strength)
 	if material:
 		material.set_shader_param("emission", emission_color * emission_strength)
 
