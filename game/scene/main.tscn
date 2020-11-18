@@ -14,8 +14,9 @@ mouse_filter = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0672531, 0.230003, -0.269363 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.358889, 0.93338, 0, -0.93338, 0.358889, 40.0297, 67.6201, 68.3758 )
+transform = Transform( 1, 0, 0, 0, 0.434649, 0.9006, 0, -0.9006, 0.434649, 40.0297, 70, 52.5937 )
 current = true
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.767881, 0.640592, 0, -0.640592, 0.767881, 1.21785, 2.04939, 2.82277 )
+transform = Transform( 0.71407, 0.698371, -0.0488104, -0.28459, 0.353273, 0.891183, 0.63962, -0.622476, 0.451011, 6.93521, 18.3167, -0.314833 )
+light_color = Color( 0.945098, 0.160784, 0.160784, 1 )

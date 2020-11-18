@@ -112,3 +112,24 @@ class HexCoordinates:
 
 	func get_y():
 		return -x-z
+
+
+class HexEdgeVertices:
+	var v1
+	var v2
+	var v3
+	var v4
+	func _init(corner1,corner2):
+		v1 = corner1
+		v2 = lerp(corner1,corner2,0.333)
+		v3 = lerp(corner1,corner2,0.666)
+		v4 = corner2
+
+	static func terrace_lerp(a,b,step):
+		var result = HexEdgeVertices.new(Vector3(0,0,0),Vector3(0,0,0))
+		var hex_metrics = HexMetrics.new()
+		result.v1 = hex_metrics.terrace_lerp(a.v1,b.v1,step)
+		result.v2 = hex_metrics.terrace_lerp(a.v2,b.v2,step)
+		result.v3 = hex_metrics.terrace_lerp(a.v3,b.v3,step)
+		result.v4 = hex_metrics.terrace_lerp(a.v4,b.v4,step)
+		return result
