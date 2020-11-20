@@ -7,8 +7,8 @@ export(int) var chunk_count_z := 3
 var cell_count_x
 var cell_count_z
 
-export(float) var unit := 10
 export(Resource) var cell_obj = preload("res://scene/common/hex_cell.tscn")
+export(Resource) var chunk_obj = preload("res://scene/common/hex_grid_chunk.tscn")
 #export(Resource) var cell_label_obj = preload("res://scene/common/hex_cell_label.tscn")
 
 var GUI
@@ -16,6 +16,7 @@ var GUI
 var cell_map = Dictionary()
 
 var cells:Array
+var chunks:Array
 
 var multiple = 10
 var hex_metrics = HexStatic.HexMetrics.new()
@@ -23,7 +24,29 @@ var hex_metrics = HexStatic.HexMetrics.new()
 func _ready():
 	cell_count_x = chunk_count_x * hex_metrics.chunk_size_x
 	cell_count_z = chunk_count_z * hex_metrics.chunk_size_z
+	create_chunks()
 	create_cells()
+
+func create_chunks():
+	chunks = []
+	chunks.resize(chunk_count_x*chunk_count_z)
+	var i = 0
+	for z in range(chunk_count_z):
+		for x in range(chunk_count_x):
+			create_chunk(x,z,i)
+			i = i + 1
+	pass
+
+func create_chunk(x:int,z:int,i:int):
+	var position = Vector3(0.0,0.0,0.0)
+	# position.x = (x +z*0.5 -floor(z / 2))* hex_metrics.inner_radius * 2
+	# position.y = 0
+	# position.z = z * hex_metrics.outer_radius * 1.5
+	# var position2d = Vector2(position.x*multiple,position.z*multiple)
+	var chunk = chunk_obj.instance()
+	chunks[i] = chunk
+	chunk.translation = position
+	add_child(chunk)
 
 func create_cells():
 	cells = []
@@ -70,8 +93,16 @@ func create_cell(x:int,z:int,i:int):
 			cell.set_neighbor(cell.HexDirection.NE,cells[i-cell_count_x])
 			if x > 0:
 				cell.set_neighbor(cell.HexDirection.NW,cells[i-cell_count_x-1])
-	add_child(cell)
+	add_cell_to_trunk(x,z,cell)
+				# add_child(cell)
 
+func add_cell_to_trunk(x,z,cell):
+	var chunk_x = floor(x / hex_metrics.chunk_size_x)
+	var chunk_z = floor(z / hex_metrics.chunk_size_z)
+	var chunk = chunks[chunk_x+chunk_z*chunk_count_x]
+	var local_x = x - hex_metrics.chunk_size_x*chunk_x
+	var local_z = z - hex_metrics.chunk_size_z*chunk_z
+	chunk.add_cell(local_x+local_z*hex_metrics.chunk_size_x,cell)
 
 func click_hex_cell(x,z,cell):
 	if cell_map.has(cell):
