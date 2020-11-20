@@ -1,17 +1,18 @@
 extends Spatial
 class_name HexGrid
 
-export(int) var width := 6
-export(int) var height := 6
+export(int) var chunk_count_x := 4
+export(int) var chunk_count_z := 3
+
+var cell_count_x
+var cell_count_z
+
 export(float) var unit := 10
 export(Resource) var cell_obj = preload("res://scene/common/hex_cell.tscn")
 #export(Resource) var cell_label_obj = preload("res://scene/common/hex_cell_label.tscn")
 
 var GUI
 
-onready var hex_grid_canvas = $hex_grid_canvas
-
-onready var label_canvas = $label_canvas
 var cell_map = Dictionary()
 
 var cells:Array
@@ -20,27 +21,27 @@ var multiple = 10
 var hex_metrics = HexStatic.HexMetrics.new()
 
 func _ready():
-	update_canvas()
+	cell_count_x = chunk_count_x * hex_metrics.chunk_size_x
+	cell_count_z = chunk_count_z * hex_metrics.chunk_size_z
+	create_cells()
+
+func create_cells():
 	cells = []
-	cells.resize(width*height)
+	cells.resize(cell_count_x*cell_count_z)
 	var i = 0
-	for z in range(height):
-		for x in range(width):
+	for z in range(cell_count_z):
+		for x in range(cell_count_x):
 			create_cell(x,z,i)
 			i = i + 1
 	for cell in cells:
 		cell.init_mesh()
-		# cell.elevation = randi()%7
-		cell.elevation = 0
+		cell.elevation = randi()%7
+		# cell.elevation = 0
 		var color_map =["white","green","yellow","blue"]
 		var index = randi()%4
 		cell.change_color(color_map[index])
 		cell_map[cell] = {"color":color_map[index]}
 
-func update_canvas():
-	hex_grid_canvas.size = Vector2((width+1/2)*hex_metrics.inner_radius * 2*multiple,(height * 1.5+0.5)*hex_metrics.outer_radius*multiple)
-	label_canvas.mesh.size = Vector2((width+1/2)*hex_metrics.inner_radius * 2,(height * 1.5+0.5)*hex_metrics.outer_radius)
-	label_canvas.translation = Vector3((width+1/2)*hex_metrics.inner_radius,0,(height * 1.5-0.5)/2*hex_metrics.outer_radius)
 
 func create_cell(x:int,z:int,i:int):
 	var position = Vector3(0.0,0.0,0.0)
@@ -62,13 +63,13 @@ func create_cell(x:int,z:int,i:int):
 		cell.set_neighbor(cell.HexDirection.W,cells[i-1])
 	if z>0:
 		if z%2 == 1:
-			cell.set_neighbor(cell.HexDirection.NW,cells[i-width])
-			if x < width - 1:
-				cell.set_neighbor(cell.HexDirection.NE,cells[i-width+1])
+			cell.set_neighbor(cell.HexDirection.NW,cells[i-cell_count_x])
+			if x < cell_count_x - 1:
+				cell.set_neighbor(cell.HexDirection.NE,cells[i-cell_count_x+1])
 		else:
-			cell.set_neighbor(cell.HexDirection.NE,cells[i-width])
+			cell.set_neighbor(cell.HexDirection.NE,cells[i-cell_count_x])
 			if x > 0:
-				cell.set_neighbor(cell.HexDirection.NW,cells[i-width-1])
+				cell.set_neighbor(cell.HexDirection.NW,cells[i-cell_count_x-1])
 	add_child(cell)
 
 

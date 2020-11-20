@@ -210,26 +210,26 @@ func triangulate_corner_terraces(begin,begin_cell,left,left_cell,right,right_cel
 func triangulate_corner_terraces_cliff(begin,begin_cell,left,left_cell,right,right_cell):
 	var b = 1.0/ (right_cell.elevation - begin_cell.elevation)
 	b = abs(b)
-	var boundary =lerp(begin,right,b)
+	var boundary =lerp(perturb(begin),perturb(right),b)
 	var boundary_color = hex_metrics.color_slerp(begin_cell.cell_color,right_cell.cell_color,b)
 	triangulate_boundary_triangle(begin,begin_cell,left,left_cell,boundary,boundary_color)
 	if left_cell.get_edge_type_by_cell(right_cell) == hex_metrics.HexEdgeType.SLOPE:
 		triangulate_boundary_triangle(left,left_cell,right,right_cell,boundary,boundary_color)
 	else:
-		add_triangle(left,right,boundary)
-		add_triangle_color(left,right,boundary,left_cell.cell_color,right_cell.cell_color,boundary_color)
+		add_triangle_unperturbed(perturb(left),perturb(right),boundary)
+		add_triangle_color_unperturbed(perturb(left),perturb(right),boundary,left_cell.cell_color,right_cell.cell_color,boundary_color)
 
 func triangulate_corner_cliff_terraces(begin,begin_cell,left,left_cell,right,right_cell):
 	var b = 1.0/ (left_cell.elevation - begin_cell.elevation)
 	b = abs(b)
-	var boundary =lerp(begin,left,b)
+	var boundary =lerp(perturb(begin),perturb(left),b)
 	var boundary_color = hex_metrics.color_slerp(begin_cell.cell_color,left_cell.cell_color,b)
 	triangulate_boundary_triangle(right,right_cell,begin,begin_cell,boundary,boundary_color)
 	if left_cell.get_edge_type_by_cell(right_cell) == hex_metrics.HexEdgeType.SLOPE:
 		triangulate_boundary_triangle(left,left_cell,right,right_cell,boundary,boundary_color)
 	else:
-		add_triangle(left,right,boundary)
-		add_triangle_color(left,right,boundary,left_cell.cell_color,right_cell.cell_color,boundary_color)
+		add_triangle_unperturbed(perturb(left),perturb(right),boundary)
+		add_triangle_color_unperturbed(perturb(left),perturb(right),boundary,left_cell.cell_color,right_cell.cell_color,boundary_color)
 
 func triangulate_boundary_triangle(begin,begin_cell,left,left_cell,boundary,boundary_color):
 	var v2  = perturb(hex_metrics.terrace_lerp(begin,left,1))

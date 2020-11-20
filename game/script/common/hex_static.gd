@@ -3,9 +3,9 @@ class_name HexStatic
 class HexMetrics:
 	var outer_radius := 10.0
 	var inner_radius := outer_radius * 0.866025404
-	var solid_factor = 0.75
+	var solid_factor = 0.8
 	var blend_factor = 1 - solid_factor
-	var elevation_step = 5 # 高度步进
+	var elevation_step = 3 # 高度步进
 	var terraces_per_slope = 2 # 梯田数量
 	var terrace_steps = terraces_per_slope *2 +1
 	var horizontal_terrace_step_size = 1.0/terrace_steps
@@ -23,9 +23,12 @@ class HexMetrics:
 	var noise2 =create_noise(22222,4,20,0.8)
 	var noise3 = create_noise(45678,4,20,0.8)
 
-	var cell_perturb_strength = 5
+	var cell_perturb_strength = 4
 	var noise_scale = 1
 	var elevation_perturb_strength = 1.5
+
+	var chunk_size_x = 5
+	var chunk_size_z = 5
 
 	enum HexEdgeType {
 		FLAT,# 平坦
