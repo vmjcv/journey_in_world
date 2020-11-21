@@ -13,14 +13,14 @@ func _ready():
 func get_now_color():
 	var now_button = color_group.get_pressed_button()
 	if now_button == $VBoxContainer2/VBoxContainer/blue:
-		return "blue"
+		return Color.blue
 	elif now_button == $VBoxContainer2/VBoxContainer/green:
-		return "green"
+		return Color.green
 	elif now_button == $VBoxContainer2/VBoxContainer/white:
-		return "white"
+		return Color.white
 	elif now_button == $VBoxContainer2/VBoxContainer/yellow:
-		return "yellow"
-	return null
+		return Color.yellow
+	return Color.white
 
 
 func _on_HSlider_value_changed(value):

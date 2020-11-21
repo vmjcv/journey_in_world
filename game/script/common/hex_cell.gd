@@ -11,12 +11,11 @@ var arr = []
 var hex_metrics = HexStatic.HexMetrics.new()
 var coordinates
 
-var default_color = Color.white
-var touched_color = Color.darkorchid
-var entered_color = Color.turquoise
-var cell_color = default_color
 
-var elevation = 0 setget set_elevation,get_elevation# 高度
+var cell_color = Color.white setget set_cell_color,get_cell_color# 单元格颜色
+var chunk
+
+var elevation =  -INF setget set_elevation,get_elevation# 高度
 
 enum HexDirection {
 	NE,# 东北
@@ -73,6 +72,14 @@ func update_mesh():
 	# multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, arr)
 	# multimesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLE_FAN, arr)
 	#multimesh.mesh.generate_triangle_mesh()
+
+func refresh():
+	if chunk:
+		chunk.refresh()
+		for d in range(HexDirection.NE, HexDirection.NW+1):
+			var neighbor = get_neighbor(d)
+			if neighbor and neighbor.chunk!=chunk:
+				neighbor.chunk.refresh()
 
 func triangulate_connection(direction,cell,e1):
 	var neighbor = get_neighbor(direction)
@@ -290,37 +297,6 @@ func _on_area_mouse_entered():
 func _on_area_mouse_exited():
 	emit_signal("exited_hex_cell")
 
-func change_color_entered():
-	cell_color = entered_color
-	update_mesh()
-	update_neighbor_mesh()
-
-
-func change_color_exited():
-	cell_color = default_color
-	update_mesh()
-	update_neighbor_mesh()
-
-
-func change_color(_cell_color):
-	match _cell_color:
-		"white":
-			cell_color = Color.white
-		"green":
-			cell_color = Color.green
-		"yellow":
-			cell_color = Color.yellow
-		"blue":
-			cell_color = Color.blue
-	update_mesh()
-	update_neighbor_mesh()
-
-func update_neighbor_mesh():
-	for d in range(HexDirection.NE, HexDirection.NW+1):
-		var neighbor = get_neighbor(d)
-		if neighbor:
-			neighbor.update_mesh()
-
 func get_neighbor(direction):
 	return neighbors.get(direction,null)
 
@@ -341,14 +317,24 @@ func direction_opposite(direction):
 		return direction-3
 
 func set_elevation(_elevation):
+	if elevation ==_elevation:
+		return
 	elevation = _elevation
 	translation.y = elevation*hex_metrics.elevation_step
 	translation.y = translation.y + hex_metrics.get_noise(translation).y*hex_metrics.elevation_perturb_strength
-	update_mesh()
-	update_neighbor_mesh()
+	refresh()
 
 func get_elevation():
 	return elevation
+
+func set_cell_color(_cell_color):
+	if cell_color == _cell_color:
+		return
+	cell_color = _cell_color
+	refresh()
+
+func get_cell_color():
+	return cell_color
 
 func get_edge_type(direction):
 	var neighbor = get_neighbor(direction)

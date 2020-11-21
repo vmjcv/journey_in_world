@@ -11,6 +11,10 @@ export(Resource) var cell_obj = preload("res://scene/common/hex_cell.tscn")
 export(Resource) var chunk_obj = preload("res://scene/common/hex_grid_chunk.tscn")
 #export(Resource) var cell_label_obj = preload("res://scene/common/hex_cell_label.tscn")
 
+var default_color = Color.white
+var touched_color = Color.darkorchid
+var entered_color = Color.turquoise
+
 var GUI
 
 var cell_map = Dictionary()
@@ -35,17 +39,10 @@ func create_chunks():
 		for x in range(chunk_count_x):
 			create_chunk(x,z,i)
 			i = i + 1
-	pass
 
 func create_chunk(x:int,z:int,i:int):
-	var position = Vector3(0.0,0.0,0.0)
-	# position.x = (x +z*0.5 -floor(z / 2))* hex_metrics.inner_radius * 2
-	# position.y = 0
-	# position.z = z * hex_metrics.outer_radius * 1.5
-	# var position2d = Vector2(position.x*multiple,position.z*multiple)
 	var chunk = chunk_obj.instance()
 	chunks[i] = chunk
-	chunk.translation = position
 	add_child(chunk)
 
 func create_cells():
@@ -60,9 +57,10 @@ func create_cells():
 		cell.init_mesh()
 		cell.elevation = randi()%7
 		# cell.elevation = 0
-		var color_map =["white","green","yellow","blue"]
+		var color_map =[Color.white,Color.green,Color.yellow,Color.blue]
 		var index = randi()%4
-		cell.change_color(color_map[index])
+		cell.cell_color = color_map[index]
+		# cell.init_mesh()
 		cell_map[cell] = {"color":color_map[index]}
 
 
@@ -109,20 +107,20 @@ func click_hex_cell(x,z,cell):
 		if cell_map[cell]["color"] == GUI.get_now_color():
 			# 如果二次点击则取消点击变为进入色
 			cell_map.erase(cell)
-			cell.change_color_entered()
+			cell.cell_color = entered_color
 		else:
 			cell_map[cell]["color"] = GUI.get_now_color()
-			cell.change_color(GUI.get_now_color())
-			cell.set_elevation(GUI.get_now_elevation())
+			cell.cell_color = GUI.get_now_color()
+			cell.elevation = GUI.get_now_elevation()
 	else:
 		cell_map[cell] = {"color":GUI.get_now_color()}
-		cell.change_color(GUI.get_now_color())
-		cell.set_elevation(GUI.get_now_elevation())
+		cell.cell_color = GUI.get_now_color()
+		cell.elevation = GUI.get_now_elevation()
 
 func entered_hex_cell(x,z,cell):
 	if not cell_map.has(cell):
-		cell.change_color_entered()
+		cell.cell_color = entered_color
 
 func exited_hex_cell(x,z,cell):
 	if not cell_map.has(cell):
-		cell.change_color_exited()
+		cell.cell_color =default_color

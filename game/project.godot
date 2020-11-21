@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/common/hex_grid.gd"
 }, {
+"base": "Spatial",
+"class": "HexGridChunk",
+"language": "GDScript",
+"path": "res://script/common/hex_grid_chunk.gd"
+}, {
 "base": "Resource",
 "class": "HexStatic",
 "language": "GDScript",
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "ArrayUtils": "",
 "HexCell": "",
 "HexGrid": "",
+"HexGridChunk": "",
 "HexStatic": ""
 }
 
