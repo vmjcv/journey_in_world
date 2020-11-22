@@ -9,3 +9,4 @@ extends Spatial
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$hex_grid.GUI = $GUI
+	$hex_map_camera.grid = $hex_grid

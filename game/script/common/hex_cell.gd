@@ -287,7 +287,7 @@ func add_quad_color(v2,v3,v4,v5,c2,c3,c4,c5):
 	add_vert_color(index3,c3)
 
 func _on_area_input_event(camera, event, click_position, click_normal, shape_idx):
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		emit_signal("click_hex_cell")
 
 func _on_area_mouse_entered():

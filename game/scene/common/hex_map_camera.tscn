@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://script/common/hex_map_camera.gd" type="Script" id=1]
+
+[node name="hex_map_camera" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="swivel" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
+
+[node name="stick" type="Spatial" parent="swivel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 45 )
+
+[node name="main_camera" type="Camera" parent="swivel/stick"]
+current = true
+far = 500.0

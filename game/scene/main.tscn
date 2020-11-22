@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scene/common/GUI_2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/common/hex_grid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scene/common/main.gd" type="Script" id=3]
+[ext_resource path="res://scene/common/hex_map_camera.tscn" type="PackedScene" id=4]
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 3 )
@@ -13,10 +14,8 @@ mouse_filter = 2
 [node name="hex_grid" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0672531, 0.230003, -0.269363 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.434649, 0.9006, 0, -0.9006, 0.434649, 40.0297, 70, 52.5937 )
-current = true
-
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.71407, 0.698371, -0.0488104, -0.28459, 0.353273, 0.891183, 0.63962, -0.622476, 0.451011, 6.93521, 18.3167, -0.314833 )
 light_color = Color( 0.945098, 0.160784, 0.160784, 1 )
+
+[node name="hex_map_camera" parent="." instance=ExtResource( 4 )]

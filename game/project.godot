@@ -58,7 +58,7 @@ window/size/test_height=540
 
 [editor_plugins]
 
-enabled=PoolStringArray( "SIsilicon.3d.text" )
+enabled=PoolStringArray( "FileSystemView", "SIsilicon.3d.text" )
 
 [rendering]
 
