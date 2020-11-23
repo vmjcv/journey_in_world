@@ -34,17 +34,23 @@ var _direction = Vector3(0.0, 0.0, 0.0)
 var _velocity = Vector3(0.0, 0.0, 0.0)
 var _acceleration = 30
 var _deceleration = -10
-var _vel_multiplier = 4
 var move_min_zoom = 400
 var move_max_zoom  = 100
-
+var _vel_multiplier = move_max_zoom
 var rotation_speed = 2
 
 func adjust_zoom(delta):
 	zoom = clamp(zoom+delta,0.2,1)
 	stick.translation.z = lerp(stick_max_zoom,stick_min_zoom,zoom)
-	var angle = lerp_angle(swivel_max_zoom,swivel_min_zoom,zoom)
-	swivel.rotation.x = angle
+	# var angle = lerp_angle(swivel_max_zoom,swivel_min_zoom,zoom)
+	# swivel.rotation.x = angle
+	print(Transform(main_camera.global_transform.basis))
+	var rotation_axis = main_camera.to_global(main_camera.transform.basis.z).cross(Vector3.UP)
+	swivel.global_rotate(rotation_axis,0.2)
+
+	var cur_offset = Transform(main_camera.global_transform.basis).xform(stick.translation)
+	print(cur_offset)
+	stick.global_transform.origin = cur_offset + global_transform.origin
 
 func _input(event):
 	# Receives mouse motion
@@ -103,16 +109,21 @@ func _update_movement(delta):
 	else:
 		# Clamps speed to stay within maximum value (_vel_multiplier)
 		_velocity.x = clamp(_velocity.x + offset.x, -_vel_multiplier, _vel_multiplier)
-		_velocity.y = clamp(_velocity.y + offset.y, -_vel_multiplier, _vel_multiplier)
+		_velocity.y = 0
 		_velocity.z = clamp(_velocity.z + offset.z, -_vel_multiplier, _vel_multiplier)
-		translate(_velocity * delta)
+		var displacement = _velocity * delta
+		#
+		displacement = Transform(main_camera.global_transform.basis).xform(displacement)
+		displacement.y = 0
+		translate(displacement)
 		translation = clamp_position(translation)
+
 
 # Updates mouse look
 func _update_rotation(delta):
 	var rotation_direction = _q as float - _e as float
-	print(rotation_direction)
 	main_camera.global_rotate(Vector3.UP,deg2rad(rotation_speed*rotation_direction))
+
 
 func clamp_position(position):
 	var x_max = (grid.chunk_count_x *hex_metrics.chunk_size_x - 0.5)*(2*hex_metrics.inner_radius)

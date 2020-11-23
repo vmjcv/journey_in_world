@@ -2,7 +2,7 @@
 # Copyright (c) 2018 Jaccomo Lorenz (Maujoe)
 
 extends Camera
-
+var grid
 # User settings:
 # General settings
 export var enabled = true setget set_enabled
@@ -81,7 +81,7 @@ func _input(event):
 			_direction.x = 1
 		elif not Input.is_action_pressed(left_action) and not Input.is_action_pressed(right_action):
 			_direction.x = 0
-			
+
 		if event.is_action_pressed(up_action):
 			_direction.y = 1
 		if event.is_action_pressed(down_action):
@@ -110,11 +110,11 @@ func _physics_process(delta):
 
 func _update_movement(delta):
 	var offset = max_speed * acceleration * _direction
-	
+
 	_speed.x = clamp(_speed.x + offset.x, -max_speed.x, max_speed.x)
 	_speed.y = clamp(_speed.y + offset.y, -max_speed.y, max_speed.y)
 	_speed.z = clamp(_speed.z + offset.z, -max_speed.z, max_speed.z)
-	
+
 	# Apply deceleration if no input
 	if _direction.x == 0:
 		_speed.x *= (1.0 - deceleration)
