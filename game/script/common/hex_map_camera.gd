@@ -46,7 +46,13 @@ func adjust_zoom(delta):
 	# swivel.rotation.x = angle
 	print(Transform(main_camera.global_transform.basis))
 	var rotation_axis = main_camera.to_global(main_camera.transform.basis.z).cross(Vector3.UP)
-	swivel.global_rotate(rotation_axis,0.2)
+	var cur_main_camera_transform = main_camera.transform
+	main_camera.global_rotate(rotation_axis,0.2)
+	var basis_x  = cur_main_camera_transform.basis.xform_inv(swivel.global_transform.basis.x)
+	var basis_y  = cur_main_camera_transform.basis.xform_inv(swivel.global_transform.basis.y)
+	var basis_z  = cur_main_camera_transform.basis.xform_inv(swivel.global_transform.basis.z)
+	swivel.transform.basis= Basis(basis_x,basis_y,basis_z)
+	main_camera.transform.basis = cur_main_camera_transform.basis
 
 	var cur_offset = Transform(main_camera.global_transform.basis).xform(stick.translation)
 	print(cur_offset)
