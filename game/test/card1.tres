@@ -1,0 +1,11 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[sub_resource type="ViewportTexture" id=4]
+viewport_path = NodePath("Viewport/Control/ViewportContainer2/Viewport")
+
+[resource]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource( 4 )
