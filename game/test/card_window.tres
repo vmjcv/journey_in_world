@@ -2,12 +2,12 @@
 
 [ext_resource path="res://test/stencil_mask.shader" type="Shader" id=1]
 
-[sub_resource type="ViewportTexture" id=7]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("StencilView")
 
 [resource]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
-shader_param/albedo = Color( 0.886275, 0.054902, 0.054902, 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/stencil_color = Color( 0.0470588, 1, 0.0352941, 1 )
-shader_param/stencil = SubResource( 7 )
+shader_param/stencil = SubResource( 1 )

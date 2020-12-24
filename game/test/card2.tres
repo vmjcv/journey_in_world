@@ -1,6 +1,6 @@
 [gd_resource type="SpatialMaterial" load_steps=2 format=2]
 
-[sub_resource type="ViewportTexture" id=4]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport/Control/ViewportContainer/Viewport")
 
 [resource]
@@ -9,4 +9,4 @@ flags_transparent = true
 flags_unshaded = true
 flags_do_not_receive_shadows = true
 flags_disable_ambient_light = true
-albedo_texture = SubResource( 4 )
+albedo_texture = SubResource( 1 )
