@@ -19,5 +19,4 @@ void fragment() {
 	} else {
 		ALPHA = albedo.a;
 	}
-	ALPHA = 0.0;
 }
