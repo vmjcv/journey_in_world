@@ -13,7 +13,13 @@ void fragment() {
 	float mask_id = stencil_color.r * 10.0 + stencil_color.g + 100.0 * stencil_color.b + 1000.0;
 	
 	float mask_result = abs(stencil_id - mask_id);
-
-	ALBEDO = albedo.rgb;
-	ALPHA = step(mask_result, 0.0) * albedo.a;
+	
+	if(mask_result == 0.0){
+		ALPHA = 1.0;
+		ALBEDO = albedo.rgb;
+	}
+	else{
+		ALPHA = 0.5;
+		ALBEDO = vec3(1.0,0.5,0.6);
+	}
 }

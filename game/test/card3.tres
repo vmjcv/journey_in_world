@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[sub_resource type="Shader" id=9]
+[sub_resource type="Shader" id=1]
 code = "shader_type spatial;
 render_mode depth_draw_alpha_prepass;
 
@@ -26,12 +26,12 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ViewportTexture" id=8]
+[sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("StencilView")
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource( 9 )
+shader = SubResource( 1 )
 shader_param/albedo = Color( 0.882353, 0.972549, 0, 1 )
 shader_param/stencil_color = Color( 1, 1, 1, 1 )
-shader_param/stencil = SubResource( 8 )
+shader_param/stencil = SubResource( 2 )

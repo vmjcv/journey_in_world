@@ -194,7 +194,8 @@ valign = 1
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 0.00012207
+margin_top = -1.05823
+margin_bottom = -1.05811
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
