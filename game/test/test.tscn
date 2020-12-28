@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://test/card1.tres" type="Material" id=1]
 [ext_resource path="res://test/card2.tres" type="Material" id=2]
@@ -6,9 +6,9 @@
 [ext_resource path="res://test/test.gd" type="Script" id=4]
 [ext_resource path="res://test/model_box.shader" type="Shader" id=5]
 [ext_resource path="res://test/card3.tres" type="Material" id=6]
-[ext_resource path="res://test/MeshInstance.gd" type="Script" id=7]
 [ext_resource path="res://test/3dcard.gd" type="Script" id=8]
 [ext_resource path="res://test/card_center_scene.glb" type="PackedScene" id=9]
+[ext_resource path="res://test/card_center_scene.gd" type="Script" id=10]
 
 [sub_resource type="Environment" id=1]
 background_color = Color( 1, 0.192157, 0.192157, 1 )
@@ -22,25 +22,19 @@ environment = SubResource( 1 )
 [sub_resource type="PlaneMesh" id=3]
 size = Vector2( 4.5, 7.2 )
 
-[sub_resource type="CylinderMesh" id=5]
-resource_local_to_scene = true
-
-[sub_resource type="SpatialMaterial" id=9]
-vertex_color_use_as_albedo = true
-
-[sub_resource type="ViewportTexture" id=7]
+[sub_resource type="ViewportTexture" id=6]
 viewport_path = NodePath("三维卡/卡片ui/Viewport")
 
-[sub_resource type="ViewportTexture" id=10]
+[sub_resource type="ViewportTexture" id=7]
 viewport_path = NodePath("StencilView")
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
 shader_param/albedo = Color( 0.698039, 0.14902, 0.14902, 1 )
 shader_param/stencil_color = Color( 1, 1, 1, 1 )
-shader_param/stencil = SubResource( 10 )
-shader_param/center_scene = SubResource( 7 )
+shader_param/stencil = SubResource( 7 )
+shader_param/center_scene = SubResource( 6 )
 
 [node name="卡牌" type="Spatial"]
 script = ExtResource( 4 )
@@ -76,13 +70,16 @@ render_target_update_mode = 3
 
 [node name="Camera" type="Camera" parent="StencilView"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
-cull_mask = 2147483652
+cull_mask = 4
 projection = 1
 current = true
 size = 7.2
 
 [node name="三维卡" type="Spatial" parent="."]
 script = ExtResource( 8 )
+
+[node name="RemoteTransform" type="RemoteTransform" parent="三维卡"]
+remote_path = NodePath("../卡片ui/Viewport/Spatial")
 
 [node name="卡片窗口" type="MeshInstance" parent="三维卡"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.036, 0 )
@@ -96,21 +93,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.189023, 0 )
 mesh = SubResource( 3 )
 material/0 = ExtResource( 1 )
 
-[node name="card_center_scene" parent="三维卡/卡片ui" instance=ExtResource( 9 )]
-transform = Transform( 0.003, 0, 0, 0, -4.88762e-10, 0.003, 0, -0.003, -4.88762e-10, 0, 0, 0 )
-visible = false
-
 [node name="Viewport" type="Viewport" parent="三维卡/卡片ui"]
 size = Vector2( 1920, 1080 )
+size_override_stretch = true
 transparent_bg = true
-
-[node name="角色场景" type="MeshInstance" parent="三维卡/卡片ui/Viewport"]
-process_priority = 2
-transform = Transform( 1, 0, 0, 0, 0.86139, 0.507944, 0, -0.507944, 0.86139, 0.063585, -0.023919, -1.36229 )
-layers = 2147483656
-mesh = SubResource( 5 )
-material/0 = SubResource( 9 )
-script = ExtResource( 7 )
 
 [node name="Camera2" type="Camera" parent="三维卡/卡片ui/Viewport"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
@@ -119,6 +105,12 @@ projection = 1
 current = true
 size = 7.2
 
+[node name="Spatial" type="Spatial" parent="三维卡/卡片ui/Viewport"]
+
+[node name="card_center_scene" parent="三维卡/卡片ui/Viewport/Spatial" instance=ExtResource( 9 )]
+transform = Transform( 0.003, 0, 0, 0, -4.88762e-10, 0.003, 0, -0.003, -4.88762e-10, 0, 0.189023, 0.933225 )
+script = ExtResource( 10 )
+
 [node name="卡牌模型" type="CSGBox" parent="三维卡"]
 material_override = ExtResource( 6 )
 width = 4.5
@@ -126,12 +118,10 @@ height = 0.3
 depth = 7.2
 
 [node name="卡片模型" type="MeshInstance" parent="三维卡"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.036, 0 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.036, 0 )
 layers = 2147483649
 cast_shadow = 0
 mesh = SubResource( 3 )
-material/0 = SubResource( 6 )
+material/0 = SubResource( 8 )
 
 [editable path="Viewport/Control"]
-
-[editable path="三维卡/卡片ui/card_center_scene"]

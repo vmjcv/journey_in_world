@@ -7,7 +7,7 @@ uniform sampler2D center_scene;
 uniform vec4 stencil_color : hint_color;
 
 void fragment() {
-	vec4 stencil_test = texture(stencil, UV);
+	vec4 stencil_test = texture(stencil, SCREEN_UV);
 	vec4 color_test = stencil_color;
 	
 	float stencil_id = stencil_test.r * 10.0 + stencil_test.g + 100.0 * stencil_test.b + 1000.0;
