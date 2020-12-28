@@ -10,8 +10,9 @@ var all_nodes = []
 func _ready():
 	get_all_nodes(self)
 	for n in all_nodes:
-		if n as MeshInstance:
+		if n is MeshInstance:
 			n.layers = 8
+
 	
 
 func get_all_nodes(node):

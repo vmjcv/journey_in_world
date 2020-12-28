@@ -32,6 +32,6 @@ viewport_path = NodePath("StencilView")
 [resource]
 resource_local_to_scene = true
 shader = SubResource( 1 )
-shader_param/albedo = Color( 0.882353, 0.972549, 0, 1 )
+shader_param/albedo = Color( 0.0313726, 0, 1, 1 )
 shader_param/stencil_color = Color( 1, 1, 1, 1 )
 shader_param/stencil = SubResource( 2 )

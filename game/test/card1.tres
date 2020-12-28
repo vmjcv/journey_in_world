@@ -1,23 +1,10 @@
-[gd_resource type="SpatialMaterial" load_steps=5 format=2]
-
-[ext_resource path="res://test/card_stencil.shader" type="Shader" id=1]
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
 
 [sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("Viewport/Control/ViewportContainer2/Viewport")
-
-[sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("StencilView")
-
-[sub_resource type="ShaderMaterial" id=3]
-resource_local_to_scene = true
-shader = ExtResource( 1 )
-shader_param/albedo = Color( 0, 0, 0, 1 )
-shader_param/stencil_color = Color( 1, 1, 1, 1 )
-shader_param/stencil = SubResource( 2 )
+viewport_path = NodePath("2d卡ui/Control/ViewportContainer2/Viewport")
 
 [resource]
 resource_local_to_scene = true
-next_pass = SubResource( 3 )
 flags_transparent = true
 flags_unshaded = true
 flags_no_depth_test = true

@@ -1,14 +1,12 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://test/card1.tres" type="Material" id=1]
-[ext_resource path="res://test/card2.tres" type="Material" id=2]
+[ext_resource path="res://test/3d_viewport.gd" type="Script" id=2]
 [ext_resource path="res://test/CardInfo.tscn" type="PackedScene" id=3]
 [ext_resource path="res://test/test.gd" type="Script" id=4]
-[ext_resource path="res://test/model_box.shader" type="Shader" id=5]
 [ext_resource path="res://test/card3.tres" type="Material" id=6]
 [ext_resource path="res://test/3dcard.gd" type="Script" id=8]
 [ext_resource path="res://test/card_center_scene.glb" type="PackedScene" id=9]
-[ext_resource path="res://test/card_center_scene.gd" type="Script" id=10]
 
 [sub_resource type="Environment" id=1]
 background_color = Color( 1, 0.192157, 0.192157, 1 )
@@ -20,17 +18,57 @@ tonemap_mode = 1
 environment = SubResource( 1 )
 
 [sub_resource type="PlaneMesh" id=3]
+resource_local_to_scene = true
 size = Vector2( 4.5, 7.2 )
 
+[sub_resource type="ViewportTexture" id=9]
+viewport_path = NodePath("2d卡ui/Control/ViewportContainer/Viewport")
+
+[sub_resource type="SpatialMaterial" id=10]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+albedo_texture = SubResource( 9 )
+
+[sub_resource type="Shader" id=11]
+code = "shader_type spatial;
+render_mode depth_draw_alpha_prepass;
+
+uniform vec4 albedo : hint_color;
+uniform sampler2D stencil;
+uniform sampler2D center_scene;
+uniform vec4 stencil_color : hint_color;
+
+void fragment() {
+	vec4 stencil_test = texture(stencil, SCREEN_UV);
+	vec4 color_test = stencil_color;
+	
+	float stencil_id = stencil_test.r * 10.0 + stencil_test.g + 100.0 * stencil_test.b + 1000.0;
+	float mask_id = stencil_color.r * 10.0 + stencil_color.g + 100.0 * stencil_color.b + 1000.0;
+	
+	float mask_result = abs(stencil_id - mask_id);
+	
+	if(mask_result == 0.0){
+		ALPHA = 0.0;
+		ALBEDO = vec3(0.0,0.0,0.0);
+	}
+	else{
+		vec4 end_color = texture(center_scene, SCREEN_UV);
+		ALPHA = end_color.a;
+		ALBEDO = end_color.rgb;
+	}
+}"
+
 [sub_resource type="ViewportTexture" id=6]
-viewport_path = NodePath("三维卡/卡片ui/Viewport")
+viewport_path = NodePath("卡面/Viewport")
 
 [sub_resource type="ViewportTexture" id=7]
-viewport_path = NodePath("StencilView")
+viewport_path = NodePath("卡面/显示视口")
 
 [sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
-shader = ExtResource( 5 )
+shader = SubResource( 11 )
 shader_param/albedo = Color( 0.698039, 0.14902, 0.14902, 1 )
 shader_param/stencil_color = Color( 1, 1, 1, 1 )
 shader_param/stencil = SubResource( 7 )
@@ -41,15 +79,18 @@ script = ExtResource( 4 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
-cull_mask = 1048563
+cull_mask = 1048451
 projection = 1
 current = true
 size = 7.2
 
 [node name="RemoteTransform" type="RemoteTransform" parent="Camera"]
-remote_path = NodePath("../../StencilView/Camera")
+remote_path = NodePath("../../卡面/显示视口/Camera")
 
-[node name="Viewport" type="Viewport" parent="."]
+[node name="RemoteTransform2" type="RemoteTransform" parent="Camera"]
+remote_path = NodePath("../../卡内/显示视口/Camera")
+
+[node name="2d卡ui" type="Viewport" parent="."]
 size = Vector2( 450, 720 )
 own_world = true
 world = SubResource( 2 )
@@ -57,9 +98,18 @@ transparent_bg = true
 usage = 0
 render_target_update_mode = 3
 
-[node name="Control" parent="Viewport" instance=ExtResource( 3 )]
+[node name="Control" parent="2d卡ui" instance=ExtResource( 3 )]
 
-[node name="StencilView" type="Viewport" parent="."]
+[node name="卡面" type="Spatial" parent="."]
+
+[node name="卡片窗口" type="MeshInstance" parent="卡面"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.036, 0 )
+layers = 2147483652
+cast_shadow = 0
+mesh = SubResource( 3 )
+material/0 = SubResource( 10 )
+
+[node name="显示视口" type="Viewport" parent="卡面"]
 size = Vector2( 1920, 1080 )
 size_override_stretch = true
 transparent_bg = true
@@ -68,60 +118,116 @@ keep_3d_linear = true
 usage = 3
 render_target_update_mode = 3
 
-[node name="Camera" type="Camera" parent="StencilView"]
+[node name="Camera" type="Camera" parent="卡面/显示视口"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
 cull_mask = 4
 projection = 1
 current = true
 size = 7.2
 
-[node name="三维卡" type="Spatial" parent="."]
-script = ExtResource( 8 )
-
-[node name="RemoteTransform" type="RemoteTransform" parent="三维卡"]
-remote_path = NodePath("../卡片ui/Viewport/Spatial")
-
-[node name="卡片窗口" type="MeshInstance" parent="三维卡"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.036, 0 )
-layers = 2147483652
-cast_shadow = 0
-mesh = SubResource( 3 )
-material/0 = ExtResource( 2 )
-
-[node name="卡片ui" type="MeshInstance" parent="三维卡"]
+[node name="3d卡ui" type="MeshInstance" parent="卡面"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.189023, 0 )
 mesh = SubResource( 3 )
 material/0 = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Viewport" type="Viewport" parent="三维卡/卡片ui"]
-size = Vector2( 1920, 1080 )
-size_override_stretch = true
-transparent_bg = true
-
-[node name="Camera2" type="Camera" parent="三维卡/卡片ui/Viewport"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
-cull_mask = 8
-projection = 1
-current = true
-size = 7.2
-
-[node name="Spatial" type="Spatial" parent="三维卡/卡片ui/Viewport"]
-
-[node name="card_center_scene" parent="三维卡/卡片ui/Viewport/Spatial" instance=ExtResource( 9 )]
-transform = Transform( 0.003, 0, 0, 0, -4.88762e-10, 0.003, 0, -0.003, -4.88762e-10, 0, 0.189023, 0.933225 )
-script = ExtResource( 10 )
-
-[node name="卡牌模型" type="CSGBox" parent="三维卡"]
-material_override = ExtResource( 6 )
-width = 4.5
-height = 0.3
-depth = 7.2
-
-[node name="卡片模型" type="MeshInstance" parent="三维卡"]
+[node name="卡面模型" type="MeshInstance" parent="卡面"]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.036, 0 )
 layers = 2147483649
 cast_shadow = 0
 mesh = SubResource( 3 )
 material/0 = SubResource( 8 )
 
-[editable path="Viewport/Control"]
+[node name="RemoteTransform" type="RemoteTransform" parent="卡面/卡面模型"]
+remote_path = NodePath("../../Viewport/Spatial")
+
+[node name="Viewport" type="Viewport" parent="卡面"]
+size = Vector2( 1920, 1080 )
+size_override_stretch = true
+transparent_bg = true
+script = ExtResource( 2 )
+camera_layer = 32
+
+[node name="Camera2" type="Camera" parent="卡面/Viewport"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
+cull_mask = 16
+projection = 1
+current = true
+size = 7.2
+
+[node name="Spatial" type="Spatial" parent="卡面/Viewport"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.036, 0 )
+
+[node name="卡面场景" type="CSGBox" parent="卡面/Viewport/Spatial"]
+layers = 16
+material_override = ExtResource( 6 )
+width = 4.5
+height = 0.3
+depth = 7.2
+
+[node name="卡内" type="Spatial" parent="."]
+visible = false
+
+[node name="卡片模型" type="MeshInstance" parent="卡内"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.036, 0 )
+layers = 2147483649
+cast_shadow = 0
+mesh = SubResource( 3 )
+material/0 = SubResource( 8 )
+
+[node name="三维卡" type="Spatial" parent="卡内"]
+script = ExtResource( 8 )
+
+[node name="RemoteTransform" type="RemoteTransform" parent="卡内/三维卡"]
+remote_path = NodePath("../卡片ui/Viewport/Spatial")
+
+[node name="卡片ui" type="MeshInstance" parent="卡内/三维卡"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.189023, 0 )
+mesh = SubResource( 3 )
+material/0 = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Viewport" type="Viewport" parent="卡内/三维卡/卡片ui"]
+size = Vector2( 1920, 1080 )
+size_override_stretch = true
+transparent_bg = true
+script = ExtResource( 2 )
+camera_layer = 16
+
+[node name="Camera2" type="Camera" parent="卡内/三维卡/卡片ui/Viewport"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
+cull_mask = 8
+projection = 1
+current = true
+size = 7.2
+
+[node name="Spatial" type="Spatial" parent="卡内/三维卡/卡片ui/Viewport"]
+
+[node name="card_center_scene" parent="卡内/三维卡/卡片ui/Viewport/Spatial" instance=ExtResource( 9 )]
+transform = Transform( 0.003, 0, 0, 0, -4.88762e-10, 0.003, 0, -0.003, -4.88762e-10, 0, 0.189023, 0.933225 )
+
+[node name="显示视口" type="Viewport" parent="卡内"]
+size = Vector2( 1920, 1080 )
+size_override_stretch = true
+transparent_bg = true
+hdr = false
+keep_3d_linear = true
+usage = 3
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="卡内/显示视口"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
+cull_mask = 4
+projection = 1
+current = true
+size = 7.2
+
+[node name="卡背" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153984, -1.95503e-05, -0.0262542 )
+visible = false
+
+[editable path="2d卡ui/Control"]
