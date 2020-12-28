@@ -19,8 +19,6 @@ func change_child_camera_layer():
 	for n in all_nodes:
 		if n is VisualInstance:
 			n.layers = camera_layer
-			print("VisualInstance",camera_layer)
 		if n is Camera:
 			n.cull_mask = camera_layer
-			print("Camera",camera_layer)
 	
