@@ -23,11 +23,13 @@ func change_child_camera_layer():
 			n.material_override.resource_local_to_scene = true
 			n.material_override.shader = preload("res://test/card_face.shader")
 			var stencil_viewport = ViewportTexture.new()
-			n.material_override.set_shader_param("stencil",stencil_viewport)
 			stencil_viewport.viewport_path = "卡牌/卡面/显示视口"
+			n.material_override.set_shader_param("stencil",stencil_viewport)
+			
 
 			var obj_viewport = ViewportTexture.new()
-			n.material_override.set_shader_param("center_scene",obj_viewport)
 			obj_viewport.viewport_path = "卡牌/卡面/Viewport"
+			n.material_override.set_shader_param("center_scene",obj_viewport)
+			
 			n.material_override.set_shader_param("stencil_color",Color.white)
 			pass

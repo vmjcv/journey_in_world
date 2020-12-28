@@ -15,13 +15,13 @@ void fragment() {
 	
 	float mask_result = abs(stencil_id - mask_id);
 	
-//	if(mask_result == 0.0){
-//		ALPHA = 1.0;
-//		ALBEDO = vec3(0.8,0.8,1.0);
-//	}
-//	else{
-//		vec4 end_color = texture(center_scene, SCREEN_UV);
-//		ALPHA = end_color.a;
-//		ALBEDO = end_color.rgb;
-//	}
+	if(mask_result == 0.0){
+		ALPHA = 0.5;
+		ALBEDO = vec3(0.3,0.4,1.0);
+	}
+	else{
+		vec4 end_color = texture(center_scene, SCREEN_UV);
+		ALPHA = end_color.a;
+		ALBEDO = end_color.rgb;
+	}
 }
