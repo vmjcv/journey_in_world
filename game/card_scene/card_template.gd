@@ -10,6 +10,8 @@ export var card_face_type = 1
 export var card_center_type = 1
 export var card_back_type = 1
 
+var viewport_size setget set_viewport_size
+
 func _ready():
 	_init_card_3d()
 	_init_signal()
@@ -42,14 +44,20 @@ func _init_card_3d():
 	
 	
 func _init_signal():
-	get_tree().get_root().connect("size_changed", self, "change_child_viewport_size")
+#	get_tree().get_root().connect("size_changed", self, "change_child_viewport_size")
+	pass
 
-func change_child_viewport_size():
-	var root_viewport_size = get_tree().get_root().size
-	$"卡牌/卡面/显示视口".size = root_viewport_size
-	$"卡牌/卡面/Viewport".size = root_viewport_size
-	$"卡牌/卡内/显示视口".size = root_viewport_size
-	$"卡牌/卡内/Viewport".size = root_viewport_size
+func set_viewport_size(size):
+	viewport_size = size
+	$"卡牌/卡面/显示视口".size = viewport_size
+	$"卡牌/卡面/Viewport".size = viewport_size
+	$"卡牌/卡内/显示视口".size = viewport_size
+	$"卡牌/卡内/Viewport".size = viewport_size
+
+
+#func change_child_viewport_size():
+#	var root_viewport_size = get_tree().get_root().size
+
 
 func _init_ui():
 	_init_stencil_color()
