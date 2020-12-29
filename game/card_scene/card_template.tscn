@@ -1,0 +1,228 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://card_scene/card_face_root.gd" type="Script" id=1]
+[ext_resource path="res://card_scene/card_root.gd" type="Script" id=2]
+[ext_resource path="res://card_scene/card_template.gd" type="Script" id=3]
+[ext_resource path="res://card_scene/card_center_root.gd" type="Script" id=4]
+[ext_resource path="res://card_scene/card_back_root.gd" type="Script" id=5]
+[ext_resource path="res://card_scene/card_info.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Environment" id=1]
+background_color = Color( 1, 0.192157, 0.192157, 1 )
+background_energy = 0.0
+ambient_light_color = Color( 0.964706, 0.0666667, 0.0666667, 1 )
+tonemap_mode = 1
+
+[sub_resource type="World" id=2]
+environment = SubResource( 1 )
+
+[sub_resource type="PlaneMesh" id=3]
+resource_local_to_scene = true
+size = Vector2( 4.5, 7.2 )
+
+[sub_resource type="ViewportTexture" id=4]
+viewport_path = NodePath("2d卡ui/Control/ViewportContainer/Viewport")
+
+[sub_resource type="SpatialMaterial" id=5]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+albedo_texture = SubResource( 4 )
+
+[sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("2d卡ui/Control/ViewportContainer2/Viewport")
+
+[sub_resource type="SpatialMaterial" id=7]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource( 6 )
+
+[sub_resource type="Shader" id=8]
+code = "shader_type spatial;
+render_mode depth_draw_alpha_prepass;
+
+uniform vec4 albedo : hint_color;
+uniform sampler2D stencil;
+uniform sampler2D center_scene;
+uniform vec4 stencil_color : hint_color;
+
+void fragment() {
+	vec4 stencil_test = texture(stencil, SCREEN_UV);
+	vec4 color_test = stencil_color;
+
+	float stencil_id = stencil_test.r * 10.0 + stencil_test.g + 100.0 * stencil_test.b + 1000.0;
+	float mask_id = stencil_color.r * 10.0 + stencil_color.g + 100.0 * stencil_color.b + 1000.0;
+
+	float mask_result = abs(stencil_id - mask_id);
+
+	if(mask_result == 0.0){
+		vec4 end_color = texture(center_scene, SCREEN_UV);
+		ALPHA = end_color.a;
+		ALBEDO = end_color.rgb;
+	}
+	else{
+		ALPHA = 0.0;
+		ALBEDO = vec3(0.0,0.0,0.0);
+	}
+}"
+
+[sub_resource type="ViewportTexture" id=9]
+viewport_path = NodePath("卡牌/卡内/Viewport")
+
+[sub_resource type="ViewportTexture" id=10]
+viewport_path = NodePath("卡牌/卡内/显示视口")
+
+[sub_resource type="ShaderMaterial" id=11]
+resource_local_to_scene = true
+shader = SubResource( 8 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 10 )
+shader_param/center_scene = SubResource( 9 )
+
+[node name="卡牌" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
+cull_mask = 1
+projection = 1
+current = true
+size = 7.2
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Camera"]
+remote_path = NodePath("../../卡牌/卡面/显示视口/Camera")
+
+[node name="RemoteTransform2" type="RemoteTransform" parent="Camera"]
+remote_path = NodePath("../../卡牌/卡内/显示视口/Camera")
+
+[node name="2d卡ui" type="Viewport" parent="."]
+size = Vector2( 450, 720 )
+own_world = true
+world = SubResource( 2 )
+transparent_bg = true
+usage = 0
+render_target_update_mode = 3
+
+[node name="Control" parent="2d卡ui" instance=ExtResource( 6 )]
+
+[node name="卡牌" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="3d遮挡" type="MeshInstance" parent="卡牌"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.036, 0 )
+layers = 2147483652
+cast_shadow = 0
+mesh = SubResource( 3 )
+material/0 = SubResource( 5 )
+
+[node name="卡面" type="Spatial" parent="卡牌"]
+script = ExtResource( 1 )
+
+[node name="显示视口" type="Viewport" parent="卡牌/卡面"]
+size = Vector2( 1920, 1080 )
+size_override_stretch = true
+transparent_bg = true
+hdr = false
+keep_3d_linear = true
+usage = 3
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="卡牌/卡面/显示视口"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
+cull_mask = 4
+projection = 1
+current = true
+size = 7.2
+
+[node name="3d卡ui" type="MeshInstance" parent="卡牌/卡面"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.189023, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Viewport" type="Viewport" parent="卡牌/卡面"]
+size = Vector2( 1920, 1080 )
+size_override_stretch = true
+transparent_bg = true
+render_target_update_mode = 3
+
+[node name="Camera2" type="Camera" parent="卡牌/卡面/Viewport"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
+cull_mask = 32
+projection = 1
+current = true
+size = 7.2
+
+[node name="Spatial" type="Spatial" parent="卡牌/卡面/Viewport"]
+transform = Transform( -1, 3.25841e-07, 0, -3.25841e-07, -1, 0, 0, 0, 1, 0, -0.143913, 0 )
+
+[node name="卡面模型" type="Spatial" parent="卡牌/卡面"]
+transform = Transform( -1, 3.25841e-07, 0, -3.25841e-07, -1, 0, 0, 0, 1, 0, -0.143913, 0 )
+
+[node name="RemoteTransform" type="RemoteTransform" parent="卡牌/卡面/卡面模型"]
+remote_path = NodePath("../../Viewport/Spatial")
+
+[node name="卡内" type="Spatial" parent="卡牌"]
+script = ExtResource( 4 )
+
+[node name="显示视口" type="Viewport" parent="卡牌/卡内"]
+size = Vector2( 1920, 1080 )
+size_override_stretch = true
+transparent_bg = true
+hdr = false
+keep_3d_linear = true
+usage = 3
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="卡牌/卡内/显示视口"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
+cull_mask = 4
+projection = 1
+current = true
+size = 7.2
+
+[node name="Viewport" type="Viewport" parent="卡牌/卡内"]
+size = Vector2( 1920, 1080 )
+size_override_stretch = true
+
+[node name="Camera2" type="Camera" parent="卡牌/卡内/Viewport"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 30, 0 )
+cull_mask = 16
+projection = 1
+current = true
+size = 7.2
+
+[node name="Spatial" type="Spatial" parent="卡牌/卡内/Viewport"]
+
+[node name="卡内模型" type="MeshInstance" parent="卡牌/卡内"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.036, 0 )
+layers = 2147483649
+material_override = SubResource( 11 )
+cast_shadow = 0
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RemoteTransform" type="RemoteTransform" parent="卡牌/卡内/卡内模型"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.036, 0 )
+remote_path = NodePath("../../Viewport/Spatial")
+
+[node name="卡背" type="Spatial" parent="卡牌"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153984, -1.95503e-05, -0.0262542 )
+script = ExtResource( 5 )
+
+[node name="Spatial" type="Spatial" parent="卡牌/卡背"]
+transform = Transform( -1, 3.25841e-07, 0, -3.25841e-07, -1, 0, 0, 0, 1, -0.168783, -0.350597, -0.00798273 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.807825, 0.0742618, -0.584725, 0.589422, -0.101779, 0.801388, 0, -0.992031, -0.125991, 0, 3.65683, 1.76496 )
+light_color = Color( 0.756863, 0.305882, 0.0823529, 1 )
+[connection signal="size_changed" from="2d卡ui" to="." method="_on_2dui_size_changed"]
+
+[editable path="2d卡ui/Control"]
