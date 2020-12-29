@@ -22,7 +22,7 @@ void fragment() {
 		vec4 end_color = texture(center_scene, SCREEN_UV);
 		ALPHA = end_color.a;
 		ALBEDO = end_color.rgb;
-		ALPHA = 0.5;
-		ALBEDO = vec3(1.0,0.5,0.3);
+		// ALPHA = 0.5;
+		// ALBEDO = vec3(0.8,0.1,0.8);
 	}
 }

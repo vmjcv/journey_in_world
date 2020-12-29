@@ -21,4 +21,3 @@ func change_child_camera_layer():
 			n.layers = camera_layer
 		if n is Camera:
 			n.cull_mask = camera_layer
-	
