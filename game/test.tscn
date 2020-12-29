@@ -1,27 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://card_scene/card_template.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Viewport.gd" type="Script" id=2]
+[ext_resource path="res://card_scene/card_2d.tscn" type="PackedScene" id=1]
 
 [sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("Viewport")
+viewport_path = NodePath("2d卡牌/Viewport")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 450, 720 )
-size_override_stretch = true
-transparent_bg = true
-render_direct_to_screen = true
-render_target_v_flip = true
-script = ExtResource( 2 )
-
-[node name="卡牌" parent="Viewport" instance=ExtResource( 1 )]
-
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="2d卡牌" parent="." instance=ExtResource( 1 )]
+position = Vector2( 603.436, 554.732 )
 texture = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="2d卡牌2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 978.801, 571.363 )
+texture = SubResource( 1 )
+
+[node name="2d卡牌3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1471.77, 568.987 )
+texture = SubResource( 1 )
