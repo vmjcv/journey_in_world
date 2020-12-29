@@ -34,6 +34,9 @@ func _init_stencil_color():
 
 func _init_camera():
 	$Camera.cull_mask = card_root_layer
+	$"卡牌/卡面".camera_layer = card_face_camera_layer
+	$"卡牌/卡内".camera_layer = card_center_camera_layer
+	$"卡牌/卡背".camera_layer = card_back_camera_layer
 	
 
 

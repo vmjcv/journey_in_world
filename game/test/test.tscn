@@ -38,7 +38,7 @@ flags_unshaded = true
 flags_no_depth_test = true
 albedo_texture = SubResource( 4 )
 
-[sub_resource type="Shader" id=55]
+[sub_resource type="Shader" id=6]
 code = "shader_type spatial;
 render_mode depth_draw_alpha_prepass;
 
@@ -67,19 +67,19 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ViewportTexture" id=56]
+[sub_resource type="ViewportTexture" id=7]
 viewport_path = NodePath("卡牌/卡内/Viewport")
 
-[sub_resource type="ViewportTexture" id=57]
+[sub_resource type="ViewportTexture" id=8]
 viewport_path = NodePath("卡牌/卡内/显示视口")
 
-[sub_resource type="ShaderMaterial" id=58]
+[sub_resource type="ShaderMaterial" id=9]
 resource_local_to_scene = true
-shader = SubResource( 55 )
+shader = SubResource( 6 )
 shader_param/albedo = null
 shader_param/stencil_color = Color( 1, 1, 1, 1 )
-shader_param/stencil = SubResource( 57 )
-shader_param/center_scene = SubResource( 56 )
+shader_param/stencil = SubResource( 8 )
+shader_param/center_scene = SubResource( 7 )
 
 [node name="卡牌" type="Spatial"]
 script = ExtResource( 4 )
@@ -265,7 +265,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.036, 0 )
 layers = 2147483649
 cast_shadow = 0
 mesh = SubResource( 3 )
-material/0 = SubResource( 58 )
+material/0 = SubResource( 9 )
 script = ExtResource( 6 )
 
 [node name="RemoteTransform" type="RemoteTransform" parent="卡牌/卡内/卡内模型"]
