@@ -4,8 +4,9 @@ extends Spatial
 var all_nodes = []
 
 export var camera_layer = 8
+var stencil_color = Color.white
 
-func _ready():
+func update_child_material():
 	get_all_nodes(self)
 	change_child_camera_layer()
 
@@ -24,5 +25,4 @@ func change_child_camera_layer():
 			n.material_override.shader = preload("res://test/card_face.shader")
 			n.material_override.set_shader_param("stencil",$"../显示视口".get_texture())
 			n.material_override.set_shader_param("center_scene",$"../Viewport".get_texture())
-			n.material_override.set_shader_param("stencil_color",Color.white)
-			pass
+			n.material_override.set_shader_param("stencil_color",stencil_color)

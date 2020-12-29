@@ -4,7 +4,7 @@ var all_nodes = []
 
 export var camera_layer = 8
 
-func _ready():
+func update_child_camera():
 	get_all_nodes(self)
 	change_child_camera_layer()
 

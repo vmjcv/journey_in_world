@@ -1,13 +1,41 @@
 extends Spatial
 
+var card_root_layer = 1
+var card_face_camera_layer = 1<<2
+var card_center_camera_layer = 1<<3
+var card_back_camera_layer = 1<<4
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-#	$"三维卡/卡片ui/角色场景".mesh.surface_get_material(0).next_pass.set_shader_param("stencil_color",$"Viewport/Control/ViewportContainer/Viewport/主体画面".color)
-#	$"卡面/卡牌模型".material_override.set_shader_param("stencil_color",$"2d卡ui/Control/ViewportContainer/Viewport/主体画面".color)
-	pass
+	_init_signal()
+	_init_ui()
+
+func _init_signal():
+	get_tree().get_root().connect("size_changed", self, "change_child_viewport_size")
+
+func change_child_viewport_size():
+	var root_viewport_size = get_tree().get_root().size
+	$"卡牌/卡面/显示视口".size = root_viewport_size
+	$"卡牌/卡面/Viewport".size = root_viewport_size
+	$"卡牌/卡内/显示视口".size = root_viewport_size
+	$"卡牌/卡内/Viewport".size = root_viewport_size
+
+func _init_ui():
+	_init_stencil_color()
+	_init_camera()
+
+func _init_stencil_color():
+	var stencil_color = $"2d卡ui/Control/ViewportContainer/Viewport/主体画面".color
+	$"卡牌/卡面/卡面模型".stencil_color = stencil_color
+	$"卡牌/卡面/卡面模型".update_child_material()
+
+	$"卡牌/卡内/卡内模型".stencil_color = stencil_color
+	$"卡牌/卡内/卡内模型".update_material()
+
+func _init_camera():
+	$Camera.cull_mask = card_root_layer
+	
+
+
+
+
