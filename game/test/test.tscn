@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://test/card1.tres" type="Material" id=1]
 [ext_resource path="res://test/3d_viewport.gd" type="Script" id=2]
@@ -37,13 +37,125 @@ flags_unshaded = true
 flags_no_depth_test = true
 albedo_texture = SubResource( 4 )
 
-[sub_resource type="CubeMesh" id=14]
+[sub_resource type="CubeMesh" id=6]
 size = Vector3( 4.5, 0.3, 7.2 )
 
-[sub_resource type="ViewportTexture" id=32]
+[sub_resource type="ViewportTexture" id=7]
 viewport_path = NodePath("卡牌/卡面/Viewport")
 
-[sub_resource type="ViewportTexture" id=33]
+[sub_resource type="ViewportTexture" id=8]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 8 )
+shader_param/center_scene = SubResource( 7 )
+
+[sub_resource type="ViewportTexture" id=10]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=11]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=12]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 11 )
+shader_param/center_scene = SubResource( 10 )
+
+[sub_resource type="ViewportTexture" id=57]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=58]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 58 )
+shader_param/center_scene = SubResource( 57 )
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=15]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=16]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 15 )
+shader_param/center_scene = SubResource( 14 )
+
+[sub_resource type="ViewportTexture" id=17]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=18]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 18 )
+shader_param/center_scene = SubResource( 17 )
+
+[sub_resource type="ViewportTexture" id=20]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=21]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=22]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = Color( 0, 0, 0, 1 )
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 21 )
+shader_param/center_scene = SubResource( 20 )
+
+[sub_resource type="ViewportTexture" id=23]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=24]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=25]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 24 )
+shader_param/center_scene = SubResource( 23 )
+
+[sub_resource type="ViewportTexture" id=26]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=27]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=28]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 27 )
+shader_param/center_scene = SubResource( 26 )
+
+[sub_resource type="ViewportTexture" id=29]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=30]
 viewport_path = NodePath("卡牌/卡面/显示视口")
 
 [sub_resource type="ShaderMaterial" id=31]
@@ -51,12 +163,108 @@ resource_local_to_scene = true
 shader = ExtResource( 14 )
 shader_param/albedo = null
 shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 30 )
+shader_param/center_scene = SubResource( 29 )
+
+[sub_resource type="ViewportTexture" id=32]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=33]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=34]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
 shader_param/stencil = SubResource( 33 )
 shader_param/center_scene = SubResource( 32 )
 
-[sub_resource type="ShaderMaterial" id=34]
+[sub_resource type="ViewportTexture" id=35]
+viewport_path = NodePath("卡牌/卡面/Viewport")
 
-[sub_resource type="Shader" id=27]
+[sub_resource type="ViewportTexture" id=36]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=37]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 36 )
+shader_param/center_scene = SubResource( 35 )
+
+[sub_resource type="ViewportTexture" id=38]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=39]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=40]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 39 )
+shader_param/center_scene = SubResource( 38 )
+
+[sub_resource type="ViewportTexture" id=41]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=42]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=43]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 42 )
+shader_param/center_scene = SubResource( 41 )
+
+[sub_resource type="ViewportTexture" id=44]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=45]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=46]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 45 )
+shader_param/center_scene = SubResource( 44 )
+
+[sub_resource type="ViewportTexture" id=47]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=48]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=49]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 48 )
+shader_param/center_scene = SubResource( 47 )
+
+[sub_resource type="ViewportTexture" id=50]
+viewport_path = NodePath("卡牌/卡面/Viewport")
+
+[sub_resource type="ViewportTexture" id=51]
+viewport_path = NodePath("卡牌/卡面/显示视口")
+
+[sub_resource type="ShaderMaterial" id=52]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/stencil_color = Color( 1, 1, 1, 1 )
+shader_param/stencil = SubResource( 51 )
+shader_param/center_scene = SubResource( 50 )
+
+[sub_resource type="Shader" id=53]
 code = "shader_type spatial;
 render_mode depth_draw_alpha_prepass;
 
@@ -68,12 +276,12 @@ uniform vec4 stencil_color : hint_color;
 void fragment() {
 	vec4 stencil_test = texture(stencil, SCREEN_UV);
 	vec4 color_test = stencil_color;
-	
+
 	float stencil_id = stencil_test.r * 10.0 + stencil_test.g + 100.0 * stencil_test.b + 1000.0;
 	float mask_id = stencil_color.r * 10.0 + stencil_color.g + 100.0 * stencil_color.b + 1000.0;
-	
+
 	float mask_result = abs(stencil_id - mask_id);
-	
+
 	if(mask_result == 0.0){
 		vec4 end_color = texture(center_scene, SCREEN_UV);
 		ALPHA = end_color.a;
@@ -85,19 +293,19 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ViewportTexture" id=28]
+[sub_resource type="ViewportTexture" id=54]
 viewport_path = NodePath("卡牌/卡内/Viewport")
 
-[sub_resource type="ViewportTexture" id=29]
+[sub_resource type="ViewportTexture" id=55]
 viewport_path = NodePath("卡牌/卡内/显示视口")
 
-[sub_resource type="ShaderMaterial" id=30]
+[sub_resource type="ShaderMaterial" id=56]
 resource_local_to_scene = true
-shader = SubResource( 27 )
+shader = SubResource( 53 )
 shader_param/albedo = null
 shader_param/stencil_color = Color( 1, 1, 1, 1 )
-shader_param/stencil = SubResource( 29 )
-shader_param/center_scene = SubResource( 28 )
+shader_param/stencil = SubResource( 55 )
+shader_param/center_scene = SubResource( 54 )
 
 [node name="卡牌" type="Spatial"]
 script = ExtResource( 4 )
@@ -166,7 +374,7 @@ transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.03
 visible = false
 layers = 2147483649
 cast_shadow = 0
-mesh = SubResource( 14 )
+mesh = SubResource( 6 )
 material/0 = ExtResource( 12 )
 
 [node name="RemoteTransform" type="RemoteTransform" parent="卡牌/卡面/卡面模型"]
@@ -182,10 +390,52 @@ remote_path = NodePath("../../Viewport/Spatial")
 transform = Transform( 3.5, 0, 0, 0, 3, 0, 0, 0, 3.7, 0, 0.026, 0 )
 
 [node name="Cube001_0" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="0"]
-material_override = SubResource( 31 )
+material_override = SubResource( 9 )
 
 [node name="Cube001_0001" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="1"]
+material_override = SubResource( 12 )
+
+[node name="Cube001_0002" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="2"]
+material_override = SubResource( 13 )
+
+[node name="Cube001_0003" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="3"]
+material_override = SubResource( 16 )
+
+[node name="Cube001_0004" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="4"]
+material_override = SubResource( 19 )
+
+[node name="Cube001_0005" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="5"]
+material_override = SubResource( 22 )
+
+[node name="Cube001_0006" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="6"]
+material_override = SubResource( 25 )
+
+[node name="Cube001_0007" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="7"]
+material_override = SubResource( 28 )
+
+[node name="Cube001_0008" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="8"]
+material_override = SubResource( 31 )
+
+[node name="Cube001_0009" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="9"]
 material_override = SubResource( 34 )
+
+[node name="Cube001_0010" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="10"]
+material_override = SubResource( 37 )
+
+[node name="Cube001_0011" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="11"]
+material_override = SubResource( 40 )
+
+[node name="Cube001_0012" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="12"]
+material_override = SubResource( 43 )
+
+[node name="Cube001_0013" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="13"]
+material_override = SubResource( 46 )
+
+[node name="Cube001_0014" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="14"]
+material_override = SubResource( 49 )
+
+[node name="Cube001_0015" parent="卡牌/卡面/Spatial/scene/RootNode gltf orientation matrix001/RootNode model correction matrix001/Root/Cube001" index="15"]
+material_override = SubResource( 52 )
 
 [node name="Viewport" type="Viewport" parent="卡牌/卡面"]
 size = Vector2( 1920, 1080 )
@@ -203,6 +453,7 @@ size = 7.2
 
 [node name="Spatial" type="Spatial" parent="卡牌/卡面/Viewport"]
 transform = Transform( -1, 3.25841e-07, 0, -3.25841e-07, -1, 0, 0, 0, 1, 0, 2.12591, 0 )
+visible = false
 
 [node name="卡面场景" type="CSGBox" parent="卡牌/卡面/Viewport/Spatial"]
 transform = Transform( 1, 3.45954e-20, 0, 3.45954e-20, 1, 0, 0, 0, 1, 8.88178e-16, -0.15, 0 )
@@ -240,7 +491,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.036, 0 )
 layers = 2147483649
 cast_shadow = 0
 mesh = SubResource( 3 )
-material/0 = SubResource( 30 )
+material/0 = SubResource( 56 )
 
 [node name="RemoteTransform" type="RemoteTransform" parent="卡牌/卡内/卡内模型"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.036, 0 )

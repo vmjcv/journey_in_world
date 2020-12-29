@@ -2,10 +2,10 @@
 
 [ext_resource path="res://test/card_face.shader" type="Shader" id=1]
 
-[sub_resource type="ViewportTexture" id=18]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("卡牌/卡面/Viewport")
 
-[sub_resource type="ViewportTexture" id=19]
+[sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("卡牌/卡面/显示视口")
 
 [resource]
@@ -13,5 +13,5 @@ resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 0, 0, 0, 1 )
 shader_param/stencil_color = Color( 1, 1, 1, 1 )
-shader_param/stencil = SubResource( 19 )
-shader_param/center_scene = SubResource( 18 )
+shader_param/stencil = SubResource( 2 )
+shader_param/center_scene = SubResource( 1 )
