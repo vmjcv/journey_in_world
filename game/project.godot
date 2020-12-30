@@ -237,7 +237,6 @@ _global_script_class_icons={
 [application]
 
 config/name="journey_in_world"
-run/main_scene="res://scene/main.tscn"
 config/icon="res://icon.png"
 
 [display]

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Tryndamere League of Runeterra Card
+* source:	https://sketchfab.com/3d-models/tryndamere-league-of-runeterra-card-6b311bd5d893486e8dc2e0bda534d945
+* author:	ph4minhat (https://sketchfab.com/freakeye)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Tryndamere League of Runeterra Card" (https://sketchfab.com/3d-models/tryndamere-league-of-runeterra-card-6b311bd5d893486e8dc2e0bda534d945) by ph4minhat (https://sketchfab.com/freakeye) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

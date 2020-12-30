@@ -12,6 +12,67 @@ export var card_back_type = 1
 
 var viewport_size setget set_viewport_size
 
+var cost = 1 setget set_cost # 费用 
+var card_name = "精卫鸟" setget set_card_name # 卡牌名字
+var attack = 1  setget set_attack# 攻击力
+var special = 1  setget set_special# 特殊效果数值
+var blood = 1  setget set_blood# 血量
+var shield = 1  setget set_shield# 盾量
+var introduction = "追击" setget set_introduction# 卡牌介绍
+var sect = "截"  setget set_sect# 教派
+var rarity = 1 setget set_rarity # 稀有度
+var race = "妖"  setget set_race# 种族
+
+func set_cost(value):
+	cost = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.cost = cost
+
+func set_card_name(value):
+	card_name = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.card_name = card_name
+
+func set_attack(value):
+	attack = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.attack = attack
+
+func set_special(value):
+	special = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.special = special
+
+func set_blood(value):
+	blood = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.blood = blood
+
+func set_shield(value):
+	shield = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.shield = shield
+
+func set_introduction(value):
+	introduction = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.introduction = introduction
+
+func set_sect(value):
+	sect = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.sect = sect
+
+func set_rarity(value):
+	rarity = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.rarity = rarity
+
+func set_race(value):
+	race = value
+	var card_2d_ui = $"2d卡ui/Control"
+	card_2d_ui.race = race
+
 func _ready():
 	_init_card_3d()
 	_init_signal()
@@ -23,23 +84,15 @@ func _init_card_3d():
 	var face_scene2 = face_scene.instance()
 	$"卡牌/卡面/卡面模型".add_child(face_scene1)
 	$"卡牌/卡面/Viewport/Spatial".add_child(face_scene2)
-	# 因为暂时没有对于模型做标准化处理，所以在这边调整位置，需要注意准流程是对于模型做标准化处理，而不是在代码里面设置缩放
-	face_scene1.scale = Vector3(3.5,3,3.7)
-	face_scene2.scale = Vector3(3.5,3,3.7)
 
 	
 	var center_scene = load("res://card_scene/res/card_center/%d/scene.glb"%card_center_type)
 	var center_scene1 = center_scene.instance()
 	$"卡牌/卡内/Viewport/Spatial".add_child(center_scene1)
-	# 因为暂时没有对于模型做标准化处理，所以在这边调整位置，需要注意准流程是对于模型做标准化处理，而不是在代码里面设置缩放
-	center_scene1.scale = Vector3(0.1,0.1,0.1)
-	center_scene1.rotation_degrees.x = -90
 	
 	var back_scene = load("res://card_scene/res/card_back/%d/scene.glb"%card_back_type)
 	var back_scene1 = back_scene.instance()
 	$"卡牌/卡背/Spatial".add_child(back_scene1)
-	# 因为暂时没有对于模型做标准化处理，所以在这边调整位置，需要注意准流程是对于模型做标准化处理，而不是在代码里面设置缩放
-	back_scene1.scale = Vector3(1.35,1.3,1.45)
 	
 	
 	
