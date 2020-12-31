@@ -8,14 +8,32 @@ viewport_path = NodePath("2d卡牌/Viewport")
 [node name="Node2D" type="Node2D"]
 
 [node name="2d卡牌" parent="." instance=ExtResource( 1 )]
-position = Vector2( 603.436, 554.732 )
+position = Vector2( 223.998, 364.069 )
 texture = SubResource( 1 )
 
 [node name="2d卡牌2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 978.801, 571.363 )
+position = Vector2( 708.853, 359.935 )
 texture = SubResource( 1 )
 card_name = "吞金兽"
+card_center_type = 2
+card_back_type = 2
 
 [node name="2d卡牌3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1471.77, 568.987 )
 texture = SubResource( 1 )
+card_center_type = 3
+card_back_type = 3
+
+[node name="2d卡牌4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1090.44, 955.975 )
+texture = SubResource( 1 )
+card_face_type = 2
+card_center_type = 4
+card_back_type = 4
+
+[node name="2d卡牌5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 393.865, 820.058 )
+texture = SubResource( 1 )
+card_face_type = 2
+card_center_type = 5
+card_back_type = 4

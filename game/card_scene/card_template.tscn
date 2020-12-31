@@ -129,9 +129,6 @@ size = 7.2
 [node name="3d卡ui" type="MeshInstance" parent="卡牌/卡面"]
 mesh = SubResource( 1 )
 material/0 = SubResource( 5 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Viewport" type="Viewport" parent="卡牌/卡面"]
 size = Vector2( 1920, 1080 )
