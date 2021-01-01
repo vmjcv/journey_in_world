@@ -8,7 +8,6 @@ viewport_path = NodePath("2d卡牌/Viewport")
 [node name="Node2D" type="Node2D"]
 
 [node name="2d卡牌" parent="." instance=ExtResource( 1 )]
-position = Vector2( 223.998, 364.069 )
 texture = SubResource( 1 )
 
 [node name="2d卡牌2" parent="." instance=ExtResource( 1 )]
@@ -19,7 +18,7 @@ card_center_type = 2
 card_back_type = 2
 
 [node name="2d卡牌3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1471.77, 568.987 )
+position = Vector2( 228.075, 362.299 )
 texture = SubResource( 1 )
 card_center_type = 3
 card_back_type = 3
