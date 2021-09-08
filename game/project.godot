@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-next/resources/array_map.gd"
 }, {
-"base": "Reference",
-"class": "ArrayUtils",
-"language": "GDScript",
-"path": "res://addons/SIsilicon.3d.text/array_utils.gd"
-}, {
 "base": "Resource",
 "class": "Behavior",
 "language": "GDScript",
@@ -197,7 +192,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Array2D": "",
 "ArrayMap": "",
-"ArrayUtils": "",
 "Behavior": "",
 "BitFlag": "",
 "Bitset": "",
@@ -251,7 +245,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "FileSystemView", "SIsilicon.3d.text" )
+enabled=PoolStringArray( "res://addons/FileSystemView/plugin.cfg", "res://addons/godot-next/plugin.cfg" )
 
 [rendering]
 
