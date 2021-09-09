@@ -9,3 +9,20 @@ EXIT_DIALOG_TITLE,退出游戏,exit the game
 EXIT_DIALOG_TEXT,您真的要结束这次冒险吗？,Are you really going to end this adventure?
 EXIT,退出,exit
 CANCEL,返回,cancel
+AUDIO,音频,Audio
+GRAPHICS,图像,Graphics
+GAME_PLAY,游戏玩法,Game play
+EXTRA_FEATURES,辅助功能,Extra feautres
+OTHER,其他,Other
+LANGUAGE,语言,Language
+zh,中文,Chinese
+en,英文,Engilsh
+HIDE_PLAYER_NAME,隐藏玩家名字,Hide player name
+USE_2D,使用2d战斗,Just use 2d render
+CAMERA_SHAKE,镜头抖动,Camera shake
+COLOR_BLINDNESS_MODE,色盲模式,Color blindness mode
+USER_INTERFACE_SIZE,用户界面大小,User interface size
+COLOR_BLINDNESS_MODE_DEFAULT,默认,Default
+COLOR_BLINDNESS_MODE_GREEN,绿色色盲模式,Green
+USER_INTERFACE_SIZE_DEFAULT,默认,Default
+USER_INTERFACE_SIZE_BIG,大面板,Big UI

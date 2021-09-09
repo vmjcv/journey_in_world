@@ -3,12 +3,12 @@
 [ext_resource path="res://UI/Themes/theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://UI/dialogs/settings_dialog.gd" type="Script" id=2]
 
-
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="SettingsDialog" type="WindowDialog"]
+visible = true
 margin_right = 400.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 520, 350 )
@@ -39,31 +39,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="General" type="Control" parent="MarginContainer/TabContainer"]
+[node name="Audio" type="Control" parent="MarginContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 27.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/General"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Audio"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/General/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
-[node name="PressureSensitivity" type="HBoxContainer" parent="MarginContainer/TabContainer/General/VBoxContainer"]
+[node name="PressureSensitivity" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 16.0
 margin_right = 496.0
 margin_bottom = 37.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/General/VBoxContainer/PressureSensitivity"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Audio/VBoxContainer/PressureSensitivity"]
 margin_top = 2.0
 margin_right = 246.0
 margin_bottom = 19.0
@@ -71,7 +72,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "SETTINGS_PRESSURE_SENSITIVITY"
 
-[node name="PressureSensitivity" type="SpinBox" parent="MarginContainer/TabContainer/General/VBoxContainer/PressureSensitivity"]
+[node name="PressureSensitivity" type="SpinBox" parent="MarginContainer/TabContainer/Audio/VBoxContainer/PressureSensitivity"]
 margin_left = 250.0
 margin_right = 496.0
 margin_bottom = 21.0
@@ -82,13 +83,13 @@ max_value = 2.0
 step = 0.01
 value = 1.0
 
-[node name="DefaultBrushSize" type="HBoxContainer" parent="MarginContainer/TabContainer/General/VBoxContainer"]
+[node name="DefaultBrushSize" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 41.0
 margin_right = 496.0
 margin_bottom = 62.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushSize"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultBrushSize"]
 margin_top = 2.0
 margin_right = 246.0
 margin_bottom = 19.0
@@ -96,7 +97,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "SETTINGS_BRUSH_SIZE"
 
-[node name="DefaultBrushSize" type="SpinBox" parent="MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushSize"]
+[node name="DefaultBrushSize" type="SpinBox" parent="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultBrushSize"]
 margin_left = 250.0
 margin_right = 496.0
 margin_bottom = 21.0
@@ -106,20 +107,20 @@ min_value = 1.0
 value = 12.0
 allow_greater = true
 
-[node name="DefaultBrushColor" type="HBoxContainer" parent="MarginContainer/TabContainer/General/VBoxContainer"]
+[node name="DefaultBrushColor" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 66.0
 margin_right = 496.0
 margin_bottom = 83.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushColor"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultBrushColor"]
 margin_right = 246.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "SETTINGS_BRUSH_COLOR"
 
-[node name="DefaultBrushColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushColor"]
+[node name="DefaultBrushColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultBrushColor"]
 margin_left = 250.0
 margin_right = 496.0
 margin_bottom = 17.0
@@ -133,20 +134,20 @@ flat = true
 color = Color( 1, 1, 1, 1 )
 edit_alpha = false
 
-[node name="DefaultCanvasColor" type="HBoxContainer" parent="MarginContainer/TabContainer/General/VBoxContainer"]
+[node name="DefaultCanvasColor" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 87.0
 margin_right = 496.0
 margin_bottom = 104.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/General/VBoxContainer/DefaultCanvasColor"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultCanvasColor"]
 margin_right = 246.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "SETTINGS_CANVAS_COLOR"
 
-[node name="DefaultCanvasColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/General/VBoxContainer/DefaultCanvasColor"]
+[node name="DefaultCanvasColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultCanvasColor"]
 margin_left = 250.0
 margin_right = 496.0
 margin_bottom = 17.0
@@ -160,13 +161,13 @@ flat = true
 color = Color( 0.12549, 0.129412, 0.141176, 1 )
 edit_alpha = false
 
-[node name="DefaultSaveDir" type="HBoxContainer" parent="MarginContainer/TabContainer/General/VBoxContainer"]
+[node name="DefaultSaveDir" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 108.0
 margin_right = 496.0
 margin_bottom = 129.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/General/VBoxContainer/DefaultSaveDir"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultSaveDir"]
 margin_top = 2.0
 margin_right = 246.0
 margin_bottom = 19.0
@@ -174,7 +175,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "SETTINGS_PROJECT_FOLDER"
 
-[node name="DefaultSaveDir" type="LineEdit" parent="MarginContainer/TabContainer/General/VBoxContainer/DefaultSaveDir"]
+[node name="DefaultSaveDir" type="LineEdit" parent="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultSaveDir"]
 margin_left = 250.0
 margin_right = 496.0
 margin_bottom = 21.0
@@ -183,19 +184,19 @@ size_flags_vertical = 3
 placeholder_text = "e.g. C:/Users/me/Lorien"
 placeholder_alpha = 0.5
 
-[node name="HSeparator4" type="HSeparator" parent="MarginContainer/TabContainer/General/VBoxContainer"]
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 133.0
 margin_right = 496.0
 margin_bottom = 157.0
 custom_constants/separation = 24
 
-[node name="Language" type="HBoxContainer" parent="MarginContainer/TabContainer/General/VBoxContainer"]
+[node name="Language" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 161.0
 margin_right = 496.0
 margin_bottom = 186.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/General/VBoxContainer/Language"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Audio/VBoxContainer/Language"]
 margin_top = 4.0
 margin_right = 246.0
 margin_bottom = 21.0
@@ -203,14 +204,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "SETTINGS_LANGUAGE"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/General/VBoxContainer/Language"]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Audio/VBoxContainer/Language"]
 margin_left = 250.0
 margin_right = 496.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 text = "English"
 
-[node name="RestartLabel" type="Label" parent="MarginContainer/TabContainer/General/VBoxContainer"]
+[node name="RestartLabel" type="Label" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 visible = false
 margin_top = 165.0
 margin_right = 476.0
@@ -219,40 +220,417 @@ custom_colors/font_color = Color( 1, 0.470588, 0.470588, 1 )
 text = "You need to restart for settings to take effect"
 align = 1
 
-[node name="Appearance" type="Control" parent="MarginContainer/TabContainer"]
+[node name="Graphics" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 27.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Appearance"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Graphics"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Appearance/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
-[node name="Theme" type="HBoxContainer" parent="MarginContainer/TabContainer/Appearance/VBoxContainer"]
+[node name="PressureSensitivity" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_top = 16.0
 margin_right = 496.0
-margin_bottom = 41.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/Appearance/VBoxContainer/Theme"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/PressureSensitivity"]
+margin_top = 2.0
+margin_right = 246.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_PRESSURE_SENSITIVITY"
+
+[node name="PressureSensitivity" type="SpinBox" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/PressureSensitivity"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 0.1
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="DefaultBrushSize" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
+margin_top = 41.0
+margin_right = 496.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultBrushSize"]
+margin_top = 2.0
+margin_right = 246.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_BRUSH_SIZE"
+
+[node name="DefaultBrushSize" type="SpinBox" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultBrushSize"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+value = 12.0
+allow_greater = true
+
+[node name="DefaultBrushColor" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
+margin_top = 66.0
+margin_right = 496.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultBrushColor"]
+margin_right = 246.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_BRUSH_COLOR"
+
+[node name="DefaultBrushColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultBrushColor"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+flat = true
+color = Color( 1, 1, 1, 1 )
+edit_alpha = false
+
+[node name="DefaultCanvasColor" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
+margin_top = 87.0
+margin_right = 496.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultCanvasColor"]
+margin_right = 246.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_CANVAS_COLOR"
+
+[node name="DefaultCanvasColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultCanvasColor"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+flat = true
+color = Color( 0.12549, 0.129412, 0.141176, 1 )
+edit_alpha = false
+
+[node name="DefaultSaveDir" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
+margin_top = 108.0
+margin_right = 496.0
+margin_bottom = 129.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultSaveDir"]
+margin_top = 2.0
+margin_right = 246.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_PROJECT_FOLDER"
+
+[node name="DefaultSaveDir" type="LineEdit" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultSaveDir"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "e.g. C:/Users/me/Lorien"
+placeholder_alpha = 0.5
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
+margin_top = 133.0
+margin_right = 496.0
+margin_bottom = 157.0
+custom_constants/separation = 24
+
+[node name="RestartLabel" type="Label" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
+visible = false
+margin_top = 165.0
+margin_right = 476.0
+margin_bottom = 182.0
+custom_colors/font_color = Color( 1, 0.470588, 0.470588, 1 )
+text = "You need to restart for settings to take effect"
+align = 1
+
+[node name="GamePlay" type="Control" parent="MarginContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 27.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/GamePlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_right = 496.0
+margin_bottom = 12.0
+custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
+
+[node name="PressureSensitivity" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 16.0
+margin_right = 496.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/PressureSensitivity"]
+margin_top = 2.0
+margin_right = 246.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_PRESSURE_SENSITIVITY"
+
+[node name="PressureSensitivity" type="SpinBox" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/PressureSensitivity"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 0.1
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="DefaultBrushSize" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 41.0
+margin_right = 496.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushSize"]
+margin_top = 2.0
+margin_right = 246.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_BRUSH_SIZE"
+
+[node name="DefaultBrushSize" type="SpinBox" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushSize"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+value = 12.0
+allow_greater = true
+
+[node name="DefaultBrushColor" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 66.0
+margin_right = 496.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushColor"]
+margin_right = 246.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_BRUSH_COLOR"
+
+[node name="DefaultBrushColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushColor"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+flat = true
+color = Color( 1, 1, 1, 1 )
+edit_alpha = false
+
+[node name="DefaultCanvasColor" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 87.0
+margin_right = 496.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultCanvasColor"]
+margin_right = 246.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_CANVAS_COLOR"
+
+[node name="DefaultCanvasColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultCanvasColor"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+flat = true
+color = Color( 0.12549, 0.129412, 0.141176, 1 )
+edit_alpha = false
+
+[node name="DefaultSaveDir" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 108.0
+margin_right = 496.0
+margin_bottom = 129.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultSaveDir"]
+margin_top = 2.0
+margin_right = 246.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "SETTINGS_PROJECT_FOLDER"
+
+[node name="DefaultSaveDir" type="LineEdit" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultSaveDir"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "e.g. C:/Users/me/Lorien"
+placeholder_alpha = 0.5
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 133.0
+margin_right = 496.0
+margin_bottom = 157.0
+custom_constants/separation = 24
+
+[node name="Language" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 161.0
+margin_right = 496.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/Language"]
 margin_top = 4.0
 margin_right = 246.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-text = "SETTINGS_THEME"
+text = "SETTINGS_LANGUAGE"
 
-[node name="Theme" type="OptionButton" parent="MarginContainer/TabContainer/Appearance/VBoxContainer/Theme"]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/Language"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+
+[node name="RestartLabel" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+visible = false
+margin_top = 165.0
+margin_right = 476.0
+margin_bottom = 182.0
+custom_colors/font_color = Color( 1, 0.470588, 0.470588, 1 )
+text = "You need to restart for settings to take effect"
+align = 1
+
+[node name="ExtraFeatures" type="Control" parent="MarginContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 27.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
+margin_right = 496.0
+margin_bottom = 12.0
+custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
+
+[node name="Use2d" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
+margin_top = 16.0
+margin_right = 496.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/Use2d"]
+margin_top = 11.0
+margin_right = 416.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "USE_2D"
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/Use2d"]
+margin_left = 420.0
+margin_right = 496.0
+margin_bottom = 40.0
+
+[node name="CameraShake" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
+margin_top = 60.0
+margin_right = 496.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/CameraShake"]
+margin_top = 11.0
+margin_right = 416.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "CAMERA_SHAKE"
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/CameraShake"]
+margin_left = 420.0
+margin_right = 496.0
+margin_bottom = 40.0
+
+[node name="ColorBlindnessMode" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
+margin_top = 104.0
+margin_right = 496.0
+margin_bottom = 129.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/ColorBlindnessMode"]
+margin_top = 4.0
+margin_right = 246.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "COLOR_BLINDNESS_MODE"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/ColorBlindnessMode"]
 margin_left = 250.0
 margin_right = 496.0
 margin_bottom = 25.0
@@ -262,163 +640,122 @@ text = "Dark"
 items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
 selected = 0
 
-[node name="HSeparator5" type="HSeparator" parent="MarginContainer/TabContainer/Appearance/VBoxContainer"]
-margin_top = 45.0
+[node name="UserInterfaceSize" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
+margin_top = 133.0
 margin_right = 496.0
-margin_bottom = 57.0
-custom_styles/separator = SubResource( 1 )
+margin_bottom = 158.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/UserInterfaceSize"]
+margin_top = 4.0
+margin_right = 246.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "USER_INTERFACE_SIZE"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/UserInterfaceSize"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Dark"
+items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
+selected = 0
+
+[node name="HSeparator5" type="HSeparator" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
+margin_top = 162.0
+margin_right = 496.0
+margin_bottom = 174.0
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
-[node name="RestartLabel" type="Label" parent="MarginContainer/TabContainer/Appearance/VBoxContainer"]
-visible = false
-margin_top = 16.0
-margin_right = 476.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 1, 0.470588, 0.470588, 1 )
-text = "You need to restart for settings to take effect"
-align = 1
-
-[node name="Rendering" type="Control" parent="MarginContainer/TabContainer"]
+[node name="Other" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 27.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Rendering"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Other"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Rendering/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
-[node name="AntiAliasing" type="HBoxContainer" parent="MarginContainer/TabContainer/Rendering/VBoxContainer"]
+[node name="Language" type="HBoxContainer" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_top = 16.0
 margin_right = 496.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/Rendering/VBoxContainer/AntiAliasing"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Other/VBoxContainer/Language"]
 margin_top = 4.0
 margin_right = 246.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-text = "SETTINGS_AA_METHOD"
+text = "LANGUAGE"
 
-[node name="AntiAliasing" type="OptionButton" parent="MarginContainer/TabContainer/Rendering/VBoxContainer/AntiAliasing"]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Other/VBoxContainer/Language"]
 margin_left = 250.0
 margin_right = 496.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "SETTINGS_AA_METHOD_NONE"
-items = [ "SETTINGS_AA_METHOD_NONE", null, false, 0, null, "OpenGL Hint", null, false, 1, null, "Texture Fill", null, false, 2, null ]
-selected = 0
 
-[node name="BrushRounding" type="HBoxContainer" parent="MarginContainer/TabContainer/Rendering/VBoxContainer"]
+[node name="HidePlayerName" type="HBoxContainer" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_top = 45.0
 margin_right = 496.0
-margin_bottom = 70.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/Rendering/VBoxContainer/BrushRounding"]
-margin_top = 4.0
-margin_right = 246.0
-margin_bottom = 21.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "SETTINGS_BRUSH_CAPS"
-
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Rendering/VBoxContainer/BrushRounding"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 25.0
-size_flags_horizontal = 3
-text = "SETTINGS_BRUSH_CAPS_FLAT"
-items = [ "SETTINGS_BRUSH_CAPS_FLAT", null, false, 0, null, "SETTINGS_BRUSH_CAPS_ROUND", null, false, 1, null ]
-selected = 0
-
-[node name="TargetFramerate" type="HBoxContainer" parent="MarginContainer/TabContainer/Rendering/VBoxContainer"]
-margin_top = 74.0
-margin_right = 496.0
-margin_bottom = 95.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/Rendering/VBoxContainer/TargetFramerate"]
-margin_top = 2.0
-margin_right = 246.0
-margin_bottom = 19.0
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Other/VBoxContainer/HidePlayerName"]
+margin_top = 11.0
+margin_right = 416.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-text = "SETTINGS_FPS_FOREGROUND"
+text = "HIDE_PLAYER_NAME"
 
-[node name="TargetFramerate" type="SpinBox" parent="MarginContainer/TabContainer/Rendering/VBoxContainer/TargetFramerate"]
-margin_left = 250.0
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/Other/VBoxContainer/HidePlayerName"]
+margin_left = 420.0
 margin_right = 496.0
-margin_bottom = 21.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 1000.0
-value = 144.0
-allow_greater = true
+margin_bottom = 40.0
 
-[node name="BackgroundFramerate" type="HBoxContainer" parent="MarginContainer/TabContainer/Rendering/VBoxContainer"]
-margin_top = 99.0
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
+margin_top = 89.0
 margin_right = 496.0
-margin_bottom = 120.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/Rendering/VBoxContainer/BackgroundFramerate"]
-margin_top = 2.0
-margin_right = 246.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "SETTINGS_FPS_BACKGROUND"
-
-[node name="BackgroundFramerate" type="SpinBox" parent="MarginContainer/TabContainer/Rendering/VBoxContainer/BackgroundFramerate"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 21.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 5.0
-max_value = 1000.0
-value = 10.0
-allow_greater = true
-
-[node name="HSeparator4" type="HSeparator" parent="MarginContainer/TabContainer/Rendering/VBoxContainer"]
-margin_top = 124.0
-margin_right = 496.0
-margin_bottom = 136.0
-custom_styles/separator = SubResource( 1 )
+margin_bottom = 101.0
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
-[node name="RestartLabel" type="Label" parent="MarginContainer/TabContainer/Rendering/VBoxContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 16.0
-margin_bottom = -11.0
-custom_colors/font_color = Color( 1, 0.470588, 0.470588, 1 )
-text = "You need to restart for settings to take effect"
-align = 1
-
-[connection signal="value_changed" from="MarginContainer/TabContainer/General/VBoxContainer/PressureSensitivity/PressureSensitivity" to="." method="_on_PressureSensitivity_value_changed"]
-[connection signal="value_changed" from="MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushSize/DefaultBrushSize" to="." method="_on_DefaultBrushSize_value_changed"]
-[connection signal="color_changed" from="MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushColor/DefaultBrushColor" to="." method="_on_DefaultBrushColor_color_changed"]
-[connection signal="color_changed" from="MarginContainer/TabContainer/General/VBoxContainer/DefaultCanvasColor/DefaultCanvasColor" to="." method="_on_DefaultCanvasColor_color_changed"]
-[connection signal="text_changed" from="MarginContainer/TabContainer/General/VBoxContainer/DefaultSaveDir/DefaultSaveDir" to="." method="_on_DefaultSaveDir_text_changed"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/General/VBoxContainer/Language/OptionButton" to="." method="_on_OptionButton_item_selected"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/Appearance/VBoxContainer/Theme/Theme" to="." method="_on_Theme_item_selected"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/Rendering/VBoxContainer/AntiAliasing/AntiAliasing" to="." method="_on_AntiAliasing_item_selected"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/Rendering/VBoxContainer/BrushRounding/OptionButton" to="." method="_on_Brush_rounding_item_selected"]
-[connection signal="value_changed" from="MarginContainer/TabContainer/Rendering/VBoxContainer/TargetFramerate/TargetFramerate" to="." method="_on_Target_Fps_Foreground_changed"]
-[connection signal="value_changed" from="MarginContainer/TabContainer/Rendering/VBoxContainer/BackgroundFramerate/BackgroundFramerate" to="." method="_on_Target_Fps_Background_changed"]
+[connection signal="value_changed" from="MarginContainer/TabContainer/Audio/VBoxContainer/PressureSensitivity/PressureSensitivity" to="." method="_on_PressureSensitivity_value_changed"]
+[connection signal="value_changed" from="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultBrushSize/DefaultBrushSize" to="." method="_on_DefaultBrushSize_value_changed"]
+[connection signal="color_changed" from="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultBrushColor/DefaultBrushColor" to="." method="_on_DefaultBrushColor_color_changed"]
+[connection signal="color_changed" from="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultCanvasColor/DefaultCanvasColor" to="." method="_on_DefaultCanvasColor_color_changed"]
+[connection signal="text_changed" from="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultSaveDir/DefaultSaveDir" to="." method="_on_DefaultSaveDir_text_changed"]
+[connection signal="item_selected" from="MarginContainer/TabContainer/Audio/VBoxContainer/Language/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="value_changed" from="MarginContainer/TabContainer/Graphics/VBoxContainer/PressureSensitivity/PressureSensitivity" to="." method="_on_PressureSensitivity_value_changed"]
+[connection signal="value_changed" from="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultBrushSize/DefaultBrushSize" to="." method="_on_DefaultBrushSize_value_changed"]
+[connection signal="color_changed" from="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultBrushColor/DefaultBrushColor" to="." method="_on_DefaultBrushColor_color_changed"]
+[connection signal="color_changed" from="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultCanvasColor/DefaultCanvasColor" to="." method="_on_DefaultCanvasColor_color_changed"]
+[connection signal="text_changed" from="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultSaveDir/DefaultSaveDir" to="." method="_on_DefaultSaveDir_text_changed"]
+[connection signal="value_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/PressureSensitivity/PressureSensitivity" to="." method="_on_PressureSensitivity_value_changed"]
+[connection signal="value_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushSize/DefaultBrushSize" to="." method="_on_DefaultBrushSize_value_changed"]
+[connection signal="color_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushColor/DefaultBrushColor" to="." method="_on_DefaultBrushColor_color_changed"]
+[connection signal="color_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultCanvasColor/DefaultCanvasColor" to="." method="_on_DefaultCanvasColor_color_changed"]
+[connection signal="text_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultSaveDir/DefaultSaveDir" to="." method="_on_DefaultSaveDir_text_changed"]
+[connection signal="item_selected" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/Language/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="toggled" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/Use2d/CheckButton" to="." method="_on_use2d_checkbutton_toggled"]
+[connection signal="toggled" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/CameraShake/CheckButton" to="." method="_on_camera_shake_checkbutton_toggled"]
+[connection signal="item_selected" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/ColorBlindnessMode/OptionButton" to="." method="_on_color_blindness_mode_options_item_selected"]
+[connection signal="item_selected" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/UserInterfaceSize/OptionButton" to="." method="_on_user_interface_size_options_item_selected"]
+[connection signal="item_selected" from="MarginContainer/TabContainer/Other/VBoxContainer/Language/OptionButton" to="." method="_on_language_options_item_selected"]
+[connection signal="toggled" from="MarginContainer/TabContainer/Other/VBoxContainer/HidePlayerName/CheckButton" to="." method="_on_hide_player_name_checkbutton_toggled"]

@@ -5,7 +5,6 @@
 [ext_resource path="res://UI/Themes/theme_dark.tres" type="Theme" id=3]
 
 [node name="ExitDialog" type="WindowDialog"]
-visible = true
 margin_right = 310.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 310, 90 )

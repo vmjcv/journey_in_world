@@ -4,7 +4,12 @@ const DEFAULT_SECTION 					:= "settings"
 const APPEARANCE_THEME 					:= "appearance_theme"
 const RENDERING_FOREGROUND_FPS			:= "rendering_foreground_fps"
 const RENDERING_BACKGROUND_FPS			:= "rendering_background_fps"
-
+const HIDE_PLAYER_NAME					:= "hide_player_name"
+const GAME_LANGUAGE						:= "game_language"
+const USE_2D							:= "use_2d"
+const CAMERA_SHAKE						:= "camera_shake"
+const COLOR_BLINDNESS_MODE				:= "color_blindness_mode"
+const USER_INTERFACE_SIZE				:= "user_interface_size"
 # -------------------------------------------------------------------------------------------------
 var _config_file := ConfigFile.new()
 
