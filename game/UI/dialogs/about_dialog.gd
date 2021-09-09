@@ -9,12 +9,11 @@ func _ready():
 
 # -------------------------------------------------------------------------------------------------
 func _on_GithubLinkButton_pressed():
-	
 	OS.shell_open("https://github.com/vmjcv/journey_in_world")
 
 # -------------------------------------------------------------------------------------------------
 func _on_LicenseButton_pressed():
-	OS.shell_open("https://github.com/vmjcv/journey_in_world/LICENSE")
+	OS.shell_open("https://vmjcv666.mit-license.org/")
 
 # -------------------------------------------------------------------------------------------------
 func _on_GodotButton_pressed():
