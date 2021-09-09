@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Appender",
+"language": "GDScript",
+"path": "res://addons/gs_logger/appender.gd"
+}, {
+"base": "Reference",
 "class": "Array2D",
 "language": "GDScript",
 "path": "res://addons/godot-next/references/array_2d.gd"
@@ -34,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-next/references/bitset.gd"
 }, {
+"base": "Control",
+"class": "CSVEditor",
+"language": "GDScript",
+"path": "res://addons/file-editor/scripts/CSVEditor.gd"
+}, {
 "base": "Reference",
 "class": "CSVFile",
 "language": "GDScript",
@@ -48,6 +58,16 @@ _global_script_classes=[ {
 "class": "ClassType",
 "language": "GDScript",
 "path": "res://addons/godot-next/references/class_type.gd"
+}, {
+"base": "Reference",
+"class": "Config",
+"language": "GDScript",
+"path": "res://misc/config.gd"
+}, {
+"base": "Appender",
+"class": "ConsoleAppender",
+"language": "GDScript",
+"path": "res://addons/gs_logger/appenders/console_appender.gd"
 }, {
 "base": "TabContainer",
 "class": "Cycle",
@@ -69,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-next/global/editor_tools.gd"
 }, {
+"base": "Appender",
+"class": "FileAppender",
+"language": "GDScript",
+"path": "res://addons/gs_logger/appenders/file_appender.gd"
+}, {
 "base": "Reference",
 "class": "FileSearch",
 "language": "GDScript",
@@ -83,6 +108,16 @@ _global_script_classes=[ {
 "class": "Geometry2D",
 "language": "GDScript",
 "path": "res://addons/godot-next/2d/geometry_2d.gd"
+}, {
+"base": "HTTPRequest",
+"class": "GoogleTranslateAPI",
+"language": "GDScript",
+"path": "res://addons/file-editor/scripts/GoogleTranslatorAPI.gd"
+}, {
+"base": "Layout",
+"class": "HtmlLayout",
+"language": "GDScript",
+"path": "res://addons/gs_logger/layouts/html_layout.gd"
 }, {
 "base": "Reference",
 "class": "Icons",
@@ -100,6 +135,61 @@ _global_script_classes=[ {
 "path": "res://addons/godot-next/global/inspector_controls.gd"
 }, {
 "base": "Reference",
+"class": "Layout",
+"language": "GDScript",
+"path": "res://addons/gs_logger/layout.gd"
+}, {
+"base": "Resource",
+"class": "LocalizationData",
+"language": "GDScript",
+"path": "res://addons/localization_editor/model/LocalizationData.gd"
+}, {
+"base": "Reference",
+"class": "LocalizationKeys",
+"language": "GDScript",
+"path": "res://localization/LocalizationKeys.gd"
+}, {
+"base": "Reference",
+"class": "LocalizationManagerKeys",
+"language": "GDScript",
+"path": "res://addons/localization_editor/LocalizationManagerKeys.gd"
+}, {
+"base": "Reference",
+"class": "LocalizationManagerPlaceholders",
+"language": "GDScript",
+"path": "res://addons/localization_editor/LocalizationManagerPlaceholders.gd"
+}, {
+"base": "Reference",
+"class": "LocalizationPlaceholders",
+"language": "GDScript",
+"path": "res://localization/LocalizationPlaceholders.gd"
+}, {
+"base": "Resource",
+"class": "LocalizationPlaceholdersData",
+"language": "GDScript",
+"path": "res://addons/localization_editor/model/LocalizationPlaceholdersData.gd"
+}, {
+"base": "Resource",
+"class": "LocalizationSave",
+"language": "GDScript",
+"path": "res://addons/localization_editor/model/LocalizationSave.gd"
+}, {
+"base": "Reference",
+"class": "LoggerUtils",
+"language": "GDScript",
+"path": "res://addons/gs_logger/utils.gd"
+}, {
+"base": "Button",
+"class": "LongClickButton",
+"language": "GDScript",
+"path": "res://addons/LongClickButton/script/long_click_button.gd"
+}, {
+"base": "Reference",
+"class": "Message",
+"language": "GDScript",
+"path": "res://addons/gs_logger/message.gd"
+}, {
+"base": "Reference",
 "class": "MessageDispatcher",
 "language": "GDScript",
 "path": "res://addons/godot-next/references/message_dispatcher.gd"
@@ -108,6 +198,11 @@ _global_script_classes=[ {
 "class": "MessageDispatcherWrapper",
 "language": "GDScript",
 "path": "res://addons/godot-next/nodes/message_dispatcher_wrapper.gd"
+}, {
+"base": "Layout",
+"class": "PatternLayout",
+"language": "GDScript",
+"path": "res://addons/gs_logger/layouts/pattern_layout.gd"
 }, {
 "base": "Resource",
 "class": "PhysicsLayers",
@@ -190,26 +285,45 @@ _global_script_classes=[ {
 "path": "res://addons/godot-next/3d/vector_display_3d.gd"
 } ]
 _global_script_class_icons={
+"Appender": "",
 "Array2D": "",
 "ArrayMap": "",
 "Behavior": "",
 "BitFlag": "",
 "Bitset": "",
+"CSVEditor": "",
 "CSVFile": "",
 "CallbackDelegator": "",
 "ClassType": "",
+"Config": "",
+"ConsoleAppender": "",
 "Cycle": "res://addons/godot-next/icons/icon_cycle.svg",
 "DebugLabel": "",
 "DiscreteGradientTexture": "",
 "EditorTools": "",
+"FileAppender": "",
 "FileSearch": "",
 "FileSystemLink": "",
 "Geometry2D": "res://addons/godot-next/icons/icon_geometry_2d.svg",
+"GoogleTranslateAPI": "",
+"HtmlLayout": "",
 "Icons": "",
 "Inflector": "",
 "InspectorControls": "",
+"Layout": "",
+"LocalizationData": "",
+"LocalizationKeys": "",
+"LocalizationManagerKeys": "",
+"LocalizationManagerPlaceholders": "",
+"LocalizationPlaceholders": "",
+"LocalizationPlaceholdersData": "",
+"LocalizationSave": "",
+"LoggerUtils": "",
+"LongClickButton": "",
+"Message": "",
 "MessageDispatcher": "",
 "MessageDispatcherWrapper": "",
+"PatternLayout": "",
 "PhysicsLayers": "",
 "ProjectTools": "",
 "PropertyInfo": "",
@@ -231,21 +345,29 @@ _global_script_class_icons={
 [application]
 
 config/name="journey_in_world"
-config/icon="res://icon.png"
+config/icon="res://assets/icon.png"
+config/windows_native_icon="res://assets/icon.ico"
+
+[autoload]
+
+Logger="*res://addons/gs_logger/logger.gd"
+LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
 window/size/always_on_top=true
-window/size/test_width=960
-window/size/test_height=540
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/size/test_width=1440
+window/size/test_height=810
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/FileSystemView/plugin.cfg", "res://addons/godot-next/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/FileSystemView/plugin.cfg", "res://addons/LongClickButton/plugin.cfg", "res://addons/file-editor/plugin.cfg", "res://addons/godot-next/plugin.cfg", "res://addons/gs_logger/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg" )
+
+[locale]
+
+translations=PoolStringArray( "res://localization/localizations.zh.translation", "res://localization/localizations.en.translation" )
 
 [rendering]
 

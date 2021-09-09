@@ -11,11 +11,12 @@ var interface: EditorInterface
 var filesystem: EditorFileSystem
 var editor_node : Node
 var filesystem_dock : Node
-var rmb_popup
+var filesystem_popup : PopupMenu
+var filesystem_move_dialog: ConfirmationDialog
 var tree : Tree
 
-var views : Array = []
-
+var views : Array
+var config : Dictionary
 
 func _enter_tree():
 	interface = get_editor_interface()
@@ -25,6 +26,11 @@ func _enter_tree():
 	for i in filesystem_dock.get_children():
 		if i is VSplitContainer:
 			tree = i.get_child(0)
+		elif i is PopupMenu:
+			filesystem_popup = i
+		elif i is ConfirmationDialog and i.has_signal("dir_selected"):
+			filesystem_move_dialog = i
+		if tree and filesystem_popup and filesystem_move_dialog:
 			break
 	
 	load_views()
@@ -44,39 +50,22 @@ func _exit_tree():
 
 
 func load_views():
-	views.clear()
-	var config = ConfigFile.new()
-	if config.load(PLUGIN_DIR + "views.cfg") != OK:
-		if config.load(PLUGIN_DIR + "default_views.cfg") == OK:
-			print_debug("FileSystemView: load default_views.cfg")
-			
-	for i in config.get_sections():
-		var view = View.new()
-		view.name = config.get_value(i, "name", "")
-		view.icon = config.get_value(i, "icon", "")
-		view.apply_include = config.get_value(i, "apply_include", true)
-		view.apply_exclude = config.get_value(i, "apply_exclude", false)
-		view.include = config.get_value(i, "include", "")
-		view.exclude = config.get_value(i, "exclude", "")
-		view.hide_empty_dirs = config.get_value(i, "hide_empty_dirs", true)
-		views.append(view)
+	var file = File.new()
+	if file.open(PLUGIN_DIR + "config.json", File.READ) != OK:
+		if file.open(PLUGIN_DIR + "defaultConfig.json", File.READ) == OK:
+			print_debug("FileSystemView: load defaultConfig.json")
+	
+	var result = JSON.parse(file.get_as_text()).result
+	self.config = result
+	self.views = self.config.views
 
 
 func save_views():
-	var config = ConfigFile.new()
-	var i = 0
-	for view in views:
-		var istr = str(i)
-		config.set_value(istr, "name", view.name)
-		config.set_value(istr, "icon", view.icon)
-		config.set_value(istr, "apply_include", view.apply_include)
-		config.set_value(istr, "include", view.include)
-		config.set_value(istr, "apply_exclude", view.apply_exclude)
-		config.set_value(istr, "exclude", view.exclude)
-		config.set_value(istr, "hide_empty_dirs", view.hide_empty_dirs)
-		i += 1
-		
-	config.save(PLUGIN_DIR + "views.cfg")
+	var json = to_json(config)
+	var file = File.new()
+	file.open(PLUGIN_DIR + "config.json", File.WRITE)
+	file.store_string(json)
+	file.close()
 
 
 func _on_ViewEditor_closed():
@@ -84,40 +73,26 @@ func _on_ViewEditor_closed():
 
 
 func fsd_open_file(file_path: String):
-	## method EditorNode:load_resource is not bound, so use FileSystemDock
-	#	if filesystem.get_file_type(file_path) == "PackedScene":
-	#		editor_node.call("open_request", file_path)
-	#	else:
-	#		editor_node.call("load_resource", file_path) # invalid call
 	filesystem_dock.call("_select_file", file_path, false)
 
 
-func _fsd_locate_item(root: TreeItem, path: String):
-	var item : TreeItem = root.get_children()
-	while item:
-		var item_path : String = item.get_metadata(0)
-		if path == item_path:
-			return item
-		elif path.begins_with(item_path):
-			return _fsd_locate_item(item, path)
-		item = item.get_next()
-	print("can't find treepath ", path)
-	return null
+func fsd_select_paths(paths: PoolStringArray):
+	if paths.size() == 0:
+		return
 
-
-func fsd_locate_item(path: String) -> TreeItem:
-	var res_root = tree.get_root().get_children().get_next()
-	if path == "res://":
-		return res_root
-	return _fsd_locate_item(res_root, path)
-
-
-func fsd_select_item(path: String):
-	var item = fsd_locate_item(path)
+	var temp_item = tree.create_item(tree.get_root())
+	var _start_select = false
+	for path in paths:
+		var item = tree.create_item(temp_item)
+		item.set_metadata(0, path)
+		if _start_select:
+			item.select(0)
+		else:
+			tree.select_mode = Tree.SELECT_SINGLE
+			item.select(0)
+			tree.select_mode = Tree.SELECT_MULTI
+			_start_select = true
 	
-	# easier way to unselect all
-	tree.select_mode = Tree.SELECT_SINGLE
-	item.select(0)
-	tree.select_mode = Tree.SELECT_MULTI
-	# fix show-in-file-manager
 	tree.emit_signal("multi_selected", null, 0, true)
+	tree.get_root().call_deferred("remove_child", temp_item)
+	tree.call_deferred("update")
