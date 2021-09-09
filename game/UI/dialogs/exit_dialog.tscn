@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://UI/dialogs/unsaved_changes_dialog.gd" type="Script" id=1]
+[ext_resource path="res://UI/dialogs/exit_dialog.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/font_13.tres" type="DynamicFont" id=2]
 [ext_resource path="res://UI/Themes/theme_dark.tres" type="Theme" id=3]
 
-
-[node name="SaveBeforeExitDialog" type="WindowDialog"]
+[node name="ExitDialog" type="WindowDialog"]
+visible = true
 margin_right = 310.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 310, 90 )
@@ -29,23 +29,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveButton" type="Button" parent="HBoxContainer"]
-margin_left = 46.0
-margin_right = 92.0
+[node name="ExitButton" type="Button" parent="HBoxContainer"]
+margin_left = 93.0
+margin_right = 132.0
 margin_bottom = 25.0
 custom_fonts/font = ExtResource( 2 )
-text = "SAVE"
-
-[node name="DiscardButton" type="Button" parent="HBoxContainer"]
-margin_left = 112.0
-margin_right = 179.0
-margin_bottom = 25.0
-custom_fonts/font = ExtResource( 2 )
-text = "DISCARD"
+text = "EXIT"
 
 [node name="CancelButton" type="Button" parent="HBoxContainer"]
-margin_left = 199.0
-margin_right = 263.0
+margin_left = 152.0
+margin_right = 216.0
 margin_bottom = 25.0
 custom_fonts/font = ExtResource( 2 )
 text = "CANCEL"
@@ -64,6 +57,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/DiscardButton" to="." method="_on_DiscardButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

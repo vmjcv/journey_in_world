@@ -5,3 +5,7 @@ ABOUT_DIALOG_LICSENSE,山海游记的许可证为：,journey_in_world is license
 ABOUT_DIALOG_BASED_ON,山海游记的构建引擎为：,journey_in_world is based on:
 GAME_TITLE,山海游记,journey_in_world
 ABOUT_DIALOG_SET_IN,图标图集为：,Icon set:
+EXIT_DIALOG_TITLE,退出游戏,exit the game
+EXIT_DIALOG_TEXT,您真的要结束这次冒险吗？,Are you really going to end this adventure?
+EXIT,退出,exit
+CANCEL,返回,cancel
