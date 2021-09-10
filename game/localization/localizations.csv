@@ -15,8 +15,8 @@ GAME_PLAY,游戏玩法,Game play
 EXTRA_FEATURES,辅助功能,Extra feautres
 OTHER,其他,Other
 LANGUAGE,语言,Language
-zh,中文,Chinese
-en,英文,Engilsh
+SETTING_LANGUAGE_ZH,中文,中文
+SETTING_LANGUAGE_EN,Engilsh,Engilsh
 HIDE_PLAYER_NAME,隐藏玩家名字,Hide player name
 USE_2D,使用2d战斗,Just use 2d render
 CAMERA_SHAKE,镜头抖动,Camera shake
@@ -26,3 +26,9 @@ COLOR_BLINDNESS_MODE_DEFAULT,默认,Default
 COLOR_BLINDNESS_MODE_GREEN,绿色色盲模式,Green
 USER_INTERFACE_SIZE_DEFAULT,默认,Default
 USER_INTERFACE_SIZE_BIG,大面板,Big UI
+GAME_SPEED_DEFAULT,普通,Default speed
+GAME_SPEED_SMALL,快速,Fast speed
+GAME_SPEED_MIDDLE,超快,Super fast speed
+GAME_SPEED_BIG,极快,Extremely fast speed
+GAME_SPEED,游戏速度,Game speed
+BATTLE_PREVIEW,战斗预览,Battle preview

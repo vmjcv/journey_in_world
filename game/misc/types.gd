@@ -12,3 +12,9 @@ enum UserInterfaceSize {
 	BIG,
 }
 
+enum GameSpeed {
+	DEFAULT,
+	SMALL,
+	MIDDLE,
+	BIG,
+}

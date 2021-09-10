@@ -16,6 +16,10 @@ onready var _tab_extra_features: Control = $MarginContainer/TabContainer/ExtraFe
 onready var _tab_other: Control = $MarginContainer/TabContainer/Other
 
 
+onready var _game_speed_options: OptionButton = $MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed/OptionButton
+onready var _battle_preview_checkbutton: CheckButton = $MarginContainer/TabContainer/GamePlay/VBoxContainer/BattlePreview/CheckButton
+
+
 onready var _use_2d_checkbutton: CheckButton = $MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/Use2d/CheckButton
 onready var _camera_shake_checkbutton: CheckButton = $MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/CameraShake/CheckButton
 onready var _color_blindness_mode_options: OptionButton = $MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/ColorBlindnessMode/OptionButton
@@ -24,7 +28,13 @@ onready var _user_interface_size_options: OptionButton = $MarginContainer/TabCon
 onready var _language_options: OptionButton = $MarginContainer/TabContainer/Other/VBoxContainer/Language/OptionButton
 onready var _hide_player_name_checkbutton: CheckButton = $MarginContainer/TabContainer/Other/VBoxContainer/HidePlayerName/CheckButton
 
-var _locales = TranslationServer.get_loaded_locales()
+
+var _game_speed_map = {
+	Types.GameSpeed.DEFAULT:"GAME_SPEED_DEFAULT",
+	Types.GameSpeed.SMALL:"GAME_SPEED_SMALL",
+	Types.GameSpeed.MIDDLE:"GAME_SPEED_MIDDLE",
+	Types.GameSpeed.BIG:"GAME_SPEED_BIG",
+}
 
 var _color_blindness_mode_map = {
 	Types.ColorBlindnessMode.DEFAULT:"COLOR_BLINDNESS_MODE_DEFAULT",
@@ -35,6 +45,13 @@ var _user_interface_size_map = {
 	Types.UserInterfaceSize.DEFAULT:"USER_INTERFACE_SIZE_DEFAULT",
 	Types.UserInterfaceSize.BIG:"USER_INTERFACE_SIZE_BIG"
 }
+
+var _locales = TranslationServer.get_loaded_locales()
+var _locales_map = {
+	"en":"SETTING_LANGUAGE_EN",
+	"zh":"SETTING_LANGUAGE_ZH",
+}
+
 #onready var _pressure_sensitivity: SpinBox = $MarginContainer/TabContainer/General/VBoxContainer/PressureSensitivity/PressureSensitivity
 #onready var _brush_size: SpinBox = $MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushSize/DefaultBrushSize
 #onready var _brush_color: ColorPickerButton = $MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushColor/DefaultBrushColor
@@ -56,6 +73,7 @@ func _ready():
 
 func _update_tab():
 	_update_tab_name()
+	_update_game_play_tab()
 	_update_extra_features_tab()
 	_update_other_tab()
 
@@ -67,6 +85,33 @@ func _update_tab_name():
 	_tab_other.name = tr("OTHER")
 
 
+
+
+
+# -------------------------------------------------------------------------------------------------
+func _update_game_play_tab():
+	_update_game_speed_options()
+	_update_battle_preview_checkbutton()
+
+
+func _update_game_speed_options():
+	var cur_game_speed = Settings.get_value(Settings.GAME_SPEED, Config.GAME_SPEED)
+	_game_speed_options.clear()
+	for i in _game_speed_map:
+		_game_speed_options.add_item(tr(_game_speed_map[i]), i)
+	_game_speed_options.selected = _game_speed_options.get_item_index(cur_game_speed)
+
+func _on_game_speed_options_item_selected(id:int)->void:
+	Settings.set_value(Settings.COLOR_BLINDNESS_MODE, _game_speed_options.get_item_id(id))
+
+func _update_battle_preview_checkbutton():
+	var cur_battle_preview = Settings.get_value(Settings.BATTLE_PREVIEW, Config.BATTLE_PREVIEW)
+	_battle_preview_checkbutton.toggle_mode = true
+	_battle_preview_checkbutton.pressed = cur_battle_preview
+
+func _on_battle_preview_checkbutton_toggled(button_pressed):
+	Settings.set_value(Settings.BATTLE_PREVIEW, button_pressed)
+	# TODO:发出一个信号去更新内容
 # -------------------------------------------------------------------------------------------------
 func _update_extra_features_tab():
 	_update_use2d_checkbutton()
@@ -76,16 +121,19 @@ func _update_extra_features_tab():
 
 func _update_use2d_checkbutton():
 	var use_2d = Settings.get_value(Settings.USE_2D, Config.USE_2D)
-	_use_2d_checkbutton.toggle_mode = use_2d
-	
+	_use_2d_checkbutton.toggle_mode = true
+	_use_2d_checkbutton.pressed = use_2d
+
 func _on_use2d_checkbutton_toggled(button_pressed):
 	Settings.set_value(Settings.USE_2D, button_pressed)
 	# TODO:发出一个信号去更新内容
 
 func _update_camera_shake_checkbutton():
 	var camera_shake = Settings.get_value(Settings.CAMERA_SHAKE, Config.CAMERA_SHAKE)
-	_camera_shake_checkbutton.toggle_mode = camera_shake
-	
+	_camera_shake_checkbutton.toggle_mode = true
+	_camera_shake_checkbutton.pressed = camera_shake
+
+
 func _on_camera_shake_checkbutton_toggled(button_pressed):
 	Settings.set_value(Settings.CAMERA_SHAKE, button_pressed)
 	# TODO:发出一个信号去更新内容
@@ -96,7 +144,7 @@ func _update_color_blindness_mode_options():
 	for i in _color_blindness_mode_map:
 		_color_blindness_mode_options.add_item(tr(_color_blindness_mode_map[i]), i)
 	_color_blindness_mode_options.selected = _color_blindness_mode_options.get_item_index(cur_color_blindness_mode)
-	
+
 func _on_color_blindness_mode_options_item_selected(id:int)->void:
 	Settings.set_value(Settings.COLOR_BLINDNESS_MODE, _color_blindness_mode_options.get_item_id(id))
 
@@ -106,7 +154,7 @@ func _update_user_interface_size_options():
 	for i in _user_interface_size_map:
 		_user_interface_size_options.add_item(tr(_user_interface_size_map[i]), i)
 	_user_interface_size_options.selected = _user_interface_size_options.get_item_index(cur_user_interface_size_options)
-	
+
 func _on_user_interface_size_options_item_selected(id:int)->void:
 	Settings.set_value(Settings.USER_INTERFACE_SIZE, _user_interface_size_options.get_item_id(id))
 
@@ -123,15 +171,15 @@ func _update_languages_options():
 	var cur_language = Settings.get_value(Settings.GAME_LANGUAGE, Config.GAME_LANGUAGE)
 	if not cur_language:
 		cur_language = TranslationServer.get_locale()
-	
+
 	_language_options.clear()
 	_locales = TranslationServer.get_loaded_locales()
 	var index = 0
 	for lang in _locales:
-		_language_options.add_item(tr(lang), index)
+		_language_options.add_item(tr(_locales_map[lang]), index)
 		index = index + 1
 	_language_options.selected = _language_options.get_item_index(_locales.find(cur_language))
-	
+
 func _on_language_options_item_selected(id:int)->void:
 	var cur_local = _locales[_language_options.get_item_id(id)]
 	Settings.set_value(Settings.GAME_LANGUAGE, cur_local)
@@ -139,14 +187,15 @@ func _on_language_options_item_selected(id:int)->void:
 
 func _update_hide_player_name_checkbutton():
 	var hide_player_name = Settings.get_value(Settings.HIDE_PLAYER_NAME, Config.HIDE_PLAYER_NAME)
-	_hide_player_name_checkbutton.toggle_mode = hide_player_name
-	
+	_hide_player_name_checkbutton.toggle_mode = true
+	_hide_player_name_checkbutton.pressed = hide_player_name
+
 func _on_hide_player_name_checkbutton_toggled(button_pressed):
 	Settings.set_value(Settings.HIDE_PLAYER_NAME, button_pressed)
 	# TODO:发出一个信号去更新内容
 # -------------------------------------------------------------------------------------------------
-	
-	
+
+
 func _notification(what):
 	match what:
 		NOTIFICATION_TRANSLATION_CHANGED:
@@ -286,4 +335,3 @@ func _notification(what):
 #	Settings.set_value(Settings.GENERAL_LANGUAGE, locale)
 #	TranslationServer.set_locale(locale)
 #	_general_restart_label.show()
-

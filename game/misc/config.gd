@@ -14,3 +14,5 @@ const USE_2D						:= true
 const CAMERA_SHAKE					:= true
 const COLOR_BLINDNESS_MODE			:= Types.ColorBlindnessMode.DEFAULT
 const USER_INTERFACE_SIZE			:= Types.UserInterfaceSize.DEFAULT
+const GAME_SPEED			:= Types.GameSpeed.DEFAULT
+const BATTLE_PREVIEW						:= true

@@ -54,8 +54,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="PressureSensitivity" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 16.0
@@ -235,8 +235,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="PressureSensitivity" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_top = 16.0
@@ -395,169 +395,58 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
-[node name="PressureSensitivity" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+[node name="GameSpeed" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
 margin_top = 16.0
 margin_right = 496.0
-margin_bottom = 37.0
+margin_bottom = 41.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/PressureSensitivity"]
-margin_top = 2.0
-margin_right = 246.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "SETTINGS_PRESSURE_SENSITIVITY"
-
-[node name="PressureSensitivity" type="SpinBox" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/PressureSensitivity"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 21.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 0.1
-max_value = 2.0
-step = 0.01
-value = 1.0
-
-[node name="DefaultBrushSize" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 41.0
-margin_right = 496.0
-margin_bottom = 62.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushSize"]
-margin_top = 2.0
-margin_right = 246.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "SETTINGS_BRUSH_SIZE"
-
-[node name="DefaultBrushSize" type="SpinBox" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushSize"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 21.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-value = 12.0
-allow_greater = true
-
-[node name="DefaultBrushColor" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 66.0
-margin_right = 496.0
-margin_bottom = 83.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushColor"]
-margin_right = 246.0
-margin_bottom = 17.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "SETTINGS_BRUSH_COLOR"
-
-[node name="DefaultBrushColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushColor"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 17.0
-size_flags_horizontal = 3
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/disabled = SubResource( 2 )
-custom_styles/normal = SubResource( 2 )
-flat = true
-color = Color( 1, 1, 1, 1 )
-edit_alpha = false
-
-[node name="DefaultCanvasColor" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 87.0
-margin_right = 496.0
-margin_bottom = 104.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultCanvasColor"]
-margin_right = 246.0
-margin_bottom = 17.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "SETTINGS_CANVAS_COLOR"
-
-[node name="DefaultCanvasColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultCanvasColor"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 17.0
-size_flags_horizontal = 3
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/disabled = SubResource( 2 )
-custom_styles/normal = SubResource( 2 )
-flat = true
-color = Color( 0.12549, 0.129412, 0.141176, 1 )
-edit_alpha = false
-
-[node name="DefaultSaveDir" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 108.0
-margin_right = 496.0
-margin_bottom = 129.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultSaveDir"]
-margin_top = 2.0
-margin_right = 246.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "SETTINGS_PROJECT_FOLDER"
-
-[node name="DefaultSaveDir" type="LineEdit" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultSaveDir"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 21.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-placeholder_text = "e.g. C:/Users/me/Lorien"
-placeholder_alpha = 0.5
-
-[node name="HSeparator4" type="HSeparator" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 133.0
-margin_right = 496.0
-margin_bottom = 157.0
-custom_constants/separation = 24
-
-[node name="Language" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 161.0
-margin_right = 496.0
-margin_bottom = 186.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/Language"]
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed"]
 margin_top = 4.0
 margin_right = 246.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-text = "SETTINGS_LANGUAGE"
+text = "GAME_SPEED"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/Language"]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed"]
 margin_left = 250.0
 margin_right = 496.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Dark"
+items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
+selected = 0
 
-[node name="RestartLabel" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-visible = false
-margin_top = 165.0
-margin_right = 476.0
-margin_bottom = 182.0
-custom_colors/font_color = Color( 1, 0.470588, 0.470588, 1 )
-text = "You need to restart for settings to take effect"
-align = 1
+[node name="BattlePreview" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 45.0
+margin_right = 496.0
+margin_bottom = 85.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/BattlePreview"]
+margin_top = 11.0
+margin_right = 416.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "BATTLE_PREVIEW"
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/BattlePreview"]
+margin_left = 420.0
+margin_right = 496.0
+margin_bottom = 40.0
+
+[node name="HSeparator5" type="HSeparator" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 89.0
+margin_right = 496.0
+margin_bottom = 101.0
+custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="ExtraFeatures" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
@@ -575,8 +464,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="Use2d" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_top = 16.0
@@ -668,8 +557,8 @@ selected = 0
 margin_top = 162.0
 margin_right = 496.0
 margin_bottom = 174.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="Other" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
@@ -687,8 +576,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="Language" type="HBoxContainer" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_top = 16.0
@@ -733,8 +622,8 @@ margin_bottom = 40.0
 margin_top = 89.0
 margin_right = 496.0
 margin_bottom = 101.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [connection signal="value_changed" from="MarginContainer/TabContainer/Audio/VBoxContainer/PressureSensitivity/PressureSensitivity" to="." method="_on_PressureSensitivity_value_changed"]
 [connection signal="value_changed" from="MarginContainer/TabContainer/Audio/VBoxContainer/DefaultBrushSize/DefaultBrushSize" to="." method="_on_DefaultBrushSize_value_changed"]
@@ -747,12 +636,8 @@ custom_styles/separator = SubResource( 1 )
 [connection signal="color_changed" from="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultBrushColor/DefaultBrushColor" to="." method="_on_DefaultBrushColor_color_changed"]
 [connection signal="color_changed" from="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultCanvasColor/DefaultCanvasColor" to="." method="_on_DefaultCanvasColor_color_changed"]
 [connection signal="text_changed" from="MarginContainer/TabContainer/Graphics/VBoxContainer/DefaultSaveDir/DefaultSaveDir" to="." method="_on_DefaultSaveDir_text_changed"]
-[connection signal="value_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/PressureSensitivity/PressureSensitivity" to="." method="_on_PressureSensitivity_value_changed"]
-[connection signal="value_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushSize/DefaultBrushSize" to="." method="_on_DefaultBrushSize_value_changed"]
-[connection signal="color_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultBrushColor/DefaultBrushColor" to="." method="_on_DefaultBrushColor_color_changed"]
-[connection signal="color_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultCanvasColor/DefaultCanvasColor" to="." method="_on_DefaultCanvasColor_color_changed"]
-[connection signal="text_changed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/DefaultSaveDir/DefaultSaveDir" to="." method="_on_DefaultSaveDir_text_changed"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/Language/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="item_selected" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed/OptionButton" to="." method="_on_game_speed_options_item_selected"]
+[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/BattlePreview/CheckButton" to="." method="_on_battle_preview_checkbutton_toggled"]
 [connection signal="toggled" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/Use2d/CheckButton" to="." method="_on_use2d_checkbutton_toggled"]
 [connection signal="toggled" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/CameraShake/CheckButton" to="." method="_on_camera_shake_checkbutton_toggled"]
 [connection signal="item_selected" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/ColorBlindnessMode/OptionButton" to="." method="_on_color_blindness_mode_options_item_selected"]
