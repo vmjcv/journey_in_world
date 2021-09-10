@@ -18,6 +18,7 @@ func _ready():
 	_config_file = ConfigFile.new()
 	_load_settings()
 
+
 # -------------------------------------------------------------------------------------------------
 func _load_settings() -> int:
 	var err = _config_file.load(Config.CONFIG_PATH)

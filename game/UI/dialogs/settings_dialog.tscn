@@ -40,7 +40,6 @@ __meta__ = {
 }
 
 [node name="Audio" type="Control" parent="MarginContainer/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 27.0
@@ -561,6 +560,7 @@ text = "You need to restart for settings to take effect"
 align = 1
 
 [node name="ExtraFeatures" type="Control" parent="MarginContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 27.0

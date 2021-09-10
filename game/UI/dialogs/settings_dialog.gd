@@ -67,7 +67,6 @@ func _update_tab_name():
 	_tab_other.name = tr("OTHER")
 
 
-
 # -------------------------------------------------------------------------------------------------
 func _update_extra_features_tab():
 	_update_use2d_checkbutton()
@@ -120,10 +119,13 @@ func _update_other_tab():
 	_update_hide_player_name_checkbutton()
 
 func _update_languages_options():
+	# TODO:需要找个地方初始化项目的语言
 	var cur_language = Settings.get_value(Settings.GAME_LANGUAGE, Config.GAME_LANGUAGE)
 	if not cur_language:
 		cur_language = TranslationServer.get_locale()
+	
 	_language_options.clear()
+	_locales = TranslationServer.get_loaded_locales()
 	var index = 0
 	for lang in _locales:
 		_language_options.add_item(tr(lang), index)
@@ -132,8 +134,8 @@ func _update_languages_options():
 	
 func _on_language_options_item_selected(id:int)->void:
 	var cur_local = _locales[_language_options.get_item_id(id)]
-	TranslationServer.set_locale(cur_local)
 	Settings.set_value(Settings.GAME_LANGUAGE, cur_local)
+	TranslationServer.set_locale(cur_local)
 
 func _update_hide_player_name_checkbutton():
 	var hide_player_name = Settings.get_value(Settings.HIDE_PLAYER_NAME, Config.HIDE_PLAYER_NAME)
