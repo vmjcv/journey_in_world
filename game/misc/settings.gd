@@ -5,8 +5,8 @@ const APPEARANCE_THEME 					:= "appearance_theme"
 const RENDERING_FOREGROUND_FPS			:= "rendering_foreground_fps"
 const RENDERING_BACKGROUND_FPS			:= "rendering_background_fps"
 
-const GAME_SPEED							:= "game_speed"
-const BATTLE_PREVIEW						:= "battle_preview"
+const GAME_SPEED						:= "game_speed"
+const BATTLE_PREVIEW					:= "battle_preview"
 
 const USE_2D							:= "use_2d"
 const CAMERA_SHAKE						:= "camera_shake"
@@ -14,6 +14,14 @@ const COLOR_BLINDNESS_MODE				:= "color_blindness_mode"
 const USER_INTERFACE_SIZE				:= "user_interface_size"
 const HIDE_PLAYER_NAME					:= "hide_player_name"
 const GAME_LANGUAGE						:= "game_language"
+const INPUT_MAP							:= "input_map"
+const IMAGE_QUALITY						:= "image_quality"
+const RESOLUTION						:= "resolution"
+const DISPLAY_MODE						:= "display_mode"
+const AUDIO_SFX							:= "audio_sfx"
+const AUDIO_MUSIC						:= "audio_music"
+const AUDIO_MASTER						:= "audio_master"
+
 # -------------------------------------------------------------------------------------------------
 var _config_file := ConfigFile.new()
 

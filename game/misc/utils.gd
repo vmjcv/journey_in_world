@@ -23,3 +23,40 @@ func remove_group_from_all_nodes(group: String) -> void:
 	for n in get_tree().get_nodes_in_group(group):
 		n.remove_from_group(group)
 
+func remove_all_child(node) -> void:
+	for child in node.get_children():
+		node.remove_child(child)
+
+func remove_all_child_in_group(node,group: String) -> void:
+	for child in node.get_children():
+		if child.is_in_group(group):
+			node.remove_child(child)
+
+func get_size_from_resolution_enum(id):
+	var window_size
+	match id:
+		Types.Resolution.SMALL:
+			window_size = Vector2(1280,720)
+		Types.Resolution.DEFAULT:
+			window_size = Vector2(1920,1080)
+		Types.Resolution.MIDDLE:
+			window_size = Vector2(2560,1440)
+		Types.Resolution.BIG:
+			window_size = Vector2(3200,1800)
+		Types.Resolution.BIG_BIG:
+			window_size = Vector2(3840,2160)
+	return window_size
+
+
+func change_display_mode(id):
+	match id:
+		Types.DisplayMode.BORDER:
+			OS.window_borderless = false
+			OS.window_fullscreen = false
+		Types.DisplayMode.FULLSCREEN:
+			OS.window_borderless = false
+			OS.window_fullscreen = true
+		Types.DisplayMode.BORDERLESS:
+			OS.window_borderless = true
+			OS.window_fullscreen = false
+		
