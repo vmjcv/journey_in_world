@@ -7,7 +7,6 @@ func _ready():
 func _init_game():
 	# 设置语言
 	var cur_language = Settings.get_value(Settings.GAME_LANGUAGE, Config.GAME_LANGUAGE)
-	print(cur_language)
 	if cur_language:
 		TranslationServer.set_locale(cur_language)
 	

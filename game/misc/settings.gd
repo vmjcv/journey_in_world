@@ -21,6 +21,10 @@ const DISPLAY_MODE						:= "display_mode"
 const AUDIO_SFX							:= "audio_sfx"
 const AUDIO_MUSIC						:= "audio_music"
 const AUDIO_MASTER						:= "audio_master"
+const FANCY_MOVEMENT					:= "fancy_movement"
+const OVAL_HAND_SHAPE					:= "oval_hand_shape"
+const CARD_PREVIEW						:= "card_preview"
+const USE_DEBUG							:= "use_debug"
 
 # -------------------------------------------------------------------------------------------------
 var _config_file := ConfigFile.new()

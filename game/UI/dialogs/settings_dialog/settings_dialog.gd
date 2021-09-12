@@ -1,12 +1,5 @@
 extends WindowDialog
-
-# -------------------------------------------------------------------------------------------------
-#const THEME_DARK_INDEX 	:= 0
-#const THEME_LIGHT_INDEX := 1
-#
-#const AA_NONE_INDEX 		:= 0
-#const AA_OPENGL_HINT_INDEX 	:= 1
-#const AA_TEXTURE_FILL_INDEX := 2
+# TODO:这代码写的很烂，勉强能用，1.数据是否需要找个专门的地方存储，2.子功能其实应该放到tab的脚本中，3.声音相关的控件应该考虑全局触发器的形式触发
 
 # -------------------------------------------------------------------------------------------------
 onready var _tab_audio: Control = $MarginContainer/TabContainer/Audio
@@ -25,8 +18,6 @@ onready var _music_audio_stream_player: AudioStreamPlayer = $MarginContainer/Tab
 onready var _sfx_audio_stream_player: AudioStreamPlayer = $MarginContainer/TabContainer/Audio/VBoxContainer/SFX/AudioStreamPlayer
 
 
-
-
 onready var _image_quality_checkbutton: CheckButton = $MarginContainer/TabContainer/Graphics/VBoxContainer/ImageQuality/CheckButton
 onready var _resolution_options: OptionButton = $MarginContainer/TabContainer/Graphics/VBoxContainer/Resolution/OptionButton
 onready var _display_mode_options: OptionButton = $MarginContainer/TabContainer/Graphics/VBoxContainer/DisplayMode/OptionButton
@@ -34,6 +25,12 @@ onready var _display_mode_options: OptionButton = $MarginContainer/TabContainer/
 
 onready var _game_speed_options: OptionButton = $MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed/OptionButton
 onready var _battle_preview_checkbutton: CheckButton = $MarginContainer/TabContainer/GamePlay/VBoxContainer/BattlePreview/CheckButton
+
+onready var _fancy_movement_checkbutton: CheckButton = $MarginContainer/TabContainer/GamePlay/VBoxContainer/FacncyMovement/CheckButton
+onready var _oval_hand_shape_checkbutton: CheckButton = $MarginContainer/TabContainer/GamePlay/VBoxContainer/OvalHandShape/CheckButton
+onready var _card_preview_options: OptionButton = $MarginContainer/TabContainer/GamePlay/VBoxContainer/CardPreview/OptionButton
+onready var _use_debug_checkbutton: CheckButton = $MarginContainer/TabContainer/GamePlay/VBoxContainer/UseDebug/CheckButton
+
 onready var _shortcut_key_container_toggle_button: Button = $MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ToggleButton
 onready var _shortcut_key_container_reset_button: Button = $MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ResetButton
 onready var _shortcut_key_container: ScrollContainer = $MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKeyContainer
@@ -58,6 +55,12 @@ var _game_speed_map = {
 	Types.GameSpeed.BIG:"GAME_SPEED_BIG",
 }
 
+var _card_preview_map = {
+	Types.CardPreview.SCALING:"CARD_PREVIEW_SCALING",
+	Types.CardPreview.VIEWPORT:"CARD_PREVIEW_VIEWPORT",
+	Types.CardPreview.SCALING_VIEWPORT:"CARD_PREVIEW_SCALING_VIEWPORT",
+}
+
 var _resolution_map = {
 	Types.Resolution.SMALL:"1280 X 720",
 	Types.Resolution.DEFAULT:"1920 X 1080",
@@ -73,8 +76,8 @@ var _display_mode_map = {
 
 
 
-var _action_bind:PackedScene = preload("res://UI/dialogs/action_node.tscn")
-var _control_bind:PackedScene = preload("res://UI/dialogs/control_node.tscn")
+var _action_bind:PackedScene = preload("res://UI/dialogs/settings_dialog/action_node.tscn")
+var _control_bind:PackedScene = preload("res://UI/dialogs/settings_dialog/control_node.tscn")
 var action_nodes = {}
 # 使用的是types里面的内容主要是给翻译使用
 var _action_map = {
@@ -114,21 +117,6 @@ var _locales_map = {
 	"en":"SETTING_LANGUAGE_EN",
 	"zh":"SETTING_LANGUAGE_ZH",
 }
-
-#onready var _pressure_sensitivity: SpinBox = $MarginContainer/TabContainer/General/VBoxContainer/PressureSensitivity/PressureSensitivity
-#onready var _brush_size: SpinBox = $MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushSize/DefaultBrushSize
-#onready var _brush_color: ColorPickerButton = $MarginContainer/TabContainer/General/VBoxContainer/DefaultBrushColor/DefaultBrushColor
-#onready var _canvas_color: ColorPickerButton = $MarginContainer/TabContainer/General/VBoxContainer/DefaultCanvasColor/DefaultCanvasColor
-#onready var _project_dir: LineEdit = $MarginContainer/TabContainer/General/VBoxContainer/DefaultSaveDir/DefaultSaveDir
-#onready var _theme: OptionButton = $MarginContainer/TabContainer/Appearance/VBoxContainer/Theme/Theme
-#onready var _aa_mode: OptionButton = $MarginContainer/TabContainer/Rendering/VBoxContainer/AntiAliasing/AntiAliasing
-#onready var _foreground_fps: SpinBox = $MarginContainer/TabContainer/Rendering/VBoxContainer/TargetFramerate/TargetFramerate
-#onready var _background_fps: SpinBox = $MarginContainer/TabContainer/Rendering/VBoxContainer/BackgroundFramerate/BackgroundFramerate
-#onready var _general_restart_label: Label = $MarginContainer/TabContainer/General/VBoxContainer/RestartLabel
-#onready var _appearence_restart_label: Label = $MarginContainer/TabContainer/Appearance/VBoxContainer/RestartLabel
-#onready var _rendering_restart_label: Label = $MarginContainer/TabContainer/Rendering/VBoxContainer/RestartLabel
-
-#onready var _brush_rounding_options: OptionButton = $MarginContainer/TabContainer/Rendering/VBoxContainer/BrushRounding/OptionButton
 
 # -------------------------------------------------------------------------------------------------
 func _ready():
@@ -248,6 +236,10 @@ func _update_game_play_tab():
 	_toggle_shortcut_key_container(false)
 	_init_action_controls()
 	_init_shortcut_key_box_list()
+	_update_fancy_movement_checkbutton()
+	_update_oval_hand_shape_checkbutton()
+	_update_card_preview_options()
+	_update_use_debug_checkbutton()
 
 
 func _update_game_speed_options():
@@ -269,6 +261,45 @@ func _on_battle_preview_checkbutton_toggled(button_pressed):
 	Settings.set_value(Settings.BATTLE_PREVIEW, button_pressed)
 	# TODO:发出一个信号去更新内容
 	
+
+func _update_fancy_movement_checkbutton():
+	var cur_fancy_movement = Settings.get_value(Settings.FANCY_MOVEMENT, Config.FANCY_MOVEMENT)
+	_fancy_movement_checkbutton.toggle_mode = true
+	_fancy_movement_checkbutton.pressed = cur_fancy_movement
+
+func _on_fancy_movement_checkbutton_toggled(button_pressed):
+	Settings.set_value(Settings.FANCY_MOVEMENT, button_pressed)
+	# TODO:发出一个信号去更新内容
+
+
+func _update_oval_hand_shape_checkbutton():
+	var cur_oval_hand_shape = Settings.get_value(Settings.OVAL_HAND_SHAPE, Config.OVAL_HAND_SHAPE)
+	_oval_hand_shape_checkbutton.toggle_mode = true
+	_oval_hand_shape_checkbutton.pressed = cur_oval_hand_shape
+
+func _on_oval_hand_shape_checkbutton_toggled(button_pressed):
+	Settings.set_value(Settings.OVAL_HAND_SHAPE, button_pressed)
+	# TODO:发出一个信号去更新内容
+	
+func _update_use_debug_checkbutton():
+	var cur_use_debug = Settings.get_value(Settings.USE_DEBUG, Config.USE_DEBUG)
+	_use_debug_checkbutton.toggle_mode = true
+	_use_debug_checkbutton.pressed = cur_use_debug
+
+func _on_use_debug_checkbutton_toggled(button_pressed):
+	Settings.set_value(Settings.USE_DEBUG, button_pressed)
+	# TODO:发出一个信号去更新内容
+
+func _update_card_preview_options():
+	var cur_card_preview = Settings.get_value(Settings.CARD_PREVIEW, Config.CARD_PREVIEW)
+	_card_preview_options.clear()
+	for i in _card_preview_map:
+		_card_preview_options.add_item(tr(_card_preview_map[i]), i)
+	_card_preview_options.selected = _card_preview_options.get_item_index(cur_card_preview)
+
+func _on_card_preview_options_item_selected(id:int)->void:
+	Settings.set_value(Settings.CARD_PREVIEW, _card_preview_options.get_item_id(id))
+
 
 func _shortcut_key_container_toggle_button_toggled(button_pressed):
 	_toggle_shortcut_key_container(button_pressed)
@@ -475,145 +506,3 @@ func _notification(what):
 	match what:
 		NOTIFICATION_TRANSLATION_CHANGED:
 			_update_tab()
-#	_set_values()
-#
-## -------------------------------------------------------------------------------------------------
-#func _set_values() -> void:
-#	var brush_size = Settings.get_value(Settings.GENERAL_DEFAULT_BRUSH_SIZE, Config.DEFAULT_BRUSH_SIZE)
-#	var brush_color = Settings.get_value(Settings.GENERAL_DEFAULT_BRUSH_COLOR, Config.DEFAULT_BRUSH_COLOR)
-#	var canvas_color = Settings.get_value(Settings.GENERAL_DEFAULT_CANVAS_COLOR, Config.DEFAULT_CANVAS_COLOR)
-#	var project_dir = Settings.get_value(Settings.GENERAL_DEFAULT_PROJECT_DIR, "")
-#	var theme = Settings.get_value(Settings.APPEARANCE_THEME, Types.UITheme.DARK)
-#	var aa_mode = Settings.get_value(Settings.RENDERING_AA_MODE, Config.DEFAULT_AA_MODE)
-#	var locale = Settings.get_value(Settings.GENERAL_LANGUAGE, "en")
-#	var foreground_fps = Settings.get_value(Settings.RENDERING_FOREGROUND_FPS, Config.DEFAULT_FOREGROUND_FPS)
-#	var background_fps = Settings.get_value(Settings.RENDERING_BACKGROUND_FPS, Config.DEFAULT_BACKGROUND_FPS)
-#	var pressure_sensitivity = Settings.get_value(Settings.GENERAL_PRESSURE_SENSITIVITY, Config.DEFAULT_PRESSURE_SENSITIVITY)
-#
-#	match theme:
-#		Types.UITheme.DARK: _theme.selected = THEME_DARK_INDEX
-#		Types.UITheme.LIGHT: _theme.selected = THEME_LIGHT_INDEX
-#	match aa_mode:
-#		Types.AAMode.NONE: _aa_mode.selected = AA_NONE_INDEX
-#		Types.AAMode.OPENGL_HINT: _aa_mode.selected = AA_OPENGL_HINT_INDEX
-#		Types.AAMode.TEXTURE_FILL: _aa_mode.selected = AA_TEXTURE_FILL_INDEX
-#
-#	_set_languages(locale)
-#	_set_rounding()
-#
-#	_pressure_sensitivity.value = pressure_sensitivity
-#	_brush_size.value = brush_size
-#	_brush_color.color = brush_color
-#	_canvas_color.color = canvas_color
-#	_project_dir.text = project_dir
-#	_foreground_fps.value = foreground_fps
-#	_background_fps.value = background_fps
-#
-#func _set_rounding():
-#	_brush_rounding_options.selected = Settings.get_value(Settings.RENDERING_BRUSH_ROUNDING, Config.DEFAULT_BRUSH_ROUNDING)
-#
-## -------------------------------------------------------------------------------------------------
-#func _set_languages(current_locale: String) -> void:
-#	# Technically, Settings.language_names is useless from here on out, but I figure it's probably gonna come in handy in the future
-#	var sorted_languages := Array(Settings.language_names)
-#	var unsorted_languages := sorted_languages.duplicate()
-#	# English appears at the top, so it mustn't be sorted alphabetically with the rest
-#	sorted_languages.erase("English")
-#	sorted_languages.sort()
-#
-#	# Add English before the rest + a separator so that it doesn't look weird for the alphabetical order to start after it
-#	_language_options.add_item("English", unsorted_languages.find("English"))
-#	_language_options.add_separator()
-#	for lang in sorted_languages:
-#		var id := unsorted_languages.find(lang)
-#		_language_options.add_item(lang, id)
-#
-#	# Set selected
-#	var id := Array(Settings.locales).find(current_locale)
-#	_language_options.selected = _language_options.get_item_index(id)
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_DefaultBrushSize_value_changed(value: int) -> void:
-#	Settings.set_value(Settings.GENERAL_DEFAULT_BRUSH_SIZE, int(value))
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_DefaultBrushColor_color_changed(color: Color) -> void:
-#	Settings.set_value(Settings.GENERAL_DEFAULT_BRUSH_COLOR, color)
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_DefaultCanvasColor_color_changed(color: Color) -> void:
-#	Settings.set_value(Settings.GENERAL_DEFAULT_CANVAS_COLOR, color)
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_PressureSensitivity_value_changed(value: float):
-#	Settings.set_value(Settings.GENERAL_PRESSURE_SENSITIVITY, value)
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_DefaultSaveDir_text_changed(text: String) -> void:
-#	text = text.replace("\\", "/")
-#
-#	var dir = Directory.new()
-#	if dir.dir_exists(text):
-#		Settings.set_value(Settings.GENERAL_DEFAULT_PROJECT_DIR, text)
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_Target_Fps_Foreground_changed(value: int) -> void:
-#	Settings.set_value(Settings.RENDERING_FOREGROUND_FPS, value)
-#
-#	# Settings FPS so user instantly Sees fps Change else fps only changes after unfocusing
-#	Engine.target_fps = value
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_Target_Fps_Background_changed(value: int) -> void:
-#	# Background Fps need to be a minimum of 5 so you can smoothly reopen the window
-#	Settings.set_value(Settings.RENDERING_BACKGROUND_FPS, value)
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_Theme_item_selected(index: int):
-#	var theme: int
-#	match index:
-#		THEME_DARK_INDEX: theme = Types.UITheme.DARK
-#		THEME_LIGHT_INDEX: theme = Types.UITheme.LIGHT
-#
-#	Settings.set_value(Settings.APPEARANCE_THEME, theme)
-#	_appearence_restart_label.show()
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_AntiAliasing_item_selected(index: int):
-#	var aa_mode: int
-#	match index:
-#		AA_NONE_INDEX: aa_mode = Types.AAMode.NONE
-#		AA_OPENGL_HINT_INDEX: aa_mode = Types.AAMode.OPENGL_HINT
-#		AA_TEXTURE_FILL_INDEX: aa_mode = Types.AAMode.TEXTURE_FILL
-#
-#	Settings.set_value(Settings.RENDERING_AA_MODE, aa_mode)
-#	_rendering_restart_label.show()
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_Brush_rounding_item_selected(index: int):
-#	match index:
-#		0:
-#			Settings.set_value(Settings.RENDERING_BRUSH_ROUNDING, Types.BrushRoundingType.FLAT)
-#		1:
-#			Settings.set_value(Settings.RENDERING_BRUSH_ROUNDING, Types.BrushRoundingType.ROUNDED)
-#
-#	# The Changes do work even without restarting but if the user doesn't restart old strokes remain
-#	# the same (Don't wanna implement saving of the cap roundings per line since that would break file
-#	# Compatibility)
-#	_general_restart_label.show()
-#
-## -------------------------------------------------------------------------------------------------
-#func _on_OptionButton_item_selected(idx: int):
-#	var id := _language_options.get_item_id(idx)
-#	var locale: String = Settings.locales[id]
-#
-#	Settings.set_value(Settings.GENERAL_LANGUAGE, locale)
-#	TranslationServer.set_locale(locale)
-#	_general_restart_label.show()
-
-
-
-
-
-
-

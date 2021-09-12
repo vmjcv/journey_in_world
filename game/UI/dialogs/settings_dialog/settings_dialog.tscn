@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/Themes/theme_dark.tres" type="Theme" id=1]
-[ext_resource path="res://UI/dialogs/settings_dialog.gd" type="Script" id=2]
-[ext_resource path="res://UI/dialogs/input_event_popup.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/dialogs/settings_dialog/settings_dialog.gd" type="Script" id=2]
+[ext_resource path="res://UI/dialogs/settings_dialog/input_event_popup.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sounds/test_beep.wav" type="AudioStream" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -296,6 +296,87 @@ margin_left = 420.0
 margin_right = 496.0
 margin_bottom = 40.0
 
+[node name="FacncyMovement" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 45.0
+margin_right = 496.0
+margin_bottom = 85.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/FacncyMovement"]
+margin_top = 11.0
+margin_right = 416.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "FANCY_MOVEMENT"
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/FacncyMovement"]
+margin_left = 420.0
+margin_right = 496.0
+margin_bottom = 40.0
+
+[node name="OvalHandShape" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 45.0
+margin_right = 496.0
+margin_bottom = 85.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/OvalHandShape"]
+margin_top = 11.0
+margin_right = 416.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "OVAL_HAND_SHAPE"
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/OvalHandShape"]
+margin_left = 420.0
+margin_right = 496.0
+margin_bottom = 40.0
+
+[node name="CardPreview" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 16.0
+margin_right = 496.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/CardPreview"]
+margin_top = 4.0
+margin_right = 246.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "CARD_PREVIEW"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/CardPreview"]
+margin_left = 250.0
+margin_right = 496.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Dark"
+items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
+selected = 0
+
+[node name="UseDebug" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
+margin_top = 45.0
+margin_right = 496.0
+margin_bottom = 85.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/UseDebug"]
+margin_top = 11.0
+margin_right = 416.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "USE_DEBUG"
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/UseDebug"]
+margin_left = 420.0
+margin_right = 496.0
+margin_bottom = 40.0
+
 [node name="ShortcutKey" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
 margin_top = 89.0
 margin_right = 496.0
@@ -532,6 +613,10 @@ custom_styles/separator = SubResource( 1 )
 [connection signal="item_selected" from="MarginContainer/TabContainer/Graphics/VBoxContainer/DisplayMode/OptionButton" to="." method="_on_diaplay_mode_options_item_selected"]
 [connection signal="item_selected" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed/OptionButton" to="." method="_on_game_speed_options_item_selected"]
 [connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/BattlePreview/CheckButton" to="." method="_on_battle_preview_checkbutton_toggled"]
+[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/FacncyMovement/CheckButton" to="." method="_on_fancy_movement_checkbutton_toggled"]
+[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/OvalHandShape/CheckButton" to="." method="_on_oval_hand_shape_checkbutton_toggled"]
+[connection signal="item_selected" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/CardPreview/OptionButton" to="." method="_on_card_preview_options_item_selected"]
+[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/UseDebug/CheckButton" to="." method="_on_use_debug_checkbutton_toggled"]
 [connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ToggleButton" to="." method="_shortcut_key_container_toggle_button_toggled"]
 [connection signal="pressed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ResetButton" to="." method="_shortcut_key_container_reset_button_toggled"]
 [connection signal="toggled" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/Use2d/CheckButton" to="." method="_on_use2d_checkbutton_toggled"]

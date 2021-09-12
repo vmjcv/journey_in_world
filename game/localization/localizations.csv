@@ -64,3 +64,10 @@ DISPLAY_MODE_BORDERLESS,无边框窗口,Borderless
 AUDIO_SFX,音效音量,Audio sfx
 AUDIO_MUSIC,音乐音量,Audio music
 AUDIO_MASTER,主音量,Audio master
+FANCY_MOVEMENT,花式移动,Fancy movement
+OVAL_HAND_SHAPE,椭圆形手牌,Oval hand shape
+CARD_PREVIEW,卡牌预览,Card preview
+USE_DEBUG,使用调试模式,Use debug
+CARD_PREVIEW_SCALING,缩放卡牌,Scaling card
+CARD_PREVIEW_VIEWPORT,额外界面显示,Use extra dialog
+CARD_PREVIEW_SCALING_VIEWPORT,缩放卡牌+额外界面显示,Scaling card and use extra dialog

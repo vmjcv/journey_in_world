@@ -23,3 +23,7 @@ const DISPLAY_MODE					:= Types.DisplayMode.BORDER
 const AUDIO_SFX						:= 50
 const AUDIO_MUSIC					:= 50
 const AUDIO_MASTER					:= 50
+const FANCY_MOVEMENT				:= true
+const OVAL_HAND_SHAPE				:= true
+const CARD_PREVIEW					:= Types.CardPreview.SCALING_VIEWPORT
+const USE_DEBUG						:= false
