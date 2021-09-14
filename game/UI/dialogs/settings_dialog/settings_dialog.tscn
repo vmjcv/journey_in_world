@@ -18,7 +18,6 @@
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="SettingsDialog" type="WindowDialog"]
-visible = true
 margin_right = 400.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 520, 350 )
@@ -64,8 +63,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [node name="Master" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 16.0
@@ -127,8 +126,8 @@ setting_index = 2
 margin_top = 79.0
 margin_right = 496.0
 margin_bottom = 91.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [node name="Graphics" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
@@ -146,8 +145,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [node name="ImageQuality" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_top = 16.0
@@ -214,8 +213,8 @@ setting_index = 5
 margin_top = 118.0
 margin_right = 496.0
 margin_bottom = 130.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [node name="GamePlay" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
@@ -235,8 +234,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [node name="GameSpeed" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
 margin_top = 16.0
@@ -405,8 +404,8 @@ text = "1111"
 margin_top = 383.0
 margin_right = 496.0
 margin_bottom = 395.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [node name="Popup" parent="MarginContainer/TabContainer/GamePlay" instance=ExtResource( 20 )]
 
@@ -426,8 +425,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [node name="Use2d" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_top = 16.0
@@ -503,8 +502,8 @@ setting_index = 15
 margin_top = 162.0
 margin_right = 496.0
 margin_bottom = 174.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [node name="Other" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
@@ -522,8 +521,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [node name="Language" type="HBoxContainer" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_top = 16.0
@@ -564,8 +563,8 @@ setting_index = 17
 margin_top = 89.0
 margin_right = 496.0
 margin_bottom = 101.0
-custom_styles/separator = SubResource( 1 )
 custom_constants/separation = 12
+custom_styles/separator = SubResource( 1 )
 
 [connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ToggleButton" to="MarginContainer/TabContainer/GamePlay" method="_shortcut_key_container_toggle_button_toggled"]
 [connection signal="pressed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ResetButton" to="MarginContainer/TabContainer/GamePlay" method="_shortcut_key_container_reset_button_toggled"]
