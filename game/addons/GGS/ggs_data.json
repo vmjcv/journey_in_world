@@ -1,0 +1,9 @@
+{
+	"default_logic_path": "res://systems/settings/logic/",
+	"auto_select_new_nodes": false,
+	"show_prints": true,
+	"show_errors": true,
+	"keybind_confirm_text": "Awaiting input...",
+	"keybind_assigned_text": "Already assigned...",
+	"use_cfg_save": true
+}

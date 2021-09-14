@@ -1,9 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://UI/Themes/theme_dark.tres" type="Theme" id=1]
-[ext_resource path="res://UI/dialogs/settings_dialog/settings_dialog.gd" type="Script" id=2]
-[ext_resource path="res://UI/dialogs/settings_dialog/input_event_popup.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sounds/test_beep.wav" type="AudioStream" id=4]
+[ext_resource path="res://UI/dialogs/settings_dialog/input_event_popup.tscn" type="PackedScene" id=20]
+[ext_resource path="res://UI/dialogs/settings_dialog/Language.gd" type="Script" id=21]
+[ext_resource path="res://UI/dialogs/settings_dialog/UserInterfaceSize.gd" type="Script" id=22]
+[ext_resource path="res://UI/dialogs/settings_dialog/CardPreview.gd" type="Script" id=23]
+[ext_resource path="res://UI/dialogs/settings_dialog/DisplayMode.gd" type="Script" id=24]
+[ext_resource path="res://UI/dialogs/settings_dialog/TabContainer.gd" type="Script" id=25]
+[ext_resource path="res://UI/dialogs/settings_dialog/ColorBlindnessMode.gd" type="Script" id=26]
+[ext_resource path="res://UI/dialogs/settings_dialog/Resolution.gd" type="Script" id=27]
+[ext_resource path="res://UI/dialogs/settings_dialog/GameSpeed.gd" type="Script" id=28]
+[ext_resource path="res://UI/dialogs/settings_dialog/GamePlay.gd" type="Script" id=29]
+[ext_resource path="res://addons/GGS/src/components/option_list/ggsOptionList.tscn" type="PackedScene" id=32]
+[ext_resource path="res://addons/GGS/src/components/slider/ggsSlider.tscn" type="PackedScene" id=33]
+[ext_resource path="res://addons/GGS/src/components/boolean/ggsBool.tscn" type="PackedScene" id=34]
+[ext_resource path="res://UI/Themes/theme_dark.tres" type="Theme" id=35]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -12,9 +22,8 @@ visible = true
 margin_right = 400.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 520, 350 )
-theme = ExtResource( 1 )
+theme = ExtResource( 35 )
 window_title = "SETTINGS_TITLE"
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -35,6 +44,7 @@ margin_left = 12.0
 margin_top = 12.0
 margin_right = 508.0
 margin_bottom = 338.0
+script = ExtResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -54,8 +64,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="Master" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 16.0
@@ -70,17 +80,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "AUDIO_MASTER"
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/TabContainer/Audio/VBoxContainer/Master"]
+[node name="ggsSlider" parent="MarginContainer/TabContainer/Audio/VBoxContainer/Master" instance=ExtResource( 33 )]
 margin_left = 396.0
 margin_right = 496.0
 margin_bottom = 12.0
-rect_min_size = Vector2( 100, 0 )
-step = 10.0
-value = 50.0
-ticks_on_borders = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/TabContainer/Audio/VBoxContainer/Master"]
-stream = ExtResource( 4 )
 
 [node name="Music" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 37.0
@@ -95,18 +98,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "AUDIO_MUSIC"
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/TabContainer/Audio/VBoxContainer/Music"]
+[node name="ggsSlider" parent="MarginContainer/TabContainer/Audio/VBoxContainer/Music" instance=ExtResource( 33 )]
 margin_left = 396.0
 margin_right = 496.0
 margin_bottom = 12.0
-rect_min_size = Vector2( 100, 0 )
-step = 10.0
-value = 50.0
-ticks_on_borders = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/TabContainer/Audio/VBoxContainer/Music"]
-stream = ExtResource( 4 )
-bus = "Music"
+setting_index = 1
 
 [node name="SFX" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 58.0
@@ -121,25 +117,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "AUDIO_SFX"
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/TabContainer/Audio/VBoxContainer/SFX"]
+[node name="ggsSlider" parent="MarginContainer/TabContainer/Audio/VBoxContainer/SFX" instance=ExtResource( 33 )]
 margin_left = 396.0
 margin_right = 496.0
 margin_bottom = 12.0
-rect_min_size = Vector2( 100, 0 )
-step = 10.0
-value = 50.0
-ticks_on_borders = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/TabContainer/Audio/VBoxContainer/SFX"]
-stream = ExtResource( 4 )
-bus = "SFX"
+setting_index = 2
 
 [node name="HSeparator5" type="HSeparator" parent="MarginContainer/TabContainer/Audio/VBoxContainer"]
 margin_top = 79.0
 margin_right = 496.0
 margin_bottom = 91.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="Graphics" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
@@ -157,8 +146,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="ImageQuality" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_top = 16.0
@@ -174,71 +163,67 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "IMAGE_QUALITY"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/ImageQuality"]
+[node name="ggsBool" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/ImageQuality" instance=ExtResource( 34 )]
 margin_left = 420.0
 margin_right = 496.0
-margin_bottom = 40.0
+setting_index = 3
 
 [node name="Resolution" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_top = 60.0
 margin_right = 496.0
 margin_bottom = 85.0
 size_flags_horizontal = 3
+script = ExtResource( 27 )
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/Resolution"]
 margin_top = 4.0
-margin_right = 246.0
+margin_right = 427.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "RESOLUTION"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/Resolution"]
-margin_left = 250.0
+[node name="ggsOptionList" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/Resolution" instance=ExtResource( 32 )]
+margin_left = 431.0
 margin_right = 496.0
 margin_bottom = 25.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Dark"
-items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
-selected = 0
+setting_index = 4
 
 [node name="DisplayMode" type="HBoxContainer" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_top = 89.0
 margin_right = 496.0
 margin_bottom = 114.0
 size_flags_horizontal = 3
+script = ExtResource( 24 )
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DisplayMode"]
 margin_top = 4.0
-margin_right = 246.0
+margin_right = 427.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "DISPLAY_MODE"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DisplayMode"]
-margin_left = 250.0
+[node name="ggsOptionList" parent="MarginContainer/TabContainer/Graphics/VBoxContainer/DisplayMode" instance=ExtResource( 32 )]
+margin_left = 431.0
 margin_right = 496.0
 margin_bottom = 25.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Dark"
-items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
-selected = 0
+setting_index = 5
 
 [node name="HSeparator5" type="HSeparator" parent="MarginContainer/TabContainer/Graphics/VBoxContainer"]
 margin_top = 118.0
 margin_right = 496.0
 margin_bottom = 130.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="GamePlay" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 27.0
+script = ExtResource( 29 )
+setting_index = 18
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/GamePlay"]
 anchor_right = 1.0
@@ -250,32 +235,29 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="GameSpeed" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
 margin_top = 16.0
 margin_right = 496.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
+script = ExtResource( 28 )
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed"]
 margin_top = 4.0
-margin_right = 246.0
+margin_right = 427.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "GAME_SPEED"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed"]
-margin_left = 250.0
+[node name="ggsOptionList" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed" instance=ExtResource( 32 )]
+margin_left = 431.0
 margin_right = 496.0
 margin_bottom = 25.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Dark"
-items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
-selected = 0
+setting_index = 6
 
 [node name="BattlePreview" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
 margin_top = 45.0
@@ -291,15 +273,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "BATTLE_PREVIEW"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/BattlePreview"]
+[node name="ggsBool" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/BattlePreview" instance=ExtResource( 34 )]
 margin_left = 420.0
 margin_right = 496.0
-margin_bottom = 40.0
+setting_index = 7
 
 [node name="FacncyMovement" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 45.0
+margin_top = 89.0
 margin_right = 496.0
-margin_bottom = 85.0
+margin_bottom = 129.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/FacncyMovement"]
@@ -310,15 +292,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "FANCY_MOVEMENT"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/FacncyMovement"]
+[node name="ggsBool" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/FacncyMovement" instance=ExtResource( 34 )]
 margin_left = 420.0
 margin_right = 496.0
-margin_bottom = 40.0
+setting_index = 8
 
 [node name="OvalHandShape" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 45.0
+margin_top = 133.0
 margin_right = 496.0
-margin_bottom = 85.0
+margin_bottom = 173.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/OvalHandShape"]
@@ -329,39 +311,36 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "OVAL_HAND_SHAPE"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/OvalHandShape"]
+[node name="ggsBool" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/OvalHandShape" instance=ExtResource( 34 )]
 margin_left = 420.0
 margin_right = 496.0
-margin_bottom = 40.0
+setting_index = 9
 
 [node name="CardPreview" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 16.0
+margin_top = 177.0
 margin_right = 496.0
-margin_bottom = 41.0
+margin_bottom = 202.0
 size_flags_horizontal = 3
+script = ExtResource( 23 )
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/CardPreview"]
 margin_top = 4.0
-margin_right = 246.0
+margin_right = 427.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "CARD_PREVIEW"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/CardPreview"]
-margin_left = 250.0
+[node name="ggsOptionList" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/CardPreview" instance=ExtResource( 32 )]
+margin_left = 431.0
 margin_right = 496.0
 margin_bottom = 25.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Dark"
-items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
-selected = 0
+setting_index = 10
 
 [node name="UseDebug" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 45.0
+margin_top = 206.0
 margin_right = 496.0
-margin_bottom = 85.0
+margin_bottom = 246.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/UseDebug"]
@@ -372,15 +351,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "USE_DEBUG"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/UseDebug"]
+[node name="ggsBool" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/UseDebug" instance=ExtResource( 34 )]
 margin_left = 420.0
 margin_right = 496.0
-margin_bottom = 40.0
+setting_index = 11
 
 [node name="ShortcutKey" type="HBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 89.0
+margin_top = 250.0
 margin_right = 496.0
-margin_bottom = 114.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 
 [node name="ToggleButton" type="Button" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey"]
@@ -406,9 +385,9 @@ margin_bottom = 25.0
 text = "RESET_SHORTCUT_KEY"
 
 [node name="ShortcutKeyContainer" type="ScrollContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 118.0
+margin_top = 279.0
 margin_right = 496.0
-margin_bottom = 218.0
+margin_bottom = 379.0
 rect_min_size = Vector2( 0, 100 )
 
 [node name="ShortcutKeyBoxList" type="VBoxContainer" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKeyContainer"]
@@ -423,13 +402,13 @@ margin_bottom = 17.0
 text = "1111"
 
 [node name="HSeparator5" type="HSeparator" parent="MarginContainer/TabContainer/GamePlay/VBoxContainer"]
-margin_top = 222.0
+margin_top = 383.0
 margin_right = 496.0
-margin_bottom = 234.0
-custom_constants/separation = 12
+margin_bottom = 395.0
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
-[node name="Popup" parent="MarginContainer/TabContainer/GamePlay" instance=ExtResource( 3 )]
+[node name="Popup" parent="MarginContainer/TabContainer/GamePlay" instance=ExtResource( 20 )]
 
 [node name="ExtraFeatures" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
@@ -447,8 +426,8 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="Use2d" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_top = 16.0
@@ -464,10 +443,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "USE_2D"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/Use2d"]
-margin_left = 420.0
-margin_right = 496.0
-margin_bottom = 40.0
+[node name="ggsBool" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/Use2d" instance=ExtResource( 34 )]
+setting_index = 12
 
 [node name="CameraShake" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_top = 60.0
@@ -483,16 +460,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "CAMERA_SHAKE"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/CameraShake"]
-margin_left = 420.0
-margin_right = 496.0
-margin_bottom = 40.0
+[node name="ggsBool" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/CameraShake" instance=ExtResource( 34 )]
+setting_index = 13
 
 [node name="ColorBlindnessMode" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_top = 104.0
 margin_right = 496.0
 margin_bottom = 129.0
 size_flags_horizontal = 3
+script = ExtResource( 26 )
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/ColorBlindnessMode"]
 margin_top = 4.0
@@ -502,21 +478,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "COLOR_BLINDNESS_MODE"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/ColorBlindnessMode"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 25.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Dark"
-items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
-selected = 0
+[node name="ggsOptionList" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/ColorBlindnessMode" instance=ExtResource( 32 )]
+setting_index = 14
 
 [node name="UserInterfaceSize" type="HBoxContainer" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_top = 133.0
 margin_right = 496.0
 margin_bottom = 158.0
 size_flags_horizontal = 3
+script = ExtResource( 22 )
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/UserInterfaceSize"]
 margin_top = 4.0
@@ -526,22 +496,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "USER_INTERFACE_SIZE"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/UserInterfaceSize"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 25.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Dark"
-items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
-selected = 0
+[node name="ggsOptionList" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/UserInterfaceSize" instance=ExtResource( 32 )]
+setting_index = 15
 
 [node name="HSeparator5" type="HSeparator" parent="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer"]
 margin_top = 162.0
 margin_right = 496.0
 margin_bottom = 174.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="Other" type="Control" parent="MarginContainer/TabContainer"]
 visible = false
@@ -559,14 +522,15 @@ __meta__ = {
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_right = 496.0
 margin_bottom = 12.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
 [node name="Language" type="HBoxContainer" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_top = 16.0
 margin_right = 496.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
+script = ExtResource( 21 )
 
 [node name="Label" type="Label" parent="MarginContainer/TabContainer/Other/VBoxContainer/Language"]
 margin_top = 4.0
@@ -576,11 +540,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "LANGUAGE"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Other/VBoxContainer/Language"]
-margin_left = 250.0
-margin_right = 496.0
-margin_bottom = 25.0
-size_flags_horizontal = 3
+[node name="ggsOptionList" parent="MarginContainer/TabContainer/Other/VBoxContainer/Language" instance=ExtResource( 32 )]
+setting_index = 16
 
 [node name="HidePlayerName" type="HBoxContainer" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_top = 45.0
@@ -596,32 +557,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "HIDE_PLAYER_NAME"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/TabContainer/Other/VBoxContainer/HidePlayerName"]
-margin_left = 420.0
-margin_right = 496.0
-margin_bottom = 40.0
+[node name="ggsBool" parent="MarginContainer/TabContainer/Other/VBoxContainer/HidePlayerName" instance=ExtResource( 34 )]
+setting_index = 17
 
 [node name="HSeparator4" type="HSeparator" parent="MarginContainer/TabContainer/Other/VBoxContainer"]
 margin_top = 89.0
 margin_right = 496.0
 margin_bottom = 101.0
-custom_constants/separation = 12
 custom_styles/separator = SubResource( 1 )
+custom_constants/separation = 12
 
-[connection signal="toggled" from="MarginContainer/TabContainer/Graphics/VBoxContainer/ImageQuality/CheckButton" to="." method="_on_image_quality_checkbutton_toggled"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/Graphics/VBoxContainer/Resolution/OptionButton" to="." method="_on_resolution_options_item_selected"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/Graphics/VBoxContainer/DisplayMode/OptionButton" to="." method="_on_diaplay_mode_options_item_selected"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/GameSpeed/OptionButton" to="." method="_on_game_speed_options_item_selected"]
-[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/BattlePreview/CheckButton" to="." method="_on_battle_preview_checkbutton_toggled"]
-[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/FacncyMovement/CheckButton" to="." method="_on_fancy_movement_checkbutton_toggled"]
-[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/OvalHandShape/CheckButton" to="." method="_on_oval_hand_shape_checkbutton_toggled"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/CardPreview/OptionButton" to="." method="_on_card_preview_options_item_selected"]
-[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/UseDebug/CheckButton" to="." method="_on_use_debug_checkbutton_toggled"]
-[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ToggleButton" to="." method="_shortcut_key_container_toggle_button_toggled"]
-[connection signal="pressed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ResetButton" to="." method="_shortcut_key_container_reset_button_toggled"]
-[connection signal="toggled" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/Use2d/CheckButton" to="." method="_on_use2d_checkbutton_toggled"]
-[connection signal="toggled" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/CameraShake/CheckButton" to="." method="_on_camera_shake_checkbutton_toggled"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/ColorBlindnessMode/OptionButton" to="." method="_on_color_blindness_mode_options_item_selected"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/ExtraFeatures/VBoxContainer/UserInterfaceSize/OptionButton" to="." method="_on_user_interface_size_options_item_selected"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/Other/VBoxContainer/Language/OptionButton" to="." method="_on_language_options_item_selected"]
-[connection signal="toggled" from="MarginContainer/TabContainer/Other/VBoxContainer/HidePlayerName/CheckButton" to="." method="_on_hide_player_name_checkbutton_toggled"]
+[connection signal="toggled" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ToggleButton" to="MarginContainer/TabContainer/GamePlay" method="_shortcut_key_container_toggle_button_toggled"]
+[connection signal="pressed" from="MarginContainer/TabContainer/GamePlay/VBoxContainer/ShortcutKey/ResetButton" to="MarginContainer/TabContainer/GamePlay" method="_shortcut_key_container_reset_button_toggled"]

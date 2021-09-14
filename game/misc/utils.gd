@@ -47,6 +47,15 @@ func get_size_from_resolution_enum(id):
 			window_size = Vector2(3840,2160)
 	return window_size
 
+func get_language_from_resolution_enum(id):
+	var language_name
+	match id:
+		Types.GameLanguage.EN:
+			language_name = "en"
+		Types.GameLanguage.ZH:
+			language_name = "zh"
+	return language_name
+
 
 func change_display_mode(id):
 	match id:
