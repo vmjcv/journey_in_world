@@ -1,0 +1,198 @@
+{
+	"0": {
+		"name": "audio_master",
+		"default": {
+			"value": 50,
+			"bus_name": "Master"
+		},
+		"current": {
+			"value": 0,
+			"bus_name": "Master"
+		},
+		"logic": "res://systems/settings/logic/audio_slider.gd"
+	},
+	"1": {
+		"name": "audio_music",
+		"default": {
+			"value": 50,
+			"bus_name": "Music"
+		},
+		"current": {
+			"value": 0.7,
+			"bus_name": "Music"
+		},
+		"logic": "res://systems/settings/logic/audio_slider.gd"
+	},
+	"2": {
+		"name": "audio_sfx",
+		"default": {
+			"value": 50,
+			"bus_name": "SFX"
+		},
+		"current": {
+			"value": 0.2,
+			"bus_name": "SFX"
+		},
+		"logic": "res://systems/settings/logic/audio_slider.gd"
+	},
+	"3": {
+		"name": "image_quality",
+		"default": {
+			"value": true
+		},
+		"current": {
+			"value": true
+		},
+		"logic": "res://systems/settings/logic/image_quality.gd"
+	},
+	"4": {
+		"name": "resolution",
+		"default": {
+			"value": 0
+		},
+		"current": {
+			"value": 0
+		},
+		"logic": "res://systems/settings/logic/resolution.gd"
+	},
+	"5": {
+		"name": "display_mode",
+		"default": {
+			"value": 0
+		},
+		"current": {
+			"value": 0
+		},
+		"logic": "res://systems/settings/logic/display_mode.gd"
+	},
+	"6": {
+		"name": "game_speed",
+		"default": {
+			"value": 0
+		},
+		"current": {
+			"value": 2
+		},
+		"logic": "res://systems/settings/logic/game_speed.gd"
+	},
+	"7": {
+		"name": "battle_preview",
+		"default": {
+			"value": true
+		},
+		"current": {
+			"value": true
+		},
+		"logic": "res://systems/settings/logic/battle_preview.gd"
+	},
+	"8": {
+		"name": "fancy_movement",
+		"default": {
+			"value": true
+		},
+		"current": {
+			"value": true
+		},
+		"logic": "res://systems/settings/logic/fancy_movement.gd"
+	},
+	"9": {
+		"name": "oval_hand_shape",
+		"default": {
+			"value": true
+		},
+		"current": {
+			"value": true
+		},
+		"logic": "res://systems/settings/logic/oval_hand_shape.gd"
+	},
+	"10": {
+		"name": "card_preview",
+		"default": {
+			"value": 0
+		},
+		"current": {
+			"value": 0
+		},
+		"logic": "res://systems/settings/logic/card_preview.gd"
+	},
+	"11": {
+		"name": "use_debug",
+		"default": {
+			"value": true
+		},
+		"current": {
+			"value": true
+		},
+		"logic": "res://systems/settings/logic/use_debug.gd"
+	},
+	"12": {
+		"name": "use_2d",
+		"default": {
+			"value": true
+		},
+		"current": {
+			"value": true
+		},
+		"logic": "res://systems/settings/logic/use_2d.gd"
+	},
+	"13": {
+		"name": "camera_shake",
+		"default": {
+			"value": true
+		},
+		"current": {
+			"value": true
+		},
+		"logic": "res://systems/settings/logic/camera_shake.gd"
+	},
+	"14": {
+		"name": "color_blindness_mode",
+		"default": {
+			"value": 0
+		},
+		"current": {
+			"value": 1
+		},
+		"logic": "res://systems/settings/logic/color_blindness_mode.gd"
+	},
+	"15": {
+		"name": "user_interface_size",
+		"default": {
+			"value": 0
+		},
+		"current": {
+			"value": 1
+		},
+		"logic": "res://systems/settings/logic/user_interface_size.gd"
+	},
+	"16": {
+		"name": "game_language",
+		"default": {
+			"value": 0
+		},
+		"current": {
+			"value": 1
+		},
+		"logic": "res://systems/settings/logic/game_language.gd"
+	},
+	"17": {
+		"name": "hide_player_name",
+		"default": {
+			"value": true
+		},
+		"current": {
+			"value": true
+		},
+		"logic": "res://systems/settings/logic/hide_player_name.gd"
+	},
+	"18": {
+		"name": "input_map",
+		"default": {
+			"value": "{}"
+		},
+		"current": {
+			"value": "{\"CancelUseCard\":[\"[InputEventKey:54]\",\"[InputEventKey:55]\"],\"Card1\":[\"[InputEventKey:46]\",\"[InputEventKey:2933]\"],\"Card2\":[\"[InputEventKey:47]\"],\"Card3\":[\"[InputEventKey:48]\"],\"Card4\":[\"[InputEventKey:49]\"],\"Card5\":[\"[InputEventKey:50]\"],\"Down\":[\"[InputEventKey:63]\",\"[InputEventKey:64]\"],\"Left\":[\"[InputEventKey:57]\",\"[InputEventKey:58]\"],\"Right\":[\"[InputEventKey:59]\",\"[InputEventKey:60]\"],\"Setting\":[\"[InputEventKey:56]\"],\"ShowCards\":[\"[InputEventKey:65]\"],\"ShowDiscardCards\":[\"[InputEventKey:67]\"],\"ShowDrawCards\":[\"[InputEventKey:66]\"],\"ShowMap\":[\"[InputEventKey:69]\"],\"ShowShortcutKey\":[\"[InputEventKey:68]\"],\"ToggleGameSpeed\":[\"[InputEventKey:51]\"],\"Up\":[\"[InputEventKey:61]\",\"[InputEventKey:62]\"],\"UseCard\":[\"[InputEventKey:52]\",\"[InputEventKey:53]\"]}"
+		},
+		"logic": "res://systems/settings/logic/input_map.gd"
+	}
+}

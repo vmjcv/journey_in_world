@@ -6,6 +6,11 @@ enum ColorBlindnessMode {
 	GREEN,
 }
 
+enum GameLanguage {
+	EN,
+	ZH,
+}
+
 enum UserInterfaceSize {
 	DEFAULT,
 	BIG,

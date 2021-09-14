@@ -14,30 +14,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/appender.gd"
 }, {
-"base": "Reference",
-"class": "Array2D",
+"base": "LineEdit",
+"class": "BaseInput",
 "language": "GDScript",
-"path": "res://addons/godot-next/references/array_2d.gd"
+"path": "res://addons/GGS/src/base_classes/base_input.gd"
 }, {
-"base": "Resource",
-"class": "ArrayMap",
+"base": "HBoxContainer",
+"class": "BaseOptionsContainer",
 "language": "GDScript",
-"path": "res://addons/godot-next/resources/array_map.gd"
-}, {
-"base": "Resource",
-"class": "Behavior",
-"language": "GDScript",
-"path": "res://addons/godot-next/resources/behavior.gd"
-}, {
-"base": "Reference",
-"class": "BitFlag",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/bit_flag.gd"
-}, {
-"base": "Reference",
-"class": "Bitset",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/bitset.gd"
+"path": "res://UI/dialogs/settings_dialog/BaseOptionsContainer.gd"
 }, {
 "base": "Control",
 "class": "Board",
@@ -73,16 +58,6 @@ _global_script_classes=[ {
 "class": "CSVEditor",
 "language": "GDScript",
 "path": "res://addons/file-editor/scripts/CSVEditor.gd"
-}, {
-"base": "Reference",
-"class": "CSVFile",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/csv_file.gd"
-}, {
-"base": "Node",
-"class": "CallbackDelegator",
-"language": "GDScript",
-"path": "res://addons/godot-next/nodes/callback_delegator.gd"
 }, {
 "base": "Area2D",
 "class": "Card",
@@ -120,11 +95,6 @@ _global_script_classes=[ {
 "path": "res://UI/dialogs/battle_dialog/core/Card/CardFront.gd"
 }, {
 "base": "Reference",
-"class": "ClassType",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/class_type.gd"
-}, {
-"base": "Reference",
 "class": "Config",
 "language": "GDScript",
 "path": "res://misc/config.gd"
@@ -139,45 +109,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://UI/dialogs/battle_dialog/custom/cards/CustomScripts.gd"
 }, {
-"base": "TabContainer",
-"class": "Cycle",
-"language": "GDScript",
-"path": "res://addons/godot-next/gui/cycle.gd"
-}, {
-"base": "Label",
-"class": "DebugLabel",
-"language": "GDScript",
-"path": "res://addons/godot-next/gui/debug_label.gd"
-}, {
-"base": "ImageTexture",
-"class": "DiscreteGradientTexture",
-"language": "GDScript",
-"path": "res://addons/godot-next/resources/discrete_gradient_texture.gd"
-}, {
-"base": "Reference",
-"class": "EditorTools",
-"language": "GDScript",
-"path": "res://addons/godot-next/global/editor_tools.gd"
-}, {
 "base": "Appender",
 "class": "FileAppender",
 "language": "GDScript",
 "path": "res://addons/gs_logger/appenders/file_appender.gd"
 }, {
-"base": "Reference",
-"class": "FileSearch",
+"base": "Node",
+"class": "GGSUtils",
 "language": "GDScript",
-"path": "res://addons/godot-next/global/file_search.gd"
-}, {
-"base": "Reference",
-"class": "FileSystemLink",
-"language": "GDScript",
-"path": "res://addons/godot-next/global/file_system_link.gd"
-}, {
-"base": "CollisionShape2D",
-"class": "Geometry2D",
-"language": "GDScript",
-"path": "res://addons/godot-next/2d/geometry_2d.gd"
+"path": "res://addons/GGS/src/utils.gd"
 }, {
 "base": "HTTPRequest",
 "class": "GoogleTranslateAPI",
@@ -200,19 +140,9 @@ _global_script_classes=[ {
 "path": "res://addons/gs_logger/layouts/html_layout.gd"
 }, {
 "base": "Reference",
-"class": "Icons",
+"class": "JSONBeautifier",
 "language": "GDScript",
-"path": "res://addons/godot-next/singletons/icons.gd"
-}, {
-"base": "Reference",
-"class": "Inflector",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/inflector.gd"
-}, {
-"base": "Reference",
-"class": "InspectorControls",
-"language": "GDScript",
-"path": "res://addons/godot-next/global/inspector_controls.gd"
+"path": "res://addons/GGS/_depedencies/json_beautifier/json_beautifier.gd"
 }, {
 "base": "Reference",
 "class": "Layout",
@@ -274,16 +204,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/message.gd"
 }, {
-"base": "Reference",
-"class": "MessageDispatcher",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/message_dispatcher.gd"
-}, {
-"base": "Node",
-"class": "MessageDispatcherWrapper",
-"language": "GDScript",
-"path": "res://addons/godot-next/nodes/message_dispatcher_wrapper.gd"
-}, {
 "base": "Area2D",
 "class": "MousePointer",
 "language": "GDScript",
@@ -294,45 +214,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/layouts/pattern_layout.gd"
 }, {
-"base": "Resource",
-"class": "PhysicsLayers",
-"language": "GDScript",
-"path": "res://addons/godot-next/global/physics_layers.gd"
-}, {
 "base": "CardContainer",
 "class": "Pile",
 "language": "GDScript",
 "path": "res://UI/dialogs/battle_dialog/core/Pile.gd"
-}, {
-"base": "Reference",
-"class": "ProjectTools",
-"language": "GDScript",
-"path": "res://addons/godot-next/global/project_tools.gd"
-}, {
-"base": "Reference",
-"class": "PropertyInfo",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/property_info.gd"
-}, {
-"base": "Reference",
-"class": "PropertyInfoFactory",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/property_info_factory.gd"
-}, {
-"base": "ResourceCollection",
-"class": "ResourceArray",
-"language": "GDScript",
-"path": "res://addons/godot-next/resources/resource_collections/resource_array.gd"
-}, {
-"base": "Resource",
-"class": "ResourceCollection",
-"language": "GDScript",
-"path": "res://addons/godot-next/resources/resource_collections/resource_collection.gd"
-}, {
-"base": "ResourceCollection",
-"class": "ResourceSet",
-"language": "GDScript",
-"path": "res://addons/godot-next/resources/resource_collections/resource_set.gd"
 }, {
 "base": "Reference",
 "class": "SP",
@@ -359,11 +244,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://UI/dialogs/battle_dialog/core/ScriptingEngine.gd"
 }, {
-"base": "Reference",
-"class": "Singletons",
-"language": "GDScript",
-"path": "res://addons/godot-next/global/singletons.gd"
-}, {
 "base": "Line2D",
 "class": "TargetingArrow",
 "language": "GDScript",
@@ -379,46 +259,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://UI/dialogs/battle_dialog/core/Card/TokenDrawer.gd"
 }, {
-"base": "Line2D",
-"class": "Trail2D",
-"language": "GDScript",
-"path": "res://addons/godot-next/2d/trail_2d.gd"
-}, {
-"base": "ImmediateGeometry",
-"class": "Trail3D",
-"language": "GDScript",
-"path": "res://addons/godot-next/3d/trail_3d.gd"
-}, {
-"base": "Reference",
-"class": "TweenSequence",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/tween_sequence/tween_sequence.gd"
-}, {
-"base": "Reference",
-"class": "Tweener",
-"language": "GDScript",
-"path": "res://addons/godot-next/references/tween_sequence/tweener.gd"
-}, {
-"base": "VBoxContainer",
-"class": "VBoxItemList",
-"language": "GDScript",
-"path": "res://addons/godot-next/gui/v_box_item_list.gd"
-}, {
-"base": "Reference",
-"class": "Variant",
-"language": "GDScript",
-"path": "res://addons/godot-next/global/variant.gd"
-}, {
-"base": "Node",
-"class": "VectorDisplay2D",
-"language": "GDScript",
-"path": "res://addons/godot-next/2d/vector_display_2d.gd"
-}, {
-"base": "Node",
-"class": "VectorDisplay3D",
-"language": "GDScript",
-"path": "res://addons/godot-next/3d/vector_display_3d.gd"
-}, {
 "base": "Node2D",
 "class": "ViewportCardFocus",
 "language": "GDScript",
@@ -426,11 +266,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Appender": "",
-"Array2D": "",
-"ArrayMap": "",
-"Behavior": "",
-"BitFlag": "",
-"Bitset": "",
+"BaseInput": "",
+"BaseOptionsContainer": "",
 "Board": "",
 "BoardPlacementGrid": "",
 "BoardPlacementSlot": "",
@@ -438,8 +275,6 @@ _global_script_class_icons={
 "CFControl": "",
 "CFUtils": "",
 "CSVEditor": "",
-"CSVFile": "",
-"CallbackDelegator": "",
 "Card": "",
 "CardBack": "",
 "CardBackGlow": "",
@@ -447,25 +282,16 @@ _global_script_class_icons={
 "CardConfig": "",
 "CardContainer": "",
 "CardFront": "",
-"ClassType": "",
 "Config": "",
 "ConsoleAppender": "",
 "CustomScripts": "",
-"Cycle": "res://addons/godot-next/icons/icon_cycle.svg",
-"DebugLabel": "",
-"DiscreteGradientTexture": "",
-"EditorTools": "",
 "FileAppender": "",
-"FileSearch": "",
-"FileSystemLink": "",
-"Geometry2D": "res://addons/godot-next/icons/icon_geometry_2d.svg",
+"GGSUtils": "",
 "GoogleTranslateAPI": "",
 "Hand": "",
 "Highlight": "",
 "HtmlLayout": "",
-"Icons": "",
-"Inflector": "",
-"InspectorControls": "",
+"JSONBeautifier": "",
 "Layout": "",
 "LocalizationData": "",
 "LocalizationKeys": "",
@@ -478,35 +304,17 @@ _global_script_class_icons={
 "LongClickButton": "",
 "ManipulationButtons": "",
 "Message": "",
-"MessageDispatcher": "",
-"MessageDispatcherWrapper": "",
 "MousePointer": "",
 "PatternLayout": "",
-"PhysicsLayers": "",
 "Pile": "",
-"ProjectTools": "",
-"PropertyInfo": "",
-"PropertyInfoFactory": "",
-"ResourceArray": "",
-"ResourceCollection": "",
-"ResourceSet": "",
 "SP": "",
 "ScriptObject": "",
 "ScriptPer": "",
 "ScriptTask": "",
 "ScriptingEngine": "",
-"Singletons": "",
 "TargetingArrow": "",
 "Token": "",
 "TokenDrawer": "",
-"Trail2D": "res://addons/godot-next/icons/icon_trail_2d.svg",
-"Trail3D": "res://addons/godot-next/icons/icon_trail_3d.svg",
-"TweenSequence": "",
-"Tweener": "",
-"VBoxItemList": "res://addons/godot-next/icons/icon_v_box_item_list.svg",
-"Variant": "",
-"VectorDisplay2D": "",
-"VectorDisplay3D": "",
 "ViewportCardFocus": ""
 }
 
@@ -525,6 +333,7 @@ Types="*res://misc/types.gd"
 Settings="*res://misc/settings.gd"
 Game="*res://misc/game.gd"
 cfc="*res://UI/dialogs/battle_dialog/core/CFControl.gd"
+ggsManager="*res://addons/GGS/src/ggs_manager.gd"
 
 [display]
 
@@ -536,109 +345,109 @@ window/size/test_height=810
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/FileSystemView/plugin.cfg", "res://addons/LongClickButton/plugin.cfg", "res://addons/file-editor/plugin.cfg", "res://addons/godot-next/plugin.cfg", "res://addons/gs_logger/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/FileSystemView/plugin.cfg", "res://addons/GGS/plugin.cfg", "res://addons/LongClickButton/plugin.cfg", "res://addons/file-editor/plugin.cfg", "res://addons/gs_logger/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg" )
 
 [input]
 
 ui_end={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777230,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777230,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card1={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card2={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card3={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card4={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card5={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":53,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":53,"unicode":0,"echo":false,"script":null)
  ]
 }
 ToggleGameSpeed={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":78,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":78,"unicode":0,"echo":false,"script":null)
  ]
 }
 UseCard={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
  ]
 }
 CancelUseCard={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777220,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777220,"unicode":0,"echo":false,"script":null)
  ]
 }
 Setting={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
  ]
 }
 Left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
  ]
 }
 Right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
  ]
 }
 Up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
 Down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowCards={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowDrawCards={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowDiscardCards={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowShortcutKey={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowMap={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"unicode":0,"echo":false,"script":null)
  ]
 }
 
