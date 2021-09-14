@@ -1,0 +1,73 @@
+keys,zh,en
+ABOUT_DIALOG_TITLE,相关,About
+ABOUT_DIALOG_COPYRIGHT,© 2021 vmjcv666 <vmjcv666@gmail.com>,© 2021 vmjcv666 <vmjcv666@gmail.com>
+ABOUT_DIALOG_LICSENSE,山海游记的许可证为：,journey_in_world is licensed under:
+ABOUT_DIALOG_BASED_ON,山海游记的构建引擎为：,journey_in_world is based on:
+GAME_TITLE,山海游记,journey_in_world
+ABOUT_DIALOG_SET_IN,图标图集为：,Icon set:
+EXIT_DIALOG_TITLE,退出游戏,exit the game
+EXIT_DIALOG_TEXT,您真的要结束这次冒险吗？,Are you really going to end this adventure?
+EXIT,退出,exit
+CANCEL,返回,cancel
+AUDIO,音频,Audio
+GRAPHICS,图像,Graphics
+GAME_PLAY,游戏玩法,Game play
+EXTRA_FEATURES,辅助功能,Extra feautres
+OTHER,其他,Other
+LANGUAGE,语言,Language
+SETTING_LANGUAGE_ZH,中文,中文
+SETTING_LANGUAGE_EN,Engilsh,Engilsh
+HIDE_PLAYER_NAME,隐藏玩家名字,Hide player name
+USE_2D,使用2d战斗,Just use 2d render
+CAMERA_SHAKE,镜头抖动,Camera shake
+COLOR_BLINDNESS_MODE,色盲模式,Color blindness mode
+USER_INTERFACE_SIZE,用户界面大小,User interface size
+COLOR_BLINDNESS_MODE_DEFAULT,默认,Default
+COLOR_BLINDNESS_MODE_GREEN,绿色色盲模式,Green
+USER_INTERFACE_SIZE_DEFAULT,默认,Default
+USER_INTERFACE_SIZE_BIG,大面板,Big UI
+GAME_SPEED_DEFAULT,普通,Default speed
+GAME_SPEED_SMALL,快速,Fast speed
+GAME_SPEED_MIDDLE,超快,Super fast speed
+GAME_SPEED_BIG,极快,Extremely fast speed
+GAME_SPEED,游戏速度,Game speed
+BATTLE_PREVIEW,战斗预览,Battle preview
+SHORTCUT_KEY,快捷键,Shortcut key
+OPEN_OR_CLOSE,展开/折叠,Open/Close
+RESET_SHORTCUT_KEY,还原默认快捷键,Reset default
+CARD1,卡牌1,Card1
+CARD2,卡牌2,Card2
+CARD3,卡牌3,Card3
+CARD4,卡牌4,Card4
+CARD5,卡牌5,Card5
+TOGGLE_GAME_SPEED,切换游戏速度,Toggle game speed
+USE_CARD,使用卡牌,Use card
+CANCEL_USE_CARD,取消卡牌使用,Cancel use card
+SETTING,显示设置界面,Show setting panel
+LEFT,左移,Left
+RIGHT,右移,Right
+UP,上移,Up
+DOWN,下移,Down
+SHOW_CARDS,显示牌组,Show cards
+SHOW_DRAW_CARDS,显示抽牌堆,Show draw cards
+SHOW_DISCARD_CARDS,显示弃牌堆,Show discard cards
+SHOW_SHORTCUT_KEY,显示快捷键,Show shortcutkey
+SHOW_MAP,显示地图,Show map
+ADD_NEW_CONTROLS,增加新的控制方式,Add new controls
+KEY_BOARD,键位,Keyboard
+IMAGE_QUALITY,图片质量,Image quality
+RESOLUTION,分辨率,Resolution
+DISPLAY_MODE,显示模式,Display mode
+DISPLAY_MODE_BORDER,窗口模式,Border
+DISPLAY_MODE_FULLSCREEN,全屏模式,Fullscreen
+DISPLAY_MODE_BORDERLESS,无边框窗口,Borderless
+AUDIO_SFX,音效音量,Audio sfx
+AUDIO_MUSIC,音乐音量,Audio music
+AUDIO_MASTER,主音量,Audio master
+FANCY_MOVEMENT,花式移动,Fancy movement
+OVAL_HAND_SHAPE,椭圆形手牌,Oval hand shape
+CARD_PREVIEW,卡牌预览,Card preview
+USE_DEBUG,使用调试模式,Use debug
+CARD_PREVIEW_SCALING,缩放卡牌,Scaling card
+CARD_PREVIEW_VIEWPORT,额外界面显示,Use extra dialog
+CARD_PREVIEW_SCALING_VIEWPORT,缩放卡牌+额外界面显示,Scaling card and use extra dialog
