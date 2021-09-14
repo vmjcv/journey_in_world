@@ -7,8 +7,9 @@ onready var _shortcut_key_container: ScrollContainer = $VBoxContainer/ShortcutKe
 onready var _shortcut_key_box_list: VBoxContainer = $VBoxContainer/ShortcutKeyContainer/ShortcutKeyBoxList
 onready var _shortcut_key_pop_up: Popup = $Popup
 
-var _action_bind:PackedScene = preload("res://UI/dialogs/settings_dialog/action_node.tscn")
-var _control_bind:PackedScene = preload("res://UI/dialogs/settings_dialog/control_node.tscn")
+
+var _action_bind:PackedScene = preload("res://UI/dialogs/settings_dialog/ActionNode.tscn")
+var _control_bind:PackedScene = preload("res://UI/dialogs/settings_dialog/ControlNode.tscn")
 var action_nodes = {}
 
 export(int, 0, 99) var setting_index: int # 共用18的input_map,如果插件逻辑更改可能需要调整结构
