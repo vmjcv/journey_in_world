@@ -79,8 +79,11 @@ func _on_Debug_toggled(button_pressed: bool) -> void:
 func load_test_cards(extras := 0) -> void:
 	"Test Card 1"
 	var test_cards := []
-	for i in range(5):
+	for i in range(3):
 		test_cards.append("Test Card 1")
+		test_cards.append("Test Card 2")
+		test_cards.append("Test Card 3")
+		test_cards.append("Multiple Choices Test Card")
 #	for ckey in cfc.card_definitions.keys():
 #		test_cards.append(ckey)
 	var test_card_array := []
@@ -99,4 +102,3 @@ func load_test_cards(extras := 0) -> void:
 		#card.set_is_faceup(false,true)
 		card._determine_idle_state()
 		allCards.append(card) # Just keeping track of all the instanced card objects for demo purposes
-
