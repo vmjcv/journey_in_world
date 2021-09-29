@@ -60,7 +60,7 @@ const EXPLANATIONS = {
 
 # Creates the format dictionary to convert strings pointing to amounts
 # text in the card abilities, into rich text numbers.
-static func get_amounts_format(properties_dict: Dictionary) -> Dictionary:
+static func get_amounts_format(properties_dict: Dictionary) -> Dictionary: 
 	var amounts_format = properties_dict.get("_amounts", {}).duplicate(true)
 	for amount in amounts_format:
 		amounts_format[amount] = "[color=yellow]" + str(amounts_format[amount]) + "[/color]"

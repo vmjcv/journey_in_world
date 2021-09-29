@@ -30,15 +30,16 @@ onready var _pathos_button := $HBC/Pathos
 onready var _artifacts := $HBC/Artifacts
 
 func _ready() -> void:
-	for entry in globals.player.pathos.repressed:
-		var pinfo = PATHOS_INFO_SCENE.instance()
-		_pathos_details_list.add_child(pinfo)
-		pathos_infos[entry] = pinfo
-		pinfo.setup(entry)
+	if globals.player.pathos:
+		for entry in globals.player.pathos.repressed:
+			var pinfo = PATHOS_INFO_SCENE.instance()
+			_pathos_details_list.add_child(pinfo)
+			pathos_infos[entry] = pinfo
+			pinfo.setup(entry)
 	globals.player.connect("artifact_added", self, "_on_artifact_added")
 	_init_artifacts()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_update_health_label()
 	_update_encounter_label()
 	_update_deck_count()
@@ -114,6 +115,7 @@ func _on_artifact_added(artifact_object: ArtifactObject) -> void:
 	_instance_artifact(artifact_object, true)
 
 
+# Instances and adds the artifact objects to this node
 func _init_artifacts() -> void:
 	for artifact_object in globals.player.artifacts:
 		_instance_artifact(artifact_object)
@@ -126,3 +128,4 @@ func _instance_artifact(artifact_object: ArtifactObject, new_addition := false) 
 		artifact_active = true
 	new_artifact.setup_artifact(artifact_object, artifact_active, new_addition)
 	_artifacts.add_child(new_artifact)
+

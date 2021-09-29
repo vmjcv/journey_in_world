@@ -13,16 +13,15 @@ var repressed := {
 
 var progressions := {
 	Terms.RUN_ACCUMULATION_NAMES.enemy: range(11,20),
-	Terms.RUN_ACCUMULATION_NAMES.rest: range(5,10),
+	Terms.RUN_ACCUMULATION_NAMES.rest: range(4,9),
 	Terms.RUN_ACCUMULATION_NAMES.shop: range(2,4),
+	Terms.RUN_ACCUMULATION_NAMES.artifact: range(2,3),
 # These arem temporarily disabled while I don't have any.
 # Will be activated once populated
 #	Terms.RUN_ACCUMULATION_NAMES.elite: range(5,10),
-#	Terms.RUN_ACCUMULATION_NAMES.artifact: range(2,3),
 #	Terms.RUN_ACCUMULATION_NAMES.nce: range(7,11),
 	Terms.RUN_ACCUMULATION_NAMES.nce: [0],
 	Terms.RUN_ACCUMULATION_NAMES.elite: [0],
-	Terms.RUN_ACCUMULATION_NAMES.artifact: [0],
 	Terms.RUN_ACCUMULATION_NAMES.boss: range(6,7),
 }
 
