@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/cfc/src/dreamscape/Counters.gd" type="Script" id=1]
+[ext_resource path="res://addons/cfc/src/dreamscape/Counter.tscn" type="PackedScene" id=2]
+
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="Counters" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+counter_scene = ExtResource( 2 )
+
+[node name="VBC" type="VBoxContainer" parent="."]
+margin_right = 14.0
+margin_bottom = 14.0
+
+[node name="DescriptionPanel" type="PopupPanel" parent="."]
+margin_right = 8.0
+margin_bottom = 8.0
+
+[node name="Label" type="Label" parent="DescriptionPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 18.0

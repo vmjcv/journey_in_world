@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/shrug.png-8d5c50e6ed8a225272d918ae969133fc.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://addons/cfc/assets/icons/shrug.png"
+dest_files=[ "res://.import/shrug.png-8d5c50e6ed8a225272d918ae969133fc.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

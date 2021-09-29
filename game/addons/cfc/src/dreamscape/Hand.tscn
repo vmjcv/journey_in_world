@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/cfc/src/core/Hand.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/cfc/src/dreamscape/Hand.gd" type="Script" id=3]
+
+
+[node name="Hand" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+placement = 7
+excess_discard_pile_name = "discard"
+excess_cards = 2
+
+[node name="Shuffle" parent="Control/ManipulationButtons" index="0"]
+visible = false

@@ -1,0 +1,433 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://addons/cfc/src/dreamscape/Discard.gd" type="Script" id=1]
+[ext_resource path="res://addons/cfc/src/core/Pile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/cfc/src/dreamscape/Hand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/cfc/src/dreamscape/Deck.gd" type="Script" id=4]
+[ext_resource path="res://addons/cfc/src/dreamscape/Board.gd" type="Script" id=5]
+[ext_resource path="res://addons/cfc/src/dreamscape/Counters.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/cfc/src/dreamscape/PlayerInfo.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/cfc/assets/card_backs/TCG_vol12_back.png" type="Texture" id=8]
+[ext_resource path="res://addons/cfc/assets/backgrounds/tint.png" type="Texture" id=9]
+[ext_resource path="res://addons/cfc/themes/darktheme/darktheme.theme" type="Theme" id=12]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 1500, 2100 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 1 )
+
+[node name="Board" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 1700.0
+margin_bottom = 900.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundTint" type="TextureRect" parent="."]
+visible = false
+margin_right = 1700.0
+margin_bottom = 900.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBC" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerInfo" parent="VBC" instance=ExtResource( 7 )]
+margin_right = 1920.0
+context = 1
+
+[node name="CombatArena" type="HBoxContainer" parent="VBC"]
+margin_top = 53.0
+margin_right = 1920.0
+margin_bottom = 758.0
+mouse_filter = 2
+size_flags_vertical = 3
+theme = ExtResource( 12 )
+
+[node name="PlayerArea" type="CenterContainer" parent="VBC/CombatArena"]
+margin_right = 300.0
+margin_bottom = 705.0
+rect_min_size = Vector2( 300, 0 )
+mouse_filter = 2
+
+[node name="EnemyArea" type="CenterContainer" parent="VBC/CombatArena"]
+margin_left = 303.0
+margin_right = 1920.0
+margin_bottom = 705.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="Enemies" type="HBoxContainer" parent="VBC/CombatArena/EnemyArea"]
+margin_left = 808.0
+margin_top = 352.0
+margin_right = 808.0
+margin_bottom = 352.0
+mouse_filter = 2
+custom_constants/separation = 150
+
+[node name="HBC" type="HBoxContainer" parent="VBC"]
+margin_top = 762.0
+margin_right = 1920.0
+margin_bottom = 790.0
+theme = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Counters" parent="VBC/HBC" instance=ExtResource( 6 )]
+margin_right = 0.0
+margin_bottom = 28.0
+
+[node name="Push" type="Control" parent="VBC/HBC"]
+margin_left = 3.0
+margin_right = 1772.0
+margin_bottom = 28.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="EndTurn" type="Button" parent="VBC/HBC"]
+margin_left = 1775.0
+margin_right = 1857.0
+margin_bottom = 28.0
+disabled = true
+text = "End Turn"
+
+[node name="Margin" type="MarginContainer" parent="VBC/HBC"]
+margin_left = 1860.0
+margin_right = 1920.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 60, 0 )
+
+[node name="HandArea" type="MarginContainer" parent="VBC"]
+margin_top = 794.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 0, 280 )
+mouse_filter = 2
+theme = ExtResource( 12 )
+
+[node name="HBC" type="HBoxContainer" parent="VBC/HandArea"]
+margin_right = 1920.0
+margin_bottom = 286.0
+mouse_filter = 2
+
+[node name="DeckControl" type="MarginContainer" parent="VBC/HandArea/HBC"]
+margin_right = 130.0
+margin_bottom = 286.0
+rect_min_size = Vector2( 100, 140 )
+mouse_filter = 2
+custom_constants/margin_right = 15
+custom_constants/margin_left = 15
+
+[node name="VBC" type="VBoxContainer" parent="VBC/HandArea/HBC/DeckControl"]
+margin_left = 15.0
+margin_right = 115.0
+margin_bottom = 286.0
+mouse_filter = 2
+
+[node name="Push" type="Control" parent="VBC/HandArea/HBC/DeckControl/VBC"]
+margin_right = 100.0
+margin_bottom = 70.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="VBC/HandArea/HBC/DeckControl/VBC"]
+margin_top = 73.0
+margin_right = 100.0
+margin_bottom = 213.0
+rect_min_size = Vector2( 100, 140 )
+mouse_filter = 2
+
+[node name="Deck" parent="VBC/HandArea/HBC/DeckControl/VBC/Control" instance=ExtResource( 2 )]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 4 )
+
+[node name="Control" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck" index="0"]
+custom_styles/panel = SubResource( 1 )
+
+[node name="VBoxContainer" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Control/CenterContainer" index="0"]
+margin_right = 68.0
+margin_bottom = 109.0
+
+[node name="Label" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Control/CenterContainer/VBoxContainer" index="0"]
+margin_right = 68.0
+
+[node name="PanelContainer" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Control/CenterContainer/VBoxContainer" index="1"]
+margin_top = 32.0
+margin_right = 68.0
+margin_bottom = 61.0
+
+[node name="CenterContainer" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Control/CenterContainer/VBoxContainer/PanelContainer" index="0"]
+margin_right = 68.0
+
+[node name="CardCount" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Control/CenterContainer/VBoxContainer/PanelContainer/CenterContainer" index="0"]
+margin_right = 45.0
+
+[node name="ManipulationButtons" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Control" index="2"]
+visible = false
+
+[node name="View" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Control/ManipulationButtons" index="0"]
+margin_right = 26.0
+margin_bottom = 27.0
+
+[node name="ViewSorted" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Control/ManipulationButtons" index="1"]
+margin_top = 30.0
+margin_right = 26.0
+margin_bottom = 57.0
+
+[node name="Shuffle" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Control/ManipulationButtons" index="2"]
+margin_top = 60.0
+margin_right = 26.0
+margin_bottom = 87.0
+
+[node name="CardView" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/ViewPopup" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 6.0
+margin_bottom = 6.0
+
+[node name="Position" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Debug" index="0"]
+margin_bottom = 24.0
+
+[node name="AreaPos" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Debug" index="1"]
+margin_top = 27.0
+margin_bottom = 51.0
+
+[node name="Size" parent="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck/Debug" index="2"]
+margin_top = 54.0
+margin_bottom = 78.0
+
+[node name="Push2" type="Control" parent="VBC/HandArea/HBC/DeckControl/VBC"]
+margin_top = 216.0
+margin_right = 100.0
+margin_bottom = 286.0
+mouse_filter = 2
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HandControl" type="Control" parent="VBC/HandArea/HBC"]
+margin_left = 133.0
+margin_right = 1787.0
+margin_bottom = 286.0
+rect_min_size = Vector2( 0, 280 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="Hand" parent="VBC/HandArea/HBC/HandControl" instance=ExtResource( 3 )]
+placement = 9
+
+[node name="DiscardsControl" type="MarginContainer" parent="VBC/HandArea/HBC"]
+margin_left = 1790.0
+margin_right = 1920.0
+margin_bottom = 286.0
+rect_min_size = Vector2( 100, 140 )
+mouse_filter = 2
+custom_constants/margin_right = 15
+custom_constants/margin_left = 15
+
+[node name="VBC" type="VBoxContainer" parent="VBC/HandArea/HBC/DiscardsControl"]
+margin_left = 15.0
+margin_right = 115.0
+margin_bottom = 286.0
+mouse_filter = 2
+
+[node name="ForgottenControl" type="Control" parent="VBC/HandArea/HBC/DiscardsControl/VBC"]
+margin_right = 100.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 100, 140 )
+mouse_filter = 2
+
+[node name="Forgotten" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl" instance=ExtResource( 2 )]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+placement = 9
+index_shift_priority = 1
+pile_name = "Forgotten"
+faceup_cards = true
+
+[node name="Control" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten" index="0"]
+custom_styles/panel = SubResource( 2 )
+
+[node name="VBoxContainer" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Control/CenterContainer" index="0"]
+margin_right = 68.0
+margin_bottom = 109.0
+
+[node name="Label" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Control/CenterContainer/VBoxContainer" index="0"]
+margin_right = 68.0
+
+[node name="PanelContainer" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Control/CenterContainer/VBoxContainer" index="1"]
+margin_top = 32.0
+margin_right = 68.0
+margin_bottom = 61.0
+
+[node name="CenterContainer" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Control/CenterContainer/VBoxContainer/PanelContainer" index="0"]
+margin_right = 68.0
+
+[node name="CardCount" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Control/CenterContainer/VBoxContainer/PanelContainer/CenterContainer" index="0"]
+margin_right = 45.0
+
+[node name="ManipulationButtons" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Control" index="2"]
+visible = false
+
+[node name="View" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Control/ManipulationButtons" index="0"]
+margin_right = 26.0
+margin_bottom = 27.0
+
+[node name="ViewSorted" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Control/ManipulationButtons" index="1"]
+margin_top = 30.0
+margin_right = 26.0
+margin_bottom = 57.0
+
+[node name="Shuffle" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Control/ManipulationButtons" index="2"]
+margin_top = 25.0
+margin_right = 18.0
+margin_bottom = 47.0
+
+[node name="CardView" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/ViewPopup" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 6.0
+margin_bottom = 6.0
+
+[node name="Position" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Debug" index="0"]
+margin_bottom = 24.0
+
+[node name="AreaPos" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Debug" index="1"]
+margin_top = 27.0
+margin_bottom = 51.0
+
+[node name="Size" parent="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten/Debug" index="2"]
+margin_top = 54.0
+margin_bottom = 78.0
+
+[node name="Push" type="Control" parent="VBC/HandArea/HBC/DiscardsControl/VBC"]
+margin_top = 143.0
+margin_right = 100.0
+margin_bottom = 143.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="DiscardControl" type="Control" parent="VBC/HandArea/HBC/DiscardsControl/VBC"]
+margin_top = 146.0
+margin_right = 100.0
+margin_bottom = 286.0
+rect_min_size = Vector2( 100, 140 )
+mouse_filter = 2
+
+[node name="Discard" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl" instance=ExtResource( 2 )]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+placement = 9
+index_shift_priority = 1
+pile_name = "Discard"
+faceup_cards = true
+
+[node name="Control" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard" index="0"]
+custom_styles/panel = SubResource( 2 )
+
+[node name="VBoxContainer" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Control/CenterContainer" index="0"]
+margin_right = 68.0
+margin_bottom = 109.0
+
+[node name="Label" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Control/CenterContainer/VBoxContainer" index="0"]
+margin_right = 68.0
+
+[node name="PanelContainer" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Control/CenterContainer/VBoxContainer" index="1"]
+margin_top = 32.0
+margin_right = 68.0
+margin_bottom = 61.0
+
+[node name="CenterContainer" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Control/CenterContainer/VBoxContainer/PanelContainer" index="0"]
+margin_right = 68.0
+
+[node name="CardCount" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Control/CenterContainer/VBoxContainer/PanelContainer/CenterContainer" index="0"]
+margin_right = 45.0
+
+[node name="ManipulationButtons" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Control" index="2"]
+visible = false
+
+[node name="View" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Control/ManipulationButtons" index="0"]
+margin_right = 26.0
+margin_bottom = 27.0
+
+[node name="ViewSorted" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Control/ManipulationButtons" index="1"]
+margin_top = 30.0
+margin_right = 26.0
+margin_bottom = 57.0
+
+[node name="Shuffle" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Control/ManipulationButtons" index="2"]
+margin_top = 25.0
+margin_right = 18.0
+margin_bottom = 47.0
+
+[node name="CardView" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/ViewPopup" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 6.0
+margin_bottom = 6.0
+
+[node name="Position" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Debug" index="0"]
+margin_bottom = 24.0
+
+[node name="AreaPos" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Debug" index="1"]
+margin_top = 27.0
+margin_bottom = 51.0
+
+[node name="Size" parent="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard/Debug" index="2"]
+margin_top = 54.0
+margin_bottom = 78.0
+
+[node name="FadeToBlack" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[editable path="VBC/HandArea/HBC/DeckControl/VBC/Control/Deck"]
+[editable path="VBC/HandArea/HBC/DiscardsControl/VBC/ForgottenControl/Forgotten"]
+[editable path="VBC/HandArea/HBC/DiscardsControl/VBC/DiscardControl/Discard"]
