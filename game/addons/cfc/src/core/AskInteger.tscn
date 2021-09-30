@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/cfc/src/core/AskInteger.gd" type="Script" id=1]
 [ext_resource path="res://addons/cfc/src/core/IntegerLineEdit.gd" type="Script" id=2]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
 draw_center = false

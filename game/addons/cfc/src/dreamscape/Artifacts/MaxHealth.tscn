@@ -3,6 +3,5 @@
 [ext_resource path="res://addons/cfc/src/dreamscape/Artifacts/MaxHealth.gd" type="Script" id=1]
 [ext_resource path="res://addons/cfc/src/dreamscape/Artifacts/ArtifactTemplate.tscn" type="PackedScene" id=2]
 
-
 [node name="MaxHealth" instance=ExtResource( 2 )]
 script = ExtResource( 1 )

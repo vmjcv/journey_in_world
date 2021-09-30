@@ -2,7 +2,6 @@
 
 [ext_resource path="res://addons/cfc/src/core/SelectionWindow.gd" type="Script" id=1]
 
-
 [node name="SelectionWindow" type="AcceptDialog"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0

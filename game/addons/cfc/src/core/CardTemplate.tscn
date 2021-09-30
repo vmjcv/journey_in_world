@@ -5,7 +5,6 @@
 [ext_resource path="res://addons/cfc/src/core/Card/TokenDrawer.gd" type="Script" id=5]
 [ext_resource path="res://addons/cfc/src/core/Highlight.tscn" type="PackedScene" id=6]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 75, 120 )
 

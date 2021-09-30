@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/cfc/shaders/Warping.shader" type="Shader" id=2]
 [ext_resource path="res://addons/cfc/assets/card_front/dream card/card_frame_square.png" type="Texture" id=3]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/is_card = true

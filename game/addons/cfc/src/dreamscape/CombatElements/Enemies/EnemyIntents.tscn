@@ -2,7 +2,6 @@
 
 [ext_resource path="res://addons/cfc/src/dreamscape/CombatElements/Enemies/EnemyIntents.gd" type="Script" id=2]
 
-
 [node name="EnemyIntents" type="HBoxContainer"]
 margin_right = 14.0
 margin_bottom = 14.0

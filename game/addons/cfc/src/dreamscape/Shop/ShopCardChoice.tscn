@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/cfc/src/dreamscape/Shop/ShopCardChoice.gd" type="Script" id=1]
 [ext_resource path="res://addons/cfc/src/dreamscape/ChoiceCardObject.tscn" type="PackedScene" id=2]
 
-
 [node name="ShopCardChoice" type="VBoxContainer"]
 margin_bottom = 14.0
 script = ExtResource( 1 )

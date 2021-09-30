@@ -128,4 +128,3 @@ func _instance_artifact(artifact_object: ArtifactObject, new_addition := false) 
 		artifact_active = true
 	new_artifact.setup_artifact(artifact_object, artifact_active, new_addition)
 	_artifacts.add_child(new_artifact)
-

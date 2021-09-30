@@ -2,7 +2,6 @@
 
 [ext_resource path="res://addons/cfc/src/dreamscape/Overworld/JournalEncounterChoice.gd" type="Script" id=1]
 
-
 [node name="JournalEncounterChoice" type="RichTextLabel"]
 margin_top = 54.0
 margin_right = 705.0

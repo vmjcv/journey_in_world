@@ -2,7 +2,6 @@
 
 [ext_resource path="res://addons/cfc/src/dreamscape/CombatElements/Enemies/Art/AnimatedPolygonEnemy.gd" type="Script" id=1]
 
-
 [sub_resource type="GDScript" id=1]
 script/source = "tool
 extends Polygon2D

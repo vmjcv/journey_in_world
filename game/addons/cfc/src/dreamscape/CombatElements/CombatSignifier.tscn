@@ -5,7 +5,6 @@
 [ext_resource path="res://addons/cfc/themes/darktheme/fonts/Reggae_One/ReggaeOne-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://addons/cfc/assets/card_front/tag_container.png" type="Texture" id=5]
 
-
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )

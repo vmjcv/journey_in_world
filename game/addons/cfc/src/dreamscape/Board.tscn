@@ -70,42 +70,41 @@ __meta__ = {
 }
 
 [node name="PlayerInfo" parent="VBC" instance=ExtResource( 7 )]
-margin_right = 1920.0
 context = 1
 
 [node name="CombatArena" type="HBoxContainer" parent="VBC"]
 margin_top = 53.0
-margin_right = 1920.0
-margin_bottom = 758.0
+margin_right = 1455.0
+margin_bottom = 578.0
 mouse_filter = 2
 size_flags_vertical = 3
 theme = ExtResource( 12 )
 
 [node name="PlayerArea" type="CenterContainer" parent="VBC/CombatArena"]
 margin_right = 300.0
-margin_bottom = 705.0
+margin_bottom = 525.0
 rect_min_size = Vector2( 300, 0 )
 mouse_filter = 2
 
 [node name="EnemyArea" type="CenterContainer" parent="VBC/CombatArena"]
 margin_left = 303.0
-margin_right = 1920.0
-margin_bottom = 705.0
+margin_right = 1455.0
+margin_bottom = 525.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Enemies" type="HBoxContainer" parent="VBC/CombatArena/EnemyArea"]
-margin_left = 808.0
-margin_top = 352.0
-margin_right = 808.0
-margin_bottom = 352.0
+margin_left = 576.0
+margin_top = 262.0
+margin_right = 576.0
+margin_bottom = 262.0
 mouse_filter = 2
 custom_constants/separation = 150
 
 [node name="HBC" type="HBoxContainer" parent="VBC"]
-margin_top = 762.0
-margin_right = 1920.0
-margin_bottom = 790.0
+margin_top = 582.0
+margin_right = 1455.0
+margin_bottom = 610.0
 theme = ExtResource( 12 )
 __meta__ = {
 "_edit_group_": true,
@@ -118,34 +117,34 @@ margin_bottom = 28.0
 
 [node name="Push" type="Control" parent="VBC/HBC"]
 margin_left = 3.0
-margin_right = 1772.0
+margin_right = 1307.0
 margin_bottom = 28.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="EndTurn" type="Button" parent="VBC/HBC"]
-margin_left = 1775.0
-margin_right = 1857.0
+margin_left = 1310.0
+margin_right = 1392.0
 margin_bottom = 28.0
 disabled = true
 text = "End Turn"
 
 [node name="Margin" type="MarginContainer" parent="VBC/HBC"]
-margin_left = 1860.0
-margin_right = 1920.0
+margin_left = 1395.0
+margin_right = 1455.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 60, 0 )
 
 [node name="HandArea" type="MarginContainer" parent="VBC"]
-margin_top = 794.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_top = 614.0
+margin_right = 1455.0
+margin_bottom = 900.0
 rect_min_size = Vector2( 0, 280 )
 mouse_filter = 2
 theme = ExtResource( 12 )
 
 [node name="HBC" type="HBoxContainer" parent="VBC/HandArea"]
-margin_right = 1920.0
+margin_right = 1455.0
 margin_bottom = 286.0
 mouse_filter = 2
 
@@ -247,7 +246,7 @@ __meta__ = {
 
 [node name="HandControl" type="Control" parent="VBC/HandArea/HBC"]
 margin_left = 133.0
-margin_right = 1787.0
+margin_right = 1322.0
 margin_bottom = 286.0
 rect_min_size = Vector2( 0, 280 )
 mouse_filter = 2
@@ -257,8 +256,8 @@ size_flags_horizontal = 3
 placement = 9
 
 [node name="DiscardsControl" type="MarginContainer" parent="VBC/HandArea/HBC"]
-margin_left = 1790.0
-margin_right = 1920.0
+margin_left = 1325.0
+margin_right = 1455.0
 margin_bottom = 286.0
 rect_min_size = Vector2( 100, 140 )
 mouse_filter = 2

@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/cfc/assets/card_front/cost_container.png" type="Texture" id=2]
 [ext_resource path="res://addons/cfc/fonts/Butler/Butler_Medium.otf" type="DynamicFontData" id=3]
 
-
 [sub_resource type="DynamicFont" id=1]
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )

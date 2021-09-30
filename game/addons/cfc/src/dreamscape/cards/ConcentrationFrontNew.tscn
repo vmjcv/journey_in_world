@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/cfc/src/dreamscape/CardFrontNew.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/cfc/shaders/Concentration.shader" type="Shader" id=2]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.0392157, 0, 1 )
 corner_radius_bottom_right = 50

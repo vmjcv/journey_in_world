@@ -6,7 +6,6 @@
 [ext_resource path="res://addons/cfc/assets/card_backs/CGFBackLines.png" type="Texture" id=4]
 [ext_resource path="res://addons/cfc/assets/card_backs/CGFBackDots.png" type="Texture" id=5]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.164706, 0.203922, 0.223529, 1 )
 corner_radius_top_left = 10

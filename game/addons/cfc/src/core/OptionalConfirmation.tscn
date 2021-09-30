@@ -2,7 +2,6 @@
 
 [ext_resource path="res://addons/cfc/src/core/OptionalConfirmation.gd" type="Script" id=1]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
 draw_center = false

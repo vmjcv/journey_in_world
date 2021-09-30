@@ -2,7 +2,6 @@
 
 [ext_resource path="res://addons/cfc/src/dreamscape/PathosEntryInfo.gd" type="Script" id=1]
 
-
 [node name="PathosEntryInfo" type="HBoxContainer"]
 margin_top = 18.0
 margin_right = 216.0

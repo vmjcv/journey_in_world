@@ -220,7 +220,7 @@ func generate_discard_tasks(only_from_hand := true) -> Array:
 # with each tag we've played, to hook onto with othr effects.
 #
 # The reason to go via sceng, is because we  don't want to increment if costs
-# cannot be paid. 
+# cannot be paid.
 func generate_play_confirm_scripts() -> Array:
 	if not deck_card_entry:
 		return([])
@@ -297,8 +297,8 @@ func remove_from_deck(permanent := true, tags := []) -> void:
 					"tags": tags
 				}
 		)
-#	card_front.apply_sharer("res://shaders/consume.shader")
-	card_front.material = preload("res://shaders/dissolve.tres")
+#	card_front.apply_sharer("res://addons/cfc/shaders/consume.shader")
+	card_front.material = preload("res://addons/cfc/shaders/dissolve.tres")
 #	card_front.material.shader = CFConst.REMOVE_FROM_GAME_SHADER
 	state = ExtendedCardState.REMOVE_FROM_GAME
 	cfc.flush_cache()

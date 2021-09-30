@@ -9,7 +9,7 @@ metadata={
 
 [deps]
 
-source_file="res://assets/icons/view.svg"
+source_file="res://addons/cfc/assets/icons/view.svg"
 dest_files=[ "res://.import/view.svg-b2db9bcb5ef2f1d25945e28acd1c0e4b.stex" ]
 
 [params]

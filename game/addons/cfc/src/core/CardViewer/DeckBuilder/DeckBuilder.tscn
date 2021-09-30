@@ -7,7 +7,6 @@
 [ext_resource path="res://addons/cfc/src/core/CardViewer/DeckBuilder/DBListCardObject.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckNameRandomizer.gd" type="Script" id=6]
 
-
 [node name="DeckBuilder" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 list_card_object_scene = ExtResource( 5 )

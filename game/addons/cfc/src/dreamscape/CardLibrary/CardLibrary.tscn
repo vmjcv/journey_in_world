@@ -28,7 +28,7 @@ custom_constants/margin_left = 5
 
 [node name="AvailableCards" parent="VBC/HBC/MC" index="0"]
 margin_left = 5.0
-margin_right = 1915.0
+margin_right = 1450.0
 
 [node name="FilterLine" parent="VBC/HBC/MC/AvailableCards/HBC" index="1"]
 criteria_map = {
@@ -40,8 +40,8 @@ criteria_map = {
 }
 
 [node name="ButtonFilters" parent="VBC/HBC/MC/AvailableCards/CC" index="0"]
-margin_left = 871.0
-margin_right = 1038.0
+margin_left = 639.0
+margin_right = 806.0
 
 [node name="ArchetypeFilter" type="MenuButton" parent="VBC/HBC/MC/AvailableCards/CC/ButtonFilters" index="0"]
 margin_right = 133.0

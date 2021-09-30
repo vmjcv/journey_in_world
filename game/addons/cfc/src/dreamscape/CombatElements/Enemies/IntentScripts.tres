@@ -6,7 +6,6 @@
 [ext_resource path="res://addons/cfc/assets/icons/cursed-star.png" type="Texture" id=4]
 [ext_resource path="res://addons/cfc/assets/icons/growth.png" type="Texture" id=5]
 
-
 [resource]
 script = ExtResource( 1 )
 ICON_ATTACK = ExtResource( 3 )

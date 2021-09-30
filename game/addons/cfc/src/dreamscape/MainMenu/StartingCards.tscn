@@ -2,7 +2,6 @@
 
 [ext_resource path="res://addons/cfc/src/dreamscape/MainMenu/StartingCards.gd" type="Script" id=1]
 
-
 [node name="StartingCards" type="ScrollContainer"]
 margin_top = 5.0
 margin_bottom = 5.0

@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/cfc/assets/icons/magnifying-glass.png" type="Texture" id=1]
 [ext_resource path="res://addons/cfc/src/dreamscape/CombatElements/IncomingSignifier.gd" type="Script" id=2]
 
-
 [node name="IncomingSignifier" type="HBoxContainer"]
 margin_right = 28.0
 margin_bottom = 24.0

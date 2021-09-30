@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/cfc/assets/card_backs/TCG_vol12_back.png" type="Texture" id=2]
 [ext_resource path="res://addons/cfc/src/core/Card/CardBackTexture.gd" type="Script" id=3]
 
-
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 1500, 2100 )

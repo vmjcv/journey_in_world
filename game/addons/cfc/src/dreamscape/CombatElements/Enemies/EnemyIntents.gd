@@ -12,7 +12,7 @@ var intent_name: String
 var all_intent_scripts = IntentScripts.new()
 
 func prepare_intents(specific_index = null) -> void:
-	# This will reshuffle all intents and make sure the specified intent is the 
+	# This will reshuffle all intents and make sure the specified intent is the
 	# one selected for this enemy. This is useful for setting up enemies.
 	if not unused_intents.size():
 		reshuffle_intents()
@@ -34,7 +34,7 @@ func prepare_intents(specific_index = null) -> void:
 		# Therefore we always split the intent name (i.e. the key) on a colon, and the name
 		# is always the first part.
 		var intent_array = intent.split(':')
-		# We store the name of the last script in the list of intents as the 
+		# We store the name of the last script in the list of intents as the
 		# intent name. Then we can use it for special animations and so on.
 		intent_name = intent_array[0]
 		var intent_scripts = all_intent_scripts.get_scripts(intent_name)

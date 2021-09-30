@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/cfc/assets/archetypes/flyer.png" type="Texture" id=1]
 [ext_resource path="res://addons/cfc/src/dreamscape/MainMenu/ArchetypeButton.gd" type="Script" id=2]
 
-
 [node name="ArchetypeButton" type="MarginContainer"]
 margin_right = 270.0
 margin_bottom = 390.0

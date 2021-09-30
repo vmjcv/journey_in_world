@@ -1,7 +1,8 @@
 extends Board
 
-const ENEMY_ENTITY_SCENE = preload("res://addons/cfc/src/dreamscape/CombatElements/Enemies/EnemyEntity.tscn")
 signal battle_begun
+
+const ENEMY_ENTITY_SCENE = preload("res://addons/cfc/src/dreamscape/CombatElements/Enemies/EnemyEntity.tscn")
 
 var end_turn : Button
 var turn := Turn.new()

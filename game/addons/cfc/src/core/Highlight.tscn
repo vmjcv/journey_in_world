@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/cfc/src/core/Highlight.gd" type="Script" id=1]
 [ext_resource path="res://addons/cfc/shaders/Dreambox.shader" type="Shader" id=2]
 
-
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
 shader_param/is_card = true

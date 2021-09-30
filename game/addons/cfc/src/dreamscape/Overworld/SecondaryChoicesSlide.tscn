@@ -2,7 +2,6 @@
 
 [ext_resource path="res://addons/cfc/src/dreamscape/Overworld/SecondaryChoicesSlide.gd" type="Script" id=2]
 
-
 [node name="SecondaryChoicesSlide" type="MarginContainer"]
 mouse_filter = 1
 custom_constants/margin_left = 20

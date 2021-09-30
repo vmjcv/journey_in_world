@@ -9,16 +9,16 @@ extends Reference
 
 const FLYER:= {
 	"Anxiety": 5,
-	"Icon": preload("res://assets/archetypes/flyer.png"),
+	"Icon": preload("res://addons/cfc/assets/archetypes/flyer.png"),
 	"Tags": [
 		Terms.ACTIVE_EFFECTS.impervious.name,
 		Terms.GENERIC_TAGS.relax.name,
 	],
 	"Artifacts": [
-		
+
 	],
 	"Perturbations": [
-		
+
 	],
 	"Starting Cards": [
 		"Out of Reach",
@@ -54,7 +54,7 @@ const MAD_SCIENTIST := {
 		Terms.ACTIVE_EFFECTS.buffer.name,
 	],
 	"Artifacts": [
-		
+
 	],
 	"Perturbations": [
 		"Apathy",
@@ -87,10 +87,10 @@ const WARRIOR:= {
 	"Icon": preload("res://icon.png"),
 	"Tags": [],
 	"Artifacts": [
-		
+
 	],
 	"Perturbations": [
-		
+
 	],
 	"Starting Cards": [
 		"War Paint",
@@ -109,10 +109,10 @@ const RUNNER := {
 	"Icon": preload("res://icon.png"),
 	"Tags": [],
 	"Artifacts": [
-		
+
 	],
 	"Perturbations": [
-		
+
 	],
 	"Starting Cards": [
 	],
@@ -139,7 +139,7 @@ const FEARLESS:= {
 		ArtifactDefinitions.ImprovePoison
 	],
 	"Perturbations": [
-		
+
 	],
 	"Starting Cards": [
 		"Confidence",
@@ -173,10 +173,10 @@ const COWARD := {
 	"Icon": preload("res://icon.png"),
 	"Tags": [],
 	"Artifacts": [
-		
+
 	],
 	"Perturbations": [
-		
+
 	],
 	"_is_inactive": true
 }
@@ -189,10 +189,10 @@ const RUBBER_CHICKEN := {
 		Terms.ACTIVE_EFFECTS.buffer.name,
 	],
 	"Artifacts": [
-		
+
 	],
 	"Perturbations": [
-		
+
 	],
 	"Starting Cards": [
 		"Interpretation",
@@ -228,15 +228,21 @@ const ABUSIVE_RELATIONSHIP := {
 		Terms.GENERIC_TAGS.purpose.name,
 	],
 	"Artifacts": [
-		
+
 	],
 	"Perturbations": [
-		
+
 	],
 	"Starting Cards": [
 		"Inner Justice",
 	],
-	"Commons": [],
-	"Uncommons": [],
+	"Commons": [
+		"unnamed_card_7",
+		"unnamed_card_8",
+		"unnamed_card_9",
+	],
+	"Uncommons": [
+		"unnamed_card_6",
+	],
 	"Rares": []
 }

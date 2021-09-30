@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/cfc/src/core/Hand.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/cfc/src/dreamscape/Hand.gd" type="Script" id=3]
 
-
 [node name="Hand" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 placement = 7

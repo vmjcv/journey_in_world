@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/cfc/src/dreamscape/CombatElements/CombatEffects/Advantage.gd" type="Script" id=2]
 [ext_resource path="res://addons/cfc/assets/icons/crow-dive.png" type="Texture" id=3]
 
-
 [node name="Advantage" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 priority = 1

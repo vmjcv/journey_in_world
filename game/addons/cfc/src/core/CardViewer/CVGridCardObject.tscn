@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/cfc/src/core/CardViewer/CVGridCardObject.gd" type="Script" id=1]
 [ext_resource path="res://addons/cfc/src/core/CardViewer/CVPreviewPopup.tscn" type="PackedScene" id=2]
 
-
 [node name="GridCardObject" type="CenterContainer"]
 margin_right = 150.0
 margin_bottom = 240.0
