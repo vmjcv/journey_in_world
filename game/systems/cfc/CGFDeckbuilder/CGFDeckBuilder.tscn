@@ -1,24 +1,57 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/cfc/src/core/CardViewer/CardViewer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/cfc/src/core/CardViewer/DeckBuilder/DBDeckScene.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckBuilder.gd" type="Script" id=3]
-[ext_resource path="res://addons/cfc/src/core/CardViewer/DeckBuilder/DBGridCardObject.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/cfc/src/core/CardViewer/DeckBuilder/DBListCardObject.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckNameRandomizer.gd" type="Script" id=6]
+[ext_resource path="res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckBuilder.tscn" type="PackedScene" id=1]
+[ext_resource path="res://systems/cfc/CGFInfoPanel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://systems/cfc/CGFDeckbuilder/CGFDeckBuilder.gd" type="Script" id=4]
 
 [node name="DeckBuilder" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
-list_card_object_scene = ExtResource( 5 )
-grid_card_object_scene = ExtResource( 4 )
-deck_name_randomizer = ExtResource( 6 )
+script = ExtResource( 4 )
+info_panel_scene = ExtResource( 2 )
 
-[node name="Title" parent="VBC" index="0"]
-text = "Deck Builder"
-
-[node name="DeckMC" parent="VBC/HBC" index="0" instance=ExtResource( 2 )]
+[node name="DeckMC" parent="VBC/HBC" index="0"]
 margin_right = 725.0
 margin_bottom = 882.0
+
+[node name="CurrentDeck" parent="VBC/HBC/DeckMC" index="0"]
+margin_right = 725.0
+margin_bottom = 877.0
+
+[node name="DeckDetails" parent="VBC/HBC/DeckMC/CurrentDeck" index="0"]
+margin_right = 720.0
+
+[node name="LineSeparator2" parent="VBC/HBC/DeckMC/CurrentDeck" index="1"]
+margin_right = 720.0
+
+[node name="ScrollContainer" parent="VBC/HBC/DeckMC/CurrentDeck" index="2"]
+margin_right = 720.0
+margin_bottom = 801.0
+
+[node name="CardsInDeck" parent="VBC/HBC/DeckMC/CurrentDeck/ScrollContainer" index="0"]
+margin_bottom = 793.0
+
+[node name="HBoxContainer" parent="VBC/HBC/DeckMC/CurrentDeck" index="3"]
+margin_top = 805.0
+margin_right = 720.0
+margin_bottom = 825.0
+
+[node name="NoticeLabel" parent="VBC/HBC/DeckMC/CurrentDeck/HBoxContainer" index="2"]
+margin_right = 720.0
+
+[node name="DeckNameEdit" parent="VBC/HBC/DeckMC/CurrentDeck" index="4"]
+margin_top = 829.0
+margin_right = 720.0
+margin_bottom = 853.0
+
+[node name="Buttons" parent="VBC/HBC/DeckMC/CurrentDeck" index="5"]
+margin_top = 857.0
+margin_right = 720.0
+margin_bottom = 877.0
+
+[node name="Back" type="Button" parent="VBC/HBC/DeckMC/CurrentDeck/Buttons" index="4"]
+margin_left = 202.0
+margin_right = 244.0
+margin_bottom = 20.0
+text = "Back"
 
 [node name="MC" parent="VBC/HBC" index="1"]
 margin_left = 729.0
@@ -71,3 +104,5 @@ margin_right = 571.0
 [node name="GridViewStyle" parent="VBC/HBC/MC/AvailableCards/Settings" index="1"]
 margin_left = 575.0
 margin_right = 716.0
+
+[editable path="VBC/HBC/DeckMC"]

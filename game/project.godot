@@ -10,59 +10,14 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
-"class": "Act1",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Run/Act1CombatEncounters.gd"
-}, {
-"base": "GridContainer",
-"class": "ActiveEffects",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/ActiveEffects.gd"
-}, {
-"base": "Reference",
 "class": "AlterantEngine",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/AlterantEngine.gd"
-}, {
-"base": "Control",
-"class": "AnimatedEnemy",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/Enemies/Art/AnimatedPolygonEnemy.gd"
 }, {
 "base": "Reference",
 "class": "Appender",
 "language": "GDScript",
 "path": "res://addons/gs_logger/appender.gd"
-}, {
-"base": "MarginContainer",
-"class": "ArchetypeButton",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/MainMenu/ArchetypeButton.gd"
-}, {
-"base": "Reference",
-"class": "Archetypes",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Archetypes.gd"
-}, {
-"base": "CombatSignifier",
-"class": "Artifact",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Artifacts/ArtifactTemplate.gd"
-}, {
-"base": "Reference",
-"class": "ArtifactDefinitions",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Artifacts/ArtifactDefinitions.gd"
-}, {
-"base": "Reference",
-"class": "ArtifactObject",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Globals/ArtifactObject.gd"
-}, {
-"base": "Reference",
-"class": "Aspects",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Aspects.gd"
 }, {
 "base": "LineEdit",
 "class": "BaseInput",
@@ -74,35 +29,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://UI/dialogs/settings_dialog/BaseOptionsContainer.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "Board",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/BoardTemplate.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "BoardPlacementGrid",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/BoardPlacementGrid.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "BoardPlacementSlot",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/BoardPlacementSlot.gd"
 }, {
-"base": "CombatEncounter",
-"class": "BossEncounter",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Run/BossEncounter.gd"
-}, {
-"base": "EnemyIntents",
-"class": "BossIntents",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/Enemies/Bosses/BossIntents.gd"
-}, {
 "base": "Reference",
 "class": "CFConst",
 "language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CFConst.gd"
+"path": "res://systems/cfc/CFConst.gd"
 }, {
 "base": "Node",
 "class": "CFControl",
@@ -139,27 +84,27 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVFilter.gd"
 }, {
-"base": "Button",
+"base": "Reference",
 "class": "CVFilterButton",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVFilterButton.gd"
 }, {
-"base": "LineEdit",
+"base": "Reference",
 "class": "CVFilterLine",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVFilterLine.gd"
 }, {
-"base": "CenterContainer",
+"base": "Reference",
 "class": "CVGridCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVGridCardObject.gd"
 }, {
-"base": "HBoxContainer",
+"base": "Reference",
 "class": "CVListCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVListCardObject.gd"
 }, {
-"base": "Popup",
+"base": "Reference",
 "class": "CVPreviewPopup",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVPreviewPopup.gd"
@@ -169,17 +114,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardTemplate.gd"
 }, {
-"base": "Panel",
+"base": "Reference",
 "class": "CardBack",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/CardBack.gd"
 }, {
-"base": "CardBack",
+"base": "Reference",
 "class": "CardBackGlow",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/CardBackGlow.gd"
 }, {
-"base": "CardBack",
+"base": "Reference",
 "class": "CardBackTexture",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/CardBackTexture.gd"
@@ -187,17 +132,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "CardConfig",
 "language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/cards/CardConfig.gd"
+"path": "res://systems/cfc/cards/CardConfig.gd"
 }, {
-"base": "Area2D",
+"base": "Reference",
 "class": "CardContainer",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardContainer.gd"
-}, {
-"base": "Reference",
-"class": "CardEntry",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Globals/CardEntry.gd"
 }, {
 "base": "Panel",
 "class": "CardFront",
@@ -205,11 +145,6 @@ _global_script_classes=[ {
 "path": "res://addons/cfc/src/core/Card/CardFront.gd"
 }, {
 "base": "Reference",
-"class": "CardGroupDefinitions",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/cards/sets/CardGroups.gd"
-}, {
-"base": "RichTextLabel",
 "class": "CardLabel",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CardLabel.gd"
@@ -219,30 +154,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CardLibrary/CardLibrary.gd"
 }, {
+"base": "Reference",
+"class": "CardProject",
+"language": "GDScript",
+"path": "res://systems/cfc/builder/CardProjectManager/CardProject.gd"
+}, {
+"base": "Reference",
+"class": "CardProjectMetadata",
+"language": "GDScript",
+"path": "res://systems/cfc/builder/CardProjectManager/CardProjectMetadata.gd"
+}, {
 "base": "PanelContainer",
 "class": "CardViewer",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CardViewer.gd"
-}, {
-"base": "CombatSignifier",
-"class": "CombatEffect",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/CombatEffects/CombatEffect.gd"
-}, {
-"base": "SingleEncounter",
-"class": "CombatEncounter",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Run/CombatEncounter.gd"
-}, {
-"base": "VBoxContainer",
-"class": "CombatEntity",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/CombatEntity.gd"
-}, {
-"base": "Control",
-"class": "CombatSignifier",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/CombatSignifier.gd"
 }, {
 "base": "Reference",
 "class": "Config",
@@ -254,7 +179,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/appenders/console_appender.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "Counters",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Counters.gd"
@@ -262,39 +187,34 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "CustomScripts",
 "language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/cards/CustomScripts.gd"
+"path": "res://systems/cfc/cards/CustomScripts.gd"
 }, {
-"base": "HBoxContainer",
+"base": "Reference",
 "class": "DBDeckCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DBDeckCardObject.gd"
 }, {
-"base": "HBoxContainer",
+"base": "Reference",
 "class": "DBDeckSummaries",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DBDeckSummaries.gd"
 }, {
-"base": "CVGridCardObject",
+"base": "Reference",
 "class": "DBGridCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DBGridCardObject.gd"
 }, {
-"base": "CVListCardObject",
+"base": "Reference",
 "class": "DBListCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DBListCardObject.gd"
 }, {
 "base": "Reference",
-"class": "Deck",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Globals/DeckObject.gd"
-}, {
-"base": "CardViewer",
 "class": "DeckBuilder",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckBuilder.gd"
 }, {
-"base": "MenuButton",
+"base": "Reference",
 "class": "DeckLoader",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckLoader.gd"
@@ -304,40 +224,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckNameRandomizer.gd"
 }, {
-"base": "VBoxContainer",
+"base": "Reference",
 "class": "DetailPanels",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/DetailPanels.gd"
-}, {
-"base": "Card",
-"class": "DreamCard",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CardTemplate.gd"
-}, {
-"base": "Pile",
-"class": "DreamPile",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/DreamPile.gd"
-}, {
-"base": "Reference",
-"class": "EnemyDefinitions",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/Enemies/Enemies.gd"
-}, {
-"base": "CombatEncounter",
-"class": "EnemyEncounter",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Run/EnemiesEncounter.gd"
-}, {
-"base": "CombatEntity",
-"class": "EnemyEntity",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/Enemies/EnemyEntity.gd"
-}, {
-"base": "HBoxContainer",
-"class": "EnemyIntents",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/Enemies/EnemyIntents.gd"
 }, {
 "base": "Appender",
 "class": "FileAppender",
@@ -359,12 +249,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/file-editor/scripts/GoogleTranslatorAPI.gd"
 }, {
-"base": "CardContainer",
+"base": "Reference",
 "class": "Hand",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Hand.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "Highlight",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Highlight.gd"
@@ -374,45 +264,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/layouts/html_layout.gd"
 }, {
-"base": "LineEdit",
+"base": "Reference",
 "class": "IntegerLineEdit",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/IntegerLineEdit.gd"
-}, {
-"base": "Resource",
-"class": "IntentScripts",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/Enemies/IntentScripts.gd"
 }, {
 "base": "Reference",
 "class": "JSONBeautifier",
 "language": "GDScript",
 "path": "res://addons/GGS/_depedencies/json_beautifier/json_beautifier.gd"
-}, {
-"base": "PanelContainer",
-"class": "Journal",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Overworld/Journal.gd"
-}, {
-"base": "RichTextLabel",
-"class": "JournalChoice",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Overworld/JournalChoice.gd"
-}, {
-"base": "JournalChoice",
-"class": "JournalEncounterChoice",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Overworld/JournalEncounterChoice.gd"
-}, {
-"base": "JournalChoice",
-"class": "JournalNestedChoice",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Overworld/JournalNestedChoice.gd"
-}, {
-"base": "Reference",
-"class": "JournalTexts",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Overworld/JournalTexts.gd"
 }, {
 "base": "Reference",
 "class": "Layout",
@@ -464,50 +324,40 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/LongClickButton/script/long_click_button.gd"
 }, {
-"base": "VBoxContainer",
+"base": "PopupMenu",
+"class": "MainMenu",
+"language": "GDScript",
+"path": "res://systems/cfc/builder/MainMenu.gd"
+}, {
+"base": "Reference",
 "class": "ManipulationButtons",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/ManipulationButtons.gd"
+}, {
+"base": "Panel",
+"class": "Menubar",
+"language": "GDScript",
+"path": "res://systems/cfc/builder/Menubar.gd"
 }, {
 "base": "Reference",
 "class": "Message",
 "language": "GDScript",
 "path": "res://addons/gs_logger/message.gd"
 }, {
-"base": "Area2D",
+"base": "Reference",
 "class": "MousePointer",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/MousePointer.gd"
-}, {
-"base": "PanelContainer",
-"class": "NewGameMenu",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/MainMenu/NewGame.gd"
-}, {
-"base": "SingleEncounter",
-"class": "NonCombatEncounter",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Run/NonCombatEncounter.gd"
 }, {
 "base": "Reference",
 "class": "OVUtils",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/OverridableUtils.gd"
 }, {
-"base": "Reference",
-"class": "Pathos",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Overworld/Pathos.gd"
-}, {
 "base": "Layout",
 "class": "PatternLayout",
 "language": "GDScript",
 "path": "res://addons/gs_logger/layouts/pattern_layout.gd"
-}, {
-"base": "Reference",
-"class": "Perturbations",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Perturbations.gd"
 }, {
 "base": "CardContainer",
 "class": "Pile",
@@ -515,31 +365,26 @@ _global_script_classes=[ {
 "path": "res://addons/cfc/src/core/Pile.gd"
 }, {
 "base": "Reference",
-"class": "Player",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Globals/PlayerObject.gd"
-}, {
-"base": "CombatEntity",
-"class": "PlayerEntity",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/CombatElements/PlayerEntity.gd"
-}, {
-"base": "PanelContainer",
-"class": "PlayerInfo",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/PlayerInfo.gd"
-}, {
-"base": "Button",
 "class": "QuantityNumberButton",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/QuantityNumberButton.gd"
 }, {
-"base": "ScriptProperties",
+"base": "Reference",
+"class": "RuleBase",
+"language": "GDScript",
+"path": "res://systems/cfc/cards/rule/rule.gd"
+}, {
+"base": "CardProjectMetadata",
+"class": "RuleMetadata",
+"language": "GDScript",
+"path": "res://systems/cfc/builder/CardProjectManager/RuleMetadata.gd"
+}, {
+"base": "Reference",
 "class": "SP",
 "language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/SP.gd"
+"path": "res://systems/cfc/SP.gd"
 }, {
-"base": "ScriptObject",
+"base": "Reference",
 "class": "ScriptAlter",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ScriptAlter.gd"
@@ -559,7 +404,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ScriptProperties.gd"
 }, {
-"base": "ScriptObject",
+"base": "Reference",
 "class": "ScriptTask",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ScriptTask.gd"
@@ -569,62 +414,37 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ScriptingEngine.gd"
 }, {
-"base": "MarginContainer",
-"class": "SecondaryChoiceSlide",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Overworld/SecondaryChoicesSlide.gd"
-}, {
-"base": "AcceptDialog",
+"base": "Reference",
 "class": "SelectionWindow",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/SelectionWindow.gd"
 }, {
 "base": "Reference",
-"class": "SingleEncounter",
+"class": "Serializer",
 "language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Run/SingleEncounter.gd"
+"path": "res://systems/cfc/builder/CardProjectManager/Serializer.gd"
+}, {
+"base": "PanelContainer",
+"class": "Tab",
+"language": "GDScript",
+"path": "res://UI/components/tab.gd"
 }, {
 "base": "Reference",
-"class": "SingleRun",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Run/Encounters.gd"
-}, {
-"base": "CenterContainer",
-"class": "TagRepresentation",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/MainMenu/TagRepresentation.gd"
-}, {
-"base": "HBoxContainer",
-"class": "TagsList",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/MainMenu/TagsList.gd"
-}, {
-"base": "Line2D",
 "class": "TargetingArrow",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/TargetingArrow.gd"
 }, {
 "base": "Reference",
-"class": "Terms",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Terms.gd"
-}, {
-"base": "HBoxContainer",
 "class": "Token",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Token.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "TokenDrawer",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/TokenDrawer.gd"
 }, {
-"base": "Node",
-"class": "Turn",
-"language": "GDScript",
-"path": "res://addons/cfc/src/dreamscape/Turn.gd"
-}, {
-"base": "Node2D",
+"base": "Reference",
 "class": "ViewportCardFocus",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ViewportCardFocus.gd"
@@ -635,24 +455,13 @@ _global_script_classes=[ {
 "path": "res://addons/cfc/src/core/perMessage.gd"
 } ]
 _global_script_class_icons={
-"Act1": "",
-"ActiveEffects": "",
 "AlterantEngine": "",
-"AnimatedEnemy": "",
 "Appender": "",
-"ArchetypeButton": "",
-"Archetypes": "",
-"Artifact": "",
-"ArtifactDefinitions": "",
-"ArtifactObject": "",
-"Aspects": "",
 "BaseInput": "",
 "BaseOptionsContainer": "",
 "Board": "",
 "BoardPlacementGrid": "",
 "BoardPlacementSlot": "",
-"BossEncounter": "",
-"BossIntents": "",
 "CFConst": "",
 "CFControl": "",
 "CFInt": "",
@@ -672,16 +481,12 @@ _global_script_class_icons={
 "CardBackTexture": "",
 "CardConfig": "",
 "CardContainer": "",
-"CardEntry": "",
 "CardFront": "",
-"CardGroupDefinitions": "",
 "CardLabel": "",
 "CardLibrary": "",
+"CardProject": "",
+"CardProjectMetadata": "",
 "CardViewer": "",
-"CombatEffect": "",
-"CombatEncounter": "",
-"CombatEntity": "",
-"CombatSignifier": "",
 "Config": "",
 "ConsoleAppender": "",
 "Counters": "",
@@ -690,17 +495,10 @@ _global_script_class_icons={
 "DBDeckSummaries": "",
 "DBGridCardObject": "",
 "DBListCardObject": "",
-"Deck": "",
 "DeckBuilder": "",
 "DeckLoader": "",
 "DeckNameRandomizer": "",
 "DetailPanels": "",
-"DreamCard": "",
-"DreamPile": "",
-"EnemyDefinitions": "",
-"EnemyEncounter": "",
-"EnemyEntity": "",
-"EnemyIntents": "",
 "FileAppender": "",
 "GGSUtils": "",
 "GameStats": "",
@@ -709,13 +507,7 @@ _global_script_class_icons={
 "Highlight": "",
 "HtmlLayout": "",
 "IntegerLineEdit": "",
-"IntentScripts": "",
 "JSONBeautifier": "",
-"Journal": "",
-"JournalChoice": "",
-"JournalEncounterChoice": "",
-"JournalNestedChoice": "",
-"JournalTexts": "",
 "Layout": "",
 "LocalizationData": "",
 "LocalizationKeys": "",
@@ -726,20 +518,17 @@ _global_script_class_icons={
 "LocalizationSave": "",
 "LoggerUtils": "",
 "LongClickButton": "",
+"MainMenu": "",
 "ManipulationButtons": "",
+"Menubar": "",
 "Message": "",
 "MousePointer": "",
-"NewGameMenu": "",
-"NonCombatEncounter": "",
 "OVUtils": "",
-"Pathos": "",
 "PatternLayout": "",
-"Perturbations": "",
 "Pile": "",
-"Player": "",
-"PlayerEntity": "",
-"PlayerInfo": "",
 "QuantityNumberButton": "",
+"RuleBase": "",
+"RuleMetadata": "",
 "SP": "",
 "ScriptAlter": "",
 "ScriptObject": "",
@@ -747,17 +536,12 @@ _global_script_class_icons={
 "ScriptProperties": "",
 "ScriptTask": "",
 "ScriptingEngine": "",
-"SecondaryChoiceSlide": "",
 "SelectionWindow": "",
-"SingleEncounter": "",
-"SingleRun": "",
-"TagRepresentation": "",
-"TagsList": "",
+"Serializer": "",
+"Tab": "",
 "TargetingArrow": "",
-"Terms": "",
 "Token": "",
 "TokenDrawer": "",
-"Turn": "",
 "ViewportCardFocus": "",
 "perMessage": ""
 }
@@ -790,127 +574,131 @@ window/stretch/aspect="keep"
 
 enabled=PoolStringArray( "res://addons/FileSystemView/plugin.cfg", "res://addons/GGS/plugin.cfg", "res://addons/LongClickButton/plugin.cfg", "res://addons/file-editor/plugin.cfg", "res://addons/gs_logger/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg" )
 
+[gui]
+
+theme/custom_font="res://assets/fonts/font_14.tres"
+
 [input]
 
 ui_end={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777230,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777230,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card1={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card2={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card3={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card4={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Card5={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":53,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":53,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 ToggleGameSpeed={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":78,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":78,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 UseCard={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 CancelUseCard={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777220,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777220,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Setting={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowCards={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowDrawCards={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowDiscardCards={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowShortcutKey={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 ShowMap={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 debug={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 complete_battle={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 lose_battle={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":76,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":76,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 init_debug_game={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
