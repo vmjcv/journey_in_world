@@ -14,7 +14,8 @@ func _init():
 
 # -------------------------------------------------------------------------------------------------
 func clear() -> void:
-	meta_data.clear()
+	if meta_data:
+		meta_data.clear()
 
 
 func get_filename() -> String:

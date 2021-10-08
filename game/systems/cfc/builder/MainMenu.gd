@@ -2,9 +2,9 @@ extends PopupMenu
 class_name MainMenu
 
 # -------------------------------------------------------------------------------------------------
-signal open_project(filepath)
-signal save_project
-signal save_project_as
+signal open_card_project(filepath)
+signal save_card_project
+signal save_card_project_as
 
 # -------------------------------------------------------------------------------------------------
 const ITEM_OPEN 		:= 0
@@ -28,8 +28,8 @@ func _ready():
 func _on_MainMenu_id_pressed(id: int):
 	match id:
 		ITEM_OPEN: _on_open_project()
-		ITEM_SAVE: emit_signal("save_project")
-		ITEM_SAVE_AS: emit_signal("save_project_as")
+		ITEM_SAVE: emit_signal("save_card_project")
+		ITEM_SAVE_AS: emit_signal("save_card_project_as")
 
 
 # -------------------------------------------------------------------------------------------------

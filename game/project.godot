@@ -562,6 +562,7 @@ Utils="*res://misc/utils.gd"
 Types="*res://misc/types.gd"
 Game="res://misc/game.gd"
 ggsManager="*res://addons/GGS/src/ggs_manager.gd"
+CardProjectManager="*res://systems/cfc/builder/CardProjectManager/CardProjectManager.gd"
 
 [display]
 
