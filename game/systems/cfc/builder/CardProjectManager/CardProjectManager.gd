@@ -26,7 +26,6 @@ func remove_project(project: CardProject) -> void:
 
 	if project == _active_project:
 		_active_project = null
-
 	project.clear()
 
 # -------------------------------------------------------------------------------------------------

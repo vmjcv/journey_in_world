@@ -5,6 +5,7 @@ onready var _menubar: Menubar = $Menubar
 onready var _file_dialog: FileDialog = $FileDialog
 onready var _main_menu: MainMenu = $MainMenu
 
+
 var _ui_visible := true
 var _player_enabled := false
 
