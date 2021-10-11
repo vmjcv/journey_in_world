@@ -1,0 +1,41 @@
+{
+    "Test Card 1":{
+        "definition":{
+            "Type":"Blue",
+            "Tags":[
+                "Tag 1",
+                "Tag 2"
+            ],
+            "Requirements":"Demo Requirements",
+            "Abilities":"While on board, this will rotate itself.\n\nWhile in hand, this will spawn a test card on the board.",
+            "Cost":0,
+            "Power":0,
+            "_max_allowed":1,
+            "_illustration":"Nobody",
+            "_keywords":[
+                "Keyword 1"
+            ]
+        },
+        "script":{
+            "manual":{
+                "board":[
+                    {
+                        "name":"rotate_card",
+                        "subject":"self",
+                        "degrees":90
+                    }
+                ],
+                "hand":[
+                    {
+                        "name":"spawn_card",
+                        "card_name":"Spawn Card",
+                        "board_position":[
+                            500,
+                            500
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

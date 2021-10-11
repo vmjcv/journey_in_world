@@ -12,7 +12,6 @@
 [ext_resource path="res://systems/cfc/CGFDeckbuilder/CGFDeckBuilder.tscn" type="PackedScene" id=10]
 [ext_resource path="res://addons/cfc/themes/darktheme/darktheme.theme" type="Theme" id=12]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 25
@@ -65,18 +64,15 @@ margin_right = 68.0
 margin_right = 45.0
 
 [node name="View" parent="Deck/Control/ManipulationButtons" index="0"]
-margin_right = 26.0
-margin_bottom = 27.0
+margin_bottom = 28.0
 
 [node name="ViewSorted" parent="Deck/Control/ManipulationButtons" index="1"]
-margin_top = 30.0
-margin_right = 26.0
-margin_bottom = 57.0
+margin_top = 31.0
+margin_bottom = 59.0
 
 [node name="Shuffle" parent="Deck/Control/ManipulationButtons" index="2"]
-margin_top = 60.0
-margin_right = 26.0
-margin_bottom = 87.0
+margin_top = 62.0
+margin_bottom = 90.0
 
 [node name="CardView" parent="Deck/ViewPopup" index="0"]
 margin_left = 2.0
@@ -85,15 +81,15 @@ margin_right = 6.0
 margin_bottom = 6.0
 
 [node name="Position" parent="Deck/Debug" index="0"]
-margin_bottom = 23.0
+margin_bottom = 24.0
 
 [node name="AreaPos" parent="Deck/Debug" index="1"]
-margin_top = 26.0
-margin_bottom = 49.0
+margin_top = 27.0
+margin_bottom = 51.0
 
 [node name="Size" parent="Deck/Debug" index="2"]
-margin_top = 52.0
-margin_bottom = 75.0
+margin_top = 54.0
+margin_bottom = 78.0
 
 [node name="Discard" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1124, 475 )
@@ -124,18 +120,15 @@ margin_right = 68.0
 margin_right = 45.0
 
 [node name="View" parent="Discard/Control/ManipulationButtons" index="0"]
-margin_right = 26.0
-margin_bottom = 27.0
+margin_bottom = 28.0
 
 [node name="ViewSorted" parent="Discard/Control/ManipulationButtons" index="1"]
-margin_top = 30.0
-margin_right = 26.0
-margin_bottom = 57.0
+margin_top = 31.0
+margin_bottom = 59.0
 
 [node name="Shuffle" parent="Discard/Control/ManipulationButtons" index="2"]
-margin_top = 60.0
-margin_right = 26.0
-margin_bottom = 87.0
+margin_top = 62.0
+margin_bottom = 90.0
 
 [node name="CardView" parent="Discard/ViewPopup" index="0"]
 margin_left = 2.0
@@ -144,15 +137,15 @@ margin_right = 6.0
 margin_bottom = 6.0
 
 [node name="Position" parent="Discard/Debug" index="0"]
-margin_bottom = 23.0
+margin_bottom = 24.0
 
 [node name="AreaPos" parent="Discard/Debug" index="1"]
-margin_top = 26.0
-margin_bottom = 49.0
+margin_top = 27.0
+margin_bottom = 51.0
 
 [node name="Size" parent="Discard/Debug" index="2"]
-margin_top = 52.0
-margin_bottom = 75.0
+margin_top = 54.0
+margin_bottom = 78.0
 
 [node name="Hand" parent="." instance=ExtResource( 3 )]
 position = Vector2( 155, 480 )

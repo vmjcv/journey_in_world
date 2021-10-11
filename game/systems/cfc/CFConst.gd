@@ -74,7 +74,7 @@ const DECKS_PATH := "user://Decks/"
 const PATH_CORE := "res://addons/cfc/src/core/"
 # The path where scenes and scripts customized for this specific game exist
 # (e.g. board, card back etc)
-const PATH_CUSTOM := "res://systems/cfc"
+const PATH_CUSTOM := "res://systems/cfc/"
 # The path where card template scenes exist.
 # These is usually one scene per type of card in the game
 const PATH_CARDS := PATH_CUSTOM + "cards/"
@@ -90,6 +90,9 @@ const CARD_SET_NAME_PREPEND := "SetDefinition_"
 # The text which is prepended to files to signify the contain
 # script definitions for a specific set
 const SCRIPT_SET_NAME_PREPEND := "SetScripts_"
+
+const CARD_NAME_PREPEND := "CARD_"
+
 # This specifies the location of your token images.
 # Tokens are always going to be seeked at this location
 const PATH_TOKENS := PATH_ASSETS + "tokens/"

@@ -44,3 +44,7 @@ rect_min_size = Vector2( 300, 105 )
 window_title = "保存文件"
 
 [node name="CardPreview" parent="." instance=ExtResource( 4 )]
+margin_left = 2.17477
+margin_top = 41.7063
+margin_right = 629.175
+margin_bottom = 896.706
