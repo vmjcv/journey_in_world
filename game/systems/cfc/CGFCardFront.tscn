@@ -4,7 +4,6 @@
 [ext_resource path="res://systems/cfc/CGFCardFront.gd" type="Script" id=2]
 [ext_resource path="res://addons/cfc/themes/darktheme/darktheme.theme" type="Theme" id=3]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.145098, 0.145098, 0.145098, 1 )
 corner_radius_top_left = 10
@@ -51,8 +50,8 @@ __meta__ = {
 
 [node name="CardText" type="VBoxContainer" parent="Margin"]
 margin_left = 2.0
-margin_right = 148.0
-margin_bottom = 240.0
+margin_right = 323.0
+margin_bottom = 420.0
 rect_min_size = Vector2( 0, 240 )
 mouse_filter = 2
 __meta__ = {
@@ -60,8 +59,8 @@ __meta__ = {
 }
 
 [node name="Name" type="Label" parent="Margin/CardText"]
-margin_right = 146.0
-margin_bottom = 23.0
+margin_right = 321.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 146, 19 )
 size_flags_vertical = 1
 custom_styles/normal = SubResource( 2 )
@@ -72,9 +71,9 @@ valign = 1
 autowrap = true
 
 [node name="Type" type="Label" parent="Margin/CardText"]
-margin_top = 26.0
-margin_right = 146.0
-margin_bottom = 49.0
+margin_top = 27.0
+margin_right = 321.0
+margin_bottom = 51.0
 rect_min_size = Vector2( 146, 13 )
 size_flags_vertical = 1
 text = "Type"
@@ -84,9 +83,9 @@ autowrap = true
 uppercase = true
 
 [node name="Tags" type="Label" parent="Margin/CardText"]
-margin_top = 52.0
-margin_right = 146.0
-margin_bottom = 75.0
+margin_top = 54.0
+margin_right = 321.0
+margin_bottom = 78.0
 rect_min_size = Vector2( 146, 17 )
 size_flags_vertical = 1
 text = "Tag1 - Tag2"
@@ -96,9 +95,9 @@ autowrap = true
 uppercase = true
 
 [node name="Requirements" type="Label" parent="Margin/CardText"]
-margin_top = 78.0
-margin_right = 146.0
-margin_bottom = 101.0
+margin_top = 81.0
+margin_right = 321.0
+margin_bottom = 105.0
 rect_min_size = Vector2( 146, 14 )
 custom_colors/font_color = Color( 0.290196, 0.752941, 0, 1 )
 text = "Requirements"
@@ -107,9 +106,9 @@ valign = 1
 autowrap = true
 
 [node name="Abilities" type="Label" parent="Margin/CardText"]
-margin_top = 104.0
-margin_right = 146.0
-margin_bottom = 224.0
+margin_top = 108.0
+margin_right = 321.0
+margin_bottom = 404.0
 rect_min_size = Vector2( 146, 120 )
 size_flags_vertical = 3
 text = "This is the card ability text.
@@ -119,9 +118,9 @@ valign = 1
 autowrap = true
 
 [node name="HB" type="HBoxContainer" parent="Margin/CardText"]
-margin_top = 227.0
-margin_right = 146.0
-margin_bottom = 240.0
+margin_top = 407.0
+margin_right = 321.0
+margin_bottom = 420.0
 rect_min_size = Vector2( 146, 13 )
 mouse_filter = 2
 
@@ -136,7 +135,7 @@ valign = 1
 
 [node name="Power" type="Label" parent="Margin/CardText/HB"]
 margin_left = 48.0
-margin_right = 146.0
+margin_right = 321.0
 margin_bottom = 13.0
 rect_min_size = Vector2( 40, 13 )
 size_flags_horizontal = 3

@@ -175,6 +175,7 @@ func instance_card(card_name: String) -> Card:
 	var template = load(CFConst.PATH_CARDS
 			+ card_definitions[card_name][CardConfig.SCENE_PROPERTY] + ".tscn")
 	var card = template.instance()
+
 	# We set the card_name variable so that it's able to be used later
 	card.canonical_name = card_name
 	return(card)

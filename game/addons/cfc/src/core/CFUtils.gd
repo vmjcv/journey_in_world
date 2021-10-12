@@ -77,7 +77,6 @@ static func list_files_in_directory(path: String, prepend_needed := "") -> Array
 	dir.list_dir_begin()
 	while true:
 		var file := dir.get_next()
-		print(file)
 		if file == "":
 			break
 		elif not file.begins_with('.')\
