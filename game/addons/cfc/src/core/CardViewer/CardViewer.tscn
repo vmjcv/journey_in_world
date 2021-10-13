@@ -26,41 +26,41 @@ margin_bottom = 900.0
 
 [node name="Title" type="Label" parent="VBC"]
 margin_right = 1455.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Card Viewer"
 align = 1
 
 [node name="HBC" type="HBoxContainer" parent="VBC"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 1455.0
 margin_bottom = 900.0
 size_flags_vertical = 3
 
 [node name="MC" type="MarginContainer" parent="VBC/HBC"]
 margin_right = 1455.0
-margin_bottom = 882.0
+margin_bottom = 878.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 10
 custom_constants/margin_bottom = 5
 
 [node name="AvailableCards" type="VBoxContainer" parent="VBC/HBC/MC"]
 margin_right = 1445.0
-margin_bottom = 877.0
+margin_bottom = 873.0
 size_flags_horizontal = 3
 
 [node name="HBC" type="HBoxContainer" parent="VBC/HBC/MC/AvailableCards"]
 margin_right = 1445.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 
 [node name="ClearFilters" type="Button" parent="VBC/HBC/MC/AvailableCards/HBC"]
-margin_right = 20.0
-margin_bottom = 24.0
+margin_right = 21.0
+margin_bottom = 28.0
 text = "X"
 
 [node name="FilterLine" type="LineEdit" parent="VBC/HBC/MC/AvailableCards/HBC"]
-margin_left = 24.0
+margin_left = 25.0
 margin_right = 1341.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 placeholder_text = "Filter the list"
 script = ExtResource( 1 )
@@ -72,22 +72,22 @@ margin_bottom = 8.0
 [node name="Label" type="Label" parent="VBC/HBC/MC/AvailableCards/HBC/FilterLine/Syntax"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 45.0
-margin_bottom = 18.0
+margin_right = 50.0
+margin_bottom = 22.0
 text = "Syntax"
 
 [node name="CardCount" type="Label" parent="VBC/HBC/MC/AvailableCards/HBC"]
 margin_left = 1345.0
 margin_top = 5.0
 margin_right = 1445.0
-margin_bottom = 19.0
+margin_bottom = 23.0
 rect_min_size = Vector2( 100, 0 )
 text = "Total:"
 
 [node name="CC" type="CenterContainer" parent="VBC/HBC/MC/AvailableCards"]
-margin_top = 28.0
+margin_top = 32.0
 margin_right = 1445.0
-margin_bottom = 58.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
 
 [node name="ButtonFilters" type="HBoxContainer" parent="VBC/HBC/MC/AvailableCards/CC"]
@@ -104,9 +104,9 @@ icon = ExtResource( 2 )
 expand_icon = true
 
 [node name="CardListHeaders" type="HBoxContainer" parent="VBC/HBC/MC/AvailableCards"]
-margin_top = 62.0
+margin_top = 66.0
 margin_right = 1445.0
-margin_bottom = 82.0
+margin_bottom = 86.0
 
 [node name="Name" type="RichTextLabel" parent="VBC/HBC/MC/AvailableCards/CardListHeaders"]
 margin_right = 1341.0
@@ -125,15 +125,15 @@ text = "Type"
 scroll_active = false
 
 [node name="LineSeparator" type="Panel" parent="VBC/HBC/MC/AvailableCards"]
-margin_top = 86.0
+margin_top = 90.0
 margin_right = 1445.0
-margin_bottom = 86.0
+margin_bottom = 90.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBC/HBC/MC/AvailableCards"]
-margin_top = 90.0
+margin_top = 94.0
 margin_right = 1445.0
-margin_bottom = 833.0
+margin_bottom = 829.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -149,12 +149,12 @@ __meta__ = {
 columns = 4
 
 [node name="Settings" type="HBoxContainer" parent="VBC/HBC/MC/AvailableCards"]
-margin_top = 837.0
+margin_top = 833.0
 margin_right = 1445.0
-margin_bottom = 877.0
+margin_bottom = 873.0
 
 [node name="Control" type="Control" parent="VBC/HBC/MC/AvailableCards/Settings"]
-margin_right = 1300.0
+margin_right = 1299.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -162,7 +162,7 @@ __meta__ = {
 }
 
 [node name="GridViewStyle" type="CheckButton" parent="VBC/HBC/MC/AvailableCards/Settings"]
-margin_left = 1304.0
+margin_left = 1303.0
 margin_right = 1445.0
 margin_bottom = 40.0
 pressed = true

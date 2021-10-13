@@ -1,7 +1,7 @@
 {
     "Test Card 1":{
         "definition":{
-            "Type":"Blue",
+            "Type":"Rule",
             "Tags":[
                 "Tag 1",
                 "Tag 2"

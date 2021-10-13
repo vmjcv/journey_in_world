@@ -7,4 +7,58 @@
 script = ExtResource( 3 )
 
 [node name="Title" parent="VBC" index="0"]
+margin_bottom = 18.0
 text = "Card Library"
+
+[node name="HBC" parent="VBC" index="1"]
+margin_top = 22.0
+
+[node name="MC" parent="VBC/HBC" index="0"]
+margin_bottom = 878.0
+
+[node name="AvailableCards" parent="VBC/HBC/MC" index="0"]
+margin_bottom = 873.0
+
+[node name="HBC" parent="VBC/HBC/MC/AvailableCards" index="0"]
+margin_bottom = 28.0
+
+[node name="ClearFilters" parent="VBC/HBC/MC/AvailableCards/HBC" index="0"]
+margin_right = 21.0
+margin_bottom = 28.0
+
+[node name="FilterLine" parent="VBC/HBC/MC/AvailableCards/HBC" index="1"]
+margin_left = 25.0
+margin_bottom = 28.0
+
+[node name="Label" parent="VBC/HBC/MC/AvailableCards/HBC/FilterLine/Syntax" index="0"]
+margin_right = 50.0
+margin_bottom = 22.0
+
+[node name="CardCount" parent="VBC/HBC/MC/AvailableCards/HBC" index="2"]
+margin_bottom = 23.0
+
+[node name="CC" parent="VBC/HBC/MC/AvailableCards" index="1"]
+margin_top = 32.0
+margin_bottom = 62.0
+
+[node name="CardListHeaders" parent="VBC/HBC/MC/AvailableCards" index="2"]
+margin_top = 66.0
+margin_bottom = 86.0
+
+[node name="LineSeparator" parent="VBC/HBC/MC/AvailableCards" index="3"]
+margin_top = 90.0
+margin_bottom = 90.0
+
+[node name="ScrollContainer" parent="VBC/HBC/MC/AvailableCards" index="4"]
+margin_top = 94.0
+margin_bottom = 829.0
+
+[node name="Settings" parent="VBC/HBC/MC/AvailableCards" index="5"]
+margin_top = 833.0
+margin_bottom = 873.0
+
+[node name="Control" parent="VBC/HBC/MC/AvailableCards/Settings" index="0"]
+margin_right = 1299.0
+
+[node name="GridViewStyle" parent="VBC/HBC/MC/AvailableCards/Settings" index="1"]
+margin_left = 1303.0

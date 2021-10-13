@@ -13,6 +13,6 @@ static func load_card_project(project: CardProject) -> void:
 	var data = Utils.load_json(project.filepath)
 	var cur_data = Utils.merge_dict(data["definition"],data["script"])
 	match cur_data["card_type"]:
-		"rule":
+		"Rule":
 			project.meta_data = RuleMetadata.new(cur_data)
 		
