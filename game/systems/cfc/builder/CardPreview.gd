@@ -19,8 +19,6 @@ var grid_card_object: CVGridCardObject
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var test_card = cfc.instance_card("Test Card 1")
-	add_child(test_card)
 	pass # Replace with function body.
 
 func remove_all_preview_tscn():
