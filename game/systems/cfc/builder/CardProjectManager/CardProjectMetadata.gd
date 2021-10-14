@@ -4,7 +4,7 @@ class_name CardProjectMetadata
 var card_type
 var card_name
 var card_abilities
-const CARD_TYPE := "card_type"
+const CARD_TYPE := "Type"
 const CARD_NAME := "card_name"
 const CARD_ABILITIES := "card_abilities"
 

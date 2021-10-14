@@ -1,4 +1,3 @@
-tool
 extends HBoxContainer
 
 var index: String

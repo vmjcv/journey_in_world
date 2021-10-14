@@ -1,7 +1,7 @@
 extends Control
 
 # -------------------------------------------------------------------------------------------------
-onready var _menubar: Menubar = $Menubar
+onready var _menubar: Menubar = $VBoxContainer/Menubar
 onready var _file_dialog: FileDialog = $FileDialog
 onready var _main_menu: MainMenu = $MainMenu
 

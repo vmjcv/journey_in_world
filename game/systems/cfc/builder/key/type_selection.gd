@@ -1,4 +1,3 @@
-tool
 extends OptionButton
 
 onready var ValueField: LineEdit = get_node("../Value")

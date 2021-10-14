@@ -40,19 +40,19 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 32.0
+margin_top = 36.0
 margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Toolbar" type="HBoxContainer" parent="Tabs/Game Settings"]
-margin_right = 1912.0
-margin_bottom = 24.0
+margin_right = 1447.0
+margin_bottom = 28.0
 
 [node name="Create" type="Button" parent="Tabs/Game Settings/Toolbar"]
-margin_right = 119.0
-margin_bottom = 24.0
+margin_right = 125.0
+margin_bottom = 28.0
 size_flags_horizontal = 0
 custom_constants/hseparation = 2
 shortcut_in_tooltip = false
@@ -61,9 +61,9 @@ icon = ExtResource( 5 )
 script = ExtResource( 2 )
 
 [node name="AddNode" type="Button" parent="Tabs/Game Settings/Toolbar"]
-margin_left = 123.0
-margin_right = 256.0
-margin_bottom = 24.0
+margin_left = 129.0
+margin_right = 266.0
+margin_bottom = 28.0
 toggle_mode = true
 shortcut_in_tooltip = false
 action_mode = 0
@@ -77,27 +77,27 @@ margin_bottom = 20.0
 items = [ "Boolean", null, 0, false, false, 0, 0, null, "", false, "Option List", null, 0, false, false, 1, 0, null, "", false, "Text Field", null, 0, false, false, 2, 0, null, "", false, "Number Field", null, 0, false, false, 3, 0, null, "", false, "Arrow List", null, 0, false, false, 4, 0, null, "", false, "Slider", null, 0, false, false, 5, 0, null, "", false, "Keybind", null, 0, false, false, 6, 0, null, "KeybindSub", false, "", null, 0, false, false, -1, 0, null, "", true, "Reset Button", null, 0, false, false, 8, 0, null, "", false ]
 
 [node name="Reload" type="Button" parent="Tabs/Game Settings/Toolbar"]
-margin_left = 260.0
-margin_right = 288.0
-margin_bottom = 24.0
+margin_left = 270.0
+margin_right = 298.0
+margin_bottom = 28.0
 hint_tooltip = "Reload List"
 icon = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="VSeparator" type="VSeparator" parent="Tabs/Game Settings/Toolbar"]
-margin_left = 292.0
-margin_right = 296.0
-margin_bottom = 24.0
+margin_left = 302.0
+margin_right = 306.0
+margin_bottom = 28.0
 
 [node name="Search" type="HBoxContainer" parent="Tabs/Game Settings/Toolbar"]
-margin_left = 300.0
-margin_right = 624.0
-margin_bottom = 24.0
+margin_left = 310.0
+margin_right = 634.0
+margin_bottom = 28.0
 script = ExtResource( 13 )
 
 [node name="OptionButton" type="OptionButton" parent="Tabs/Game Settings/Toolbar/Search"]
 margin_right = 70.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 70, 0 )
 text = "Name"
 items = [ "Name", null, false, 0, null, "Type", null, false, 1, null, "Script", null, false, 2, null ]
@@ -106,70 +106,70 @@ selected = 0
 [node name="LineEdit" type="LineEdit" parent="Tabs/Game Settings/Toolbar/Search"]
 margin_left = 74.0
 margin_right = 324.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 250, 0 )
 clear_button_enabled = true
 shortcut_keys_enabled = false
 placeholder_text = "Search..."
 
 [node name="Help" type="Button" parent="Tabs/Game Settings/Toolbar"]
-margin_left = 1884.0
-margin_right = 1912.0
-margin_bottom = 24.0
+margin_left = 1419.0
+margin_right = 1447.0
+margin_bottom = 28.0
 hint_tooltip = "Open Github Wiki / Documentation"
 size_flags_horizontal = 10
 icon = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="HSep" type="HSeparator" parent="Tabs/Game Settings"]
-margin_top = 28.0
-margin_right = 1912.0
-margin_bottom = 32.0
+margin_top = 32.0
+margin_right = 1447.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 
 [node name="MainArea" type="ScrollContainer" parent="Tabs/Game Settings"]
-margin_top = 36.0
-margin_right = 1912.0
-margin_bottom = 1044.0
+margin_top = 40.0
+margin_right = 1447.0
+margin_bottom = 860.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBox" type="HBoxContainer" parent="Tabs/Game Settings/MainArea"]
-margin_right = 1912.0
-margin_bottom = 1008.0
+margin_right = 1447.0
+margin_bottom = 820.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
 
 [node name="SettingsList" type="VBoxContainer" parent="Tabs/Game Settings/MainArea/HBox"]
-margin_right = 949.0
-margin_bottom = 1008.0
+margin_right = 716.0
+margin_bottom = 820.0
 size_flags_horizontal = 3
 
 [node name="VSeparator" type="VSeparator" parent="Tabs/Game Settings/MainArea/HBox"]
-margin_left = 954.0
-margin_right = 958.0
-margin_bottom = 1008.0
+margin_left = 721.0
+margin_right = 725.0
+margin_bottom = 820.0
 
 [node name="Inspector" type="VBoxContainer" parent="Tabs/Game Settings/MainArea/HBox"]
-margin_left = 963.0
-margin_right = 1912.0
-margin_bottom = 1008.0
+margin_left = 730.0
+margin_right = 1447.0
+margin_bottom = 820.0
 size_flags_horizontal = 3
 script = ExtResource( 17 )
 
 [node name="NoSelection" type="CenterContainer" parent="Tabs/Game Settings/MainArea/HBox/Inspector"]
-margin_right = 949.0
-margin_bottom = 1008.0
+margin_right = 717.0
+margin_bottom = 820.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Tabs/Game Settings/MainArea/HBox/Inspector/NoSelection"]
-margin_left = 336.0
-margin_top = 497.0
-margin_right = 612.0
-margin_bottom = 511.0
+margin_left = 216.0
+margin_top = 401.0
+margin_right = 500.0
+margin_bottom = 419.0
 text = "Click on \"Edit Value\" of a setting to inspect."
 
 [node name="GGS Settings" type="VBoxContainer" parent="Tabs"]
@@ -177,7 +177,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 32.0
+margin_top = 36.0
 margin_right = -4.0
 margin_bottom = -4.0
 custom_constants/separation = 6

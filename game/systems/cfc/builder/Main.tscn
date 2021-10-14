@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://systems/cfc/builder/Menubar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://systems/cfc/builder/MainMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://systems/cfc/builder/Main.gd" type="Script" id=3]
 [ext_resource path="res://systems/cfc/builder/CardPreview.tscn" type="PackedScene" id=4]
+[ext_resource path="res://systems/cfc/builder/set_card_info.gd" type="Script" id=6]
 
 [node name="Main" type="Panel"]
 anchor_right = 1.0
@@ -13,18 +14,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionButton" type="OptionButton" parent="."]
-margin_right = 29.0
-margin_bottom = 24.0
-text = "角色卡"
-items = [ "角色卡", null, false, 0, null, "技能卡", null, false, 1, null, "道具卡", null, false, 2, null, "特性卡", null, false, 3, null, "规则卡", null, false, 4, null, "地图卡", null, false, 5, null, "记忆卡", null, false, 6, null ]
-selected = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menubar" parent="." instance=ExtResource( 1 )]
-_main_menu_path = NodePath("../MainMenu")
+[node name="Menubar" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_right = 1455.0
+_main_menu_path = NodePath("../../MainMenu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 42.0
+margin_right = 1455.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 721.0
+margin_bottom = 858.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CardPreview" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_right = 721.0
+margin_bottom = 858.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_left = 725.0
+margin_right = 729.0
+margin_bottom = 858.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 733.0
+margin_right = 1455.0
+margin_bottom = 858.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 6 )
 
 [node name="MainMenu" parent="." instance=ExtResource( 2 )]
 margin_top = 37.9571
@@ -42,9 +77,3 @@ margin_right = 250.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 300, 105 )
 window_title = "保存文件"
-
-[node name="CardPreview" parent="." instance=ExtResource( 4 )]
-margin_left = 2.17477
-margin_top = 41.7063
-margin_right = 629.175
-margin_bottom = 896.706
