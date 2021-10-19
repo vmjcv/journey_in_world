@@ -48,6 +48,8 @@ var Actions:Array = ["Card1", "Card2", "Card3", "Card4", "Card5","ToggleGameSpee
 "ShowDiscardCards","ShowShortcutKey","ShowMap"]
 
 
+var card_type:Array = ["Rule","Skill","Item","Role","Memory","Map"]
+
 # 因为可能存在删除状态的情况存在，所以直接使用名字来作为键，先只添加要用的游戏状态
 var game_status = {
 	"MAP_OPERATE_END":"MAP_OPERATE_END",# 地图操作结束，用于移动卡消耗

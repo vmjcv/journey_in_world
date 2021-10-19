@@ -6,13 +6,13 @@ var card_name
 var card_abilities
 const CARD_TYPE := "Type"
 const CARD_NAME := "card_name"
-const CARD_ABILITIES := "card_abilities"
+const CARD_ABILITIES := "Abilities"
 
 # -------------------------------------------------------------------------------------------------
 func make_definition_dict() -> Dictionary:
 	return {
 		CARD_TYPE: card_type,
-		CARD_NAME: card_name,
+#		CARD_NAME: card_name,# 卡牌名不保存到数组本身里面，直接在索引字段保存
 		CARD_ABILITIES: card_abilities,
 	}
 

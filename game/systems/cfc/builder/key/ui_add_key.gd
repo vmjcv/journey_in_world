@@ -9,5 +9,5 @@ func _ready() -> void:
 
 
 func _on_uiAddKey_pressed() -> void:
-	get_parent().add_one_key("")
+	get_parent().add_one_key()
 	raise()

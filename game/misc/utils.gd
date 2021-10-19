@@ -32,6 +32,13 @@ func remove_all_child_in_group(node,group: String) -> void:
 		if child.is_in_group(group):
 			node.remove_child(child)
 
+func get_nodes_in_group(node,group: String):
+	var childlist = []
+	for child in node.get_children():
+		if child.is_in_group(group):
+			childlist.append(child)
+	return childlist
+
 func get_size_from_resolution_enum(id):
 	var window_size
 	match id:

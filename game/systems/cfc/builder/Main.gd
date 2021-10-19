@@ -27,7 +27,7 @@ func _ready():
 	_main_menu.connect("save_card_project_as", self, "_on_save_project_as")
 
 	# Create the default project
-#	_create_active_default_project()
+	_create_active_default_project()
 
 # -------------------------------------------------------------------------------------------------
 func _exit_tree():

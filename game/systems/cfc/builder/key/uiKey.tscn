@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://systems/cfc/builder/key/ui_key.gd" type="Script" id=1]
 [ext_resource path="res://addons/GGS/assets/icons/types/float.svg" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://systems/cfc/builder/key/uikey_remove.gd" type="Script" id=6]
 [ext_resource path="res://systems/cfc/builder/key/value.gd" type="Script" id=7]
 [ext_resource path="res://systems/cfc/builder/key/key_name.gd" type="Script" id=8]
+[ext_resource path="res://systems/cfc/builder/key/ValueSelection.gd" type="Script" id=9]
 
 [node name="uiKey" type="HBoxContainer"]
 margin_right = 153.0
@@ -24,24 +25,42 @@ margin_bottom = 28.0
 size_flags_horizontal = 3
 script = ExtResource( 8 )
 
-[node name="Value" type="LineEdit" parent="."]
+[node name="ValueSelection" type="OptionButton" parent="." groups=[
+"ValueSelection",
+]]
 margin_left = 62.0
-margin_right = 120.0
+margin_right = 91.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 9 )
+
+[node name="Value" type="LineEdit" parent="." groups=[
+"Value",
+]]
+margin_left = 95.0
+margin_right = 153.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 script = ExtResource( 7 )
 
-[node name="TypeSelection" type="OptionButton" parent="."]
-margin_left = 124.0
-margin_right = 169.0
+[node name="TypeSelection" type="OptionButton" parent="." groups=[
+"Value",
+]]
+margin_left = 157.0
+margin_right = 256.0
 margin_bottom = 28.0
+text = "Boolean"
 icon = ExtResource( 5 )
 items = [ "Boolean", ExtResource( 5 ), false, 0, null, "Number", ExtResource( 2 ), false, 2, null, "String", ExtResource( 3 ), false, 3, null ]
 selected = 0
+script = ExtResource( 9 )
 
-[node name="Remove" type="Button" parent="."]
-margin_left = 173.0
-margin_right = 201.0
+[node name="Remove" type="Button" parent="." groups=[
+"Remove",
+]]
+margin_left = 260.0
+margin_right = 288.0
 margin_bottom = 28.0
 hint_tooltip = "Remove Key"
 icon = ExtResource( 4 )

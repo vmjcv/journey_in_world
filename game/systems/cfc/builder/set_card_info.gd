@@ -20,16 +20,15 @@ func clean_all():
 func add_base_attr():
 	# 增加默认属性，类型，名字，介绍
 	for type in base_type:
-		add_one_key(type,false)
+		add_one_key(type,"",false,false,false,[])
 		
-func add_one_key(attr_name,can_delete = true):
+	add_one_key("test","",true,false,false,["test1","test2","test3"])
+		
+func add_one_key(key="",value="",use_selection=false,can_remove=true,can_change_name=true,selection_list=[]):
 	var obj = ui_key_tscn.instance()
 	add_child(obj)
-	obj.name = attr_name
-	obj.KeyNameField.text = attr_name
+	obj.setup(key,value,use_selection,can_remove,can_change_name,selection_list)
 	obj.add_to_group(group_name)
-	obj.RemoveBtn.visible = can_delete
-	obj.KeyNameField.editable = can_delete
 	add_node.raise()
 	
 func get_value_from_node(attr_name):
