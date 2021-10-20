@@ -1,6 +1,9 @@
 extends VBoxContainer
 # 卡牌类必定含有的基础数据，选择后再额外添加其他信息
 var base_type = ["Type","Name","Abilities"]
+var use_selection = {
+	"Type":Types.card_type,
+}
 onready var ui_add_key_tscn = preload("res://systems/cfc/builder/key/uiAddKey.tscn")
 onready var ui_key_tscn = preload("res://systems/cfc/builder/key/uiKey.tscn")
 # Called when the node enters the scene tree for the first time.
@@ -20,9 +23,11 @@ func clean_all():
 func add_base_attr():
 	# 增加默认属性，类型，名字，介绍
 	for type in base_type:
-		add_one_key(type,"",false,false,false,[])
-		
-	add_one_key("test","",true,false,false,["test1","test2","test3"])
+		if use_selection.has(type):
+			add_one_key(type,"",true,false,false,use_selection[type])
+		else:
+			add_one_key(type,"",false,false,false,[])
+
 		
 func add_one_key(key="",value="",use_selection=false,can_remove=true,can_change_name=true,selection_list=[]):
 	var obj = ui_key_tscn.instance()
