@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/GGS/assets/icons/types/float.svg" type="Texture" id=2]
 [ext_resource path="res://addons/GGS/assets/icons/types/string.svg" type="Texture" id=3]
 [ext_resource path="res://addons/GGS/assets/icons/remove_key.svg" type="Texture" id=4]
 [ext_resource path="res://addons/GGS/assets/icons/types/bool.svg" type="Texture" id=5]
 [ext_resource path="res://systems/cfc/builder/key/value.gd" type="Script" id=7]
+[ext_resource path="res://systems/cfc/builder/key/uiAddKey.tscn" type="PackedScene" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends HBoxContainer
@@ -117,27 +118,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="uiAddKey" parent="." instance=ExtResource( 10 )]
+margin_bottom = 28.0
+
 [node name="KeyName" type="LineEdit" parent="."]
-margin_right = 58.0
+margin_left = 32.0
+margin_right = 90.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 script = SubResource( 2 )
 
-[node name="ValueSelection" type="OptionButton" parent="." groups=[
-"ValueSelection",
-]]
-margin_left = 62.0
-margin_right = 91.0
-margin_bottom = 28.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = SubResource( 3 )
-
 [node name="Value" type="LineEdit" parent="." groups=[
 "Value",
 ]]
-margin_left = 95.0
-margin_right = 153.0
+margin_left = 94.0
+margin_right = 152.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 script = ExtResource( 7 )
@@ -145,8 +140,8 @@ script = ExtResource( 7 )
 [node name="TypeSelection" type="OptionButton" parent="." groups=[
 "Value",
 ]]
-margin_left = 157.0
-margin_right = 256.0
+margin_left = 156.0
+margin_right = 255.0
 margin_bottom = 28.0
 text = "Boolean"
 icon = ExtResource( 5 )
@@ -157,8 +152,8 @@ script = SubResource( 3 )
 [node name="Remove" type="Button" parent="." groups=[
 "Remove",
 ]]
-margin_left = 260.0
-margin_right = 288.0
+margin_left = 259.0
+margin_right = 287.0
 margin_bottom = 28.0
 hint_tooltip = "Remove Key"
 icon = ExtResource( 4 )

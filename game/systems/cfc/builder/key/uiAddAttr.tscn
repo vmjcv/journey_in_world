@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/GGS/assets/icons/types/bool.svg" type="Texture" id=1]
+[ext_resource path="res://addons/GGS/assets/icons/remove_key.svg" type="Texture" id=3]
+[ext_resource path="res://systems/cfc/builder/key/LabelName.gd" type="Script" id=4]
+[ext_resource path="res://systems/cfc/builder/key/uiAddAttr.gd" type="Script" id=5]
+[ext_resource path="res://systems/cfc/builder/key/OptionSelection.gd" type="Script" id=6]
+
+[node name="uiKeyScript" type="HBoxContainer"]
+margin_right = 153.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttrLabel" type="Label" parent="."]
+margin_top = 5.0
+margin_right = 28.0
+margin_bottom = 23.0
+text = "key:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttrName" type="LineEdit" parent="."]
+margin_left = 32.0
+margin_right = 90.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+script = ExtResource( 4 )
+
+[node name="AttrValueLabel" type="Label" parent="."]
+margin_left = 94.0
+margin_top = 5.0
+margin_right = 133.0
+margin_bottom = 23.0
+text = "value:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValueSelection" type="OptionButton" parent="."]
+margin_left = 137.0
+margin_right = 205.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Board"
+script = ExtResource( 6 )
+
+[node name="ValueName" type="LineEdit" parent="."]
+margin_left = 209.0
+margin_right = 267.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+script = ExtResource( 4 )
+
+[node name="ValueNameSelection" type="OptionButton" parent="."]
+margin_left = 271.0
+margin_right = 358.0
+margin_bottom = 28.0
+text = "target"
+icon = ExtResource( 1 )
+script = ExtResource( 6 )
+
+[node name="Remove" type="Button" parent="."]
+margin_left = 362.0
+margin_right = 390.0
+margin_bottom = 28.0
+hint_tooltip = "Remove Key"
+icon = ExtResource( 3 )
+
+[connection signal="pressed" from="Remove" to="." method="_on_Remove_pressed"]

@@ -102,3 +102,32 @@ static func load_json(path: String) -> Dictionary:
 		file.close()
 	var result: JSONParseResult = JSON.parse(data)
 	return result.result
+
+
+enum Type {_bool, _float, _String}
+func convert_value(value: String,selected_type):
+	var result
+	match selected_type:
+		Type._String:
+			result = value
+		Type._bool:
+			result = str2bool(value)
+		Type._float:
+			result = str2float(value)
+	return result
+
+func str2bool(value: String):
+	var val = value.to_lower()
+	if val == "false" or val == "0":
+		return false
+	elif val == "true" or val == "1":
+		return true
+	else:
+		return null
+
+
+func str2float(value: String):
+	if value.is_valid_float():
+		return float(value)
+	else:
+		return null

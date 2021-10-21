@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/GGS/assets/icons/types/bool.svg" type="Texture" id=1]
+[ext_resource path="res://systems/cfc/builder/key/LabelName.gd" type="Script" id=2]
+[ext_resource path="res://systems/cfc/builder/key/uiAddTrigger.gd" type="Script" id=3]
+[ext_resource path="res://systems/cfc/builder/key/OptionSelection.gd" type="Script" id=4]
+[ext_resource path="res://systems/cfc/builder/key/uiAddScript.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/GGS/assets/icons/remove_key.svg" type="Texture" id=6]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="uiTriggerScript" type="HBoxContainer" parent="."]
+margin_right = 434.0
+margin_bottom = 28.0
+
+[node name="TriggerNameLabel" type="Label" parent="uiTriggerScript"]
+margin_top = 5.0
+margin_right = 88.0
+margin_bottom = 23.0
+text = "trigger name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TriggerName" type="LineEdit" parent="uiTriggerScript"]
+margin_left = 92.0
+margin_right = 301.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+script = ExtResource( 2 )
+
+[node name="TriggerLabel" type="Label" parent="uiTriggerScript"]
+margin_left = 305.0
+margin_top = 5.0
+margin_right = 353.0
+margin_bottom = 23.0
+text = "trigger:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TriggerSelection" type="OptionButton" parent="uiTriggerScript"]
+margin_left = 357.0
+margin_right = 402.0
+margin_bottom = 28.0
+icon = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Remove" type="Button" parent="uiTriggerScript"]
+margin_left = 406.0
+margin_right = 434.0
+margin_bottom = 28.0
+hint_tooltip = "Remove Key"
+icon = ExtResource( 6 )
+
+[node name="uiKeyScript" parent="." instance=ExtResource( 5 )]
+margin_top = 32.0
+margin_right = 434.0
+margin_bottom = 60.0
+
+[node name="VBoxContainer" parent="uiKeyScript" index="3"]
+margin_right = 434.0
+
+[node name="HBoxContainer" parent="uiKeyScript/VBoxContainer" index="0"]
+margin_right = 322.0
+
+[node name="Remove" parent="uiKeyScript/VBoxContainer/HBoxContainer" index="5"]
+visible = false
+
+[connection signal="pressed" from="uiTriggerScript/Remove" to="." method="_on_Remove_pressed"]
+
+[editable path="uiKeyScript"]
