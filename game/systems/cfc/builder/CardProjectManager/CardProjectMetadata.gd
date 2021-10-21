@@ -1,33 +1,32 @@
 extends Reference
 class_name CardProjectMetadata
 
-var card_type
 var card_name
-var card_abilities
-const CARD_TYPE := "Type"
 const CARD_NAME := "card_name"
-const CARD_ABILITIES := "Abilities"
+var definition_dict
+var script_dict
 
 # -------------------------------------------------------------------------------------------------
 func make_definition_dict() -> Dictionary:
-	return {
-		CARD_TYPE: card_type,
-#		CARD_NAME: card_name,# 卡牌名不保存到数组本身里面，直接在索引字段保存
-		CARD_ABILITIES: card_abilities,
-	}
+	return 
 
 func make_script_dict() -> Dictionary:
 	return {
 	}
 
 # -------------------------------------------------------------------------------------------------
-func apply_from_dict(meta_data: Dictionary) -> void:
-	card_type = meta_data[CARD_TYPE]
-	card_name = meta_data[CARD_NAME]
-	card_abilities = meta_data[CARD_ABILITIES]
+func apply_from_definition_dict(meta_data: Dictionary) -> void:
+	definition_dict = meta_data
 
-func _init(meta_data):
-	apply_from_dict(meta_data)
+func apply_from_script_dict(meta_data: Dictionary) -> void:
+	script_dict = meta_data
+
+func _init(card_data):
+	var definition = card_data["definition"]
+	var script = card_data["script"]
+	apply_from_definition_dict(definition)
+	apply_from_script_dict(script)
+	card_name = card_data["card_name"]
 
 func clear():
 	card_type = null

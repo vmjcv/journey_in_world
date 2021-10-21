@@ -374,11 +374,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://systems/cfc/cards/rule/rule.gd"
 }, {
-"base": "CardProjectMetadata",
-"class": "RuleMetadata",
-"language": "GDScript",
-"path": "res://systems/cfc/builder/CardProjectManager/RuleMetadata.gd"
-}, {
 "base": "ScriptProperties",
 "class": "SP",
 "language": "GDScript",
@@ -528,7 +523,6 @@ _global_script_class_icons={
 "Pile": "",
 "QuantityNumberButton": "",
 "RuleBase": "",
-"RuleMetadata": "",
 "SP": "",
 "ScriptAlter": "",
 "ScriptObject": "",

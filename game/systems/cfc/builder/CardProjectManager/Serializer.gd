@@ -13,9 +13,7 @@ static func save_card_project(project: CardProject) -> void:
 static func load_card_project(project: CardProject) -> void:
 	var data = Utils.load_json(project.filepath)
 	var card_name = data.keys().front()
-	var cur_data = Utils.merge_dict(data[card_name]["definition"],data[card_name]["script"])
-	cur_data["card_name"] = card_name
-	match cur_data["Type"]:
-		"Rule":
-			project.meta_data = RuleMetadata.new(cur_data)
+
+	data[card_name]["card_name"] = card_name # 额外数据
+	project.meta_data = CardProjectMetadata.new(data[card_name])
 		
