@@ -16,7 +16,7 @@ var _active_file_tab: Tab
 var _tabs_map: Dictionary # Dictonary<project_id, ProjectTab>
 
 # -------------------------------------------------------------------------------------------------
-func make_tab(project: CardProject) -> void:
+func make_tab(project) -> void:
 	var tab: Tab = PROJECT_TAB.instance()
 	tab.title = project.get_filename()
 	tab.id = project.id
@@ -26,11 +26,11 @@ func make_tab(project: CardProject) -> void:
 	_tabs_map[project.id] = tab
 
 # ------------------------------------------------------------------------------------------------
-func has_tab(project: CardProject) -> bool:
+func has_tab(project) -> bool:
 	return _tabs_map.has(project.id)
 
 # ------------------------------------------------------------------------------------------------
-func remove_tab(project: CardProject) -> void:
+func remove_tab(project) -> void:
 	if _tabs_map.has(project.id):
 		var tab = _tabs_map[project.id]
 		tab.disconnect("close_requested", self, "_on_tab_close_requested")
@@ -49,7 +49,7 @@ func remove_all_tabs() -> void:
 	_active_file_tab = null
 
 # ------------------------------------------------------------------------------------------------
-func update_tab_title(project: CardProject) -> void:
+func update_tab_title(project) -> void:
 	if _tabs_map.has(project.id):
 		var name = project.get_filename()
 		if project.dirty:
@@ -57,7 +57,7 @@ func update_tab_title(project: CardProject) -> void:
 		_tabs_map[project.id].title = name
 
 # ------------------------------------------------------------------------------------------------
-func set_tab_active(project: CardProject) -> void:
+func set_tab_active(project) -> void:
 	if _tabs_map.has(project.id):
 		var tab: Tab = _tabs_map[project.id]
 		_active_file_tab = tab

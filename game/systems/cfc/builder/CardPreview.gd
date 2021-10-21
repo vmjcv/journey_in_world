@@ -42,9 +42,7 @@ func add_front_tscn():
 		return 
 	var data = active_project.meta_data
 	var card_name = data.card_name
-	match data.card_type:
-		"Rule":
-			add_front_card(card_name)
+	add_front_card(card_name)
 	
 func add_front_card(card_name):
 	grid_card_object = grid_card_object_scene.instance()

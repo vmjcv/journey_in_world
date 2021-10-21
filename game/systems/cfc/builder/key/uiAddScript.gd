@@ -17,7 +17,7 @@ const _ARGS_SCENE = preload(_ARGS_SCENE_FILE)
 const args_scene_group = "args"
 
 func get_dirty():
-	for obj in [EnvSelection,ScriptName,SubjectSelection,AddButton,RemoveButton]:
+	for obj in [EnvSelection,ScriptName,SubjectSelection]:
 		if obj.dirty:
 			return true
 	for obj in Utils.get_nodes_in_group(ScriptContainer,args_scene_group):
@@ -39,7 +39,7 @@ func setup(env_name,script_name,subject_name,data_map={}):
 	var value_type
 	for key in data_map:
 		value = data_map[key]
-		match value:
+		match typeof(value):
 			TYPE_BOOL:
 				value_type = "Boolean"
 			TYPE_REAL:

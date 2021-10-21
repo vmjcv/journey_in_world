@@ -24,6 +24,8 @@ var group_attr_name = "info_attr"
 var group_script_name = "info_script"
 var group_signal_name = "info_signal"
 
+onready var dirty setget ,get_dirty
+
 func _on_MenuButton_pressed():
 	_main_menu.popup()
 	_main_menu.rect_global_position = $VBoxContainer/HBoxContainer.rect_global_position+Vector2(0,20)
@@ -33,8 +35,8 @@ func _ready():
 	_main_menu.connect("add_attr_ui", self, "_on_add_attr_ui")
 	_main_menu.connect("add_script_ui", self, "_on_add_script_ui")
 	_main_menu.connect("add_trigger_ui", self, "_on_add_trigger_ui")
-	clean_all()
-	add_base_attr()
+	CardProjectManager.connect("change_active_project", self, "update_ui_from_data")
+	init_ui()
 
 func _on_add_attr_ui():
 	add_attr_ui("","",[],true)
@@ -83,17 +85,89 @@ func get_all_attr_dict():
 		attr_dict = Utils.merge_dict(attr_dict,cur_dict)
 	return attr_dict
 
-func get_all_script_dict():
-	var script_dict = {}
+func get_all_script_list():
+	var script_list = []
 	for _script_node in _container_script.get_children():
 		var cur_dict = _script_node.get_data()
-		script_dict = Utils.merge_dict(script_dict,cur_dict)
-	return script_dict
+		script_list.append(cur_dict)
+	return script_list
 	
-func get_all_trigger_dict():
-	var trigger_dict = {}
+func get_all_trigger_list():
+	var trigger_list = []
 	for _trigger_node in _container_trigger.get_children():
 		var cur_dict = _trigger_node.get_data()
-		trigger_dict = Utils.merge_dict(trigger_dict,cur_dict)
-	return trigger_dict
+		trigger_list.append(cur_dict)
+	return trigger_list
+
+func _process(delta):
+	# 每帧刷新，其实可以更改的时候做刷新数据的操作，待定
+	if get_dirty():
+		if CardProjectManager.get_active_project().meta_data:
+			CardProjectManager.get_active_project().meta_data.update_data_from_ui(self)
+			CardProjectManager.get_active_project().dirty = true
+	else:
+		if CardProjectManager.get_active_project().meta_data:
+			CardProjectManager.get_active_project().dirty = false
+
+
+func get_dirty():
+	var cur_list = []
+	cur_list.append_array(_container_attr.get_children())
+	cur_list.append_array(_container_script.get_children())
+	cur_list.append_array(_container_trigger.get_children())
+	var dir
+	for node in cur_list:
+		if node.dirty:
+			return true
+	return false
+
+
+func init_ui():
+	clean_all()
+	add_base_attr()
 	
+func update_ui_from_data(project):
+	if not project.meta_data:
+		init_ui()
+		return 
+	var definition_data = project.meta_data.definition_dict
+	var script_data = project.meta_data.script_dict
+	var card_name = project.meta_data.card_name
+	clean_all()
+	
+	add_attr_ui("Name",card_name,[],false)
+	
+	for key in definition_data:
+		add_attr_ui(key,definition_data[key],use_selection.get(key,[]),not(key in base_type))
+	
+	var cur_script_data = script_data.get("manual",{})
+	for key in cur_script_data:
+		var cur_data = cur_script_data[key]
+		for one_data in cur_data:
+			var script_name = one_data["name"]
+			var subject_name = one_data["subject"]
+			var args_dict = {}
+			args_dict = one_data.duplicate(true)
+			args_dict.erase("name")
+			args_dict.erase("subject")
+			add_script_ui(key,script_name,subject_name,args_dict)
+	
+	var trigger_dict = script_data.duplicate(true)
+	trigger_dict.erase("manual")
+	
+	for key in trigger_dict:
+		var trigger_name = trigger_dict[key]["trigger"]
+		trigger_dict[key].erase("trigger")
+		for env_key in trigger_dict[key]:
+			var cur_data = trigger_dict[key].get(env_key,[])
+			for one_data in cur_data:
+				var script_name = one_data["name"]
+				var subject_name = one_data["subject"]
+				var args_dict = {}
+				args_dict = one_data.duplicate(true)
+				args_dict.erase("name")
+				args_dict.erase("subject")
+				add_trigger_ui(key,trigger_name,env_key,script_name,subject_name,args_dict)
+			
+	
+

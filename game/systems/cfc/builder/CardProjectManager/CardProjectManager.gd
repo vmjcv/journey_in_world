@@ -2,24 +2,25 @@ extends Node
 
 # -------------------------------------------------------------------------------------------------
 var _open_projects: Array # Array<Project>
-var _active_project: CardProject
-
+var _active_project
+signal change_active_project
 # -------------------------------------------------------------------------------------------------
 func read_project_list() -> void:
 	pass
 
 # -------------------------------------------------------------------------------------------------
-func make_project_active(project: CardProject) -> void:
+func make_project_active(project) -> void:
 	if !project.loaded:
 		_load_project(project)
 	_active_project = project
+	emit_signal("change_active_project",_active_project)
 
 # -------------------------------------------------------------------------------------------------
-func get_active_project() -> CardProject:
+func get_active_project():
 	return _active_project
 
 # -------------------------------------------------------------------------------------------------
-func remove_project(project: CardProject) -> void:
+func remove_project(project) -> void:
 	var index := _open_projects.find(project)
 	if index >= 0:
 		_open_projects.remove(index)
@@ -36,10 +37,10 @@ func remove_all_projects() -> void:
 	_active_project = null
 
 # -------------------------------------------------------------------------------------------------
-func add_project(filepath: String = "") -> CardProject:
+func add_project(filepath: String = ""):
 	# Check if already open
 	if !filepath.empty():
-		var p := get_open_project_by_filepath(filepath)
+		var p = get_open_project_by_filepath(filepath)
 		if p != null:
 			print_debug("Project already in open project list")
 			return p
@@ -52,9 +53,12 @@ func add_project(filepath: String = "") -> CardProject:
 	return project
 
 # -------------------------------------------------------------------------------------------------
-func save_project(project: CardProject) -> void:
+func save_project(project) -> void:
 	Serializer.save_card_project(project)
+	project.loaded = false
 	project.dirty = false
+	make_project_active(project)
+	
 
 # -------------------------------------------------------------------------------------------------
 func save_all_projects() -> void:
@@ -63,7 +67,7 @@ func save_all_projects() -> void:
 			save_project(p)
 
 # -------------------------------------------------------------------------------------------------
-func _load_project(project: CardProject) -> void:
+func _load_project(project) -> void:
 	if !project.loaded:
 		Serializer.load_card_project(project)
 		project.loaded = true
@@ -71,14 +75,14 @@ func _load_project(project: CardProject) -> void:
 		print_debug("Trying to load already loaded project")
 
 # -------------------------------------------------------------------------------------------------
-func get_open_project_by_filepath(filepath: String) -> CardProject:
+func get_open_project_by_filepath(filepath: String):
 	for p in _open_projects:
 		if p.filepath == filepath:
 			return p
 	return null
 
 # -------------------------------------------------------------------------------------------------
-func get_project_by_id(id: int) -> CardProject:
+func get_project_by_id(id: int):
 	for p in _open_projects:
 		if p.id == id:
 			return p
@@ -103,5 +107,5 @@ func get_project_count() -> int:
 	return _open_projects.size()
 
 # -------------------------------------------------------------------------------------------------
-func is_active_project(project: CardProject) -> bool:
+func is_active_project(project) -> bool:
 	return _active_project == project

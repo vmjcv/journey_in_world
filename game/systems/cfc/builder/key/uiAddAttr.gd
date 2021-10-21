@@ -47,13 +47,14 @@ func setup(attr_name,value,value_array=[],can_edit_attr_name=true):
 	else:
 		ValueNameSelection.selection_array = ["Boolean","Number","String"]
 		var value_type
-		match value:
+		match typeof(value):
 			TYPE_BOOL:
 				value_type = "Boolean"
 			TYPE_REAL:
 				value_type = "Number"
 			TYPE_STRING:
 				value_type = "String"
+		
 		value = str(value)
 		ValueNameSelection.init_name = value_type
 		ValueName.init_name = value
@@ -64,7 +65,7 @@ func _on_Remove_pressed():
 
 func get_data():
 	if UseSelection:
-		return {AttrName.text:ValueSelection.selected}
+		return {AttrName.text:ValueSelection.get_item_text(ValueSelection.selected)}
 	else:
 		return {AttrName.text:Utils.convert_value(ValueName.text,ValueNameSelection.selected)}
 	return {}

@@ -36,7 +36,6 @@ func _exit_tree():
 
 # -------------------------------------------------------------------------------------------------
 func _process(delta):
-
 	# Update tab title
 	var active_project: CardProject = CardProjectManager.get_active_project()
 	if active_project != null:
@@ -50,7 +49,7 @@ func _on_files_dropped(files: PoolStringArray, screen: int) -> void:
 			_on_open_project(file)
 
 # -------------------------------------------------------------------------------------------------
-func _make_project_active(project: CardProject) -> void:
+func _make_project_active(project) -> void:
 	CardProjectManager.make_project_active(project)
 	if !_menubar.has_tab(project):
 		_menubar.make_tab(project)
@@ -63,7 +62,7 @@ func _create_active_default_project() -> void:
 	_make_project_active(default_project)
 
 # -------------------------------------------------------------------------------------------------
-func _save_project(project: CardProject) -> void:
+func _save_project(project) -> void:
 #	var meta_data = ProjectMetadata.make_dict(_canvas)
 #	project.meta_data = meta_data
 	CardProjectManager.save_project(project)
