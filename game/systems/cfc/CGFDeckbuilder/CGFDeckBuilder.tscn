@@ -8,13 +8,9 @@
 script = ExtResource( 4 )
 info_panel_scene = ExtResource( 2 )
 
-[node name="DeckMC" parent="VBC/HBC" index="0"]
-margin_right = 725.0
-margin_bottom = 882.0
-
 [node name="CurrentDeck" parent="VBC/HBC/DeckMC" index="0"]
 margin_right = 725.0
-margin_bottom = 877.0
+margin_bottom = 873.0
 
 [node name="DeckDetails" parent="VBC/HBC/DeckMC/CurrentDeck" index="0"]
 margin_right = 720.0
@@ -24,85 +20,64 @@ margin_right = 720.0
 
 [node name="ScrollContainer" parent="VBC/HBC/DeckMC/CurrentDeck" index="2"]
 margin_right = 720.0
-margin_bottom = 801.0
+margin_bottom = 785.0
 
 [node name="CardsInDeck" parent="VBC/HBC/DeckMC/CurrentDeck/ScrollContainer" index="0"]
-margin_bottom = 793.0
+margin_bottom = 777.0
 
 [node name="HBoxContainer" parent="VBC/HBC/DeckMC/CurrentDeck" index="3"]
-margin_top = 805.0
+margin_top = 789.0
 margin_right = 720.0
-margin_bottom = 825.0
+margin_bottom = 813.0
+
+[node name="DeckNameEditLabel" parent="VBC/HBC/DeckMC/CurrentDeck/HBoxContainer" index="0"]
+margin_right = 39.0
+margin_bottom = 21.0
+
+[node name="RandomizeName" parent="VBC/HBC/DeckMC/CurrentDeck/HBoxContainer" index="1"]
+margin_left = 43.0
+margin_right = 64.0
+margin_bottom = 24.0
 
 [node name="NoticeLabel" parent="VBC/HBC/DeckMC/CurrentDeck/HBoxContainer" index="2"]
+margin_left = 68.0
+margin_top = 2.0
 margin_right = 720.0
+margin_bottom = 21.0
 
 [node name="DeckNameEdit" parent="VBC/HBC/DeckMC/CurrentDeck" index="4"]
-margin_top = 829.0
+margin_top = 817.0
 margin_right = 720.0
-margin_bottom = 853.0
+margin_bottom = 845.0
 
 [node name="Buttons" parent="VBC/HBC/DeckMC/CurrentDeck" index="5"]
-margin_top = 857.0
+margin_top = 849.0
 margin_right = 720.0
-margin_bottom = 877.0
+margin_bottom = 873.0
+
+[node name="Save" parent="VBC/HBC/DeckMC/CurrentDeck/Buttons" index="0"]
+margin_right = 45.0
+margin_bottom = 24.0
+
+[node name="Load" parent="VBC/HBC/DeckMC/CurrentDeck/Buttons" index="1"]
+margin_left = 49.0
+margin_right = 94.0
+margin_bottom = 24.0
+
+[node name="Reset" parent="VBC/HBC/DeckMC/CurrentDeck/Buttons" index="2"]
+margin_left = 98.0
+margin_right = 147.0
+margin_bottom = 24.0
+
+[node name="Delete" parent="VBC/HBC/DeckMC/CurrentDeck/Buttons" index="3"]
+margin_left = 151.0
+margin_right = 205.0
+margin_bottom = 24.0
 
 [node name="Back" type="Button" parent="VBC/HBC/DeckMC/CurrentDeck/Buttons" index="4"]
-margin_left = 202.0
-margin_right = 244.0
-margin_bottom = 20.0
+margin_left = 209.0
+margin_right = 254.0
+margin_bottom = 24.0
 text = "Back"
-
-[node name="MC" parent="VBC/HBC" index="1"]
-margin_left = 729.0
-
-[node name="AvailableCards" parent="VBC/HBC/MC" index="0"]
-margin_right = 716.0
-
-[node name="HBC" parent="VBC/HBC/MC/AvailableCards" index="0"]
-margin_right = 716.0
-
-[node name="FilterLine" parent="VBC/HBC/MC/AvailableCards/HBC" index="1"]
-margin_right = 612.0
-
-[node name="CardCount" parent="VBC/HBC/MC/AvailableCards/HBC" index="2"]
-margin_left = 616.0
-margin_right = 716.0
-
-[node name="CC" parent="VBC/HBC/MC/AvailableCards" index="1"]
-margin_right = 716.0
-
-[node name="ButtonFilters" parent="VBC/HBC/MC/AvailableCards/CC" index="0"]
-margin_left = 343.0
-margin_right = 373.0
-
-[node name="CardListHeaders" parent="VBC/HBC/MC/AvailableCards" index="2"]
-margin_right = 716.0
-
-[node name="Name" parent="VBC/HBC/MC/AvailableCards/CardListHeaders" index="0"]
-margin_right = 612.0
-
-[node name="Type" parent="VBC/HBC/MC/AvailableCards/CardListHeaders" index="1"]
-margin_left = 616.0
-margin_right = 716.0
-
-[node name="LineSeparator" parent="VBC/HBC/MC/AvailableCards" index="3"]
-margin_right = 716.0
-
-[node name="ScrollContainer" parent="VBC/HBC/MC/AvailableCards" index="4"]
-margin_right = 716.0
-
-[node name="CardList" parent="VBC/HBC/MC/AvailableCards/ScrollContainer" index="0"]
-margin_right = 716.0
-
-[node name="Settings" parent="VBC/HBC/MC/AvailableCards" index="5"]
-margin_right = 716.0
-
-[node name="Control" parent="VBC/HBC/MC/AvailableCards/Settings" index="0"]
-margin_right = 571.0
-
-[node name="GridViewStyle" parent="VBC/HBC/MC/AvailableCards/Settings" index="1"]
-margin_left = 575.0
-margin_right = 716.0
 
 [editable path="VBC/HBC/DeckMC"]

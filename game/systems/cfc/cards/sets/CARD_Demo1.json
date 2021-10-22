@@ -8,7 +8,8 @@
 			"Power": 0,
 			"_max_allowed": 1,
 			"_illustration": "Nobody",
-			"_keywords": "test"
+			"_keywords": "test",
+			"Tags": "EvalString[\"Tag1\",\"Text\"]"
 		},
 		"script": {
 			"manual": {

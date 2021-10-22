@@ -24,7 +24,7 @@ margin_left = 5.0
 margin_right = 1450.0
 
 [node name="CardListHeaders" parent="VBC/HBC/MC/AvailableCards" index="2"]
-margin_bottom = 62.0
+margin_bottom = 66.0
 
 [node name="Name" parent="VBC/HBC/MC/AvailableCards/CardListHeaders" index="0"]
 margin_bottom = 0.0
@@ -35,16 +35,16 @@ margin_bottom = 0.0
 rect_min_size = Vector2( 100, 0 )
 
 [node name="LineSeparator" parent="VBC/HBC/MC/AvailableCards" index="3"]
-margin_top = 66.0
-margin_bottom = 66.0
+margin_top = 70.0
+margin_bottom = 70.0
 
 [node name="ScrollContainer" parent="VBC/HBC/MC/AvailableCards" index="4"]
-margin_top = 70.0
+margin_top = 74.0
 
 [node name="Back" type="Button" parent="VBC/HBC/MC/AvailableCards/Settings" index="0"]
-margin_right = 42.0
+margin_right = 45.0
 margin_bottom = 40.0
 text = "Back"
 
 [node name="Control" parent="VBC/HBC/MC/AvailableCards/Settings" index="1"]
-margin_left = 46.0
+margin_left = 49.0

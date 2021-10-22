@@ -43,9 +43,12 @@ func setup(attr_name,value,value_array=[],can_edit_attr_name=true):
 	
 	if UseSelection:
 		ValueSelection.selection_array = value_array
-		ValueSelection.init_name = value
+		if value == "":
+			ValueSelection.init_name = value_array.front()
+		else:
+			ValueSelection.init_name = value # 如果为空字符串则默认选第一个
 	else:
-		ValueNameSelection.selection_array = ["Boolean","Number","String"]
+		ValueNameSelection.selection_array = ["Boolean","Number","String","EvalString"]
 		var value_type
 		match typeof(value):
 			TYPE_BOOL:
@@ -54,6 +57,10 @@ func setup(attr_name,value,value_array=[],can_edit_attr_name=true):
 				value_type = "Number"
 			TYPE_STRING:
 				value_type = "String"
+		if value_type == "String":
+			if value.begins_with("EvalString"):
+				value_type = "EvalString"
+				value = value.trim_prefix("EvalString")
 		
 		value = str(value)
 		ValueNameSelection.init_name = value_type

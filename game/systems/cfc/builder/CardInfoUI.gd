@@ -101,14 +101,15 @@ func get_all_trigger_list():
 
 func _process(delta):
 	# 每帧刷新，其实可以更改的时候做刷新数据的操作，待定
-	if get_dirty():
-		if CardProjectManager.get_active_project().meta_data:
-			CardProjectManager.get_active_project().meta_data.update_data_from_ui(self)
-			CardProjectManager.get_active_project().dirty = true
+	var _dirty = get_dirty()
+	if not CardProjectManager.get_active_project().meta_data:
+		CardProjectManager.get_active_project().meta_data = CardProjectMetadata.new()
+		CardProjectManager.get_active_project().meta_data.update_data_from_ui(self)
+	if _dirty:
+		CardProjectManager.get_active_project().meta_data.update_data_from_ui(self)
+		CardProjectManager.get_active_project().dirty = true
 	else:
-		if CardProjectManager.get_active_project().meta_data:
-			CardProjectManager.get_active_project().dirty = false
-
+		CardProjectManager.get_active_project().dirty = false
 
 func get_dirty():
 	var cur_list = []

@@ -17,7 +17,7 @@ func setup(arg_name="",value_name="",value_type_name=""):
 	ArgName.init_name = arg_name
 	ArgValue.init_name = value_name
 	
-	ArgTypeSelection.selection_array = ["Boolean","Number","String"]
+	ArgTypeSelection.selection_array = ["Boolean","Number","String","EvalString"]
 	ArgTypeSelection.init_name = value_type_name
 	
 func _on_Remove_pressed():

@@ -9,7 +9,9 @@ func load_card_definitions() -> Dictionary:
 	for set_file in set_definitions:
 		var data = Utils.load_json(CFConst.PATH_SETS + set_file)
 		for dict_entry in data:
-			combined_sets[dict_entry] = data[dict_entry]["definition"]
+			var cur_data = data[dict_entry]["definition"]
+			cur_data = Utils.transform_evalstring(cur_data)
+			combined_sets[dict_entry] = cur_data
 	return(combined_sets)
 
 
@@ -29,5 +31,7 @@ func load_script_definitions() -> Dictionary:
 			# method which returns the script for the requested card name
 			var card_script = data.get(card_name,null)
 			if not card_script.empty():
-				combined_scripts[card_name] = card_script["script"]
+				var cur_data = card_script["script"]
+				cur_data = Utils.transform_evalstring(cur_data)
+				combined_scripts[card_name] = cur_data
 	return(combined_scripts)

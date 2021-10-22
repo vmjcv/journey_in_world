@@ -50,6 +50,8 @@ func add_project(filepath: String = ""):
 	project.filepath = filepath
 	project.loaded = project.filepath.empty() # empty/unsaved/new projects are loaded by definition
 	_open_projects.append(project)
+	
+#	project.meta_data = CardProjectMetadata.new()
 	return project
 
 # -------------------------------------------------------------------------------------------------

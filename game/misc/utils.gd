@@ -104,7 +104,7 @@ static func load_json(path: String) -> Dictionary:
 	return result.result
 
 
-enum Type {_bool, _float, _String}
+enum Type {_bool, _float, _String, _evalString}
 func convert_value(value: String,selected_type):
 	var result
 	match selected_type:
@@ -114,6 +114,8 @@ func convert_value(value: String,selected_type):
 			result = str2bool(value)
 		Type._float:
 			result = str2float(value)
+		Type._evalString:
+			result = str2evalstr(value)
 	return result
 
 func str2bool(value: String):
@@ -131,3 +133,34 @@ func str2float(value: String):
 		return float(value)
 	else:
 		return null
+
+
+func str2evalstr(value: String):
+	var result = "EvalString" + value
+	return result
+
+
+func transform_evalstring(data_dict):
+	# 将字典里面的所有value值转换
+	match typeof(data_dict):
+		TYPE_DICTIONARY:
+			for key in data_dict:
+				match typeof(data_dict[key]):
+					TYPE_STRING:
+						if data_dict[key].begins_with("EvalString"):
+							data_dict[key] = parse_json(data_dict[key].trim_prefix("EvalString"))
+					TYPE_DICTIONARY:
+						data_dict[key] = transform_evalstring(data_dict[key])
+					TYPE_ARRAY:
+						data_dict[key] = transform_evalstring(data_dict[key])
+		TYPE_ARRAY:
+			for key in range(len(data_dict)):
+				match typeof(data_dict[key]):
+					TYPE_STRING:
+						if data_dict[key].begins_with("EvalString"):
+							data_dict[key] = parse_json(data_dict[key].trim_prefix("EvalString"))
+					TYPE_DICTIONARY:
+						data_dict[key] = transform_evalstring(data_dict[key])
+					TYPE_ARRAY:
+						data_dict[key] = transform_evalstring(data_dict[key])
+	return data_dict

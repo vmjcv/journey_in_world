@@ -46,6 +46,12 @@ func setup(env_name,script_name,subject_name,data_map={}):
 				value_type = "Number"
 			TYPE_STRING:
 				value_type = "String"
+				
+		if value_type == "String":
+			if value.begins_with("EvalString"):
+				value_type = "EvalString"
+				value = value.trim_prefix("EvalString")
+				
 		value = str(value)
 		add_one_arg(key,value,value_type)
 	

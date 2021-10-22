@@ -6,10 +6,10 @@ const CARD_NAME := "card_name"
 var definition_dict = {}
 var script_dict = {}
 
-func _init(card_data):
-	definition_dict = card_data["definition"]
-	script_dict = card_data["script"]
-	card_name = card_data["card_name"]
+func _init(card_data={}):
+	definition_dict = card_data.get("definition",{})
+	script_dict = card_data.get("script",{})
+	card_name = card_data.get("card_name","")
 
 func clear():
 	card_name = ""

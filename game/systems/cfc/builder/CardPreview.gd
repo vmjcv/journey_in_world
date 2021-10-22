@@ -10,6 +10,11 @@ onready var front_node = $"VBoxContainer/Front"
 onready var back_node = $"VBoxContainer/Back"
 onready var ingame_node = $"VBoxContainer/InGame"
 
+const _INFO_PANEL_SCENE_FILE = CFConst.PATH_CORE\
+		+ "CardViewer/CVInfoPanel.tscn"
+const _INFO_PANEL_SCENE = preload(_INFO_PANEL_SCENE_FILE)
+export var info_panel_scene = _INFO_PANEL_SCENE
+
 const _GRID_CARD_OBJECT_SCENE_FILE = CFConst.PATH_CORE\
 		+ "CardViewer/CVGridCardObject.tscn"
 const _GRID_CARD_OBJECT_SCENE = preload(_GRID_CARD_OBJECT_SCENE_FILE)
@@ -49,6 +54,9 @@ func add_front_card(card_name):
 	front_node.add_child(grid_card_object)
 	# warning-ignore:return_value_discarded
 	grid_card_object.setup(card_name)
+	grid_card_object.preview_popup.focus_info.info_panel_scene = info_panel_scene
+	grid_card_object.preview_popup.focus_info.setup()
+	
 
 	
 
