@@ -6,6 +6,9 @@ var dirty setget ,get_dirty
 
 var selection_array setget set_selection_array
 
+func _ready():
+	connect("item_selected",self,"_on_item_selected")
+
 func get_dirty():
 	return init_index != selected
 	
@@ -20,3 +23,7 @@ func set_init_name(_name):
 			selected = index
 			return 
 	init_index = -1
+
+func _on_item_selected(index):
+#	if init_index!=init_index:
+	CardProjectManager.emit_signal("change_card_info_ui")

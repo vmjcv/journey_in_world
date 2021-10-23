@@ -35,7 +35,8 @@ func _ready():
 	_main_menu.connect("add_attr_ui", self, "_on_add_attr_ui")
 	_main_menu.connect("add_script_ui", self, "_on_add_script_ui")
 	_main_menu.connect("add_trigger_ui", self, "_on_add_trigger_ui")
-	CardProjectManager.connect("change_active_project", self, "update_ui_from_data")
+	CardProjectManager.connect("change_metadata", self, "update_ui_from_data")
+	CardProjectManager.card_info_ui = self
 	init_ui()
 
 func _on_add_attr_ui():
@@ -99,17 +100,6 @@ func get_all_trigger_list():
 		trigger_list.append(cur_dict)
 	return trigger_list
 
-func _process(delta):
-	# 每帧刷新，其实可以更改的时候做刷新数据的操作，待定
-	var _dirty = get_dirty()
-	if not CardProjectManager.get_active_project().meta_data:
-		CardProjectManager.get_active_project().meta_data = CardProjectMetadata.new()
-		CardProjectManager.get_active_project().meta_data.update_data_from_ui(self)
-	if _dirty:
-		CardProjectManager.get_active_project().meta_data.update_data_from_ui(self)
-		CardProjectManager.get_active_project().dirty = true
-	else:
-		CardProjectManager.get_active_project().dirty = false
 
 func get_dirty():
 	var cur_list = []
@@ -127,10 +117,10 @@ func init_ui():
 	clean_all()
 	add_base_attr()
 	
-func update_ui_from_data(project):
-	if not project.meta_data:
-		init_ui()
+func update_ui_from_data(project=CardProjectManager.get_active_project()):
+	if not project.meta_data.loaded:
 		return 
+	
 	var definition_data = project.meta_data.definition_dict
 	var script_data = project.meta_data.script_dict
 	var card_name = project.meta_data.card_name

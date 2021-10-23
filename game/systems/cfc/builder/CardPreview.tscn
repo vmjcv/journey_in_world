@@ -46,4 +46,4 @@ margin_top = 36.0
 margin_right = 627.0
 margin_bottom = 36.0
 
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/OptionButton" to="." method="update_card_ui"]

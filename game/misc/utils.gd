@@ -140,8 +140,9 @@ func str2evalstr(value: String):
 	return result
 
 
-func transform_evalstring(data_dict):
+func transform_evalstring(_data_dict):
 	# 将字典里面的所有value值转换
+	var data_dict = _data_dict.duplicate()
 	match typeof(data_dict):
 		TYPE_DICTIONARY:
 			for key in data_dict:

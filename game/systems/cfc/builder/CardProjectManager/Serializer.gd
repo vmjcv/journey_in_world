@@ -15,4 +15,4 @@ static func load_card_project(project) -> void:
 	var card_name = data.keys().front()
 	data[card_name]["card_name"] = card_name # 额外数据
 	project.meta_data = CardProjectMetadata.new(data[card_name])
-		
+

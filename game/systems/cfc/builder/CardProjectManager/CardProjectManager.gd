@@ -3,7 +3,13 @@ extends Node
 # -------------------------------------------------------------------------------------------------
 var _open_projects: Array # Array<Project>
 var _active_project
-signal change_active_project
+var card_info_ui
+var card_preview_ui
+signal change_metadata
+signal change_card_info_ui
+func _ready():
+	connect("change_card_info_ui",self,"updata_data_from_card_info_ui")
+
 # -------------------------------------------------------------------------------------------------
 func read_project_list() -> void:
 	pass
@@ -13,7 +19,8 @@ func make_project_active(project) -> void:
 	if !project.loaded:
 		_load_project(project)
 	_active_project = project
-	emit_signal("change_active_project",_active_project)
+	# 更新激活数据后重置卡片信息设置界面和预览界面
+	emit_signal("change_metadata")
 
 # -------------------------------------------------------------------------------------------------
 func get_active_project():
@@ -50,8 +57,7 @@ func add_project(filepath: String = ""):
 	project.filepath = filepath
 	project.loaded = project.filepath.empty() # empty/unsaved/new projects are loaded by definition
 	_open_projects.append(project)
-	
-#	project.meta_data = CardProjectMetadata.new()
+	project.meta_data = CardProjectMetadata.new()
 	return project
 
 # -------------------------------------------------------------------------------------------------
@@ -111,3 +117,8 @@ func get_project_count() -> int:
 # -------------------------------------------------------------------------------------------------
 func is_active_project(project) -> bool:
 	return _active_project == project
+
+func updata_data_from_card_info_ui():
+	var _dirty = card_info_ui.dirty
+	_active_project.meta_data.update_data_from_ui(card_info_ui)
+	_active_project.dirty = _dirty
