@@ -1,0 +1,14 @@
+{
+	"F": {
+		"definition": {
+			"Type": "Rule",
+			"Abilities": "f",
+			"Tags": "EvalString[\"card1\",\"card2\"]",
+			"Cost": 0,
+			"Power": 10
+		},
+		"script": {
+			"manual": {}
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"Test Card 8": {
+		"definition": {
+			"Type": "Rule",
+			"Requirements": "Demo Requirements",
+			"Abilities": "While on board, this will rotate itself.\n\nWhile in hand, this will spawn a test card on the board.",
+			"Cost": 0,
+			"Power": 0,
+			"_max_allowed": 1,
+			"_illustration": "Nobody",
+			"_keywords": "test",
+			"Tags": "EvalString[\"Tag1\",\"Text\"]"
+		},
+		"script": {
+			"manual": {
+				"board": [
+					{
+						"name": "rotate_card",
+						"subject": "self",
+						"degrees": 90
+					}
+				]
+			}
+		}
+	}
+}

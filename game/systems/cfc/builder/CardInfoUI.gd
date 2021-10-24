@@ -119,6 +119,7 @@ func init_ui():
 	
 func update_ui_from_data(project=CardProjectManager.get_active_project()):
 	if not project.meta_data.loaded:
+		init_ui()
 		return 
 	
 	var definition_data = project.meta_data.definition_dict
