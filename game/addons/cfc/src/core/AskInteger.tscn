@@ -35,8 +35,8 @@ __meta__ = {
 [node name="VecticalHighlights" type="Panel" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 174.0
-margin_bottom = 32.0
+margin_right = 175.0
+margin_bottom = 36.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
@@ -46,8 +46,8 @@ __meta__ = {
 [node name="HorizontalHighlights" type="Panel" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 174.0
-margin_bottom = 32.0
+margin_right = 175.0
+margin_bottom = 36.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
@@ -57,8 +57,8 @@ __meta__ = {
 [node name="IntegerLineEdit" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 174.0
-margin_bottom = 32.0
+margin_right = 175.0
+margin_bottom = 36.0
 caret_blink = true
 caret_blink_speed = 0.5
 script = ExtResource( 2 )

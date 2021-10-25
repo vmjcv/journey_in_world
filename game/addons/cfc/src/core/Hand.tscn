@@ -74,17 +74,17 @@ __meta__ = {
 
 [node name="Position" type="Label" parent="Debug"]
 margin_right = 39.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 
 [node name="AreaPos" type="Label" parent="Debug"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 39.0
-margin_bottom = 32.0
+margin_bottom = 40.0
 
 [node name="Size" type="Label" parent="Debug"]
-margin_top = 36.0
+margin_top = 44.0
 margin_right = 39.0
-margin_bottom = 50.0
+margin_bottom = 62.0
 
 [node name="Counters" type="PanelContainer" parent="."]
 margin_left = -0.392883

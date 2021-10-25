@@ -112,8 +112,8 @@ __meta__ = {
 [node name="View" type="Button" parent="Control/ManipulationButtons" groups=[
 "manipulation_button",
 ]]
-margin_right = 27.0
-margin_bottom = 20.0
+margin_right = 30.0
+margin_bottom = 24.0
 mouse_filter = 1
 text = "V"
 __meta__ = {
@@ -123,9 +123,9 @@ __meta__ = {
 [node name="ViewSorted" type="Button" parent="Control/ManipulationButtons" groups=[
 "manipulation_button",
 ]]
-margin_top = 24.0
-margin_right = 27.0
-margin_bottom = 44.0
+margin_top = 28.0
+margin_right = 30.0
+margin_bottom = 52.0
 mouse_filter = 1
 text = "VS"
 __meta__ = {
@@ -135,9 +135,9 @@ __meta__ = {
 [node name="Shuffle" type="Button" parent="Control/ManipulationButtons" groups=[
 "manipulation_button",
 ]]
-margin_top = 48.0
-margin_right = 27.0
-margin_bottom = 68.0
+margin_top = 56.0
+margin_right = 30.0
+margin_bottom = 80.0
 mouse_filter = 1
 text = "S"
 expand_icon = true
@@ -184,16 +184,16 @@ __meta__ = {
 
 [node name="Position" type="Label" parent="Debug"]
 margin_right = 40.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 
 [node name="AreaPos" type="Label" parent="Debug"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 40.0
-margin_bottom = 32.0
+margin_bottom = 40.0
 
 [node name="Size" type="Label" parent="Debug"]
-margin_top = 36.0
+margin_top = 44.0
 margin_right = 40.0
-margin_bottom = 50.0
+margin_bottom = 62.0
 
 [node name="OpacityTween" type="Tween" parent="."]

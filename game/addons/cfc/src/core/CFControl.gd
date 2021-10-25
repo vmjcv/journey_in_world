@@ -175,7 +175,6 @@ func instance_card(card_name: String) -> Card:
 	var template = load(CFConst.PATH_CARDS
 			+ card_definitions[card_name][CardConfig.SCENE_PROPERTY] + ".tscn")
 	var card = template.instance()
-
 	# We set the card_name variable so that it's able to be used later
 	card.canonical_name = card_name
 	return(card)
@@ -227,6 +226,7 @@ func set_setting(setting_name: String, value) -> void:
 	file.open(CFConst.SETTINGS_FILENAME, File.WRITE)
 	file.store_string(JSON.print(game_settings, '\t'))
 	file.close()
+	print_debug(setting_name,value)
 
 
 # Initiates game_settings from the contents of CFConst.SETTINGS_FILENAME
@@ -265,10 +265,17 @@ func flush_cache() -> void:
 	alterant_cache.clear()
 	emit_signal("cache_cleared")
 
+
+func hide_all_previews() -> void:
+	for card_preview_node in cfc.get_tree().get_nodes_in_group("card_preview"):
+		card_preview_node.hide_preview_card()
+
+
 # The SignalPropagator is responsible for collecting all card signals
 # and asking all cards to check if there's any automation they need to perform
 class SignalPropagator:
 
+	signal signal_received(trigger_card, trigger, details)
 	# The working signals cards might send depending on their status changes
 	# this array can be extended by signals added by other games
 	var known_card_signals := [
@@ -317,3 +324,4 @@ class SignalPropagator:
 			card.execute_scripts(trigger_card,trigger,details)
 #		cfc.get_tree().call_group_flags(SceneTree.GROUP_CALL_UNIQUE  ,"cards",
 #				"execute_scripts",trigger_card,trigger,details)
+		emit_signal("signal_received", trigger_card, trigger, details)

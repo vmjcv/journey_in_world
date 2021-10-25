@@ -3,7 +3,7 @@
 [ext_resource path="res://addons/cfc/src/core/Highlight.gd" type="Script" id=1]
 [ext_resource path="res://addons/cfc/shaders/Dreambox.shader" type="Shader" id=2]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/is_card = true
 shader_param/eps = 0.0001
@@ -15,7 +15,7 @@ shader_param/foldingLimit = 1.0
 shader_param/Iterations = 5
 shader_param/Scale = 1.5
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 6.0
 content_margin_right = 5.0
 content_margin_top = 6.0
@@ -29,7 +29,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 content_margin_left = 6.0
 content_margin_right = 5.0
 content_margin_top = 6.0
@@ -45,7 +45,7 @@ corner_radius_bottom_left = 15
 
 [node name="Highlight" type="MarginContainer"]
 visible = false
-material = SubResource( 3 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -3.0
@@ -65,7 +65,7 @@ use_parent_material = true
 margin_right = 200.0
 margin_bottom = 280.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -76,7 +76,7 @@ use_parent_material = true
 margin_right = 200.0
 margin_bottom = 280.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
