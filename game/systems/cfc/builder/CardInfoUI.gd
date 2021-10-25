@@ -1,7 +1,7 @@
 extends Panel
 
 # 卡牌类必定含有的基础数据，选择后再额外添加其他信息
-var base_type = ["Type","Name","Abilities"]
+var base_type = ["Type","Name","Abilities","Tags"]
 var use_selection = {
 	"Type":Types.card_type,
 }

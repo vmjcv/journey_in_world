@@ -1,0 +1,21 @@
+{
+	"supply": {
+		"definition": {
+			"Type": "Rule",
+			"Abilities": "回合开始时获得部分资源",
+			"Tags": "EvalString[\"World\"]"
+		},
+		"script": {
+			"manual": {},
+			"battle_round_start": {
+				"board": [
+					{
+						"name": "get_supply",
+						"subject": "self"
+					}
+				],
+				"trigger": "self"
+			}
+		}
+	}
+}
