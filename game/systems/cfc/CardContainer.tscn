@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://systems/cfc/CGFModifiedLabelGrid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/cfc/src/core/BoardPlacementSlot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/cfc/src/core/BoardPlacementGrid.gd" type="Script" id=3]
+
+[node name="CardContainer" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="GridContainer" parent="." index="0"]
+margin_right = 747.0
+
+[node name="BoardPlacementSlot3" parent="GridContainer" index="2" instance=ExtResource( 2 )]
+margin_left = 250.0
+margin_right = 370.0
+
+[node name="BoardPlacementSlot4" parent="GridContainer" index="3" instance=ExtResource( 2 )]
+margin_left = 375.0
+margin_right = 495.0
+
+[node name="BoardPlacementSlot5" parent="GridContainer" index="4" instance=ExtResource( 2 )]
+margin_left = 500.0
+margin_right = 620.0
+
+[node name="BoardPlacementSlot6" parent="GridContainer" index="5" instance=ExtResource( 2 )]
+margin_left = 625.0
+margin_right = 745.0
+
+[node name="Control" parent="." index="1"]
+margin_right = 747.0
+
+[node name="Label" parent="Control" index="0"]
+text = "Card container"
