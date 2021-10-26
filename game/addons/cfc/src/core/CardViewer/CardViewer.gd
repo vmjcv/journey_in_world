@@ -79,7 +79,7 @@ func _ready() -> void:
 		var load_end_time = OS.get_ticks_msec()
 		print("Resource load time = " + str(load_end_time - load_start_time))		
 	_show_all_button.icon = CFUtils.convert_texture_to_image(
-			"res://src/core/CardViewer/open-book.png")
+		"res://addons/cfc/src/core/CardViewer/open-book.png")
 
 
 ## Prepares the filter buttons based on the unique values in cards.

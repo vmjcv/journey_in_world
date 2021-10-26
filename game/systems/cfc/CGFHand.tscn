@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/cfc/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://systems/cfc/CGFHand.gd" type="Script" id=3]
 
-
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
 
@@ -23,3 +22,14 @@ margin_bottom = 26.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 1 )
 text = "R"
+
+[node name="Position" parent="Debug" index="0"]
+margin_bottom = 18.0
+
+[node name="AreaPos" parent="Debug" index="1"]
+margin_top = 22.0
+margin_bottom = 40.0
+
+[node name="Size" parent="Debug" index="2"]
+margin_top = 44.0
+margin_bottom = 62.0
