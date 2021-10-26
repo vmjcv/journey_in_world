@@ -29,7 +29,7 @@ func load_script_definitions() -> Dictionary:
 			# able to refer specific variables inside them
 			# such as cfc.deck etc. Instead they contain a
 			# method which returns the script for the requested card name
-			var card_script = data.get(card_name,null)
+			var card_script = data.get(card_name,{})
 			if not card_script.empty():
 				var cur_data = card_script["script"]
 				cur_data = Utils.transform_evalstring(cur_data)
