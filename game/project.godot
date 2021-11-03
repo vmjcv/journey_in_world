@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://UI/dialogs/settings_dialog/BaseOptionsContainer.gd"
 }, {
-"base": "Reference",
+"base": "Control",
 "class": "Board",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/BoardTemplate.gd"
@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/BoardPlacementGrid.gd"
 }, {
-"base": "Reference",
+"base": "Control",
 "class": "BoardPlacementSlot",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/BoardPlacementSlot.gd"
@@ -84,27 +84,27 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVFilter.gd"
 }, {
-"base": "Reference",
+"base": "Button",
 "class": "CVFilterButton",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVFilterButton.gd"
 }, {
-"base": "Reference",
+"base": "LineEdit",
 "class": "CVFilterLine",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVFilterLine.gd"
 }, {
-"base": "Reference",
+"base": "CenterContainer",
 "class": "CVGridCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVGridCardObject.gd"
 }, {
-"base": "Reference",
+"base": "HBoxContainer",
 "class": "CVListCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVListCardObject.gd"
 }, {
-"base": "Reference",
+"base": "Popup",
 "class": "CVPreviewPopup",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CVPreviewPopup.gd"
@@ -114,17 +114,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardTemplate.gd"
 }, {
-"base": "Reference",
+"base": "Panel",
 "class": "CardBack",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/CardBack.gd"
 }, {
-"base": "Reference",
+"base": "CardBack",
 "class": "CardBackGlow",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/CardBackGlow.gd"
 }, {
-"base": "Reference",
+"base": "CardBack",
 "class": "CardBackTexture",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/CardBackTexture.gd"
@@ -134,7 +134,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://systems/cfc/cards/CardConfig.gd"
 }, {
-"base": "Reference",
+"base": "Area2D",
 "class": "CardContainer",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardContainer.gd"
@@ -144,7 +144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/CardFront.gd"
 }, {
-"base": "Reference",
+"base": "RichTextLabel",
 "class": "CardLabel",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/CardLabel.gd"
@@ -179,7 +179,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/appenders/console_appender.gd"
 }, {
-"base": "Reference",
+"base": "Control",
 "class": "Counters",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Counters.gd"
@@ -189,32 +189,32 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://systems/cfc/cards/CustomScripts.gd"
 }, {
-"base": "Reference",
+"base": "HBoxContainer",
 "class": "DBDeckCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DBDeckCardObject.gd"
 }, {
-"base": "Reference",
+"base": "HBoxContainer",
 "class": "DBDeckSummaries",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DBDeckSummaries.gd"
 }, {
-"base": "Reference",
+"base": "CVGridCardObject",
 "class": "DBGridCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DBGridCardObject.gd"
 }, {
-"base": "Reference",
+"base": "CVListCardObject",
 "class": "DBListCardObject",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DBListCardObject.gd"
 }, {
-"base": "Reference",
+"base": "CardViewer",
 "class": "DeckBuilder",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckBuilder.gd"
 }, {
-"base": "Reference",
+"base": "MenuButton",
 "class": "DeckLoader",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckLoader.gd"
@@ -224,7 +224,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/DeckNameRandomizer.gd"
 }, {
-"base": "Reference",
+"base": "VBoxContainer",
 "class": "DetailPanels",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/DetailPanels.gd"
@@ -249,12 +249,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/file-editor/scripts/GoogleTranslatorAPI.gd"
 }, {
-"base": "Reference",
+"base": "CardContainer",
 "class": "Hand",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Hand.gd"
 }, {
-"base": "Reference",
+"base": "Control",
 "class": "Highlight",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Highlight.gd"
@@ -264,7 +264,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/layouts/html_layout.gd"
 }, {
-"base": "Reference",
+"base": "LineEdit",
 "class": "IntegerLineEdit",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/IntegerLineEdit.gd"
@@ -329,7 +329,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://systems/cfc/builder/MainMenu.gd"
 }, {
-"base": "Reference",
+"base": "VBoxContainer",
 "class": "ManipulationButtons",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/ManipulationButtons.gd"
@@ -344,7 +344,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/message.gd"
 }, {
-"base": "Reference",
+"base": "Area2D",
 "class": "MousePointer",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/MousePointer.gd"
@@ -364,7 +364,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Pile.gd"
 }, {
-"base": "Reference",
+"base": "Button",
 "class": "QuantityNumberButton",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/CardViewer/DeckBuilder/QuantityNumberButton.gd"
@@ -374,12 +374,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://systems/cfc/cards/rule/rule.gd"
 }, {
-"base": "Reference",
+"base": "ScriptProperties",
 "class": "SP",
 "language": "GDScript",
 "path": "res://systems/cfc/SP.gd"
 }, {
-"base": "Reference",
+"base": "ScriptObject",
 "class": "ScriptAlter",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ScriptAlter.gd"
@@ -399,7 +399,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ScriptProperties.gd"
 }, {
-"base": "Reference",
+"base": "ScriptObject",
 "class": "ScriptTask",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ScriptTask.gd"
@@ -409,7 +409,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ScriptingEngine.gd"
 }, {
-"base": "Reference",
+"base": "AcceptDialog",
 "class": "SelectionWindow",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/SelectionWindow.gd"
@@ -424,22 +424,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://UI/components/tab.gd"
 }, {
-"base": "Reference",
+"base": "Line2D",
 "class": "TargetingArrow",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/TargetingArrow.gd"
 }, {
-"base": "Reference",
+"base": "HBoxContainer",
 "class": "Token",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Token.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "TokenDrawer",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/Card/TokenDrawer.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "ViewportCardFocus",
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/ViewportCardFocus.gd"
@@ -566,7 +566,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/FileSystemView/plugin.cfg", "res://addons/GGS/plugin.cfg", "res://addons/LongClickButton/plugin.cfg", "res://addons/file-editor/plugin.cfg", "res://addons/gs_logger/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/FileSystemView/plugin.cfg", "res://addons/GGS/plugin.cfg", "res://addons/LongClickButton/plugin.cfg", "res://addons/file-editor/plugin.cfg", "res://addons/gs_logger/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/orphan_import_file_cleaner/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg" )
 
 [gui]
 
