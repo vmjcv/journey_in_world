@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://systems/cfc/battle_map/hex_region.gd" type="Script" id=1]
+
+[node name="hex_region" type="Area2D" groups=["placement_slot"]]
+script = ExtResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 1.0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

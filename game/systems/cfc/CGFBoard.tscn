@@ -10,7 +10,7 @@
 [ext_resource path="res://systems/cfc/CGFModifiedLabelGrid.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/cfc/fonts/Comfortaa-Bold.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://systems/cfc/CGFDeckbuilder/CGFDeckBuilder.tscn" type="PackedScene" id=10]
-[ext_resource path="res://systems/cfc/CardContainer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://systems/cfc/battle_map/BoardMapPlacementGrid.tscn" type="PackedScene" id=11]
 [ext_resource path="res://addons/cfc/themes/darktheme/darktheme.theme" type="Theme" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -259,11 +259,11 @@ margin_top = 30.0
 margin_right = 1264.0
 margin_bottom = 226.0
 
-[node name="ModifiedLabelGrid2" parent="." instance=ExtResource( 11 )]
-margin_left = 35.2778
-margin_top = 244.425
-margin_right = 284.278
-margin_bottom = 440.425
+[node name="PlacementGridDemo2" parent="." instance=ExtResource( 11 )]
+margin_left = 620.721
+margin_top = 313.3
+margin_right = 624.721
+margin_bottom = 317.3
 
 [node name="SeedLabel" type="Label" parent="."]
 margin_left = 10.0

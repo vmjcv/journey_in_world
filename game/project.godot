@@ -34,6 +34,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cfc/src/core/BoardTemplate.gd"
 }, {
+"base": "PanelContainer",
+"class": "BoardMapPlacementGrid",
+"language": "GDScript",
+"path": "res://systems/cfc/battle_map/BoardMapPlacementGrid.gd"
+}, {
+"base": "Area2D",
+"class": "BoardMapPlacementSlot",
+"language": "GDScript",
+"path": "res://systems/cfc/battle_map/hex_region.gd"
+}, {
 "base": "Control",
 "class": "BoardPlacementGrid",
 "language": "GDScript",
@@ -455,6 +465,8 @@ _global_script_class_icons={
 "BaseInput": "",
 "BaseOptionsContainer": "",
 "Board": "",
+"BoardMapPlacementGrid": "",
+"BoardMapPlacementSlot": "",
 "BoardPlacementGrid": "",
 "BoardPlacementSlot": "",
 "CFConst": "",
@@ -543,6 +555,7 @@ _global_script_class_icons={
 [application]
 
 config/name="journey_in_world"
+run/main_scene="res://systems/cfc/CGFMain.tscn"
 config/icon="res://assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
 
@@ -562,6 +575,8 @@ cfc="*res://systems/cfc/CGFCFControl.gd"
 window/size/width=1455
 window/size/height=900
 window/size/always_on_top=true
+window/size/test_width=960
+window/size/test_height=540
 window/stretch/aspect="keep"
 
 [editor_plugins]

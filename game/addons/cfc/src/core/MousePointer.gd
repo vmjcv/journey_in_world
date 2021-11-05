@@ -72,6 +72,8 @@ func _on_MousePointer_area_exited(area: Area2D) -> void:
 			area.highlight.set_highlight(false)
 		elif area.get_parent() as BoardPlacementSlot:
 			area.get_parent().set_highlight(false)
+		elif area as BoardMapPlacementSlot:
+			area.set_highlight(false)
 		overlaps.erase(area)
 		#print("exit:",area.name)
 		_discover_focus()
@@ -109,6 +111,8 @@ func disable() -> void:
 			area.highlight.set_highlight(false)
 		elif area.get_parent() as BoardPlacementSlot:
 			area.get_parent().set_highlight(false)
+		elif area as BoardMapPlacementSlot:
+			area.set_highlight(false)
 	overlaps.clear()
 
 
@@ -166,6 +170,12 @@ func _discover_focus() -> void:
 		if area.get_parent() as BoardPlacementSlot \
 				and _is_placement_slot_valid(area.get_parent(),potential_cards):
 			potential_slots.append(area.get_parent())
+		print("kkkkk")
+		print(area)
+		print(area as BoardMapPlacementSlot)
+		print(area)
+		if area as BoardMapPlacementSlot and _is_placement_slot_valid(area,potential_cards):
+			potential_slots.append(area)
 #		if area.get_parent() as BoardPlacementSlot and cfc.card_drag_ongoing and cfc.card_drag_ongoing.is_attachment and not potential_cards.empty():
 #			print_debug(potential_cards)
 		if area as CardContainer and cfc.card_drag_ongoing:
@@ -257,6 +267,7 @@ func _is_placement_slot_valid(slot: BoardPlacementSlot, potential_cards := []) -
 		is_valid = false
 	else:
 		# We only hihglight a slot if it is not hosting a different card.
+		print(slot)
 		if slot.occupying_card and slot.occupying_card != cfc.card_drag_ongoing:
 			is_valid = false
 		# We only hihglight a slot if the dragged card is not an attachment

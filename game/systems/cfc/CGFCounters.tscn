@@ -3,7 +3,6 @@
 [ext_resource path="res://systems/cfc/CGFCounters.gd" type="Script" id=1]
 [ext_resource path="res://systems/cfc/CGFCounter.tscn" type="PackedScene" id=2]
 
-
 [node name="Counters" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
