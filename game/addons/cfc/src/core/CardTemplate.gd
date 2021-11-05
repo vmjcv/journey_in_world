@@ -990,8 +990,8 @@ func get_card_rotation() -> int:
 
 
 # Discovers if a grid placement slot is currently highlighted to be used
-func get_potential_placement_slot() -> BoardPlacementSlot:
-	var placement_slot: BoardPlacementSlot = null
+func get_potential_placement_slot():
+	var placement_slot = null
 	for ps in get_tree().get_nodes_in_group("placement_slot"):
 		if ps.is_highlighted():
 			placement_slot = ps

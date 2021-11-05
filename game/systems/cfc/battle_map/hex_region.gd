@@ -145,9 +145,6 @@ func is_highlighted() -> bool:
 # Changes card highlight colour.
 func set_highlight(requested: bool,
 		hoverColour = owner_grid.highlight) -> void:
-	print("set_highlight")
-	print(requested)
-	print(hoverColour)
 	highlighted = requested
 	if requested:
 		_poly.color = hoverColour

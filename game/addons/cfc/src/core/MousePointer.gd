@@ -170,12 +170,9 @@ func _discover_focus() -> void:
 		if area.get_parent() as BoardPlacementSlot \
 				and _is_placement_slot_valid(area.get_parent(),potential_cards):
 			potential_slots.append(area.get_parent())
-		print("kkkkk")
-		print(area)
-		print(area as BoardMapPlacementSlot)
-		print(area)
-		if area as BoardMapPlacementSlot and _is_placement_slot_valid(area,potential_cards):
-			potential_slots.append(area)
+		if area as BoardMapPlacementSlot:
+			if _is_placement_slot_valid(area,potential_cards):
+				potential_slots.append(area)
 #		if area.get_parent() as BoardPlacementSlot and cfc.card_drag_ongoing and cfc.card_drag_ongoing.is_attachment and not potential_cards.empty():
 #			print_debug(potential_cards)
 		if area as CardContainer and cfc.card_drag_ongoing:
@@ -260,7 +257,7 @@ func _discover_focus() -> void:
 # * The card being dragged cannot be an attachment
 # or if it is an attachment, there have to be no potential hosts
 # currently highlighted
-func _is_placement_slot_valid(slot: BoardPlacementSlot, potential_cards := []) -> bool:
+func _is_placement_slot_valid(slot, potential_cards := []) -> bool:
 	var is_valid := true
 	# We only hihglight slots if a card is not currently being dragged
 	if not cfc.card_drag_ongoing:
