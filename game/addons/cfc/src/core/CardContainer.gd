@@ -35,6 +35,7 @@ export(CFInt.OverlapShiftDirection) var overlap_shift_direction
 # In case of multiple CardContainers using the same anchor placement
 # specifies which container should be displaced more.
 export(CFInt.IndexShiftPriority) var index_shift_priority
+export var card_size := CFConst.CARD_SIZE
 
 # Used for debugging
 var _debugger_hook := false

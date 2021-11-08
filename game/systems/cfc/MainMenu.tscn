@@ -24,6 +24,8 @@ __meta__ = {
 
 [node name="DeckBuilder" parent="." instance=ExtResource( 4 )]
 custom_styles/panel = SubResource( 1 )
+replacements = {
+}
 
 [node name="CardLibrary" parent="." instance=ExtResource( 5 )]
 custom_styles/panel = SubResource( 1 )
@@ -60,7 +62,7 @@ margin_top = 108.0
 margin_right = 1280.0
 margin_bottom = 340.0
 custom_fonts/font = SubResource( 2 )
-text = "Godot 
+text = "Godot
 Card Game Framework"
 align = 1
 

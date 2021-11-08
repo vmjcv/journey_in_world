@@ -37,13 +37,25 @@ func _init(state_scripts: Array,
 		owner,
 		trigger_object: Node,
 		trigger_details: Dictionary) -> void:
-	for task in state_scripts:
-		var script_task := ScriptTask.new(
-				owner,
-				task,
-				trigger_object,
-				trigger_details)
-		scripts_queue.append(script_task)
+	for t in state_scripts:
+		# We do a duplicate to allow repeat to modify tasks without danger.
+		var task: Dictionary = t.duplicate(true)
+		# This is the only script property which we use outside of the
+		# ScriptTask object. The repeat property duplicates the whole task
+		# definition in multiple tasks
+		var repeat = task.get(SP.KEY_REPEAT, 1)
+		for iter in range(repeat):
+			# In case it's a targeting task, we assume we don't want to
+			# spawn X targeting arrows at the same time, so we convert
+			# all subsequent repeats into "previous" targets
+			if iter > 0 and task.has("subject") and task["subject"] == "target":
+				task["subject"] = "previous"
+			var script_task := ScriptTask.new(
+					owner,
+					task,
+					trigger_object,
+					trigger_details)
+			scripts_queue.append(script_task)
 
 # This flag will be true if we're attempting to find if the card
 # has costs that need to be paid, before the effects take place.
@@ -128,7 +140,8 @@ func execute(_run_type := CFInt.RunType.NORMAL) -> void:
 				var retcode = call(script.script_name, script)
 				if retcode is GDScriptFunctionState:
 					retcode = yield(retcode, "completed")
-				prev_subjects = script.subjects
+				if not script.get_property(SP.KEY_PROTECT_PREVIOUS):
+					prev_subjects = script.subjects
 				if costs_dry_run():
 					if retcode != CFConst.ReturnCode.CHANGED:
 						can_all_costs_be_paid = false
@@ -146,8 +159,16 @@ func execute(_run_type := CFInt.RunType.NORMAL) -> void:
 			# (such as because the subjects cannot be matched)
 			# Then we consider the costs cannot be paid.
 			# However is the task was merely skipped (because filters didn't match)
-			# we don't consider the whole script failed
+			# we don't consider the whole script failed.
+			# This allows us to have conditional costs based on the board state
+			# which will not abort the overall script.
 			elif not script.is_valid and script.is_cost:
+				can_all_costs_be_paid = false
+			# This allows a skipped board state filter such as filter_per_counter
+			# placed in an is_cost task, to block all other tasks.
+			elif script.is_skipped\
+					and script.get_property(SP.KEY_FAIL_COST_ON_SKIP)\
+					and script.is_cost:
 				can_all_costs_be_paid = false
 			# At the end of the task run, we loop back to the start, but of course
 			# with one less item in our scripts_queue.
@@ -292,7 +313,7 @@ func move_card_to_board(script: ScriptTask) -> int:
 			# To avoid overlapping on the board, we spawn the cards
 			# Next to each other.
 			board_position.x += \
-					count * CFConst.CARD_SIZE.x * CFConst.PLAY_AREA_SCALE.x
+					count * card.canonical_size.x * card.play_area_scale
 			count += 1
 			# We assume cards moving to board want to be face-up
 			if not costs_dry_run():
@@ -321,13 +342,15 @@ func mod_tokens(script: ScriptTask) -> int:
 		modification = stored_integer
 		if script.get_property(SP.KEY_IS_INVERTED):
 			modification *= -1
+		modification += script.get_property(SP.KEY_ADJUST_RETRIEVED_INTEGER)
 	elif SP.VALUE_PER in str(script.get_property(SP.KEY_MODIFICATION)):
 		var per_msg = perMessage.new(
 				script.get_property(SP.KEY_MODIFICATION),
 				script.owner,
 				script.get_property(script.get_property(SP.KEY_MODIFICATION)),
 				null,
-				script.subjects)
+				script.subjects,
+				script.prev_subjects)
 		modification = per_msg.found_things
 		print_debug(per_msg.found_things, modification)
 	else:
@@ -382,13 +405,15 @@ func spawn_card(script: ScriptTask) -> void:
 		count = stored_integer
 		if script.get_property(SP.KEY_IS_INVERTED):
 			count *= -1
+		count += script.get_property(SP.KEY_ADJUST_RETRIEVED_INTEGER)
 	elif SP.VALUE_PER in str(script.get_property(SP.KEY_OBJECT_COUNT)):
 		var per_msg = perMessage.new(
 				script.get_property(SP.KEY_OBJECT_COUNT),
 				script.owner,
 				script.get_property(script.get_property(SP.KEY_OBJECT_COUNT)),
 				null,
-				script.subjects)
+				script.subjects,
+				script.prev_subjects)
 		count = per_msg.found_things
 	else:
 		count = script.get_property(SP.KEY_OBJECT_COUNT)
@@ -420,7 +445,7 @@ func spawn_card(script: ScriptTask) -> void:
 			# If we're spawning more than 1 card, we place the extra ones
 			# +1 card-length to the right each.
 			card.position.x += \
-					iter * CFConst.CARD_SIZE.x * CFConst.PLAY_AREA_SCALE.x
+					iter * card.canonical_size.x * card.play_area_scale
 			card.state = Card.CardState.ON_PLAY_BOARD
 
 
@@ -432,7 +457,8 @@ func shuffle_container(script: ScriptTask) -> void:
 	while container.are_cards_still_animating():
 		yield(container.get_tree().create_timer(0.2), "timeout")
 	container.shuffle_cards()
-	if container.is_in_group("piles"):
+	# If there's no shuffle aniumation, we will get stuck if we yield.
+	if container.is_in_group("piles") and container.shuffle_style != CFConst.ShuffleStyle.NONE:
 		yield(container, "shuffle_completed")
 
 
@@ -491,7 +517,8 @@ func modify_properties(script: ScriptTask) -> int:
 								# per_value
 								script.get_property(properties[property].lstrip('+')),
 								null,
-								script.subjects)
+								script.subjects,
+								script.prev_subjects)
 						modification = per_msg.found_things
 						# We cannot check for +/- using .is_valid_integer() because
 						# the value might be something like '+per_counter'
@@ -592,6 +619,7 @@ func add_grid(script: ScriptTask) -> void:
 		count = stored_integer
 		if script.get_property(SP.KEY_IS_INVERTED):
 			count *= -1
+		count += script.get_property(SP.KEY_ADJUST_RETRIEVED_INTEGER)
 	else:
 		count = script.get_property(SP.KEY_OBJECT_COUNT)
 	for iter in range(count):
@@ -608,7 +636,7 @@ func add_grid(script: ScriptTask) -> void:
 		# +1 card-width below, becase we assume they're spanwining with more
 		# than 1 column.
 		grid.rect_position.y += \
-				iter * CFConst.CARD_SIZE.y * CFConst.PLAY_AREA_SCALE.y
+				iter * grid.card_size.y * grid.card_play_scale
 
 # Task for modifying a a counter.
 # If this task is specified, the variable [counters](Board#counters) **has** to be set
@@ -632,13 +660,15 @@ func mod_counter(script: ScriptTask) -> int:
 		modification = stored_integer
 		if script.get_property(SP.KEY_IS_INVERTED):
 			modification *= -1
+		modification += script.get_property(SP.KEY_ADJUST_RETRIEVED_INTEGER)
 	elif SP.VALUE_PER in str(script.get_property(SP.KEY_MODIFICATION)):
 		var per_msg = perMessage.new(
 				script.get_property(SP.KEY_MODIFICATION),
 				script.owner,
 				script.get_property(script.get_property(SP.KEY_MODIFICATION)),
 				null,
-				script.subjects)
+				script.subjects,
+				script.prev_subjects)
 		modification = per_msg.found_things
 	else:
 		modification = script.get_property(SP.KEY_MODIFICATION)
@@ -747,6 +777,12 @@ func nested_script(script: ScriptTask) -> int:
 	return(retcode)
 
 
+# Does nothing. Useful for selecting subjects to pass to further filters etc.
+# warning-ignore:unused_argument
+func null_script(script: ScriptTask) -> int:
+	return(CFConst.ReturnCode.CHANGED)
+
+
 # Initiates a seek through the table to see if there's any cards
 # which have scripts which modify the intensity of the current task.
 func _check_for_alterants(script: ScriptTask, value: int) -> int:
@@ -801,4 +837,5 @@ func _retrieve_temp_modifiers(script: ScriptTask, type: String) -> Dictionary:
 			temp_modifiers[value] = stored_integer
 			if script.get_property(SP.KEY_IS_INVERTED):
 				temp_modifiers[value] *= -1
+			temp_modifiers[value] += script.get_property(SP.KEY_ADJUST_RETRIEVED_INTEGER)
 	return(temp_modifiers)

@@ -24,6 +24,11 @@ var _ut_show_token_buttons := CFConst.SHOW_TOKEN_BUTTONS
 # It is initiated by looking for [CFConst#SETTINGS_FILENAME], but if it
 # doesn't exist, defaults to the values specified in CFConst, if applicable.
 var game_settings := {}
+# This variable stores the font and icon size for each string of text.
+# based on the current card size. This allows us to avoid calculating fonts
+# on the fly all the time and adding delay to card instancing.
+var font_size_cache := {}
+var cache_commit_timer: SceneTreeTimer
 # If set to true, the player will be prevented from interacting with the game
 var game_paused := false setget set_game_paused
 # If this is false, all CardContainers will pause in their ready() scene
@@ -82,9 +87,17 @@ var alterant_cache: Dictionary
 # A game need to explicitly make use of it.
 var card_temp_property_modifiers = {}
 var ov_utils  = load(CFConst.PATH_OVERRIDABLE_UTILS).new()
+var curr_scale: float
 
 func _ready() -> void:
+	connect("all_nodes_mapped", self, "_on_all_nodes_mapped")
+	get_viewport().connect("size_changed", self, '_on_viewport_resized')
+	_on_viewport_resized()
+	_setup()
+
+func _setup() -> void:
 	init_settings_from_file()
+	init_font_cache()
 	if not game_settings.has('fancy_movement'):
 		game_settings['fancy_movement'] = CFConst.FANCY_MOVEMENT
 	if not game_settings.has('focus_style'):
@@ -95,7 +108,6 @@ func _ready() -> void:
 	# as they repopulate during unit testing many times.
 	# warning-ignore:return_value_discarded
 	flush_cache()
-	connect("all_nodes_mapped", self, "_on_all_nodes_mapped")
 	# We need to reset these values for UNIT testing
 	NMAP = {}
 	are_all_nodes_mapped = false
@@ -226,7 +238,6 @@ func set_setting(setting_name: String, value) -> void:
 	file.open(CFConst.SETTINGS_FILENAME, File.WRITE)
 	file.store_string(JSON.print(game_settings, '\t'))
 	file.close()
-	print_debug(setting_name,value)
 
 
 # Initiates game_settings from the contents of CFConst.SETTINGS_FILENAME
@@ -238,6 +249,44 @@ func init_settings_from_file() -> void:
 		file.close()
 		if typeof(data) == TYPE_DICTIONARY:
 			game_settings = data.duplicate()
+
+
+func set_font_cache() -> void:
+#	var timer = Timer.new()
+#	timer.connect("timeout", self, "_commit_font_cache", [timer])
+#	timer.wait_time = 1
+#	timer.start()
+	if not cache_commit_timer:
+		cache_commit_timer = get_tree().create_timer(1.0)
+		cache_commit_timer.connect("timeout", self, "_commit_font_cache")
+		
+	
+# Whenever a setting is changed via this function, it also stores it
+# permanently on-disk.
+func _commit_font_cache() -> void:
+#	timer.disconnect("timeout", self, "_commit_font_cache")
+#	timer.queue_free()
+	var file = File.new()
+	file.open(CFConst.FONT_SIZE_CACHE, File.WRITE)
+	file.store_string(JSON.print(font_size_cache, '\t'))
+	file.close()
+	cache_commit_timer = null
+
+
+# Initiates game_settings from the contents of CFConst.SETTINGS_FILENAME
+func init_font_cache() -> void:
+	var file = File.new()
+	if file.file_exists(CFConst.FONT_SIZE_CACHE):
+		file.open(CFConst.FONT_SIZE_CACHE, File.READ)
+		var data = parse_json(file.get_as_text())
+		file.close()
+		if typeof(data) == TYPE_DICTIONARY:
+			if font_size_cache.get('version') == CFConst.GAME_VERSION:
+				font_size_cache = data.duplicate()
+			else:
+				# If the version of the game has increased, we wipe the 
+				# font size cache and a new one will start being populated
+				font_size_cache['version'] = CFConst.GAME_VERSION
 
 
 # This function resets the game to the same state as when
@@ -271,6 +320,13 @@ func hide_all_previews() -> void:
 		card_preview_node.hide_preview_card()
 
 
+func _on_viewport_resized() -> void:
+	var pix = CFConst.DESIGN_RESOLUTION.x * CFConst.DESIGN_RESOLUTION.y
+	var curr_pix = get_viewport().size.x * get_viewport().size.y
+	curr_scale = curr_pix / pix
+	if curr_scale > 1:
+		curr_scale = 1
+	
 # The SignalPropagator is responsible for collecting all card signals
 # and asking all cards to check if there's any automation they need to perform
 class SignalPropagator:

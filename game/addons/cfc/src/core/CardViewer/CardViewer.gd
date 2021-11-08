@@ -72,14 +72,14 @@ func _ready() -> void:
 			cfc.game_settings.get('deckbuilder_gridstyle', false)
 	$VBC/HBC/MC/AvailableCards/Settings/GridViewStyle.pressed =\
 			cfc.game_settings.deckbuilder_gridstyle
-	
+
 	if cfc.game_settings.deckbuilder_gridstyle:
 		var load_start_time = OS.get_ticks_msec()
 		prepare_card_grid()
 		var load_end_time = OS.get_ticks_msec()
-		print("Resource load time = " + str(load_end_time - load_start_time))		
+		print("Resource load time = " + str(load_end_time - load_start_time))
 	_show_all_button.icon = CFUtils.convert_texture_to_image(
-		"res://addons/cfc/src/core/CardViewer/open-book.png")
+			"res://addons/cfc/src/core/CardViewer/open-book.png")
 
 
 ## Prepares the filter buttons based on the unique values in cards.
@@ -104,10 +104,10 @@ func prepate_filter_buttons() -> void:
 
 
 func _process(_delta: float) -> void:
-	# We keep updating the card count label with the amount of cards in the deck
+	# We keep updating the columns based on the card size
 	_card_grid.columns = int(
 			$"VBC/HBC/MC/AvailableCards/ScrollContainer".rect_size.x
-			/ (CFConst.CARD_SIZE.x * CFConst.THUMBNAIL_SCALE))
+			/ (CFConst.CARD_SIZE.x * CFConst.THUMBNAIL_SCALE * cfc.curr_scale))
 
 # Populates the list of available cards, with all defined cards in the game
 func populate_available_cards() -> void:

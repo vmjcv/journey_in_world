@@ -45,6 +45,11 @@ enum BoardPlacement{
 	ANY_GRID
 	ANYWHERE
 }
+enum AttachmentMode{
+	DO_NOT_ATTACH	
+	ATTACH_BEHIND
+	ATTACH_IN_FRONT
+}
 enum AttachmentOffset{
 	TOP_LEFT
 	TOP
@@ -108,7 +113,7 @@ export var scripts : Dictionary
 # If true, the card can be attached to other cards and will follow
 # their host around the table. The card will always return to its host
 # when dragged away
-export var is_attachment := false setget set_is_attachment, get_is_attachment
+export(AttachmentMode) var attachment_mode = AttachmentMode.DO_NOT_ATTACH
 # If true, staggers the attachment so the side is also visible
 export(AttachmentOffset) var attachment_offset = AttachmentOffset.TOP
 # If true, the card front will be displayed when mouse hovers over the card
@@ -154,6 +159,35 @@ export var disable_dragging_from_pile := false
 # If not, it will act according to
 # [disable_dragging_from_hand](#disable_dragging_from_hand)
 export var hand_drag_starts_targeting := false
+# The duration of the tweening animation when cards rotate in hand
+export(float, 0.0, 1.0, 0.05) var in_hand_tween_duration := 0.3
+# The duration of the tweening animation when reorganizing cards in hand
+export(float, 0.0, 1.0, 0.05) var reorganization_tween_duration := 0.4
+# The duration of the tweening animation when focusing a card in hand
+export(float, 0.0, 1.0, 0.05) var focus_tween_duration := 0.3
+# The duration of the tweening animation when moving a card between containers
+export(float, 0.0, 1.0, 0.05) var to_container_tween_duration := 0.3
+# The duration of the tweening animation when cards are pushed aside
+# due to a neighbor being focused
+export(float, 0.0, 1.0, 0.05) var pushed_aside_tween_duration := 0.3
+# The duration of the tweening animation when cards are dropping to the board
+export(float, 0.0, 1.0, 0.05) var to_board_tween_duration := 0.25
+# The duration of the tweening animation when cards are scaled in play area on the board
+export(float, 0.0, 1.0, 0.05) var on_board_tween_duration := 0.3
+# The duration of the tweening animation when cards are scaled when being dragged
+export(float, 0.0, 1.0, 0.05) var dragged_tween_duration := 0.2
+# Stores the normal size of the card as it should appear on the hand.
+# It should typically should be the same as card_size, 
+# but unlike card_size, it should not be adjusted in runtime
+export var canonical_size := CFConst.CARD_SIZE
+# the size of the card when seen smaller (usually in a card-grid of selection window)
+export var play_area_scale := CFConst.PLAY_AREA_SCALE
+# the size of the card when seen smaller (usually in a card-grid of selection window)
+export var thumbnail_scale := CFConst.THUMBNAIL_SCALE
+# The size of the card when seen a thumbnail is moused-over
+export var preview_scale := CFConst.PREVIEW_SCALE
+# The size of the card when seen larger in the viewport focus window
+export var focused_scale := CFConst.FOCUSED_SCALE
 
 # This is **the** authorative name for this node
 #
@@ -162,7 +196,7 @@ export var hand_drag_starts_targeting := false
 # to the human-readable value of the "name" node property.
 var canonical_name : String setget set_card_name, get_card_name
 # Ensures all nodes fit inside this rect.
-var card_size := CFConst.CARD_SIZE setget set_card_size
+var card_size := canonical_size setget set_card_size
 # Starting state for each card
 var state : int = CardState.PREVIEW
 # If this card is hosting other cards,
@@ -173,6 +207,9 @@ var attachments := []
 var current_host_card : Card = null
 # If true, the card will be displayed faceup. If false, it will be facedown
 var is_faceup := true setget set_is_faceup, get_is_faceup
+# Used to keep the card and mouse cursor in sync when dragging the card around
+# Represents the cursor's position relative to the card origin when drag was initiated
+var _drag_offset: Vector2
 # Used for animating the card.
 var _target_position: Vector2
 # Used for animating the card.
@@ -223,7 +260,9 @@ var card_back : CardBack
 # This will be loaded in `_init_card_layout()`
 var card_front : CardFront
 var _card_text
-var original_layouts:= {}
+# Holds which controls have already been resized through resize_recursively()
+# to avoid trying to resize them again
+var _original_layouts:= {}
 # This is true while the card is in the process of executing its scripts
 # This flag not used in the core CGF, but games build on it can use
 # This flag to prevent the player from "double-dipping" on a script
@@ -437,7 +476,7 @@ func _on_Card_gui_input(event) -> void:
 						else:
 							# While the mouse is kept pressed, we tell the engine
 							# that a card is being dragged
-							_start_dragging()
+							_start_dragging(event.position)
 			# If the mouse button was released we drop the dragged card
 			# This also means a card clicked once won't try to immediately drag
 		elif not event.is_pressed() and event.get_button_index() == 1:
@@ -450,6 +489,9 @@ func _on_Card_gui_input(event) -> void:
 					# to always draw above other objects
 					# We need to reset it to the default of 0
 					z_index = 0
+					for attachment in self.attachments:
+						attachment.z_index = 0
+										
 					var destination = cfc.NMAP.board
 					if potential_container:
 						destination = potential_container
@@ -707,22 +749,32 @@ func get_property_and_alterants(property: String,
 # This allows the card layout to scale without using the .scale property
 # Which prevents the font from getting blurry
 func resize_recursively(control_node: Node, requested_scale: float) -> void:
-	if card_size != CFConst.CARD_SIZE * requested_scale:
-		card_size = CFConst.CARD_SIZE * requested_scale
-	if original_layouts.has(control_node)\
-			and CFUtils.compare_floats(requested_scale, original_layouts[control_node].get('scale')):
+	if card_size != canonical_size * requested_scale:
+		card_size = canonical_size * requested_scale
+	if _original_layouts.has(control_node)\
+			and CFUtils.compare_floats(requested_scale, _original_layouts[control_node].get('scale')):
 		return
-	if control_node as Control and not original_layouts.has(control_node):
-		original_layouts[control_node] = {}
-		original_layouts[control_node]["size"] = control_node.rect_min_size
-		original_layouts[control_node]["position"] = control_node.rect_position
+	if control_node as Control and not _original_layouts.has(control_node):
+		_original_layouts[control_node] = {}
+		_original_layouts[control_node]["size"] = control_node.rect_min_size
+		_original_layouts[control_node]["position"] = control_node.rect_position
+		if control_node as MarginContainer:
+			for margin in ["top","bottom", "left", "right"]:
+				_original_layouts[control_node]["margin_" + margin]\
+						= control_node.get("custom_constants/margin_" + margin)
 	for child in control_node.get_children():
 		resize_recursively(child, requested_scale)
 	if control_node as Control:
-		control_node.rect_min_size = original_layouts[control_node]["size"] * requested_scale
+		control_node.rect_min_size = _original_layouts[control_node]["size"] * requested_scale
 		control_node.call_deferred('set_size', control_node.rect_min_size)
-		control_node.rect_position = original_layouts[control_node]["position"] * requested_scale
-		original_layouts[control_node]["scale"] = requested_scale
+		control_node.rect_position = _original_layouts[control_node]["position"] * requested_scale
+		if control_node as MarginContainer:
+			for margin in ["top","bottom", "left", "right"]:
+				var current_margin = control_node.get("custom_constants/margin_" + margin)
+				if not current_margin:
+					current_margin = 0.0
+				control_node.set("custom_constants/margin_" + margin,current_margin * requested_scale)
+		_original_layouts[control_node]["scale"] = requested_scale
 
 
 # Sets the card size and adjusts all nodes depending on it.
@@ -746,15 +798,6 @@ func set_card_size(value: Vector2, ignore_area = false) -> void:
 		$CollisionShape2D.shape.extents = value / 2
 		$CollisionShape2D.position = value / 2
 
-
-# Setter for _is_attachment
-func set_is_attachment(value: bool) -> void:
-	is_attachment = value
-
-
-# Getter for _is_attachment
-func get_is_attachment() -> bool:
-	return is_attachment
 
 # Setter for is_faceup
 #
@@ -1222,8 +1265,9 @@ func move_to(targetHost: Node,
 			# If the card has tokens, and tokens_only_on_board is true
 			# we remove all tokens
 			# (The cfc._ut_tokens_only_on_board is there for unit testing)
-			if CFConst.TOKENS_ONLY_ON_BOARD or cfc._ut_tokens_only_on_board:
+			if CFConst.TOKENS_ONLY_ON_BOARD and cfc._ut_tokens_only_on_board:
 				for token in tokens.get_all_tokens().values():
+					print_debug(cfc._ut_tokens_only_on_board)
 					token.queue_free()
 			# If the card was hosted in a board placement grid
 			# we clean the references.
@@ -1558,10 +1602,17 @@ func set_focus(requestedFocus: bool, colour := CFConst.FOCUS_HOVER_COLOUR) -> vo
 	if highlight.visible != requestedFocus and \
 			highlight.modulate in CFConst.CostsState.values():
 		highlight.set_highlight(requestedFocus,colour)
+	# focus_style value 0 means only scaling focus
+	# We also recheck that main exists, as sometimes GUT messes it up
 	if not state in [CardState.PREVIEW, CardState.DECKBUILDER_GRID]\
-			and cfc.game_settings.focus_style: # value 0 means only scaling focus
+			and cfc.game_settings.focus_style\
+			and cfc.NMAP.has("main"):
 		if requestedFocus:
-			cfc.NMAP.main.focus_card(self)
+			var show_preview := true
+			if cfc.curr_scale < 0.8\
+					or cfc.game_settings.focus_style == CFInt.FocusStyle.BOTH_INFO_PANELS_ONLY:
+				show_preview = false
+			cfc.NMAP.main.focus_card(self, show_preview)
 		else:
 			cfc.NMAP.main.unfocus(self)
 	# Tokens drawer is an optional node, so we check if it exists
@@ -1798,18 +1849,16 @@ func _organize_attachments() -> void:
 			# We use the index of the attachment among other attachments
 			# to figure out its index and placement
 			var attach_index = attachments.find(card)
-			if attach_index:
-				# if the card is not the first attachment to this host
-				# Then we make sure that each subsequent card is higher
-				# in the node hierarchy than its parent
-				# This will make latter cards draw below the others
-				if card.get_index() > attachments[attach_index - 1].get_index():
-					get_parent().move_child(card,
-							attachments[attach_index - 1].get_index())
-			# If the card if the first for its host, we need to make sure
-			# it is higher in the hierarchy than the host
-			elif card.get_index() > self.get_index():
-				get_parent().move_child(card,self.get_index())
+
+			# offset the attachment's position in the boards hierarchy
+			# by the attachment offset
+			if (card.attachment_mode == AttachmentMode.ATTACH_BEHIND and 
+				card.get_index() > (self.get_index()-attach_index)):
+				get_parent().move_child(card, self.get_index()-attach_index)
+			elif(card.attachment_mode == AttachmentMode.ATTACH_IN_FRONT and 
+				card.get_index() < (self.get_index()+attach_index)):
+				get_parent().move_child(card, self.get_index()+attach_index)
+
 			# We don't want to try and move it if it's still tweening.
 			# But if it isn't, we make sure it always follows its parent
 			if not card.get_node('Tween').is_active() and \
@@ -1827,7 +1876,7 @@ func _organize_attachments() -> void:
 #
 # Returns the adjusted global_mouse_position
 func _determine_board_position_from_mouse() -> Vector2:
-	var targetpos: Vector2 = cfc.NMAP.board.mouse_pointer.determine_global_mouse_pos()
+	var targetpos: Vector2 = cfc.NMAP.board.mouse_pointer.determine_global_mouse_pos() - (_drag_offset * scale)
 	if targetpos.x + card_size.x * scale.x >= get_viewport().size.x:
 		targetpos.x = get_viewport().size.x - card_size.x * scale.x
 	if targetpos.x < 0:
@@ -1844,18 +1893,19 @@ func _determine_board_position_from_mouse() -> Vector2:
 # It takes extra care not to drop the card outside viewport margins
 func _determine_target_position_from_mouse() -> void:
 	_target_position = _determine_board_position_from_mouse()
+
 	# The below ensures the card doesn't leave the viewport dimentions
-	if _target_position.x + card_size.x * CFConst.PLAY_AREA_SCALE.x \
+	if _target_position.x + card_size.x * play_area_scale \
 			> get_viewport().size.x:
 		_target_position.x = get_viewport().size.x \
 				- card_size.x \
-				* CFConst.PLAY_AREA_SCALE.x
-	if _target_position.y + card_size.y * CFConst.PLAY_AREA_SCALE.y \
+				* play_area_scale
+	if _target_position.y + card_size.y * play_area_scale \
 			> get_viewport().size.y:
 		_target_position.y = get_viewport().size.y \
 				- card_size.y \
-				* CFConst.PLAY_AREA_SCALE.y
-
+				* play_area_scale
+				
 
 # Instructs the card to move aside for another card enterring focus
 func _pushAside(targetpos: Vector2, target_rotation: float) -> void:
@@ -1866,21 +1916,24 @@ func _pushAside(targetpos: Vector2, target_rotation: float) -> void:
 
 
 # Pick up a card to drag around with the mouse.
-func _start_dragging() -> void:
-	# When dragging we want the dragged card to always be drawn above all else
+func _start_dragging(drag_offset: Vector2) -> void:
+	_drag_offset = drag_offset
+	# When dragging we want the dragged card and attachments to always be drawn above all else
 	z_index = 99
+	for attachment in self.attachments:
+		attachment.z_index = 99
 	# We have use parent viewport to calculate global_position
 	# due to godotengine/godot#30215
 	# This is caused because we're using a viewport node and scaling the game
 	# in full-creen.
 	if not cfc.ut:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-		if ProjectSettings.get("display/window/stretch/mode") != 'disabled':
-			get_tree().current_scene.get_viewport().warp_mouse(global_position + Vector2(5,5))
+#		if ProjectSettings.get("display/window/stretch/mode") != 'disabled':
+#			get_tree().current_scene.get_viewport().warp_mouse(global_position + Vector2(5,5))
 		# However the above messes things if we don't have stretch mode,
 		# so we ignore it then
-		else:
-			get_viewport().warp_mouse(global_position)
+#		else:
+#			get_viewport().warp_mouse(global_position + _drag_anchor)
 	state = CardState.DRAGGED
 	# We check if the card was already overlapping with other card
 	# before we started dragging. If so, we activate the code
@@ -2092,7 +2145,8 @@ func _process_card_state() -> void:
 				_target_rotation  = _recalculate_rotation()
 				if not $Tween.is_active() \
 						and not CFUtils.compare_floats($Control.rect_rotation, _target_rotation):
-					_add_tween_rotation($Control.rect_rotation,_target_rotation)
+					_add_tween_rotation($Control.rect_rotation,_target_rotation,
+						in_hand_tween_duration)
 					$Tween.start()
 
 		CardState.FOCUSED_IN_HAND:
@@ -2157,11 +2211,11 @@ func _process_card_state() -> void:
 				_target_rotation = expected_rotation
 				# We make sure to remove other tweens of the same type
 				# to avoid a deadlock
-				_add_tween_position(expected_position, _target_position, 0.3)
-				_add_tween_scale(scale, Vector2(1.5,1.5))
+				_add_tween_position(expected_position, _target_position, focus_tween_duration)
+				_add_tween_scale(scale, Vector2(1.5,1.5), focus_tween_duration)
 
 				if cfc.game_settings.hand_use_oval_shape:
-					_add_tween_rotation($Control.rect_rotation,0)
+					_add_tween_rotation($Control.rect_rotation, 0, focus_tween_duration)
 				else:
 					# warning-ignore:return_value_discarded
 					set_card_rotation(0)
@@ -2184,7 +2238,7 @@ func _process_card_state() -> void:
 			if not $Tween.is_active():
 				var intermediate_position: Vector2
 				if not scale.is_equal_approx(Vector2(1,1)):
-					_add_tween_scale(scale, Vector2(1,1),0.4)
+					_add_tween_scale(scale, Vector2(1,1),to_container_tween_duration)
 				if cfc.game_settings.fancy_movement:
 					# The below calculations figure out
 					# the intermediate position as a spot,
@@ -2231,15 +2285,18 @@ func _process_card_state() -> void:
 					# Instead we use directly the viewport coords.
 					else:
 						intermediate_position = get_viewport().size/2
-					_add_tween_global_position(global_position, intermediate_position)
+					_add_tween_global_position(global_position, intermediate_position,
+						to_container_tween_duration)
 					$Tween.start()
 					yield($Tween, "tween_all_completed")
 					_tween_stuck_time = 0
 					_fancy_move_second_part = true
 				# We need to check again, just in case it's been reorganized instead.
 				if state == CardState.MOVING_TO_CONTAINER:
-					_add_tween_position(position, _target_position, 0.35,Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					_add_tween_rotation($Control.rect_rotation,_target_rotation)
+					_add_tween_position(position, _target_position,
+						to_container_tween_duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					_add_tween_rotation($Control.rect_rotation,_target_rotation,
+						to_container_tween_duration)
 					$Tween.start()
 					yield($Tween, "tween_all_completed")
 					_determine_idle_state()
@@ -2255,10 +2312,11 @@ func _process_card_state() -> void:
 			set_card_rotation(0,false,false)
 			if not $Tween.is_active():
 				$Tween.remove(self,'position') #
-				_add_tween_position(position, _target_position, 0.4)
+				_add_tween_position(position, _target_position, reorganization_tween_duration)
 				if not scale.is_equal_approx(Vector2(1,1)):
-					_add_tween_scale(scale, Vector2(1,1),0.4)
-				_add_tween_rotation($Control.rect_rotation,_target_rotation, 0.4)
+					_add_tween_scale(scale, Vector2(1,1), reorganization_tween_duration)
+				_add_tween_rotation($Control.rect_rotation,_target_rotation,
+					reorganization_tween_duration)
 				$Tween.start()
 				state = CardState.IN_HAND
 
@@ -2271,11 +2329,13 @@ func _process_card_state() -> void:
 			# warning-ignore:return_value_discarded
 			if not $Tween.is_active() and \
 					not position.is_equal_approx(_target_position):
-				_add_tween_position(position, _target_position, 0.3,
-						Tween.TRANS_QUART, Tween.EASE_IN)
-				_add_tween_rotation($Control.rect_rotation, _target_rotation, 0.3)
+				_add_tween_position(position, _target_position,
+					pushed_aside_tween_duration, Tween.TRANS_QUART, Tween.EASE_IN)
+				_add_tween_rotation($Control.rect_rotation, _target_rotation,
+					pushed_aside_tween_duration)
 				if not scale.is_equal_approx(Vector2(1,1)):
-					_add_tween_scale(scale, Vector2(1,1), 0.3,Tween.TRANS_QUART, Tween.EASE_IN)
+					_add_tween_scale(scale, Vector2(1,1), pushed_aside_tween_duration,
+						Tween.TRANS_QUART, Tween.EASE_IN)
 				$Tween.start()
 				# We don't change state yet,
 				# only when the focus is removed from the neighbour
@@ -2288,8 +2348,8 @@ func _process_card_state() -> void:
 			if (not $Tween.is_active() and
 				not scale.is_equal_approx(CFConst.CARD_SCALE_WHILE_DRAGGING) and
 				get_parent() != cfc.NMAP.board):
-				_add_tween_scale(scale, CFConst.CARD_SCALE_WHILE_DRAGGING, 0.2,
-						Tween.TRANS_SINE, Tween.EASE_IN)
+				_add_tween_scale(scale, CFConst.CARD_SCALE_WHILE_DRAGGING,
+					dragged_tween_duration, Tween.TRANS_SINE, Tween.EASE_IN)
 				$Tween.start()
 			# We need to capture the mouse cursos in the window while dragging
 			# because if the player drags the cursor outside the window and unclicks
@@ -2306,13 +2366,19 @@ func _process_card_state() -> void:
 		CardState.ON_PLAY_BOARD:
 			# Used when the card is idle on the board
 			z_index = 0
+			
+			# if this card is an attachment and it's host is being dragged 
+			# then we want this card to be above everything like the host
+			if current_host_card and current_host_card.state == CardState.DRAGGED:
+				z_index = 99
+												
 			set_focus(false)
 			set_control_mouse_filters(true)
 			buttons.set_active(false)
 			if not $Tween.is_active() and \
-					not scale.is_equal_approx(CFConst.PLAY_AREA_SCALE):
-				_add_tween_scale(scale, CFConst.PLAY_AREA_SCALE, 0.3,
-						Tween.TRANS_SINE, Tween.EASE_OUT)
+					not scale.is_equal_approx(Vector2(1,1) * play_area_scale):
+				_add_tween_scale(scale, Vector2(1,1) * play_area_scale,
+					on_board_tween_duration, Tween.TRANS_SINE, Tween.EASE_OUT)
 				$Tween.start()
 			_organize_attachments()
 
@@ -2327,20 +2393,20 @@ func _process_card_state() -> void:
 				$Tween.remove(self,'position') # We make sure to remove other tweens of the same type to avoid a deadlock
 #				_target_position = _determine_board_position_from_mouse()
 #				# The below ensures the card doesn't leave the viewport dimentions
-#				if _target_position.x + card_size.x * CFConst.PLAY_AREA_SCALE.x > get_viewport().size.x:
-#					_target_position.x = get_viewport().size.x - card_size.x * CFConst.PLAY_AREA_SCALE.x
-#				if _target_position.y + card_size.y * CFConst.PLAY_AREA_SCALE.y > get_viewport().size.y:
-#					_target_position.y = get_viewport().size.y - card_size.y * CFConst.PLAY_AREA_SCALE.y
-				_add_tween_position(position, _target_position, 0.25)
+#				if _target_position.x + card_size.x * play_area_scale.x > get_viewport().size.x:
+#					_target_position.x = get_viewport().size.x - card_size.x * play_area_scale.x
+#				if _target_position.y + card_size.y * play_area_scale.y > get_viewport().size.y:
+#					_target_position.y = get_viewport().size.y - card_size.y * play_area_scale.y
+				_add_tween_position(position, _target_position, to_board_tween_duration)
 				# The below ensures a card dropped from the hand will not
 				# retain a slight rotation.
 				# We check if the card already has been rotated to a different
 				# card_cotation
 				if not int($Control.rect_rotation) in [0,90,180,270]:
-					_add_tween_rotation($Control.rect_rotation, _target_rotation, 0.25)
+					_add_tween_rotation($Control.rect_rotation, _target_rotation, to_board_tween_duration)
 				# We want cards on the board to be slightly smaller than in hand.
-				if not scale.is_equal_approx(CFConst.PLAY_AREA_SCALE):
-					_add_tween_scale(scale, CFConst.PLAY_AREA_SCALE, 0.5,
+				if not scale.is_equal_approx(Vector2(1,1) * play_area_scale):
+					_add_tween_scale(scale, Vector2(1,1) * play_area_scale, to_board_tween_duration,
 							Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 				$Tween.start()
 				state = CardState.ON_PLAY_BOARD
@@ -2415,15 +2481,15 @@ func _process_card_state() -> void:
 			$Control/Tokens.visible = false
 			# We scale the card dupe to allow the player a better viewing experience
 			if CFConst.VIEWPORT_FOCUS_ZOOM_TYPE == "scale":
-				scale = Vector2(1,1) * CFConst.FOCUSED_SCALE
+				scale = Vector2(1,1) * focused_scale * cfc.curr_scale
 			else:
 				# We need to reset its scale,
 				# in case it was already scaled due to being on the table etc.
 				scale = Vector2(1,1)
-				resize_recursively(_control, CFConst.FOCUSED_SCALE)
+				resize_recursively(_control, focused_scale * cfc.curr_scale)
 #				set_card_size(CFConst.CARD_SIZE * CFConst.FOCUSED_SCALE, true)
-				card_front.scale_to(CFConst.FOCUSED_SCALE)
-				card_back.scale_to(CFConst.FOCUSED_SCALE)
+				card_front.scale_to(focused_scale * cfc.curr_scale)
+				card_back.scale_to(focused_scale * cfc.curr_scale)
 			# If the card has already been been viewed while down,
 			# we allow the player hovering over it to see it
 			if not is_faceup:
@@ -2440,11 +2506,11 @@ func _process_card_state() -> void:
 			$Control.rect_rotation = 0
 			# We scale the card to allow the player a better viewing experience
 			if CFConst.VIEWPORT_FOCUS_ZOOM_TYPE == "scale":
-				scale = Vector2(1,1) * CFConst.PREVIEW_SCALE
+				scale = Vector2(1,1) * preview_scale * cfc.curr_scale
 			else:
 #				set_card_size(CFConst.CARD_SIZE * CFConst.PREVIEW_SCALE)
-				resize_recursively(_control, CFConst.PREVIEW_SCALE)
-				card_front.scale_to(CFConst.PREVIEW_SCALE)
+				resize_recursively(_control, preview_scale * cfc.curr_scale)
+				card_front.scale_to(preview_scale * cfc.curr_scale)
 
 		CardState.DECKBUILDER_GRID:
 			$Control.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -2456,11 +2522,13 @@ func _process_card_state() -> void:
 			$Control.rect_rotation = 0
 			# We scale the card to allow the player a better viewing experience
 			if CFConst.VIEWPORT_FOCUS_ZOOM_TYPE == "scale":
-				scale = Vector2(1,1) * CFConst.THUMBNAIL_SCALE
+				scale = Vector2(1,1) * thumbnail_scale
+			# Commenting this out because it is messing with RichTextLabel
+			# Font resizing
 			else:
-#				set_card_size(CFConst.CARD_SIZE * CFConst.THUMBNAIL_SCALE)
-				resize_recursively(_control, CFConst.THUMBNAIL_SCALE)
-				card_front.scale_to(CFConst.THUMBNAIL_SCALE)
+#				set_card_size(CFConst.CARD_SIZE * thumbnail_scale)
+				resize_recursively(_control, thumbnail_scale * cfc.curr_scale)
+				card_front.scale_to(thumbnail_scale * cfc.curr_scale)
 
 
 
@@ -2627,6 +2695,6 @@ func _on_Back_resized() -> void:
 	# This looks like a Godot bug. I'm leaving it here in case I can track it later
 	# It only happens if "card.set_is_faceup(false,true)" in CGFBoard.tcsn
 	# At the loop at line 91, is active
-	if $Control/Back.rect_size != CFConst.CARD_SIZE:
+	if $Control/Back.rect_size != canonical_size:
 		pass
 #		print_debug($Control/Back.rect_size) # Replace with function body.

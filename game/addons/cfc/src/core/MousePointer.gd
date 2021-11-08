@@ -90,8 +90,8 @@ func determine_global_mouse_pos() -> Vector2:
 	if get_viewport() and get_viewport().has_node("Camera2D"):
 		zoom = get_viewport().get_node("Camera2D").zoom
 	var offset_mouse_position = \
-			get_tree().current_scene.get_global_mouse_position() \
-			- get_viewport_transform().origin
+		get_tree().current_scene.get_global_mouse_position() \
+		- get_viewport_transform().origin
 	offset_mouse_position *= zoom
 	#var scaling_offset = get_tree().get_root().get_node('Main').get_viewport().get_size_override() * OS.window_size
 	if cfc.ut and cfc.NMAP.get("board"):
@@ -158,7 +158,7 @@ func _discover_focus() -> void:
 			# and the checked area has to be on the board
 			if current_focused_card \
 					and current_focused_card == cfc.card_drag_ongoing \
-					and current_focused_card.is_attachment \
+					and (current_focused_card.attachment_mode != Card.AttachmentMode.DO_NOT_ATTACH) \
 					and area != current_focused_card \
 					and not area in current_focused_card.attachments \
 					and area.state == Card.CardState.ON_PLAY_BOARD:
@@ -261,8 +261,8 @@ func _is_placement_slot_valid(slot: BoardPlacementSlot, potential_cards := []) -
 			is_valid = false
 		# We only hihglight a slot if the dragged card is not an attachment
 		# with a potential host highlighted.
-		if cfc.card_drag_ongoing.is_attachment \
-				and not potential_cards.empty():
+		if cfc.card_drag_ongoing.attachment_mode != Card.AttachmentMode.DO_NOT_ATTACH \
+			and not potential_cards.empty():
 			# The card being dragged is usually part of the potential_cards
 			# So we want to make sure we still highlight a potential slot
 			# if it's only the dragged card in there.
@@ -287,4 +287,3 @@ func _is_placement_slot_valid(slot: BoardPlacementSlot, potential_cards := []) -
 		if cfc.card_drag_ongoing.board_placement in [Card.BoardPlacement.NONE]:
 				is_valid = false
 	return(is_valid)
-
