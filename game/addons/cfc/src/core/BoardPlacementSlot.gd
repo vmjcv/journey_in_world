@@ -14,6 +14,9 @@ onready var owner_grid = get_parent().get_parent()
 func _ready() -> void:
 	# We set the initial size of our highlight and area, to 
 	# fit the size of the cards on the board.
+	on_ready()
+	
+func on_ready() -> void:
 	rect_min_size = CFConst.CARD_SIZE * CFConst.PLAY_AREA_SCALE
 	$Highlight.rect_min_size = rect_min_size
 	$Area2D/CollisionShape2D.shape.extents = rect_min_size / 2

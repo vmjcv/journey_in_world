@@ -1,5 +1,6 @@
 class_name BoardMapPlacementSlot
-extends Area2D
+extends BoardPlacementSlot
+
 # 先长后短
 var outer_radius := 10.0 setget set_outer_radius,get_outer_radius# 外径大小
 var inner_radius := outer_radius * 0.866025404 setget ,get_inner_radius# 内径大小
@@ -39,17 +40,16 @@ var y setget ,get_y
 
 var index := 0
 
-onready var _poly := $Polygon2D
-onready var _poly_line := $Line2D
-onready var _coll := $CollisionPolygon2D
+onready var _poly := $hex_region/Polygon2D
+onready var _poly_line := $hex_region/Line2D
+onready var _coll := $hex_region/CollisionPolygon2D
 
 signal hex_grid_selected
 
 
-var occupying_card = null
 var highlighted = false
+var unhoverColour = Color(Color.beige.r,Color.beige.g,Color.beige.b,0.1)
 
-onready var owner_grid = get_parent().get_parent()
 #var _colors := PoolColorArray([Color.red,Color.blue,Color.yellow,Color.green,Color.gray,Color.wheat])
 
 func set_outer_radius(_outer_radius):
@@ -87,18 +87,11 @@ func update_corners():
 func update_shape():
 	_poly.polygon = _corners
 #	_poly.vertex_colors = _colors
-	_poly.color = Color(0.002121, 0.956511, 0.632383, 0.05)
+	_poly.color = unhoverColour
 	_coll.polygon = _corners
 	_poly_line.points = _corners
 	_poly_line.add_point(Vector2(-outer_radius,0))
 
-func _on_mouse_entered():
-	_poly.color.a = 0.5
-	highlighted = true
-
-func _on_mouse_exited():
-	_poly.color.a = 0.05
-	highlighted = false
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
@@ -131,7 +124,7 @@ func set_column_row(_column,_row):
 	
 
 func update_position():
-	position = Vector2(get_x(),get_y())
+	rect_position = Vector2(get_x(),get_y())
 
 func get_grid_name() -> String:
 	return(owner_grid.name_label.text)
@@ -149,5 +142,7 @@ func set_highlight(requested: bool,
 	if requested:
 		_poly.color = hoverColour
 	else:
-		_poly.color.a = 0.05
+		_poly.color = unhoverColour
 	
+func on_ready() -> void:
+	pass

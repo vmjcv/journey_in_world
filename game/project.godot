@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://systems/cfc/battle_map/BoardMapPlacementGrid.gd"
 }, {
-"base": "Area2D",
+"base": "BoardPlacementSlot",
 "class": "BoardMapPlacementSlot",
 "language": "GDScript",
 "path": "res://systems/cfc/battle_map/hex_region.gd"
