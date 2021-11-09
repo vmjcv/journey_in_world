@@ -46,7 +46,7 @@ const grid_outer_radius = 30
 var in_board_state
 
 func _ready() -> void:
-	
+
 	pass
 
 # Sample code on how to ensure costs are paid when a card
@@ -142,11 +142,12 @@ func set_board_state(bVisible):
 		# $Control2.visible = false
 		$Control.visible = not bVisible
 		$CollisionShape2D.disabled = bVisible
-		
+
 func init_ui_var():
 	_poly = $Control2/Polygon2D
 	_poly_line = $Control2/Line2D
 	_coll = $CollisionPolygon2D
+	connect("input_event", self, "_input_event_board")
 
 # 最开始的时候就设置碰撞体积的大小
 func set_card_size(value: Vector2, ignore_area = false) -> void:
@@ -154,3 +155,7 @@ func set_card_size(value: Vector2, ignore_area = false) -> void:
 	init_ui_var()
 	set_outer_radius(grid_outer_radius)
 	set_board_state(false)
+
+func _input_event_board(viewport, event, shape_idx):
+	print("44444444")
+	_on_Card_gui_input(event)
