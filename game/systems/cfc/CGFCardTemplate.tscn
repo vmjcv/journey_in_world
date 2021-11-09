@@ -9,34 +9,10 @@
 
 [node name="Card" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-properties = null
-scripts = null
-attachment_mode = null
-attachment_offset = null
-is_viewed = null
-card_rotation = null
-board_placement = null
-mandatory_grid_name = null
 card_back_design = ExtResource( 6 )
 card_front_design = ExtResource( 3 )
-disable_dropping_to_cardcontainers = null
-disable_dragging_from_hand = null
-disable_dragging_from_board = null
-disable_dragging_from_pile = null
-hand_drag_starts_targeting = null
-in_hand_tween_duration = null
-reorganization_tween_duration = null
-focus_tween_duration = null
-to_container_tween_duration = null
-pushed_aside_tween_duration = null
-to_board_tween_duration = null
-on_board_tween_duration = null
-dragged_tween_duration = null
-canonical_size = null
-play_area_scale = null
-thumbnail_scale = null
-preview_scale = null
-focused_scale = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
 
 [node name="Front" parent="Control" index="2"]
 rect_min_size = Vector2( 150, 240 )
@@ -44,8 +20,6 @@ rect_min_size = Vector2( 150, 240 )
 [node name="ManipulationButtons" parent="Control" index="4"]
 script = ExtResource( 4 )
 manipulation_button = ExtResource( 5 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
 
 [node name="Control2" type="Control" parent="." index="3"]
 margin_right = 40.0

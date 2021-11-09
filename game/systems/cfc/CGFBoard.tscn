@@ -40,6 +40,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PlacementGridDemo2" parent="." instance=ExtResource( 11 )]
+margin_left = 620.721
+margin_top = 313.3
+margin_right = 624.721
+margin_bottom = 317.3
+
 [node name="Deck" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 475 )
 script = ExtResource( 4 )
@@ -258,12 +264,6 @@ margin_left = 1015.0
 margin_top = 30.0
 margin_right = 1264.0
 margin_bottom = 226.0
-
-[node name="PlacementGridDemo2" parent="." instance=ExtResource( 11 )]
-margin_left = 620.721
-margin_top = 313.3
-margin_right = 624.721
-margin_bottom = 317.3
 
 [node name="SeedLabel" type="Label" parent="."]
 margin_left = 10.0

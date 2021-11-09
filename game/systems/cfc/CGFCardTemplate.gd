@@ -1,7 +1,9 @@
 extends Card
 
 # 先长后短
-var outer_radius := 10.0 setget set_outer_radius,get_outer_radius# 外径大小
+
+
+var outer_radius := 10 setget set_outer_radius,get_outer_radius# 外径大小
 var inner_radius := outer_radius * 0.866025404 setget ,get_inner_radius# 内径大小
 var _corners := PoolVector2Array([
 	Vector2(-outer_radius,0),
@@ -30,18 +32,21 @@ enum SideDirection {
 	NW,# 西北
 }
 
-onready var _poly := $Control2/Polygon2D
-onready var _poly_line := $Control2/Line2D
-onready var _coll := $CollisionPolygon2D
+var _poly
+var _poly_line
+var _coll
 
 signal hex_grid_selected
 
 var highlighted = false
-var unhoverColour = Color.blue
+var unhoverColour = Color(Color.beige.r,Color.beige.g,Color.beige.b,0.1)
 
 const grid_outer_radius = 30
 
+var in_board_state
+
 func _ready() -> void:
+	
 	pass
 
 # Sample code on how to ensure costs are paid when a card
@@ -74,16 +79,10 @@ func _process_card_state() -> void:
 	._process_card_state()
 	match state:
 		CardState.ON_PLAY_BOARD:
-			set_outer_radius(grid_outer_radius)
 			set_board_state(true)
-
 		CardState.DROPPING_TO_BOARD:
-			print("DROPPING_TO_BOARD")
-			set_outer_radius(grid_outer_radius)
 			set_board_state(true)
-
 		CardState.FOCUSED_ON_BOARD:
-			set_outer_radius(grid_outer_radius)
 			set_board_state(true)
 		_:
 			set_board_state(false)
@@ -134,11 +133,24 @@ func update_shape():
 func _on_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		emit_signal("hex_grid_selected")
-		
+
 func set_board_state(bVisible):
-	_coll.visible = bVisible
-	_coll.disabled = not bVisible
-	$Control2.visible = bVisible
-	$Control.visible = not bVisible
-	$CollisionShape2D.visible = not bVisible
-	$CollisionShape2D.disabled = bVisible
+	if in_board_state != bVisible:
+		in_board_state = bVisible
+		_coll.disabled = not bVisible
+		$Control2.visible = bVisible
+		# $Control2.visible = false
+		$Control.visible = not bVisible
+		$CollisionShape2D.disabled = bVisible
+		
+func init_ui_var():
+	_poly = $Control2/Polygon2D
+	_poly_line = $Control2/Line2D
+	_coll = $CollisionPolygon2D
+
+# 最开始的时候就设置碰撞体积的大小
+func set_card_size(value: Vector2, ignore_area = false) -> void:
+	.set_card_size(value,ignore_area)
+	init_ui_var()
+	set_outer_radius(grid_outer_radius)
+	set_board_state(false)
