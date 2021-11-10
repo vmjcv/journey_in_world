@@ -22,8 +22,10 @@ script = ExtResource( 4 )
 manipulation_button = ExtResource( 5 )
 
 [node name="Control2" type="Control" parent="." index="3"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -32,3 +34,10 @@ __meta__ = {
 width = 1.0
 
 [node name="Polygon2D" type="Polygon2D" parent="Control2" index="1"]
+
+[node name="Control" type="Control" parent="Control2" index="2"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

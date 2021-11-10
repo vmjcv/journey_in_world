@@ -147,7 +147,9 @@ func init_ui_var():
 	_poly = $Control2/Polygon2D
 	_poly_line = $Control2/Line2D
 	_coll = $CollisionPolygon2D
-	connect("input_event", self, "_input_event_board")
+	# 无法使用input_event事件监听整个拉动事件，原因是因为mouse_filter存在魔法，怀疑是某个控件或者容器吞噬了整个事件
+	# 使用Control来监听事件，然后在方法回调中判断是否在区域内
+	$Control2/Control.connect("gui_input", self, "_gui_input_board")
 
 # 最开始的时候就设置碰撞体积的大小
 func set_card_size(value: Vector2, ignore_area = false) -> void:
@@ -155,7 +157,11 @@ func set_card_size(value: Vector2, ignore_area = false) -> void:
 	init_ui_var()
 	set_outer_radius(grid_outer_radius)
 	set_board_state(false)
+	$Control2/Control.margin_left = -outer_radius
+	$Control2/Control.margin_right = outer_radius
+	$Control2/Control.margin_top = -inner_radius
+	$Control2/Control.margin_bottom = inner_radius
 
-func _input_event_board(viewport, event, shape_idx):
-	print("44444444")
-	_on_Card_gui_input(event)
+func _gui_input_board(event):
+	if cfc.NMAP.board.mouse_pointer in get_overlapping_areas():
+		_on_Card_gui_input(event)
