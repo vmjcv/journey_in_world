@@ -77,15 +77,28 @@ func _on_Card_gui_input(event) -> void:
 
 func _process_card_state() -> void:
 	._process_card_state()
-	match state:
-		CardState.ON_PLAY_BOARD:
-			set_board_state(true)
-		CardState.DROPPING_TO_BOARD:
-			set_board_state(true)
-		CardState.FOCUSED_ON_BOARD:
-			set_board_state(true)
-		_:
-			set_board_state(false)
+	if get_parent().is_in_group("hands"):
+		set_board_state(false)
+	elif get_parent() == cfc.NMAP.board:
+		set_board_state(true)
+
+func _determine_board_position_from_mouse() -> Vector2:
+	var cur_drag_offset =_drag_offset
+	if in_board_state:
+		# 如果是在棋盘中则是另外的计算方式，以左上角为顶点
+		cur_drag_offset -= Vector2(outer_radius,inner_radius)
+	else:
+		pass
+	var targetpos: Vector2 = cfc.NMAP.board.mouse_pointer.determine_global_mouse_pos() - (cur_drag_offset * scale)
+	if targetpos.x + card_size.x * scale.x >= get_viewport().size.x:
+		targetpos.x = get_viewport().size.x - card_size.x * scale.x
+	if targetpos.x < 0:
+		targetpos.x = 0
+	if targetpos.y + card_size.y * scale.y >= get_viewport().size.y:
+		targetpos.y = get_viewport().size.y - card_size.y * scale.y
+	if targetpos.y < 0:
+		targetpos.y = 0
+	return targetpos
 
 
 func set_outer_radius(_outer_radius):
@@ -139,7 +152,6 @@ func set_board_state(bVisible):
 		in_board_state = bVisible
 		_coll.disabled = not bVisible
 		$Control2.visible = bVisible
-		# $Control2.visible = false
 		$Control.visible = not bVisible
 		$CollisionShape2D.disabled = bVisible
 
@@ -150,6 +162,7 @@ func init_ui_var():
 	# 无法使用input_event事件监听整个拉动事件，原因是因为mouse_filter存在魔法，怀疑是某个控件或者容器吞噬了整个事件
 	# 使用Control来监听事件，然后在方法回调中判断是否在区域内
 	$Control2/Control.connect("gui_input", self, "_gui_input_board")
+
 
 # 最开始的时候就设置碰撞体积的大小
 func set_card_size(value: Vector2, ignore_area = false) -> void:

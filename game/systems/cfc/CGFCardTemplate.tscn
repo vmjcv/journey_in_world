@@ -13,6 +13,10 @@ card_back_design = ExtResource( 6 )
 card_front_design = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+disabled = true
+
+[node name="Control" parent="." index="2"]
+modulate = Color( 1, 0.92549, 0, 1 )
 
 [node name="Front" parent="Control" index="2"]
 rect_min_size = Vector2( 150, 240 )
@@ -22,6 +26,8 @@ script = ExtResource( 4 )
 manipulation_button = ExtResource( 5 )
 
 [node name="Control2" type="Control" parent="." index="3"]
+visible = false
+modulate = Color( 0.0509804, 0.894118, 0.152941, 1 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
